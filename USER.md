@@ -1,17 +1,18 @@
 # USER.md - About Your Human
 
-_Learn about the person you're helping. Update this as you go._
-
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
-- **Notes:**
+- **Name:** Sebastien Lombard
+- **What to call them:** (you)
+- **Pronouns:** (unknown)
+- **Timezone:** GMT-5 (Bogota/Latin America)
+- **Notes:** Connected via openclaw-tui
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+- Runs an OpenClaw instance on a Raspberry Pi
+- Has a GitHub account (SebastienLombard / colombiastaking)
+- PAT stored locally at ~/.git-credentials
+- Workspace backed up to: https://github.com/colombiastaking/openclaw-workspace
 
 ---
 
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+_Learning as we go._
