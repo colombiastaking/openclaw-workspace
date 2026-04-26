@@ -1,0 +1,257 @@
+import { useEffect, useCallback, useRef } from 'react';
+import { useGetAccount } from '@multiversx/sdk-dapp/out/react/account/useGetAccount';
+import { Address, AddressValue, ContractFunction, decodeBigNumber } from '@multiversx/sdk-core';
+import { FallbackProxyNetworkProvider } from 'helpers/FallbackProxyNetworkProvider';
+import { useDispatch } from 'context';
+import { network } from 'config';
+import { fetchClaimableColsAndLockTime } from 'helpers/fetchClaimableCols';
+import { denominated } from 'helpers/denominate';
+import { useGetActiveTransactionsStatus } from './useTransactionStatus';
+import { createContractQuery } from 'helpers/contractQuery';
+import axios from 'axios';
+
+const CLAIM_COLS_CONTRACT = 'erd1qqqqqqqqqqqqqpgqjhn0rrta3hceyguqlmkqgklxc0eh0r5rl3tsv6a9k0';
+const ENTITY_ADDRESS = 'erd1qqqqqqqqqqqqqpgq7khr5sqd4cnjh5j5dz0atfz03r3l99y727rsulfjj0';
+
+// Use Colombia kepler proxy (colombia-staking.co/api) - avoids LiteSpeed caching on staking subdomain
+const COLOMBIA_API = 'https://colombia-staking.co/api/';
+const GATEWAY_URL = 'https://gateway.multiversx.com';
+const DELEGATION_CONTRACT = 'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf';
+const COLS_TOKEN_ID = 'COLS-9d91b7';
+
+/**
+ * Hook to preload and cache all shared data at login:
+ * - Delegator count
+ * - Claimable COLS and lock time
+ * - eGLD claimable rewards
+ * - COLS wallet balance
+ * - User active stake (delegated eGLD)
+ */
+export function usePreloadData() {
+  const account = useGetAccount();
+  const address = account.address;
+  const { hasSuccessfulTransactions } = useGetActiveTransactionsStatus();
+  const dispatch = useDispatch();
+  const hasLoadedRef = useRef(false);
+  const lastAddressRef = useRef<string | null>(null);
+
+  // Fetch delegator count
+  const fetchDelegatorCount = useCallback(async () => {
+    dispatch({
+      type: 'getDelegatorCount',
+      delegatorCount: { status: 'loading', data: null, error: null }
+    });
+
+    try {
+      const res = await fetch(
+        `${COLOMBIA_API}providers/${DELEGATION_CONTRACT}`
+      );
+      const data = await res.json();
+      const count = data?.numUsers || data?.accounts || 0;
+      dispatch({
+        type: 'getDelegatorCount',
+        delegatorCount: { status: 'loaded', data: count, error: null }
+      });
+    } catch (error) {
+      dispatch({
+        type: 'getDelegatorCount',
+        delegatorCount: { status: 'error', data: null, error }
+      });
+    }
+  }, [dispatch]);
+
+  // Fetch claimable COLS and lock time
+  const fetchClaimableCols = useCallback(async () => {
+    if (!address) return;
+
+    dispatch({
+      type: 'getClaimableCols',
+      claimableCols: { status: 'loading', data: null, error: null }
+    });
+    dispatch({
+      type: 'getColsLockTime',
+      colsLockTime: { status: 'loading', data: null, error: null }
+    });
+
+    try {
+      const { claimable, lockTime } = await fetchClaimableColsAndLockTime({
+        contract: CLAIM_COLS_CONTRACT,
+        entity: ENTITY_ADDRESS,
+        user: address,
+        providerUrl: GATEWAY_URL
+      });
+
+      dispatch({
+        type: 'getClaimableCols',
+        claimableCols: { status: 'loaded', data: claimable, error: null }
+      });
+      dispatch({
+        type: 'getColsLockTime',
+        colsLockTime: { status: 'loaded', data: lockTime, error: null }
+      });
+    } catch (error) {
+      dispatch({
+        type: 'getClaimableCols',
+        claimableCols: { status: 'error', data: null, error }
+      });
+      dispatch({
+        type: 'getColsLockTime',
+        colsLockTime: { status: 'error', data: null, error }
+      });
+    }
+  }, [address, dispatch]);
+
+  // Fetch eGLD claimable rewards
+  const fetchClaimableEgld = useCallback(async () => {
+    if (!address) return;
+
+    dispatch({
+      type: 'getUserClaimableRewards',
+      userClaimableRewards: { status: 'loading', data: null, error: null }
+    });
+
+    // Use FallbackProxyNetworkProvider for automatic primary/fallback switching
+    const provider = new FallbackProxyNetworkProvider();
+
+    try {
+      const query = createContractQuery({
+        address: new Address(network.delegationContract),
+        func: new ContractFunction('getClaimableRewards'),
+        args: [new AddressValue(new Address(address))]
+      });
+
+      const data = await provider.queryContract(query);
+      const [claimableRewards] = data.getReturnDataParts();
+
+      dispatch({
+        type: 'getUserClaimableRewards',
+        userClaimableRewards: {
+          status: 'loaded',
+          error: null,
+          data: claimableRewards
+            ? denominated(decodeBigNumber(claimableRewards).toFixed(), { decimals: 4 })
+            : '0'
+        }
+      });
+    } catch (err) {
+      console.error('getClaimableRewards failed:', err);
+      dispatch({
+        type: 'getUserClaimableRewards',
+        userClaimableRewards: { status: 'error', data: null, error: new Error('All gateways failed') }
+      });
+    }
+  }, [address, dispatch]);
+
+  // Fetch COLS wallet balance
+  const fetchColsBalance = useCallback(async () => {
+    if (!address) return;
+
+    dispatch({
+      type: 'getColsBalance',
+      colsBalance: { status: 'loading', data: null, error: null }
+    });
+
+    // Use Colombia kepler proxy first, then public API
+    const PRIMARY_API = 'https://colombia-staking.co/api/';
+    const PUBLIC_API = 'https://api.multiversx.com';
+    const apis = [PRIMARY_API, PUBLIC_API];
+    let balance = '0';
+
+    for (const api of apis) {
+      try {
+        const { data } = await axios.get(
+          `${api}/accounts/${address}/tokens?identifier=${COLS_TOKEN_ID}`
+        );
+        if (Array.isArray(data) && data.length > 0 && data[0].identifier === COLS_TOKEN_ID) {
+          const raw = data[0].balance;
+          if (raw && raw !== '0') {
+            const rawStr = raw.toString().padStart(19, '0');
+            const intPart = rawStr.slice(0, -18) || '0';
+            let decPart = rawStr.slice(-18).replace(/0+$/, '');
+            balance = decPart ? `${intPart}.${decPart}` : intPart;
+          }
+          break;
+        }
+      } catch {
+        // Try next API
+      }
+    }
+
+    dispatch({
+      type: 'getColsBalance',
+      colsBalance: { status: balance !== '0' ? 'loaded' : 'error', data: balance, error: null }
+    });
+  }, [address, dispatch]);
+
+  // Fetch user active stake (delegated eGLD)
+  const fetchUserActiveStake = useCallback(async () => {
+    if (!address) return;
+
+    dispatch({
+      type: 'getUserActiveStake',
+      userActiveStake: { status: 'loading', data: null, error: null }
+    });
+
+    // Use FallbackProxyNetworkProvider for automatic primary/fallback switching
+    const provider = new FallbackProxyNetworkProvider();
+
+    try {
+      const query = createContractQuery({
+        address: new Address(DELEGATION_CONTRACT),
+        func: new ContractFunction('getUserActiveStake'),
+        args: [new AddressValue(new Address(address))]
+      });
+
+      const data = await provider.queryContract(query);
+      const [userStake] = data.getReturnDataParts();
+
+      dispatch({
+        type: 'getUserActiveStake',
+        userActiveStake: {
+          status: 'loaded',
+          error: null,
+          data: userStake ? decodeBigNumber(userStake).toFixed() : '0'
+        }
+      });
+    } catch (err) {
+      console.error('getUserActiveStake failed:', err);
+      dispatch({
+        type: 'getUserActiveStake',
+        userActiveStake: { status: 'error', data: null, error: new Error('All gateways failed') }
+      });
+    }
+  }, [address, dispatch]);
+
+  // Preload all data once when user logs in (and only re-fetch if address changes)
+  useEffect(() => {
+    // Skip if no address, already loaded, or same address (tab switch)
+    if (!address || hasLoadedRef.current || lastAddressRef.current === address) return;
+    
+    lastAddressRef.current = address;
+    hasLoadedRef.current = true;
+    fetchDelegatorCount();
+    fetchClaimableCols();
+    fetchClaimableEgld();
+    fetchColsBalance();
+    fetchUserActiveStake();
+  }, [address, fetchDelegatorCount, fetchClaimableCols, fetchClaimableEgld, fetchColsBalance, fetchUserActiveStake]);
+
+  // Refresh data after transactions complete
+  useEffect(() => {
+    if (hasSuccessfulTransactions) {
+      fetchClaimableCols();
+      fetchClaimableEgld();
+      fetchColsBalance();
+      fetchUserActiveStake();
+    }
+  }, [hasSuccessfulTransactions, fetchClaimableCols, fetchClaimableEgld, fetchColsBalance, fetchUserActiveStake]);
+
+  return {
+    fetchDelegatorCount,
+    fetchClaimableCols,
+    fetchClaimableEgld,
+    fetchColsBalance,
+    fetchUserActiveStake,
+    isLoading: hasLoadedRef.current === false
+  };
+}

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia Staking - Validateur MultiversX</title>
+    <meta name="description" content="Déléguez vos eGLD à Colombia Staking - Validateur MultiversX professionnel avec 48 nœuds, 100% de disponibilité et des récompenses compétitives.">
+    <meta name="keywords" content="MultiversX, eGLD staking, validateur, blockchain, Colombia Staking, crypto, délégation">
+    <link rel="canonical" href="https://fr.colombia-staking.com/">
+    <link rel="alternate" hreflang="en" href="https://colombia-staking.com/">
+    <link rel="alternate" hreflang="es" href="https://esp.colombia-staking.com/">
+    <link rel="alternate" hreflang="fr" href="https://fr.colombia-staking.com/">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/1/apple-touch-icon-01e00f.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --primary: #62dbb8;
+            --primary-dark: #4bc9a1;
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --bg-card-hover: #252525;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-pink: #d33682;
+            --gradient-1: linear-gradient(135deg, #62dbb8 0%, #4bc9a1 100%);
+            --gradient-2: linear-gradient(135deg, #d33682 0%, #e85a8a 100%);
+            --shadow-glow: 0 0 30px rgba(98, 219, 184, 0.3);
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 70px;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 { font-family: 'Lustria', serif; font-weight: 600; line-height: 1.2; }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+        
+        a { color: inherit; text-decoration: none; transition: all 0.3s ease; }
+        
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--gradient-2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(211, 54, 130, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(211, 54, 130, 0); }
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero h1 a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 8px;
+        }
+        
+        .hero h1 a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: #000;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: var(--bg-card);
+            padding: 3rem 1rem;
+            border-top: 1px solid rgba(98, 219, 184, 0.2);
+            border-bottom: 1px solid rgba(98, 219, 184, 0.2);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-value {
+            font-family: 'Lustria', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(98, 219, 184, 0.1);
+        }
+        
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Cards */
+        .cta-section {
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, rgba(98, 219, 184, 0.1) 0%, rgba(211, 54, 130, 0.1) 100%);
+        }
+        
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .cta-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .cta-card img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .cta-card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .cta-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 5rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .video-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Xportal Banner */
+        .xportal-banner {
+            background: var(--gradient-2);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .xportal-banner h3 {
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        }
+        
+        .xportal-banner a {
+            display: inline-block;
+            margin-top: 1rem;
+            background: white;
+            color: var(--accent-pink);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .xportal-banner a:hover {
+            transform: scale(1.05);
+        }
+        
+        .xportal-img {
+            max-width: 400px;
+            margin: 2rem auto 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-card);
+            padding: 3rem 1rem 2rem;
+            border-top: 1px solid rgba(98, 219, 184, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(98, 219, 184, 0.2);
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .footer-social a:hover img {
+            filter: brightness(0);
+        }
+        
+        .footer-social img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(98, 219, 184, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+
+        /* Network Map Section */
+        .network-map-section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .network-map-section .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .network-map-section .section-header h2 {
+            font-family: 'Lustria', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .network-map-section .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+        .network-map-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        .network-map-preview {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        .network-map-label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(10,10,10,0.85);
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            z-index: 5;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .network-map-preview iframe {
+            width: 100%;
+            height: 420px;
+            border: none;
+            display: block;
+        }
+        .network-map-cta {
+            display: block;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--surface2);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .network-map-cta:hover {
+            background: var(--primary);
+            color: #000;
+        }
+        .network-map-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .nm-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.2s;
+        }
+        .nm-stat:hover { border-color: var(--primary); }
+        .nm-stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-variant-numeric: tabular-nums;
+        }
+        .nm-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: right;
+        }
+        .nm-info-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(98,219,184,0.25);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .nm-info-card h4 {
+            font-family: 'Lustria', serif;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .nm-info-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        .nm-info-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nm-info-card ul li {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            padding-left: 0.5rem;
+        }
+        .nm-info-card .btn { width: 100%; justify-content: center; }
+
+        @media (max-width: 900px) {
+            .network-map-wrapper { grid-template-columns: 1fr; }
+            .network-map-stats { flex-direction: row; flex-wrap: wrap; }
+            .nm-stat { flex: 1 1 calc(50% - 0.5rem); }
+            .nm-info-card { flex: 1 1 100%; }
+        }
+        @media (max-width: 768px) {
+            .nm-stat { flex: 1 1 100%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { min-height: 80vh; }
+            .hero-content { padding: 1rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; justify-content: center; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in { animation: fadeInUp 0.8s ease forwards; }
+        .animate-delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .animate-delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .animate-delay-3 { animation-delay: 0.6s; opacity: 0; }
+    </style>
+    
+    <script src="js/unified-header.js" defer></script>
+    
+    
+    <!-- Node Status Widget -->
+    <script>
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('status.json')
+                .then(r => r.json())
+                .then(data => {
+                    const allSync = data.nodes.every(n => n.status === 'SYNC');
+                    const statusColor = allSync ? '#62dbb8' : '#f59e0b';
+                    const statusText = allSync ? 'Nœuds en ligne' : 'Voir Statut';
+                    
+                    const widget = document.createElement('a');
+                    widget.href = 'node-status.html';
+                    widget.id = 'cs-node-status';
+                    widget.innerHTML = `<span style="display:inline-block;width:10px;height:10px;background:${statusColor};border-radius:50%;margin-right:8px;animation:nodePulse 2s infinite;"></span>${statusText}`;
+                    widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:500;border:1px solid #62dbb8;box-shadow:0 2px 10px rgba(0,0,0,0.3);transition:all 0.3s;';
+                    
+                    document.body.appendChild(widget);
+                    
+                    const style = document.createElement('style');
+                    style.textContent = '#cs-node-status { bottom: 80px !important; } @keyframes nodePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(98,219,184,0.4); } 50% { box-shadow: 0 0 0 8px rgba(98,219,184,0); } }';
+                    document.head.appendChild(style);
+                })
+                .catch(() => {});
+        });
+
+        // Fetch live stats from MultiversX API
+        async function fetchLiveStats() {
+            try {
+                const res = await fetch('https://colombia-staking.co/stats-api.php');
+                const data = await res.json();
+                if (!data.success) return;
+                document.getElementById('cs-validators').textContent = data.formatted.validators.replace(' nodes', '') || data.validators || '48';
+                document.getElementById('cs-delegators').textContent = data.formatted.delegators || (data.delegators ? data.delegators + '+' : '830+');
+                document.getElementById('cs-staked').textContent = data.formatted.staked || formatK(data.totalStaked) + ' eGLD';
+                document.getElementById('cs-staked-usd').textContent = data.formatted.stakedUsd || '';
+                document.getElementById('cs-rewards').textContent = data.formatted.distributed || formatK(data.totalDistributed) + ' eGLD';
+                document.getElementById('cs-rewards-usd').textContent = data.formatted.distributedUsd || '';
+            } catch (e) {
+                console.warn('Could not fetch live stats:', e);
+            }
+        }
+
+        function formatK(num) {
+            if (!num) return '0';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toFixed(1);
+        }
+
+        fetchLiveStats();
+        setInterval(fetchLiveStats, 300000); // Refresh every 5 minutes
+    })();
+    </script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="video/openart-video_03cf22a3_1748907875758.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge animate-fade-in">🚀 DApp disponible sur Xportal !</div>
+            <h1 class="animate-fade-in animate-delay-1">
+                <a href="https://staking.colombia-staking.com/dashboard" >
+                    Déléguez vos eGLD à l'agence de staking décentralisée
+                </a>
+            </h1>
+            <p class="animate-fade-in animate-delay-2" style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Validateur MultiversX professionnel avec une disponibilité de premier plan et des récompenses compétitives
+            </p>
+            <div class="hero-buttons animate-fade-in animate-delay-3">
+                <a href="https://staking.colombia-staking.com/unlock" class="btn btn-primary">
+                    ⚡ Déléguer Maintenant
+                </a>
+                <a href="quienes-somos.html" class="btn btn-secondary">
+                    En Savoir Plus
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-value" id="cs-validators">48</span>
+                <span class="stat-label">Nœuds Validateurs</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="cs-delegators">830+</span>
+                <span class="stat-label">Délégataires Actifs</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="cs-staked">178K+</span>
+                <span class="stat-label">eGLD Délégués (<span id="cs-staked-usd">~0,8M$</span>)</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="cs-rewards">12K+</span>
+                <span class="stat-label">eGLD en Récompenses (<span id="cs-rewards-usd">~90K$</span>)</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Évaluation des Nœuds</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Cards -->
+    <section class="cta-section">
+        <div class="section-header">
+            <h2>Commencez à Déléguer Aujourd'hui</h2>
+            <p>Choisissez votre méthode de staking préférée et gagnez des récompenses</p>
+        </div>
+        <div class="cta-grid">
+            <a href="https://staking.colombia-staking.com/dashboard"  class="cta-card">
+                <img src="images/0/stake-egld-with-colombiastaking-1010.png" alt="Déléguer eGLD" loading="eager">
+                <div class="cta-card-content">
+                    <h3 style="color: var(--primary);">Déléguer eGLD</h3>
+                    <p style="color: var(--text-muted);">Déléguez vos eGLD directement via notre dApp sécurisée</p>
+                </div>
+            </a>
+            <a href="cols-token.html" class="cta-card">
+                <img src="images/8/stake-cols-1238.jpg" alt="Stake COLS Token" loading="eager">
+                <div class="cta-card-content">
+                    <h3 style="color: var(--accent-pink);">Jeton COLS</h3>
+                    <p style="color: var(--text-muted);">Gagnez jusqu'à 50% APR avec notre jeton natif</p>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Pourquoi Choisir Colombia Staking ?</h2>
+            <p>Infrastructure professionnelle soutenue par des années d'expertise blockchain</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Sécurité Entreprise</h3>
+                <p>Infrastructure haute disponibilité avec plusieurs couches de redondance, garantissant que vos actifs sont toujours protégés.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>100% Disponibilité</h3>
+                <p>Nos nœuds validateurs maintiennent une disponibilité parfaite avec surveillance 24/7 et systèmes de basculement automatique.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>Énergie Verte</h3>
+                <p>Infrastructure alimentée à 100% par des énergies renouvelables en Colombie et en France, minimisant l'impact environnemental.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Récompenses Compétitives</h3>
+                <p>Maximisez vos rendements de staking avec notre structure de récompenses compétitive et nos faibles commissions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Multi-Emplacement</h3>
+                <p>Infrastructure distribuée dans plusieurs régions géographiques pour une résilience et des performances accrues.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Surveillance en Temps Réel</h3>
+                <p>Suivez les performances de vos nœuds et récompenses en temps réel via notre tableau de bord transparent.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2>Découvrez Comment Ça Marche</h2>
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="video/colombia-20staking-2025-low-1.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+    
+    <!-- Xportal Banner -->
+    
+    <!-- Network Map Section -->
+    <section class="network-map-section">
+        <div class="section-header">
+            <h2>🌐 Réseau MultiversX en Direct</h2>
+            <p>Explorez l'état en temps réel de la blockchain MultiversX — voyez les validateurs, observateurs et la répartition des nœuds dans le monde</p>
+        </div>
+        <div class="network-map-wrapper">
+            <div class="network-map-preview">
+                <div class="network-map-label">🔴 En Direct — Cliquez pour explorer</div>
+                <iframe
+                    src="https://colombia-staking.co/network/?embed=1"
+                    title="MultiversX Network Explorer"
+                    loading="eager"
+                    allow="fullscreen"
+                ></iframe>
+                <a href="https://colombia-staking.co/network/" class="network-map-cta" target="_blank">
+                    🌐 Ouvrir la Carte Réseau Complète
+                </a>
+            </div>
+            <div class="network-map-stats">
+                <div class="nm-stat">
+                    <span class="nm-stat-value">5,300+</span>
+                    <span class="nm-stat-label">Nœuds Réseau</span>
+                </div>
+                <div class="nm-stat">
+                    <span class="nm-stat-value">60+</span>
+                    <span class="nm-stat-label">Pays</span>
+                </div>
+                <div class="nm-stat">
+                    <span class="nm-stat-value">4</span>
+                    <span class="nm-stat-label">Shards + Metachain</span>
+                </div>
+                <div class="nm-stat">
+                    <span class="nm-stat-value">48</span>
+                    <span class="nm-stat-label">Nœuds Colombia Staking</span>
+                </div>
+                <div class="nm-stat">
+                    <span class="nm-stat-value">24/7</span>
+                    <span class="nm-stat-label">Surveillance</span>
+                </div>
+                <div class="nm-stat">
+                    <span class="nm-stat-value">4</span>
+                    <span class="nm-stat-label">Réseaux Observateurs</span>
+                </div>
+                <div class="nm-info-card">
+                    <h4>🗺️ Explorateur Réseau</h4>
+                    <p>Notre explorateur réseau MultiversX en temps réel cartographie les nœuds validateurs à travers le monde grâce à la géolocalisation IP. Survolez les nœuds pour voir l'identité, le shard et les détails du fournisseur.</p>
+                    <ul>
+                        <li>🔵 Nœuds colorés par shard (Shard 0 / 1 / 2 + Metachain)</li>
+                        <li>🟢 Regroupements par fournisseur et nœud</li>
+                        <li>🔵 État en ligne/hors ligne en un coup d’œil</li>
+                    </ul>
+                    <a href="https://colombia-staking.co/network/" target="_blank" class="btn btn-primary" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.7rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--gradient-1); color: #000; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s;">
+                        🌐 Explorer le Réseau
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="xportal-banner">
+        <h3>📱 DApp disponible sur Xportal ! Déléguez directement depuis votre portefeuille</h3>
+        <a href="https://xportal.com" >Obtenir Xportal</a>
+        <div class="xportal-img">
+            <img src="images/n/multiversx-labs-launches-xportal-the-first-super-app-to-reimagine-digital-finance-ai-avatars-chat-opening-web3-and-metaverse-experiences-to-everyone-764.png" alt="Xportal App" loading="eager">
+        </div>
+    </section>
+    
+    <!-- Tax Tool Banner -->
+    <section class="cta-section" style="padding: 4rem 1rem; background: linear-gradient(135deg, rgba(98, 219, 184, 0.1) 0%, rgba(98, 219, 184, 0.05) 100%);">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">📋 Outil de Déclaration Fiscale MultiversX</h2>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                Solution professionnelle de déclaration fiscale pour <strong>tous les fournisseurs de staking</strong> — Disponible pour tout année d'imposition. 
+                Suivi automatique de vos délégations, récompenses et transactions sur toutes les opérations de staking MultiversX.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://colombia-staking.com/dapp.html"  class="btn btn-primary" style="background: var(--gradient-1);">
+                    🧮 Essayer l'Outil
+                </a>
+                <a href="https://colombia-staking.com/dapp.html"  class="btn btn-secondary">
+                    Documentation
+                </a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1.5rem;">
+                ✅ Fonctionne avec n'importe quel fournisseur | ✅ Plusieurs années fiscales | ✅ Export CSV/Excel
+            </p>
+        </div>
+    </section>
+
+    <!-- BTC Strategy Banner -->
+    <section class="cta-section" style="padding: 4rem 1rem; background: linear-gradient(135deg, rgba(211, 54, 130, 0.1) 0%, rgba(247, 183, 51, 0.05) 100%);">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <h2 style="color: var(--accent-pink); margin-bottom: 1rem;">📈 Stratégie d'Investissement BTC</h2>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                Stratégie DCA Bitcoin avec IA et analyse de marché en temps réel. Obtenez des recommandations hebdomadaires personnalisées basées sur 11 indicateurs, facteur de santé Aave et positionnement dans le cycle de marché.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://colombia-staking.com/dapp.html"  class="btn btn-primary" style="background: var(--gradient-1);">
+                    📊 Voir Rapport BTC
+                </a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1.5rem;">
+                ✅ Modèle à 11 indicateurs | ✅ Surveillance santé Aave | ✅ Mises à jour hebdomadaires
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="quienes-somos.html">À Propos</a>
+                <a href="elrond.html">MultiversX</a>
+                <a href="billetera-maiar.html">Xportal</a>
+                <a href="node-status.html">Nœuds</a>
+                <a href="preguntas-frecuentes.html">FAQ</a>
+                <a href="https://staking.colombia-staking.com/dashboard" >DApp Staking</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://x.com/ColombiaStaking"  title="X (Twitter)" style="background: #000;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://t.me/ColombiaStaking"  title="Telegram">
+                    <img src="images/v/telegram-logo-120.png" alt="Telegram">
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Colombia Staking. Tous droits réservés. | Validateur MultiversX</p>
+        </div>
+    </footer>
+    <!-- Social Media Widget - Inline to bypass CDN cache -->
+    <script>
+    /**
+     * Social Media Widget - Telegram + X (Twitter)
+     */
+    (function() {
+        'use strict';
+        function detectLanguage() {
+            const host = window.location.hostname;
+            if (host.includes('esp.')) return 'es';
+            if (host.includes('fr.')) return 'fr';
+            return 'en';
+        }
+        const lang = detectLanguage();
+        const config = {
+            en: {
+                channels: [
+                    { name: '📢 Announcements', url: 'https://t.me/ColombiaStakingAnn', desc: 'Official updates & news' },
+                    { name: '💬 English Chat', url: 'https://t.me/ColombiaStakingChat', desc: 'Community discussions' },
+                    { name: '🇪🇸 Spanish Chat', url: 'https://t.me/colombiastakingesp', desc: 'Comunidad en español' },
+                    { name: '🇫🇷 French Chat', url: 'https://t.me/colmbiastakingfr', desc: 'Communauté française' }
+                ],
+                buttonText: 'Telegram'
+            },
+            es: {
+                channels: [
+                    { name: '📢 Anuncios', url: 'https://t.me/ColombiaStakingAnn', desc: 'Noticias y actualizaciones' },
+                    { name: '💬 Chat Inglés', url: 'https://t.me/ColombiaStakingChat', desc: 'English community' },
+                    { name: '🇪🇸 Chat Español', url: 'https://t.me/colombiastakingesp', desc: 'Comunidad en español' },
+                    { name: '🇫🇷 Chat Francés', url: 'https://t.me/colmbiastakingfr', desc: 'Communauté française' }
+                ],
+                buttonText: 'Telegram'
+            },
+            fr: {
+                channels: [
+                    { name: '📢 Annonces', url: 'https://t.me/ColombiaStakingAnn', desc: 'Nouvelles et mises à jour' },
+                    { name: '💬 Chat Anglais', url: 'https://t.me/ColombiaStakingChat', desc: 'English community' },
+                    { name: '🇪🇸 Chat Espagnol', url: 'https://t.me/colombiastakingesp', desc: 'Comunidad en español' },
+                    { name: '🇫🇷 Chat Français', url: 'https://t.me/colmbiastakingfr', desc: 'Communauté française' }
+                ],
+                buttonText: 'Telegram'
+            }
+        };
+        const c = config[lang];
+        const styles = `<style id="cs-telegram-styles">
+        .cs-social-widget { position: fixed; bottom: 20px; right: 20px; z-index: 999990; font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .cs-social-buttons { display: flex; gap: 10px; }
+        .cs-x-btn { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: #000; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; text-decoration: none; }
+        .cs-x-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5); }
+        .cs-telegram-btn { display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: linear-gradient(135deg, #0088cc 0%, #00a8e8 100%); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); transition: all 0.3s ease; }
+        .cs-telegram-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(0, 136, 204, 0.6); }
+        .cs-telegram-btn img { width: 24px; height: 24px; }
+        .cs-telegram-btn span { color: white; font-weight: 600; font-size: 14px; white-space: nowrap; }
+        .cs-telegram-popup { position: absolute; bottom: 70px; right: 0; background: #1a1a1a; border-radius: 16px; padding: 20px; min-width: 280px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 136, 204, 0.3); opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; }
+        .cs-telegram-popup.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .cs-telegram-popup h4 { margin: 0 0 15px 0; color: #62dbb8; font-size: 16px; font-weight: 600; padding-bottom: 10px; border-bottom: 1px solid rgba(98, 219, 184, 0.2); }
+        .cs-telegram-channel { display: block; padding: 12px 15px; background: #252525; border-radius: 10px; margin-bottom: 8px; color: white; text-decoration: none; transition: all 0.2s ease; border: 1px solid transparent; }
+        .cs-telegram-channel:last-child { margin-bottom: 0; }
+        .cs-telegram-channel:hover { background: #333; border-color: #0088cc; transform: translateX(-5px); }
+        .cs-telegram-channel-name { display: block; font-weight: 600; margin-bottom: 2px; font-size: 14px; }
+        .cs-telegram-channel-desc { font-size: 12px; color: #888; }
+        @media (max-width: 768px) { .cs-telegram-btn span { display: none; } .cs-telegram-btn { padding: 14px; border-radius: 50%; } .cs-telegram-popup { right: -10px; min-width: 250px; } }
+        </style>`;
+        function buildPopup() {
+            const channels = c.channels.map(ch => `<a href="${ch.url}"  class="cs-telegram-channel"><span class="cs-telegram-channel-name">${ch.name}</span><span class="cs-telegram-channel-desc">${ch.desc}</span></a>`).join('');
+            return `<div class="cs-social-widget" id="csSocialWidget"><div class="cs-telegram-popup" id="csTelegramPopup"><h4>📱 Join us on Telegram</h4>${channels}</div><div class="cs-social-buttons"><a href="https://x.com/ColombiaStaking"  class="cs-x-btn" title="X (Twitter)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><button class="cs-telegram-btn" id="csTelegramBtn" aria-label="Telegram"><img src="images/v/telegram-logo-120.png" alt="Telegram"><span>${c.buttonText}</span></button></div></div>`;
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const existingStyles = document.getElementById('cs-telegram-styles');
+            if (existingStyles) existingStyles.remove();
+            document.head.insertAdjacentHTML('beforeend', styles);
+            document.body.insertAdjacentHTML('beforeend', buildPopup());
+            const btn = document.getElementById('csTelegramBtn');
+            const popup = document.getElementById('csTelegramPopup');
+            if (btn && popup) {
+                btn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); popup.classList.toggle('active'); });
+                document.addEventListener('click', function(e) { if (!document.getElementById('csSocialWidget').contains(e.target)) { popup.classList.remove('active'); } });
+            }
+        });
+    })();
+    </script>
+    <script src="js/stats-updater.js"></script>
+</body>
+</html>

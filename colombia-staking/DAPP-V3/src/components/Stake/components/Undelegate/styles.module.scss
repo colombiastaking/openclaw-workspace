@@ -1,0 +1,170 @@
+// Undelegate Component Styles - Modern & Compact
+// Colombia Staking Theme
+
+$primary: #62dbb8;
+$primary-dark: #4bc9a1;
+$accent: #d33682;
+$background: #0a0a0a;
+$card-bg: #1a1a1a;
+$card-bg-hover: #252525;
+$text-primary: #ffffff;
+$text-secondary: #a0a0a0;
+$text-muted: #6a6a6a;
+$border-color: rgba(98, 219, 184, 0.2);
+
+.wrapper {
+  display: contents;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 152, 0, 0.25);
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(255, 152, 0, 0.08);
+  color: #ff9800;
+
+  &:hover:not(.disabled) {
+    border-color: #ff9800;
+    background: rgba(255, 152, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  &:active:not(.disabled) {
+    transform: translateY(0);
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(0.5);
+  }
+}
+
+.triggerIcon {
+  font-size: 15px;
+}
+
+.triggerLabel {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+// Form styles - Inside Modal
+.undelegate {
+  width: 100%;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-secondary;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  padding-right: 70px;
+  font-size: 16px;
+  font-weight: 500;
+  color: $text-primary;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.25s ease;
+  font-family: 'Poppins', sans-serif;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: rgba(#ff9800, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &.invalid {
+    border-color: rgba($accent, 0.5);
+  }
+
+  // Hide number spinners
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+}
+
+.maxButton {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(#ff9800, 0.15);
+  color: #ff9800;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+
+  &:hover:not(:disabled) {
+    background: rgba(#ff9800, 0.25);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.balance {
+  margin-top: 8px;
+  font-size: 12px;
+  color: $text-muted;
+  text-align: left;
+
+  span {
+    color: #ff9800;
+    font-weight: 600;
+  }
+}
+
+.error {
+  margin-top: 6px;
+  font-size: 11px;
+  color: $accent;
+  display: block;
+  text-align: left;
+}

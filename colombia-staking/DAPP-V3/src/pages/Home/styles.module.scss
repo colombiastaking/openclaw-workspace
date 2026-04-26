@@ -1,0 +1,1183 @@
+// Colombia Staking - League-Centric Design System
+// Beautiful glassmorphism with animal league themes
+
+// Color palette
+$primary: #62dbb8;
+$primary-dark: #4bc9a1;
+$accent: #d33682;
+$accent-light: #e85a8a;
+$background: #0a0a0a;
+$card-bg: #1a1a1a;
+$card-bg-hover: #252525;
+$text-primary: #ffffff;
+$text-secondary: #a0a0a0;
+$text-muted: #6a6a6a;
+$border-color: rgba(98, 219, 184, 0.2);
+$glow: 0 0 30px rgba(98, 219, 184, 0.4);
+$glow-accent: 0 0 30px rgba(211, 54, 130, 0.4);
+
+// League Colors
+$leviathan: #9c27b0;
+$whale: #2196f3;
+$shark: #03a9f4;
+$dolphin: #00bcd4;
+$pufferfish: #4caf50;
+$fish: #8bc34a;
+$crab: #ff9800;
+$shrimp: #f44336;
+
+// Glassmorphism mixin
+@mixin glassmorphism($opacity: 0.1, $blur: 20px) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@mixin league-glow($color) {
+  box-shadow: 0 8px 32px rgba($color, 0.4), 0 0 60px rgba($color, 0.2);
+}
+
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+.landing {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+// League Hero Section - Full width animal showcase
+.heroSection {
+  position: relative;
+  border-radius: 32px;
+  padding: 40px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s ease;
+
+  // Dynamic background based on league
+  &.leviathan {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.3) 0%, rgba(123, 31, 162, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($leviathan);
+  }
+  &.whale {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.3) 0%, rgba(21, 101, 192, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($whale);
+  }
+  &.shark {
+    background: linear-gradient(135deg, rgba(3, 169, 244, 0.3) 0%, rgba(0, 151, 167, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($shark);
+  }
+  &.dolphin {
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.3) 0%, rgba(0, 150, 136, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($dolphin);
+  }
+  &.pufferfish {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(56, 142, 60, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($pufferfish);
+  }
+  &.fish {
+    background: linear-gradient(135deg, rgba(139, 195, 74, 0.3) 0%, rgba(104, 159, 56, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($fish);
+  }
+  &.crab {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.3) 0%, rgba(245, 124, 0, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($crab);
+  }
+  &.shrimp {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.3) 0%, rgba(211, 47, 47, 0.2) 50%, rgba(0, 0, 0, 0.8) 100%);
+    @include league-glow($shrimp);
+  }
+
+  // Default when no league
+  &.default {
+    background: linear-gradient(135deg, rgba(98, 219, 184, 0.2) 0%, rgba(211, 54, 130, 0.1) 100%);
+    border: 1px solid $border-color;
+  }
+
+  // Animated background pattern
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/leagues/pattern.svg');
+    background-size: 200px;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  // Floating particles effect
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @media (max-width: 767px) {
+    padding: 24px 16px;
+    border-radius: 20px;
+    min-height: 320px;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-30px, 20px) rotate(5deg); }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+}
+
+.heroAnimal {
+  flex-shrink: 0;
+  position: relative;
+
+  img {
+    width: 180px;
+    height: 180px;
+    border-radius: 30px;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05) rotate(3deg);
+    }
+
+    @media (max-width: 767px) {
+      width: 140px;
+      height: 140px;
+      border-radius: 24px;
+    }
+  }
+
+  // League badge overlay
+  .leagueBadge {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    .tier {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+
+    .name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
+.heroInfo {
+  flex: 1;
+}
+
+.heroGreeting {
+  font-family: 'Lustria', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+
+  span {
+    background: linear-gradient(135deg, $primary, $accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 28px;
+  }
+}
+
+.heroRank {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  color: $text-primary;
+  font-size: 15px;
+  font-weight: 500;
+
+  .rankNumber {
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
+
+.heroStats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 600px) {
+    gap: 16px;
+  }
+}
+
+.heroStat {
+  text-align: center;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 100px;
+
+  .value {
+    font-size: 24px;
+    font-weight: 800;
+    color: $primary;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $text-secondary;
+  }
+
+  @media (max-width: 767px) {
+    padding: 12px 16px;
+    min-width: 80px;
+
+    .value {
+      font-size: 20px;
+    }
+  }
+}
+
+// Asset Cards Grid - Glassmorphism style
+.assetGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 0;
+  box-sizing: border-box;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.assetCard {
+  @include glassmorphism(0.08, 20px);
+  border-radius: 24px;
+  padding: 28px;
+  text-align: center;
+  color: $text-primary;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $primary, $accent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba($primary, 0.5);
+    box-shadow: $glow;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 20px;
+    border-radius: 20px;
+  }
+}
+
+.assetCardAccent {
+  composes: assetCard;
+  border-color: rgba($accent, 0.3);
+
+  &:hover {
+    border-color: $accent;
+    box-shadow: $glow-accent;
+  }
+}
+
+.assetCardTotal {
+  composes: assetCard;
+  grid-column: span 1;
+  background: linear-gradient(135deg, rgba(98, 219, 184, 0.15) 0%, rgba(211, 54, 130, 0.1) 100%);
+
+  @media (max-width: 900px) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 600px) {
+    grid-column: span 1;
+  }
+}
+
+.assetIcon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, rgba(98, 219, 184, 0.3), rgba(98, 219, 184, 0.1));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.assetIconAccent {
+  composes: assetIcon;
+  background: linear-gradient(135deg, rgba(211, 54, 130, 0.3), rgba(211, 54, 130, 0.1));
+}
+
+.assetLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.assetValue {
+  font-size: 28px;
+  font-weight: 800;
+  color: $text-primary;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
+}
+
+.assetValuePrimary {
+  color: $primary;
+}
+
+.assetValueAccent {
+  color: $accent;
+}
+
+.assetUsd {
+  font-size: 14px;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-top: 8px;
+}
+
+.totalValue {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, $primary, $accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 8px 0;
+
+  @media (max-width: 767px) {
+    font-size: 28px;
+  }
+}
+
+.hint {
+  font-size: 11px;
+  color: $text-muted;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+// APR Panel - Matching league theme
+.aprPanel {
+  margin-top: 32px;
+  @include glassmorphism(0.08, 20px);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // Dynamic border based on league
+  &.leviathan { border-color: rgba($leviathan, 0.4); }
+  &.whale { border-color: rgba($whale, 0.4); }
+  &.shark { border-color: rgba($shark, 0.4); }
+  &.dolphin { border-color: rgba($dolphin, 0.4); }
+  &.pufferfish { border-color: rgba($pufferfish, 0.4); }
+  &.fish { border-color: rgba($fish, 0.4); }
+  &.crab { border-color: rgba($crab, 0.4); }
+  &.shrimp { border-color: rgba($shrimp, 0.4); }
+
+  @media (max-width: 767px) {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+}
+
+.aprHeader {
+  font-size: 14px;
+  font-weight: 600;
+  color: $text-secondary;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.aprCard {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(98, 219, 184, 0.1);
+  border: 1px solid rgba(98, 219, 184, 0.3);
+  border-radius: 20px;
+  padding: 24px 48px;
+  margin: 16px 0;
+
+  @media (max-width: 767px) {
+    padding: 20px 32px;
+  }
+}
+
+.aprLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: 8px;
+}
+
+.aprValue {
+  font-size: 56px;
+  font-weight: 800;
+  color: $primary;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -2px;
+  line-height: 1;
+
+  @media (max-width: 767px) {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+}
+
+.aprValueLarge {
+  font-size: 64px;
+
+  @media (max-width: 767px) {
+    font-size: 48px;
+  }
+}
+
+.baseAprRow {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: $text-secondary;
+}
+
+.baseAprValue {
+  color: $primary;
+  font-weight: 700;
+}
+
+.rankingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 14px 28px;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: $text-primary;
+
+  @media (max-width: 767px) {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+}
+
+.rankingBadgeIcon {
+  font-size: 24px;
+}
+
+.rankingBadgeImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.rankingBadgeRank {
+  color: $primary;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+// Stats Row
+.statsRow {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    gap: 24px;
+  }
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  font-size: 26px;
+  font-weight: 700;
+  color: $text-primary;
+
+  @media (max-width: 767px) {
+    font-size: 22px;
+  }
+}
+
+.statValuePrimary {
+  color: $primary;
+}
+
+.statValueAccent {
+  color: $accent;
+}
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+// Mobile adjustments
+@media (max-width: 767px) {
+  .landing {
+    padding: 16px;
+    padding-bottom: 100px;
+  }
+}
+
+// Welcome Banner - Empty State
+.welcomeBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(98, 219, 184, 0.15) 0%, rgba(211, 54, 130, 0.1) 100%);
+  border: 1px solid rgba(98, 219, 184, 0.3);
+  border-radius: 24px;
+  padding: 28px;
+  margin-bottom: 24px;
+  animation: slideIn 0.5s ease-out;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.welcomeIcon {
+  font-size: 56px;
+  flex-shrink: 0;
+}
+
+.welcomeContent {
+  flex: 1;
+}
+
+.welcomeTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: $primary;
+  margin: 0 0 10px 0;
+}
+
+.welcomeText {
+  font-size: 15px;
+  color: $text-secondary;
+  margin: 0 0 18px 0;
+  line-height: 1.6;
+
+  strong {
+    color: $primary;
+  }
+}
+
+.welcomeBenefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
+}
+
+.welcomeBenefit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: $text-primary;
+  background: rgba(98, 219, 184, 0.1);
+  padding: 10px 16px;
+  border-radius: 24px;
+  border: 1px solid rgba(98, 219, 184, 0.2);
+
+  span {
+    font-size: 18px;
+  }
+}
+
+// Upsell Banner - Has eGLD but no COLS
+.upsellBanner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(255, 87, 34, 0.1) 100%);
+  border: 1px solid rgba(255, 152, 0, 0.3);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  animation: slideIn 0.5s ease-out;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.upsellIcon {
+  font-size: 40px;
+  flex-shrink: 0;
+}
+
+.upsellContent {
+  flex: 1;
+}
+
+.upsellTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff9800;
+  margin: 0 0 6px 0;
+}
+
+.upsellText {
+  font-size: 14px;
+  color: $text-secondary;
+  margin: 0;
+  line-height: 1.5;
+
+  strong {
+    color: #ff9800;
+  }
+}
+
+.upsellButton {
+  flex-shrink: 0;
+  display: inline-block;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+  }
+}
+
+// Upsell Banner - Has some COLS
+.upsellBannerCols {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(211, 54, 130, 0.15) 0%, rgba(156, 39, 176, 0.1) 100%);
+  border: 1px solid rgba(211, 54, 130, 0.3);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  animation: slideIn 0.5s ease-out;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.upsellButtonCols {
+  flex-shrink: 0;
+  display: inline-block;
+  background: linear-gradient(135deg, $accent, #9c27b0);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(211, 54, 130, 0.4);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Potential Earnings Calculator
+.potentialSection {
+  @include glassmorphism(0.08, 20px);
+  border-radius: 24px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.potentialTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: $text-primary;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.potentialSubtitle {
+  font-size: 13px;
+  color: $text-muted;
+  text-align: center;
+  margin: 0 0 24px 0;
+}
+
+.potentialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.potentialCard {
+  background: rgba(98, 219, 184, 0.05);
+  border: 1px solid rgba(98, 219, 184, 0.15);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(98, 219, 184, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(98, 219, 184, 0.2);
+  }
+}
+
+.potentialLabel {
+  font-size: 11px;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.potentialStake {
+  font-size: 13px;
+  color: $text-secondary;
+  margin-bottom: 10px;
+}
+
+.potentialReward {
+  font-size: 20px;
+  font-weight: 700;
+  color: $primary;
+  margin-bottom: 6px;
+}
+
+.potentialUsd {
+  font-size: 12px;
+  color: $text-muted;
+}
+
+.potentialBonus {
+  font-size: 11px;
+  font-weight: 600;
+  color: $accent;
+  margin-top: 10px;
+  background: rgba($accent, 0.1);
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.potentialApr {
+  font-size: 13px;
+  font-weight: 600;
+  color: $primary;
+  margin-top: 8px;
+}
+
+.potentialCta {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, $primary, $primary-dark);
+  color: $background;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 16px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba($primary, 0.4);
+  }
+}
+
+// COLS-Only Banner - has COLS but no eGLD
+.colsOnlyBanner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(0, 188, 212, 0.1) 100%);
+  border: 1px solid rgba(33, 150, 243, 0.3);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  animation: slideIn 0.5s ease-out;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.colsOnlyIcon {
+  font-size: 40px;
+  flex-shrink: 0;
+}
+
+.colsOnlyContent {
+  flex: 1;
+}
+
+.colsOnlyTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2196f3;
+  margin: 0 0 6px 0;
+}
+
+.colsOnlyText {
+  font-size: 14px;
+  color: $text-secondary;
+  margin: 0;
+  line-height: 1.5;
+
+  strong {
+    color: #2196f3;
+  }
+}
+
+.colsOnlyButton {
+  flex-shrink: 0;
+  display: inline-block;
+  background: linear-gradient(135deg, #2196f3, #00bcd4);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  }
+}
+
+// Gold Member Banner
+.goldMemberBanner {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  color: #fbbf24;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.goldBonusBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1a1a2e;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.goldHeroBanner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  border: 2px solid #fbbf24;
+  border-radius: 24px;
+  padding: 36px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(251, 191, 36, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+}
+
+.goldHeroContent {
+  position: relative;
+  text-align: center;
+}
+
+.goldHeroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a2e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 10px 20px;
+  border-radius: 24px;
+  margin-bottom: 20px;
+}
+
+.goldHeroIcon {
+  font-size: 20px;
+}
+
+.goldHeroTitle {
+  color: #fff;
+  font-size: 32px;
+  margin: 0 0 14px;
+}
+
+.goldHeroText {
+  color: #94a3b8;
+  font-size: 16px;
+  margin: 0 0 28px;
+
+  strong {
+    color: #fbbf24;
+  }
+}
+
+.goldHeroStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.goldHeroStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.goldHeroStatValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.goldHeroStatLabel {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.goldHeroStatDivider {
+  width: 1px;
+  height: 48px;
+  background: rgba(251, 191, 36, 0.3);
+}
+
+@media (max-width: 640px) {
+  .goldHeroBanner {
+    padding: 28px 18px;
+  }
+
+  .goldHeroTitle {
+    font-size: 24px;
+  }
+
+  .goldHeroStats {
+    gap: 20px;
+  }
+
+  .goldHeroStatValue {
+    font-size: 24px;
+  }
+}
+
+// League progress card
+.leagueProgress {
+  @include glassmorphism(0.1, 20px);
+  border-radius: 24px;
+  padding: 28px;
+  margin-bottom: 24px;
+  text-align: center;
+
+  .leagueName {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .leagueImage {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    object-fit: cover;
+  }
+
+  .progressBar {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 16px 0;
+
+    .progress {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.6s ease;
+    }
+  }
+
+  .nextLeague {
+    font-size: 13px;
+    color: $text-secondary;
+    margin-top: 12px;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}

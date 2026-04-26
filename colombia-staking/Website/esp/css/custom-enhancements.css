@@ -1,0 +1,326 @@
+/**
+ * Colombia Staking - Professional UI/UX Enhancements
+ * Enhanced version with premium feel
+ */
+
+/* ============================================
+   SMOOTH SCROLL & BASE IMPROVEMENTS
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Professional text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(98, 219, 184, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(98, 219, 184, 0.3);
+  color: inherit;
+}
+
+/* ============================================
+   BUTTON & INTERACTIVE ELEMENTS
+   ============================================ */
+
+/* Primary CTA buttons - elegant hover */
+.c11:hover {
+  box-shadow: 0 8px 30px rgba(98, 219, 184, 0.4);
+  transform: translateY(-2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Menu buttons - smooth lift */
+.c13:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(98, 219, 184, 0.25);
+  transition: all 0.25s ease;
+}
+
+/* Telegram button - professional hover */
+.c19:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 136, 204, 0.35);
+  transition: all 0.3s ease;
+}
+
+/* Close/popup buttons */
+.c16:hover {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+/* ============================================
+   LINKS & TEXT ENHANCEMENTS
+   ============================================ */
+
+/* Underline links smoothly */
+a:not([class*="c"]):hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Focus states for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #62dbb8;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .c11,
+  .c13,
+  .c19 {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ============================================
+   NODE STATUS FLOATING WIDGET
+   ============================================ */
+
+.node-status-widget {
+  position: fixed !important;
+  bottom: 60px !important;
+  right: 20px !important;
+  z-index: 99999 !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 16px !important;
+  background: linear-gradient(145deg, #1d1f23, #25272b) !important;
+  border: 1px solid rgba(98, 219, 184, 0.3) !important;
+  border-radius: 25px !important;
+  color: #62dbb8 !important;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(98, 219, 184, 0.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.node-status-widget:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 
+    0 8px 25px rgba(98, 219, 184, 0.25),
+    0 0 0 1px rgba(98, 219, 184, 0.3) !important;
+  border-color: rgba(98, 219, 184, 0.5) !important;
+  background: linear-gradient(145deg, #25272b, #2d2f33) !important;
+}
+
+.node-status-widget .status-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: #4caf50 !important;
+  animation: widgetPulse 2s infinite !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5) !important;
+}
+
+@keyframes widgetPulse {
+  0%, 100% { 
+    opacity: 1; 
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+  }
+  50% { 
+    opacity: 0.7; 
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.3);
+  }
+}
+
+/* ============================================
+   CARD & CONTENT ENHANCEMENTS
+   ============================================ */
+
+/* Subtle content card effect */
+.c12:hover,
+.c14:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* Fade in animation for content */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle bounce for CTAs */
+@keyframes subtleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Professional hover glow */
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(98, 219, 184, 0.2);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(98, 219, 184, 0.4);
+  }
+}
+
+/* ============================================
+   SCROLL INDICATORS & PROGRESS
+   ============================================ */
+
+/* Reading progress indicator */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #62dbb8, #d33682);
+  z-index: 999999;
+  transition: width 0.1s ease-out;
+}
+
+/* ============================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================ */
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .node-status-widget {
+    bottom: 55px !important;
+    right: 10px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Larger touch targets on mobile */
+  .c13,
+  .c11,
+  .c19 {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .node-status-widget {
+    bottom: 70px !important;
+    right: 15px !important;
+  }
+}
+
+/* ============================================
+   DARK MODE ENHANCEMENTS
+   ============================================ */
+
+/* The site is dark by default, no extra dark mode needed */
+/* But we can enhance contrast for better readability */
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .node-status-widget,
+  .c19, /* Telegram */
+  .c16  /* Close buttons */
+  {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+/* Skeleton loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   TOOLTIP STYLES (if needed)
+   ============================================ */
+
+[title] {
+  position: relative;
+}
+
+/* ============================================
+   FOOTER ENHANCEMENTS
+   ============================================ */
+
+/* Social link hover effect */
+footer a[title]:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}

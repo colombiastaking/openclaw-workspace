@@ -1,0 +1,45 @@
+(function(d){var h=[];d.loadImages=function(a,e){"string"==typeof a&&(a=[a]);for(var f=a.length,g=0,b=0;b<f;b++){var c=document.createElement("img");c.onload=function(){g++;g==f&&d.isFunction(e)&&e()};c.src=a[b];h.push(c)}}})(window.jQuery);
+var wl;
+
+var lwi=-1;function thresholdPassed(){var w=$(window).width();var p=false;var cw=0;if(w>=480){cw++;}if(w>=768){cw++;}if(w>=960){cw++;}if(w>=1200){cw++;}if(lwi!=cw){p=true;}lwi=cw;return p;}
+ldsrcset=function(t){var e,r=document.querySelectorAll(t);for(e=0;e<r.length;e++){var c=r[e].getAttribute("data-srcset");r[e].setAttribute("srcset",c)}},ldsrc=function(t){var e=document.querySelector(t),r=e.getAttribute("data-src");e.setAttribute("src",r)};ldv=function(t){var e=document.querySelector(t),r=document.querySelector(t+" source"),c=r.getAttribute("data-src");r.setAttribute("src",c),e.play()};!function(){if("Promise"in window&&void 0!==window.performance){var e,t,r=document,n=function(){return r.createElement("link")},o=new Set,a=n(),i=a.relList&&a.relList.supports&&a.relList.supports("prefetch"),s=location.href.replace(/#[^#]+$/,"");o.add(s);var c=function(e){var t=location,r="http:",n="https:";if(e&&e.href&&e.origin==t.origin&&[r,n].includes(e.protocol)&&(e.protocol!=r||t.protocol!=n)){var o=e.pathname;if(!(e.hash&&o+e.search==t.pathname+t.search||"?preload=no"==e.search.substr(-11)||".html"!=o.substr(-5)&&".html"!=o.substr(-5)&&"/"!=o.substr(-1)))return!0}},u=function(e){var t=e.replace(/#[^#]+$/,"");if(!o.has(t)){if(i){var a=n();a.rel="prefetch",a.href=t,r.head.appendChild(a)}else{var s=new XMLHttpRequest;s.open("GET",t,s.withCredentials=!0),s.send()}o.add(t)}},p=function(e){return e.target.closest("a")},f=function(t){var r=t.relatedTarget;r&&p(t)==r.closest("a")||e&&(clearTimeout(e),e=void 0)},d={capture:!0,passive:!0};r.addEventListener("touchstart",function(e){t=performance.now();var r=p(e);c(r)&&u(r.href)},d),r.addEventListener("mouseover",function(r){if(!(performance.now()-t<1200)){var n=p(r);c(n)&&(n.addEventListener("mouseout",f,{passive:!0}),e=setTimeout(function(){u(n.href),e=void 0},80))}},d)}}();
+
+$(function(){
+r=function(){if(thresholdPassed()){dpi=window.devicePixelRatio;if($(window).width()>=1200){var a='data-src';var e=document.querySelector('.un58');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/grayscale-transparent-2078.png':'images/grayscale-transparent-1039.png');
+var a='data-src';var e=document.querySelector('.un59');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/telegram-logo-264.png':'images/telegram-logo-132.png');
+var a='data-src';var e=document.querySelector('.un60');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/twitter-152-2.png':'images/twitter-76-2.png');
+var e=document.querySelector('.un54');e.setAttribute('src',(dpi>1)?'images/transparent-logo-614.png':'images/transparent-logo-307.png');
+var e=document.querySelector('.un55');e.setAttribute('src',(dpi>1)?'images/grayscale-transparent-2078.png':'images/grayscale-transparent-1039.png');
+var e=document.querySelector('.un56');e.setAttribute('src',(dpi>1)?'images/img_9613-1002-1.jpg':'images/img_9613-501-1.jpg');
+var e=document.querySelector('.un57');e.setAttribute('src',(dpi>1)?'images/img_9612-980-1.jpg':'images/img_9612-490-1.jpg');}else if($(window).width()>=960){var a='data-src';var e=document.querySelector('.un58');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/grayscale-transparent-1662.png':'images/grayscale-transparent-831.png');
+var a='data-src';var e=document.querySelector('.un59');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/telegram-logo-212.png':'images/telegram-logo-106.png');
+var a='data-src';var e=document.querySelector('.un60');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/twitter-122-2.png':'images/twitter-61-2.png');
+var e=document.querySelector('.un54');e.setAttribute('src',(dpi>1)?'images/transparent-logo-490.png':'images/transparent-logo-245.png');
+var e=document.querySelector('.un55');e.setAttribute('src',(dpi>1)?'images/grayscale-transparent-1662.png':'images/grayscale-transparent-831.png');
+var e=document.querySelector('.un56');e.setAttribute('src',(dpi>1)?'images/img_9613-802.jpg':'images/img_9613-401.jpg');
+var e=document.querySelector('.un57');e.setAttribute('src',(dpi>1)?'images/img_9612-784.jpg':'images/img_9612-392.jpg');}else if($(window).width()>=768){var a='data-src';var e=document.querySelector('.un58');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/grayscale-transparent-1330.png':'images/grayscale-transparent-665.png');
+var a='data-src';var e=document.querySelector('.un59');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/telegram-logo-168.png':'images/telegram-logo-84.png');
+var a='data-src';var e=document.querySelector('.un60');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/twitter-96.png':'images/twitter-48-1.png');
+var e=document.querySelector('.un54');e.setAttribute('src',(dpi>1)?'images/transparent-logo-392.png':'images/transparent-logo-196.png');
+var e=document.querySelector('.un55');e.setAttribute('src',(dpi>1)?'images/grayscale-transparent-1330.png':'images/grayscale-transparent-665.png');
+var e=document.querySelector('.un56');e.setAttribute('src',(dpi>1)?'images/img_9613-642.jpg':'images/img_9613-321.jpg');
+var e=document.querySelector('.un57');e.setAttribute('src',(dpi>1)?'images/img_9612-628.jpg':'images/img_9612-314.jpg');}else if($(window).width()>=480){var a='data-src';var e=document.querySelector('.un58');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/grayscale-transparent-924.png':'images/grayscale-transparent-462.png');
+var a='data-src';var e=document.querySelector('.un59');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/telegram-logo-266.png':'images/telegram-logo-133.png');
+var a='data-src';var e=document.querySelector('.un60');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/twitter-146.png':'images/twitter-73.png');
+var e=document.querySelector('.un54');e.setAttribute('src',(dpi>1)?'images/transparent-logo-624.png':'images/transparent-logo-312.png');
+var e=document.querySelector('.un55');e.setAttribute('src',(dpi>1)?'images/grayscale-transparent-650.png':'images/grayscale-transparent-325.png');
+var e=document.querySelector('.un56');e.setAttribute('src',(dpi>1)?'images/img_9613-590.jpg':'images/img_9613-295.jpg');
+var e=document.querySelector('.un57');e.setAttribute('src',(dpi>1)?'images/img_9612-918.jpg':'images/img_9612-459.jpg');}else{var a='data-src';var e=document.querySelector('.un58');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/grayscale-transparent-616.png':'images/grayscale-transparent-308.png');
+var a='data-src';var e=document.querySelector('.un59');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/telegram-logo-178.png':'images/telegram-logo-89.png');
+var a='data-src';var e=document.querySelector('.un60');if(e.hasAttribute('src')){a='src';}e.setAttribute(a,(dpi>1)?'images/twitter-98.png':'images/twitter-49.png');
+var e=document.querySelector('.un54');e.setAttribute('src',(dpi>1)?'images/transparent-logo-416.png':'images/transparent-logo-208.png');
+var e=document.querySelector('.un55');e.setAttribute('src',(dpi>1)?'images/grayscale-transparent-434.png':'images/grayscale-transparent-217.png');
+var e=document.querySelector('.un56');e.setAttribute('src',(dpi>1)?'images/img_9613-394.jpg':'images/img_9613-197.jpg');
+var e=document.querySelector('.un57');e.setAttribute('src',(dpi>1)?'images/img_9612-610.jpg':'images/img_9612-305.jpg');}}};
+if(!window.HTMLPictureElement){$(window).resize(r);r();}
+!function(){var e=document.querySelectorAll('a[href^="#"]');[].forEach.call(e,function(e){e.addEventListener("click",function(t){var o=0;if(e.hash.length>1){var l=parseFloat(getComputedStyle(document.body).getPropertyValue("zoom"));l||(l=1);var n=document.querySelectorAll('[name="'+e.hash.slice(1)+'"]')[0];o=(n.getBoundingClientRect().top+pageYOffset)*l}if("scrollBehavior"in document.documentElement.style)scroll({top:o,left:0,behavior:"smooth"});else if("requestAnimationFrame"in window){var r=pageYOffset,a=null;requestAnimationFrame(function e(t){a||(a=t);var l=t-a;scrollTo(0,r<o?(o-r)*l/400+r:r-(r-o)*l/400),l<400?requestAnimationFrame(e):scrollTo(0,o)})}else scrollTo(0,o);t.preventDefault()},!1)})}();
+initMenu($('#m1')[0]);
+$('.s38').Stickyfill();
+if(location.hash){var e=location.hash.replace("#",""),o=function(){var t=document.querySelectorAll('[name="'+e+'"]')[0];t&&t.scrollIntoView(),"complete"!=document.readyState&&setTimeout(o,100)};o()}
+
+});lfn=function(){ldsrcset('.un89 source');ldsrcset('.un90 source');ldsrcset('.un91 source');};if(document.readyState=="complete"){lfn();}else{$(window).on("load",lfn);}

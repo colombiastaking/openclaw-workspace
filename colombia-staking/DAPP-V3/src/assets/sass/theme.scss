@@ -1,0 +1,240 @@
+/* Colombia Staking Theme - Matching Website
+-------------------------------------------------- */
+$body: #0a0a0a;
+$headings-font-weight: 400 !important;
+$primary: #62dbb8; // Colombia Staking mint green
+$primary-dark: #4bc9a1; // Darker mint for hover
+$accent: #d33682; // Pink accent from website
+$accent-light: #e85a8a;
+$secondary: #a0aec0; // Soft gray for secondary text
+$background: #0a0a0a;
+$card-bg: #1a1a1a;
+$card-bg-hover: #252525;
+$card-border: rgba(98, 219, 184, 0.2);
+$button-bg: linear-gradient(135deg, #62dbb8 0%, #4bc9a1 100%);
+$button-hover: linear-gradient(135deg, #4bc9a1 0%, #3ab890 100%);
+$button-text: #0a0a0a;
+$apr-gradient: linear-gradient(135deg, #62dbb8 0%, #d33682 100%);
+$price-glow: 0 0 20px rgba(98, 219, 184, 0.4);
+$text-light: #ffffff;
+$text-muted: #a0a0a0;
+
+// Google Fonts match website
+@import url('https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+html {
+  min-height: 100%;
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $background;
+  color: $text-light;
+  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  box-sizing: border-box;
+  line-height: 1.6;
+
+  &.modal-open #root {
+    filter: blur(8px);
+  }
+}
+
+.wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+a, .link, .dapp-name, .heading, .label, .value, .activeLabel {
+  color: $primary !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary;
+  font-weight: 400;
+  font-family: 'Lustria', serif;
+}
+
+.opacity-6 {
+  opacity: 0.6;
+}
+
+.dapp-icon {
+  padding: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(98, 219, 184, 0.3);
+
+  &.icon-medium {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.modal-dialog {
+  margin: 30px;
+
+  @media (min-width: 576px) {
+    max-width: 480px;
+    margin: 30px auto;
+  }
+}
+
+.modal-content {
+  background: $card-bg !important;
+  border: 1px solid $card-border !important;
+  border-radius: 16px !important;
+}
+
+/* Navbar
+-------------------------------------------------- */
+.dapp-name {
+  line-height: 1;
+  border-left: 1px solid $primary;
+  padding-left: 12px;
+  margin-left: 8px;
+  color: $primary;
+  font-family: 'Lustria', serif;
+}
+
+/* Buttons Global Styles
+-------------------------------------------------- */
+button, .btn, .action-btn button {
+  background: $button-bg;
+  color: $button-text;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(98, 219, 184, 0.3);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(98, 219, 184, 0.4);
+  }
+}
+
+/* Cards Global Styles
+-------------------------------------------------- */
+.card, .cards .card {
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: $card-bg-hover;
+    border-color: $primary;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Input Global Styles
+-------------------------------------------------- */
+input, textarea, select {
+  background: $card-bg;
+  color: $text-light;
+  border: 1px solid $card-border;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba(98, 219, 184, 0.2);
+  }
+  
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+/* Scrollbar Styling
+-------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-dark;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary;
+}
+
+/* Neon Theme Overrides (data-theme="neon")
+-------------------------------------------------- */
+[data-theme="neon"] {
+  html, body {
+    background: $background;
+  }
+
+  body {
+    color: $text-light;
+  }
+
+  .cards {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .cards .card {
+    background: $card-bg;
+    border-color: $card-border;
+    color: $text-light;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  }
+
+  button, .btn, .action-btn button {
+    background: $button-bg;
+    color: $button-text;
+  }
+
+  button:hover, .btn:hover, .action-btn button:hover {
+    filter: brightness(1.05);
+  }
+
+  .delegation-nav {
+    background: $card-bg;
+    border-bottom: 1px solid $card-border;
+  }
+
+  .nav {
+    border-bottom: 1px solid $card-border;
+  }
+
+  .heading { color: $primary; }
+
+  input, textarea {
+    background: $card-bg;
+    color: $text-light;
+    border: 1px solid $card-border;
+  }
+
+  .label, .value, .heading {
+    color: $primary;
+  }
+
+  .price-banner {
+    background: linear-gradient(90deg, $background, $card-bg);
+  }
+
+  .modal-container, .modal-dialog, .modal-content {
+    background: rgba(0,0,0,0.6);
+  }
+}

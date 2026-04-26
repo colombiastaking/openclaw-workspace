@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia Staking DApp - Plateforme de Staking Tout-en-Un</title>
+    <meta name="description" content="Découvrez la DApp Colombia Staking - la plateforme tout-en-un pour le staking eGLD, la délégation, le changement de validateur, les rapports fiscaux et la stratégie BTC alimentée par l'IA.">
+    <link rel="canonical" href="https://fr.colombia-staking.com/dapp.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --primary: #62dbb8;
+            --primary-dark: #4bc9a1;
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --bg-card-hover: #252525;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-pink: #d33682;
+            --accent-gold: #ffc107;
+            --gradient-1: linear-gradient(135deg, #62dbb8 0%, #4bc9a1 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(98, 219, 184, 0.15) 0%, rgba(211, 54, 130, 0.1) 50%, rgba(255, 193, 7, 0.1) 100%);
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+}
+        
+        h1, h2, h3, h4 { font-family: 'Lustria', serif; font-weight: 600; line-height: 1.2; }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+        
+        a { color: inherit; text-decoration: none; transition: all 0.3s ease; }
+        img { max-width: 100%; height: auto; display: block; }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(98, 219, 184, 0.1);
+        }
+        
+.nav-logo {
+            font-family: 'Lustria', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+.nav-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        
+.hero {
+            background: var(--gradient-hero);
+            padding: 5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2362dbb8' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(98, 219, 184, 0.1);
+            border: 1px solid rgba(98, 219, 184, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .hero h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(98, 219, 184, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: #000;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: #000;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(255, 193, 7, 0.4);
+        }
+        
+        .section {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(98, 219, 184, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: rgba(98, 219, 184, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .feature-card .tag {
+            display: inline-block;
+            background: rgba(98, 219, 184, 0.1);
+            border: 1px solid rgba(98, 219, 184, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-top: 1rem;
+        }
+        
+        .highlight-section {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, rgba(98, 219, 184, 0.05) 100%);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+        }
+        
+        .highlight-section h2 {
+            color: var(--accent-gold);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .btc-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .btc-feature {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 3px solid var(--accent-gold);
+        }
+        
+        .btc-feature h4 {
+            color: var(--accent-gold);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btc-feature p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid rgba(98, 219, 184, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .wallet-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .wallet-info h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .wallet-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .wallet-list {
+            list-style: none;
+        }
+        
+        .wallet-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            color: var(--text-muted);
+        }
+        
+        .wallet-list li span {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 5rem 1rem;
+            background: var(--gradient-hero);
+            border-radius: 30px;
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+        
+        .cta-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            background: var(--bg-card);
+            padding: 3rem 1rem 2rem;
+            border-top: 1px solid rgba(98, 219, 184, 0.1);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a { color: var(--text-muted); }
+        .footer-links a:hover { color: var(--primary); }
+        
+        .footer-bottom {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(98, 219, 184, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+    .wallet-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero { padding: 3rem 1rem; }
+            .section { padding: 3rem 1rem; }
+        }
+    </style>
+    <script src="js/unified-header.js" defer></script>
+</head>
+<body>
+<section class="hero">
+        <div class="hero-badge">🚀 Plateforme de Staking Tout-en-Un</div>
+        <h1>DApp Colombia Staking</h1>
+        <p class="hero-subtitle">
+            La plateforme de staking la plus complète pour MultiversX. Déléguez, changez de validateur, 
+            suivez vos impôts et accédez à des stratégies BTC alimentées par l'IA — tout au même endroit.
+        </p>
+        <div class="hero-cta">
+            <a href="https://staking.colombia-staking.com" class="btn btn-primary" target="_blank">
+                🚀 Ouvrir la DApp
+            </a>
+            <a href="https://xportal.com" class="btn btn-secondary" target="_blank">
+                📱 Obtenir Xportal Wallet
+            </a>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="cs-dapp-validators">48</div>
+                <div class="stat-label">Nœuds Validateurs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Disponibilité</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">11</div>
+                <div class="stat-label">Indicateurs Stratégie BTC</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Langues Supportées</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="section-header">
+            <h2>Tout ce dont Vous avez Besoin dans une Seule DApp</h2>
+            <p>Du staking aux rapports fiscaux, nous avons créé les outils dont les délégateurs sérieux ont besoin.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Délégation Instantanée</h3>
+                <p>Déléguez vos eGLD à Colombia Staking en quelques clics. Notre DApp se connecte directement à la blockchain MultiversX pour des transactions rapides et sécurisées.</p>
+                <span class="tag">Fonction Principale</span>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Changement de Validateur</h3>
+                <p>Vous venez d'un autre validateur ? Notre outil de migration rend le passage à Colombia Staking simple. Dé-déléguez et re-déléguez en un seul processus fluide.</p>
+                <span class="tag">Fonction Populaire</span>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Tableau de Bord</h3>
+                <p>Suivez vos eGLD stakés, vos récompenses accumulées et votre historique de performance. Données en temps réel depuis la blockchain MultiversX.</p>
+                <span class="tag">Données en Temps Réel</span>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Outil de Rapport Fiscal</h3>
+                <p><strong>Finished with manual calculations.</strong> Our professional tool automatically tracks every delegation, reward, and transaction across the entire MultiversX network — no manual entry required.</p>
+                <ul style="text-align: left; font-size: 0.9rem; color: var(--text-muted); margin: 0.5rem 0 0.5rem 1.2rem; line-height: 1.6;">
+                    <li>📊 Automatic reward & delegation tracking</li>
+                    <li>💶 EUR & USD conversion at exact transaction dates</li>
+                    <li>📅 Monthly breakdown per tax year</li>
+                    <li>📁 Export to CSV & Excel formats</li>
+                    <li>✅ Works with <em>any</em> MultiversX staking provider</li>
+                </ul>
+                <p style="font-size: 0.85rem; color: var(--primary); margin-top: 0.5rem;"><strong>Professional reports, simplified.</strong> One-click generation — no spreadsheets, no errors.</p>
+                <span class="tag">5 COLS per report</span>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Rapport de Stratégie BTC</h3>
+                <p>Accédez à notre analyse de marché BTC propulsée par l'IA avec 11 indicateurs clés. Prenez des décisions éclairées pour votre stratégie d'investissement à long terme.</p>
+                <span class="tag">Exclusif pour Stakers COLS</span>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Avantages Gold Member</h3>
+                <p>Les stakers du token COLS débloquent des fonctionnalités premium : support prioritaire, analytiques exclusives et droits de vote en gouvernance.</p>
+                <span class="tag">Détenteurs de Token COLS</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="highlight-section">
+            <h2>🤖 Rapport de Stratégie BTC — 11 Indicateurs Clés</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                Notre analyse propulsée par l'IA évalue plusieurs facteurs de marché pour vous donner une vision complète 
+                des conditions du BTC et la stratégie DCA optimale.
+            </p>
+            
+            <div class="btc-features">
+                <div class="btc-feature">
+                    <h4>📉 Momentum du Prix</h4>
+                    <p>Suivi des tendances du prix du BTC et indicateurs de momentum pour identifier la direction du marché</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>📊 Analyse des Volumes</h4>
+                    <p>Modèles de volume on-chain révélant les niveaux d'activité institutionnelle</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>🔗 Activité Réseau</h4>
+                    <p>Adresses wallet, nombre de transactions et utilisation du réseau</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>⛏️ Métriques de Minage</h4>
+                    <p>Hash rate, ajustements de difficulté et signaux de capitulation des mineurs</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>📅 Analyse Cyclique</h4>
+                    <p>Positionnement du cycle de marché via les événements de halving et modèles historiques</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>😱 Indice Peur & Avidité</h4>
+                    <p>Indicateurs de sentiment du marché pour des points d'entrée contraviens</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>💵 Dollar Cost Averaging</h4>
+                    <p>Recommandations DCA dynamiques basées sur les conditions du marché (0-200% de la base)</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>🎯 Niveaux de Prise de Profit</h4>
+                    <p>Points de sortie stratégiques quand le score dépasse 65+</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>⚖️ Gestion des Risques</h4>
+                    <p>Surveillance du factor de santé pour les positions collateralisées (intégration Aave)</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>🔮 Détection du Régime de Marché</h4>
+                    <p>Identification des phases d'accumulation, bull, distribution et bear</p>
+                </div>
+                <div class="btc-feature">
+                    <h4>📱 Tarification Multi-Exchange</h4>
+                    <p>Données de prix agrégées des principaux exchanges pour plus de précision</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://staking.colombia-staking.com" class="btn btn-gold" target="_blank">
+                    🤖 Accéder au Rapport de Stratégie BTC
+                </a>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.75rem;">
+                    Requiert minimum 100 COLS stakés
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="wallet-section">
+            <div class="wallet-info">
+                <h2>Commencez avec Xportal Wallet</h2>
+                <p>
+                    Xportal est le wallet officiel MultiversX — une puissante "Super App" qui combine 
+                    stockage sécurisé de tokens, accès Web3 et intégration transparente avec le staking.
+                </p>
+                <ul class="wallet-list">
+                    <li><span>🔐</span> Stockage sécurisé des clés sur votre appareil</li>
+                    <li><span>⚡</span> Transactions rapides sur la blockchain MultiversX</li>
+                    <li><span>🎮</span> Accès aux dApps et à l'écosystème Web3</li>
+                    <li><span>💰</span> Fonctionnalités de staking intégrées</li>
+                    <li><span>🖼️</span> Gestion des NFTs</li>
+                    <li><span>📱</span> Applications mobiles pour iOS et Android</li>
+                </ul>
+                <a href="https://xportal.com" class="btn btn-secondary" target="_blank">
+                    📲 Télécharger Xportal
+                </a>
+            </div>
+            <div style="text-align: center;">
+                <img src="images/n/multiversx-labs-launches-xportal-the-first-super-app-to-reimagine-digital-finance-ai-avatars-chat-opening-web3-and-metaverse-experiences-to-everyone-764.png" 
+                     alt="Xportal App" 
+                     style="max-width: 300px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.4);">
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Prêt à Staker Plus Intelligemment ?</h2>
+        <p>
+            Rejoignez des milliers de délégateurs qui font confiance à Colombia Staking pour leurs besoins de validation sur MultiversX. 
+            48 nœuds, 100% de disponibilité et la DApp la plus complète de l'écosystème.
+        </p>
+        <div class="hero-cta">
+            <a href="https://staking.colombia-staking.com" class="btn btn-primary" target="_blank">
+                🚀 Ouvrir Colombia Staking DApp
+            </a>
+        </div>
+    </section>
+    
+
+    <script>
+    (function() {
+        var el = document.getElementById("cs-dapp-validators");
+        if (!el) return;
+        fetch("https://colombia-staking.co/stats-api.php")
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                if (!d.success) return;
+                el.textContent = (d.formatted.validators || "49 nodes").replace(" nodes", "");
+            }).catch(function() {});
+    })();
+    </script>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="dapp.html">DApp</a>
+            <a href="multiversx.html">MultiversX</a>
+            <a href="node-status.html">Nœuds</a>
+            <a href="cols-token.html">Token COLS</a>
+            <a href="membership.html">Adhésion</a>
+            <a href="preguntas-frecuentes.html">FAQ</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Colombia Staking. Tous droits réservés. | Validateur MultiversX</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Credentials - NEVER commit
+.ftp_credentials
+*.pgp
+*.key

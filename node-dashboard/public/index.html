@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colombia Staking — Node Monitor</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080c10;
+    --card-bg: #0d1117;
+    --card-border: #1e2530;
+    --accent: #62dbb8;
+    --accent-dim: rgba(98,219,184,0.15);
+    --text: #e6edf3;
+    --text-dim: #7d8590;
+    --text-muted: #484f58;
+    --online: #3fb950;
+    --offline: #f85149;
+    --warn: #d29922;
+    --shard0: #58a6ff;
+    --shard1: #a371f7;
+    --shard2: #3fb950;
+    --meta: #f0883e;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  header {
+    max-width: 1400px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  header h1 { font-size: 22px; font-weight: 700; color: var(--accent); }
+  header h1 span { color: var(--text); }
+
+  #global-status { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+
+  .status-pill {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--offline);
+    transition: background 0.3s;
+  }
+  .status-dot.live { background: var(--online); box-shadow: 0 0 6px var(--online); }
+
+  .grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* ── Node Card ───────────────────────────────────── */
+  .node-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .node-card.offline { border-color: rgba(248,81,73,0.3); }
+  .node-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    border-radius: 16px 16px 0 0;
+  }
+  .node-card[data-shard="0"]::before { background: var(--shard0); }
+  .node-card[data-shard="1"]::before { background: var(--shard1); }
+  .node-card[data-shard="2"]::before { background: var(--shard2); }
+  .node-card[data-shard="-1"]::before { background: var(--meta); }
+
+  .card-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .card-title { font-size: 16px; font-weight: 600; }
+  .card-ip { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-top: 2px; }
+
+  .consensus-badge {
+    font-size: 10px; font-weight: 600;
+    padding: 3px 10px; border-radius: 12px;
+    letter-spacing: 0.3px; text-transform: uppercase;
+  }
+  .consensus-badge.participant { background: rgba(63,185,80,0.15); color: #3fb950; }
+  .consensus-badge.waiting      { background: rgba(210,153,34,0.15); color: #d29922; }
+  .consensus-badge.not-consensus,
+  .consensus-badge.unknown     { background: rgba(248,81,73,0.1);  color: #f85149; }
+
+  .offline-badge {
+    font-size: 10px; font-weight: 700; padding: 3px 8px;
+    border-radius: 6px; background: rgba(248,81,73,0.15); color: #f85149; letter-spacing: 0.5px;
+  }
+
+  /* ── Metrics ─────────────────────────────────────── */
+  .metrics-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;
+  }
+  .metric-box {
+    background: rgba(255,255,255,0.03); border-radius: 10px; padding: 10px 8px; text-align: center;
+  }
+  .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .metric-value { font-size: 20px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .metric-value.warn { color: var(--warn); }
+  .metric-value.danger { color: var(--offline); }
+
+  /* ── Gauges ──────────────────────────────────────── */
+  .gauges-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;
+  }
+  .gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .g-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── Sync row ────────────────────────────────────── */
+  .sync-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: rgba(255,255,255,0.03);
+    border-radius: 10px; margin-bottom: 12px; font-size: 13px;
+  }
+  .sync-row .sync-label { color: var(--text-dim); }
+  .sync-row .sync-value { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .sync-row .sync-value.ok { color: var(--accent); }
+  .sync-row .sync-value.warn { color: var(--warn); }
+  .sync-row .sync-value.bad { color: var(--offline); }
+
+  .version-row { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+  .version-row span { color: var(--text-dim); font-family: monospace; }
+
+  /* ── Charts ─────────────────────────────────────── */
+  .charts-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--card-border); }
+  .charts-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; }
+  .chart-row { margin-bottom: 10px; }
+  .chart-canvas-wrap {
+    position: relative; height: 60px;
+    background: rgba(255,255,255,0.02); border-radius: 8px; overflow: hidden;
+  }
+  .chart-canvas-wrap canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .chart-legend { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 3px; font-variant-numeric: tabular-nums; }
+
+  /* ── Connection indicator ───────────────────────── */
+  #sse-status { font-size: 11px; color: var(--text-muted); }
+  #sse-status.connected { color: var(--online); }
+  #sse-status.error { color: var(--offline); }
+
+  @media (max-width: 600px) {
+    .metrics-row, .gauges-row { gap: 8px; }
+    .metric-value { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Colombia Staking <span>— Node Monitor</span></h1>
+  <div id="global-status">
+    <div class="status-pill">
+      <div class="status-dot" id="status-dot"></div>
+      <span id="online-count">—</span> / 4 online
+    </div>
+    <div class="status-pill">
+      <span id="ref-info">Epoch —</span>
+    </div>
+    <div class="status-pill">
+      Last update: <span id="last-update">—</span>
+    </div>
+    <div class="status-pill">
+      <span id="sse-status">🔌 Connecting…</span>
+    </div>
+  </div>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+const NODES = [
+  { name: 'Shard 0', ip: '192.168.0.120', shard: 0 },
+  { name: 'Shard 1', ip: '192.168.0.121', shard: 1 },
+  { name: 'Shard 2', ip: '192.168.0.122', shard: 2 },
+  { name: 'Metachain', ip: '192.168.0.124', shard: -1 },
+];
+
+let nodesData = NODES.map(() => null);
+let historyData = NODES.map(() => []);
+let referenceRound = null;
+let referenceEpoch = null;
+let lastUpdate = null;
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+function drawGauge(canvas, value, color) {
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const cx = w / 2;
+  const cy = h / 2 + 4;
+  const r = Math.min(cx, cy) - 6;
+
+  // Track
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, Math.PI * 0.75, Math.PI * 2.25);
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Value arc
+  const start = Math.PI * 0.75;
+  const end = start + (Math.PI * 1.5) * Math.min(value, 100) / 100;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, start, end);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Label
+  ctx.fillStyle = '#e6edf3';
+  ctx.font = `bold ${Math.round(h * 0.38)}px 'Segoe UI', system-ui, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(Math.round(value) + '%', cx, cy - 2);
+}
+
+function drawLineChart(canvas, points, color, key) {
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const valid = (points || []).filter(p => p[key] !== null && p[key] !== undefined);
+  if (valid.length < 2) return;
+
+  const max = Math.max(...valid.map(p => p[key]));
+  const min = Math.min(...valid.map(p => p[key]));
+  const range = max - min || 1;
+  const pad = 4;
+
+  const pts = valid.map((p, i) => ({
+    x: pad + (i / (valid.length - 1)) * (w - pad * 2),
+    y: h - pad - ((p[key] - min) / range) * (h - pad * 2),
+  }));
+
+  // Gradient fill
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, color + '55');
+  grad.addColorStop(1, color + '00');
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, h);
+  pts.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.lineTo(pts[pts.length - 1].x, h);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  pts.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+function roundDiffClass(round, ref) {
+  if (round === null || ref === null) return 'warn';
+  const diff = ref - round;
+  return diff <= 2 ? 'ok' : diff <= 10 ? 'warn' : 'bad';
+}
+
+function timeAgo(ts) {
+  if (!ts) return '—';
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 5) return 'just now';
+  if (s < 60) return s + 's ago';
+  return Math.floor(s / 60) + 'm ago';
+}
+
+function consensusClass(c) {
+  if (!c) return 'unknown';
+  return c.replace(/[\s_]+/g, '-').toLowerCase();
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function buildCards() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = NODES.map((n, i) => `
+    <div class="node-card" id="card-${i}" data-shard="${n.shard}">
+      <div class="card-header">
+        <div>
+          <div class="card-title">${n.name}</div>
+          <div class="card-ip">${n.ip}</div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <span class="offline-badge" id="offline-${i}" style="display:none">OFFLINE</span>
+          <span class="consensus-badge unknown" id="consensus-${i}">—</span>
+        </div>
+      </div>
+      <div class="metrics-row">
+        <div class="metric-box"><div class="metric-label">Epoch</div><div class="metric-value" id="epoch-${i}">—</div></div>
+        <div class="metric-box"><div class="metric-label">Round</div><div class="metric-value" id="round-${i}">—</div></div>
+        <div class="metric-box"><div class="metric-label">Blocks</div><div class="metric-value" id="blocks-${i}">—</div></div>
+      </div>
+      <div class="gauges-row">
+        <div class="gauge-wrap"><canvas class="gauge" id="cpu-canvas-${i}"></canvas><div class="g-label">CPU</div></div>
+        <div class="gauge-wrap"><canvas class="gauge" id="mem-canvas-${i}"></canvas><div class="g-label">RAM</div></div>
+        <div class="gauge-wrap"><canvas class="gauge" id="peer-canvas-${i}"></canvas><div class="g-label">Peers</div></div>
+      </div>
+      <div class="sync-row">
+        <span class="sync-label">Sync vs reference</span>
+        <span class="sync-value warn" id="sync-${i}">—</span>
+      </div>
+      <div class="version-row">Version <span id="version-${i}">—</span></div>
+      <div class="version-row" style="margin-bottom:0">TX Pool <span id="txpool-${i}">—</span></div>
+      <div class="charts-section">
+        <div class="charts-label">CPU — last 3 min</div>
+        <div class="chart-row">
+          <div class="chart-canvas-wrap"><canvas id="cpu-chart-${i}"></canvas></div>
+          <div class="chart-legend"><span>3m ago</span><span>now</span></div>
+        </div>
+        <div class="charts-label">Peers — last 3 min</div>
+        <div class="chart-row">
+          <div class="chart-canvas-wrap"><canvas id="peer-chart-${i}"></canvas></div>
+          <div class="chart-legend"><span>3m ago</span><span>now</span></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateCard(i, d) {
+  if (!d) return;
+  const card = document.getElementById(`card-${i}`);
+  const offlineEl = document.getElementById(`offline-${i}`);
+  const consensusEl = document.getElementById(`consensus-${i}`);
+
+  if (!d.online) {
+    card.classList.add('offline');
+    offlineEl.style.display = '';
+    return;
+  }
+
+  card.classList.remove('offline');
+  offlineEl.style.display = 'none';
+
+  // Consensus badge
+  const c = d.consensus || 'unknown';
+  consensusEl.className = 'consensus-badge ' + consensusClass(c);
+  consensusEl.textContent = c;
+
+  // Metrics
+  document.getElementById(`epoch-${i}`).textContent = d.epoch !== null ? d.epoch : '—';
+  document.getElementById(`round-${i}`).textContent = d.round !== null ? d.round.toLocaleString() : '—';
+  document.getElementById(`blocks-${i}`).textContent = d.blocks !== null ? d.blocks.toLocaleString() : '—';
+
+  // Sync
+  const syncEl = document.getElementById(`sync-${i}`);
+  if (d.round !== null && referenceRound !== null) {
+    const diff = referenceRound - d.round;
+    syncEl.className = 'sync-value ' + roundDiffClass(d.round, referenceRound);
+    syncEl.textContent = (diff >= 0 ? '+' : '') + diff + ' rounds';
+  } else {
+    syncEl.className = 'sync-value warn';
+    syncEl.textContent = '—';
+  }
+
+  // Version & tx pool
+  document.getElementById(`version-${i}`).textContent = d.version || '—';
+  document.getElementById(`txpool-${i}`).textContent = d.txPool !== null ? d.txPool : '—';
+
+  // Gauges
+  const cpuColor = d.cpu >= 90 ? '#f85149' : d.cpu >= 75 ? '#d29922' : '#62dbb8';
+  drawGauge(document.getElementById(`cpu-canvas-${i}`), d.cpu || 0, cpuColor);
+
+  const memColor = d.memLoad >= 90 ? '#f85149' : d.memLoad >= 75 ? '#d29922' : '#62dbb8';
+  drawGauge(document.getElementById(`mem-canvas-${i}`), d.memLoad || 0, memColor);
+
+  // Peer gauge (0–150 range)
+  const peerPct = d.peers !== null ? Math.min((d.peers / 150) * 100, 100) : 0;
+  drawGauge(document.getElementById(`peer-canvas-${i}`), peerPct, '#58a6ff');
+
+  // Charts
+  const hist = historyData[i] || [];
+  drawLineChart(document.getElementById(`cpu-chart-${i}`), hist, '#62dbb8', 'cpu');
+  drawLineChart(document.getElementById(`peer-chart-${i}`), hist, '#58a6ff', 'peers');
+}
+
+function updateAllCards() {
+  NODES.forEach((_, i) => updateCard(i, nodesData[i]));
+}
+
+function updateHeader() {
+  const online = nodesData.filter(n => n && n.online).length;
+  document.getElementById('online-count').textContent = online;
+  document.getElementById('status-dot').className = 'status-dot' + (online > 0 ? ' live' : '');
+  document.getElementById('last-update').textContent = timeAgo(lastUpdate);
+  if (referenceEpoch !== null) {
+    document.getElementById('ref-info').textContent = `Ref Epoch ${referenceEpoch}`;
+  }
+}
+
+// Also fetch history for charts (SSE pushes node state, history is separate)
+function fetchHistory() {
+  fetch('/api/history')
+    .then(r => r.json())
+    .then(histRes => {
+      histRes.nodes.forEach((n, i) => { historyData[i] = n.data || []; });
+      updateAllCards();
+    })
+    .catch(() => {});
+}
+
+// ── SSE ─────────────────────────────────────────────────────────────────────
+let evtSource = null;
+
+function connectSSE() {
+  evtSource = new EventSource('/api/events');
+
+  evtSource.addEventListener('nodes', e => {
+    const data = JSON.parse(e.data);
+    // Support both "nodes as array" and raw nodesState spread formats
+    let nodes;
+    if (Array.isArray(data.nodes)) {
+      nodes = data.nodes;
+    } else {
+      // First event sends raw nodesState spread — reconstruct the array
+      nodes = Object.values(data);
+    }
+    lastUpdate = data.lastUpdate;
+    referenceRound = data.referenceRound;
+    referenceEpoch = data.referenceEpoch;
+    nodes.forEach((n, i) => { nodesData[i] = n; });
+    updateAllCards();
+    updateHeader();
+  });
+
+  evtSource.addEventListener('heartbeat', () => {});
+
+  evtSource.onopen = () => {
+    document.getElementById('sse-status').textContent = '🔗 Live';
+    document.getElementById('sse-status').className = 'connected';
+  };
+
+  evtSource.onerror = () => {
+    document.getElementById('sse-status').textContent = '⚡ Reconnecting…';
+    document.getElementById('sse-status').className = 'error';
+    evtSource.close();
+    setTimeout(connectSSE, 3000);
+  };
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+buildCards();
+connectSSE();
+// Fetch history once on load to populate charts before first SSE push
+fetchHistory();
+
+// Redraw charts on resize
+window.addEventListener('resize', () => {
+  NODES.forEach((_, i) => {
+    const hist = historyData[i] || [];
+    drawLineChart(document.getElementById(`cpu-chart-${i}`), hist, '#62dbb8', 'cpu');
+    drawLineChart(document.getElementById(`peer-chart-${i}`), hist, '#58a6ff', 'peers');
+  });
+});
+</script>
+</body>
+</html>

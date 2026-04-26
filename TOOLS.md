@@ -1,0 +1,215 @@
+# TOOLS.md - Local Notes
+
+Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+
+## What Goes Here
+
+Things like:
+
+- Camera names and locations
+- SSH hosts and aliases
+- Preferred voices for TTS
+- Speaker/room names
+- Device nicknames
+- Anything environment-specific
+
+## Examples
+
+```markdown
+### Cameras
+
+- living-room → Main area, 180° wide angle
+- front-door → Entrance, motion-triggered
+
+### SSH
+
+- home-server → 192.168.1.100, user: admin
+
+### TTS
+
+- Preferred voice: "Nova" (warm, slightly British)
+- Default speaker: Kitchen HomePod
+```
+
+## Why Separate?
+
+Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+
+---
+
+### BTC Strategy Skill
+
+- **Location**: `~/.openclaw/workspace/.agents/skills/btc-strategy/`
+- **Use for**: Weekly strategy, BTC decisions, Aave position management
+- **Trigger**: Any BTC/investment/crypto discussion
+- **Includes**: 11-indicator scoring model, decision framework, quarterly evolution
+
+### GitHub Backup
+
+- **Repo**: https://github.com/colombiastaking/btc-strategy
+- **Auto-push**: Daily reports auto-commit to GitHub
+
+---
+
+### Kepler API Proxy (Tax Tool)
+
+**Purpose:** MultiversX API proxy for the DAPP tax tool and other blockchain queries.
+
+**Setup:**
+- File: `/home/raspberry/.openclaw/kepler/kepler-proxy.js` (persistent location)
+- Port: 3000
+- API Key: `acea534bc927840076692374ffab66fb`
+- Target Host: `kepler-api.projectx.mx`
+- Service: `kepler-proxy.service` (systemd user service)
+
+**Cloudflare Tunnel (colombia-staking.co):**
+- Tunnel ID: `6429a054-ec31-4f78-9b17-059e14ac58be`
+- Config: `~/.cloudflared/config.yml`
+- Routes ALL `/api`, `/gateway`, `/es`, `/tax-query`, `/delegation` to port 3000 (kepler-proxy)
+
+**Important:** 
+- Previously misconfigured to route `/tax-query` and `/delegation` to port 3001 (didn't exist)
+- Fixed to route all to port 3000 where kepler-proxy handles them
+- File must survive reboot (moved from /tmp/ to ~/.openclaw/kepler/)
+
+**Endpoints available:**
+| Endpoint | Purpose |
+|----------|---------|
+| `https://colombia-staking.co/api/*` | MultiversX API (blocks, tx, etc.) |
+| `https://colombia-staking.co/gateway/*` | Gateway API |
+| `https://colombia-staking.co/es/*` | Elasticsearch |
+| `https://colombia-staking.co/tax-query` | Tax data queries |
+| `https://colombia-staking.co/delegation` | Delegation info |
+
+**DAPP Tax Tool:** Uses `https://staking.colombia-staking.com/mvxproxy.php` for most API calls.
+
+---
+
+Add whatever helps you do your job. This is your cheat sheet.
+
+### Kepler Proxy Skill
+- **Skill**: `~/.openclaw/workspace/.agents/skills/kepler-proxy/`
+- **Use for**: Tax tool proxy, MultiversX API queries, service management
+- **Package**: `kepler-proxy.skill` (in skills/skills/skill-creator/scripts/)
+
+---
+
+### MultiversX MCP Server (alice-mcp-multiversx)
+
+**Purpose:** AI agent → MultiversX blockchain via Model Context Protocol
+
+**MCP Server:** `mcporter call multiversx.<tool>`
+
+**Setup:**
+- Location: `/home/raspberry/.openclaw/workspace/alice-mcp-multiversx/`
+- Wallet: Alice's main wallet (`erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy`)
+- Network: mainnet
+- mcporter config: `~/.mcporter/mcporter.json`
+
+**14 Tools Available:**
+| Read | Write |
+|------|-------|
+| `get-balance` | `send-egld` |
+| `query-account` | `send-tokens` |
+| `track-transaction` | `send-egld-to-multiple` |
+| `search-products` | `send-tokens-to-multiple` |
+| | `issue-fungible-token` |
+| | `issue-nft-collection` |
+| | `issue-sft-collection` |
+| | `issue-meta-esdt-collection` |
+| | `create-nft` |
+| | `create-relayed-v3` |
+
+**Quick test:**
+```bash
+mcporter list  # should show: multiversx (14 tools, Xs) — Listed 1 server (1 healthy)
+mcporter call multiversx.get-balance address:erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy
+```
+
+**Repos:**
+- MCP Server: `https://github.com/colombiastaking/alice-mcp-multiversx`
+- Skill: `~/.openclaw/workspace/.agents/skills/alice-mcp-multiversx/`
+
+**If server offline:**
+```bash
+cd /home/raspberry/.openclaw/workspace/alice-mcp-multiversx && npm run build
+# Then verify:
+mcporter list
+```
+
+**⚠️ mcporter CLI Integer Limitation:** mcporter parses `amount:10000000000000000` as JS number (>2^53 loses precision). For write TX, use direct Node.js call:
+```bash
+cd /home/raspberry/.openclaw/workspace/alice-mcp-multiversx
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld","arguments":{"receiver":"<erd1>","amount":"10000000000000000"}}}' | \
+  MVX_NETWORK=mainnet MVX_SIGNING_MODE=pem MVX_WALLET_PEM=/home/raspberry/.openclaw/wallet/.private_key \
+  node dist/index.js mcp
+```
+
+---
+
+### Network Explorer (Pure Canvas 2D + Leaflet)
+
+**URL:** `https://colombia-staking.co/network/`
+**Repo:** `https://github.com/colombiastaking/network-explorer`
+**Local:** `~/.openclaw/workspace/network-explorer/`
+**Primary files:** `public/app.js` (Canvas 2D overlay), `data/network-data.json` (nodes + coords)
+**Served via:** kepler-proxy.js (port 3000) → Cloudflare tunnel
+
+**Data folder structure:**
+```
+network-explorer/
+  data/
+  ├── network_explorer.db   ← live DB (13MB)
+  ├── network-data.json        ← live map data (12MB, 4373 geo nodes)
+  ├── identity-country-map.json (72 entries)
+  └── research-db.json         ← 74 provider countries for STEP F
+  public/
+  └── network-data.json        ← served at /network/ (copied by collector)
+```
+
+**⚠️ IMPORTANT:** `research-db.json` lives in `data/` (NOT `server/data/`). The `collector.js` reads `../data/research-db.json`. `research-sync.js` writes to the same path.
+
+**What it does:** Real-time MultiversX network visualization — ~5,300 nodes with IP geolocation. Pure Canvas 2D overlay on Leaflet (no Sigma). Nodes positioned via `latLngToContainerPoint()`. Shard-colored dots with P2P edge types.
+
+**⚠️ CRITICAL:** The collector must embed `lat`/`lng` fields in each node object in `network-data.json`. If nodes have no coords, the Canvas renders 0 nodes. The collector's `buildOutput` function queries the `geo_cache` SQLite table and injects lat/lng/city/org into each node.
+
+**Canvas z-index:** 500 (above Leaflet tile pane at 400). Appended to Leaflet's `overlayPane`.
+
+**Delegation:** Network Explorer collector runs hourly via **researcher** agent. The collector script (`server/collector.js`) must be kept in sync with the geolocation fix from commit `5d0119e`.
+
+**Deploy:** `cd network-explorer && git add -A && git commit -m "..." && git push` → live immediately
+
+
+---
+
+### Deployment Skill (Updated 2026-04-22)
+
+**Skill:** `~/.openclaw/workspace/skills/deployment/SKILL.md`
+
+**Two deployment targets:**
+
+| Target | Method | Sites |
+|--------|--------|-------|
+| **cPanel FTP** | Python ftplib.FTP_TLS | .com sites (EN/ES/FR/DApp) |
+| **Pi direct** | Git push | .co (Network Explorer) |
+
+**cPanel FTP (.com sites):**
+```bash
+python3 ~/.openclaw/workspace/scripts/deploy-website.py all   # All 3 sites + DApp
+python3 ~/.openclaw/workspace/scripts/deploy-website.py en   # EN only
+python3 ~/.openclaw/workspace/scripts/deploy-website.py dapp # DApp only
+```
+
+**⚠️ CRITICAL PATH FIX (2026-04-22):** EN site uploads to `/public_html/` (NOT `/colombia-staking.com/`). This was a bug causing LiteSpeed to serve stale cached content.
+
+**Server paths (cPanel colombia6 root):**
+| Site | Path |
+|------|------|
+| EN (colombia-staking.com) | `/public_html/` |
+| ES (esp.colombia-staking.com) | `/esp.colombia-staking.com/` |
+| FR (fr.colombia-staking.com) | `/fr.colombia-staking.com/` |
+| DApp (staking.colombia-staking.com) | `/staking.colombia-staking.com/` |
+
+**Why Python FTPS?** curl/ftp CLI hangs on TLS negotiation. Python `ftplib.FTP_TLS` with `prot_p()` (explicit TLS data channel) works every time.
+
+**LiteSpeed cache:** After FTP upload, LiteSpeed may still serve old cached HTML. The .htaccess already has no-cache headers but page cache needs manual purge from cPanel → LiteSpeed Cache → Purge All.

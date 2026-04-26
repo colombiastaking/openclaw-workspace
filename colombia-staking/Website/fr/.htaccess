@@ -1,0 +1,11 @@
+# Disable LiteSpeed cache for specific files
+<IfModule LiteSpeed>
+  CacheDisable public /
+</IfModule>
+
+# Force no-cache for HTML and JS
+<FilesMatch "\.(html|js)$">
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires "0"
+</FilesMatch>

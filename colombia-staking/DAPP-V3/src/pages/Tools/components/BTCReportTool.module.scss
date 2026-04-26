@@ -1,0 +1,403 @@
+.container {
+  padding: 1rem;
+  min-height: 100vh;
+  background: #0a0a0f;
+  color: #fff;
+}
+
+.backButton {
+  background: transparent;
+  border: 1px solid #333;
+  color: #999;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  
+  &:hover {
+    border-color: #62dbb8;
+    color: #62dbb8;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #333;
+    border-top-color: #62dbb8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  p {
+    margin-top: 1rem;
+    color: #999;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.noAccess,
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  padding: 2rem;
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: #999;
+    margin-bottom: 0.5rem;
+  }
+  
+  .currentBalance {
+    color: #f97316;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+  }
+  
+  .hint {
+    color: #62dbb8;
+    font-style: italic;
+  }
+  
+  button {
+    margin-top: 1rem;
+    background: #62dbb8;
+    color: #0a0a0f;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: #999;
+    font-size: 0.9rem;
+  }
+}
+
+.scoreCard {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.scoreMain {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.scoreValue {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.scoreLabel {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.scoreMeta {
+  flex: 1;
+}
+
+.scoreInterpretation {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.dcaRecommendation {
+  font-size: 0.9rem;
+  color: #999;
+  background: rgba(255,255,255,0.05);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.calculatorCard {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.calculatorHint {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+  
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    font-size: 1.1rem;
+    
+    &:focus {
+      outline: none;
+      border-color: #62dbb8;
+    }
+  }
+}
+
+.resultBox {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.resultMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resultLabel {
+  color: #999;
+}
+
+.resultValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #62dbb8;
+}
+
+.resultMeta {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.stopWarning {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(239,68,68,0.2);
+  border-radius: 6px;
+  color: #ef4444;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.actionCard {
+  background: linear-gradient(135deg, #1a2e1a 0%, #162a16 100%);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #22c55e33;
+}
+
+.actionIcon {
+  font-size: 2rem;
+}
+
+.actionContent {
+  flex: 1;
+}
+
+.actionMain {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #22c55e;
+  margin-bottom: 0.25rem;
+}
+
+.actionDetail {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.regimeCard {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+}
+
+.regimeHeader {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #f97316;
+}
+
+.regimeDescription {
+  font-size: 0.85rem;
+  color: #999;
+  line-height: 1.5;
+}
+
+.docsToggle {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  
+  &:hover {
+    border-color: #62dbb8;
+    background: rgba(98, 219, 184, 0.05);
+  }
+}
+
+.docsSection {
+  background: #0f0f18;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #222;
+  
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #62dbb8;
+  }
+}
+
+.docGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.docCard {
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #333;
+  
+  h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+}
+
+.docDescription {
+  font-size: 0.85rem;
+  color: #999;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.docHowToRead {
+  font-size: 0.8rem;
+  color: #62dbb8;
+  background: rgba(98, 219, 184, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.docsFooter {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #333;
+  
+  h3 {
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+    
+    li {
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      color: #999;
+      border-bottom: 1px solid #222;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #333;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  
+  p {
+    font-size: 0.8rem;
+    color: #666;
+  }
+}

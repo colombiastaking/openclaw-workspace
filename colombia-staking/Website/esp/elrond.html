@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain MultiversX - Colombia Staking</title>
+    <meta name="description" content="Conoce MultiversX (antes Elrond) - Infraestructura blockchain de alto rendimiento, segura y escalable para el futuro.">
+    <link rel="canonical" href="https://esp.colombia-staking.com/elrond.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --primary: #62dbb8; --bg-dark: #0a0a0a; --bg-card: #1a1a1a; --text-light: #ffffff; --text-muted: #a0a0a0; --gradient-1: linear-gradient(135deg, #62dbb8 0%, #4bc9a1 100%); }
+html { scroll-behavior: smooth; }
+body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; padding-top: 70px; }
+h1, h2, h3, h4 { font-family: 'Lustria', serif; font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+.page-header { background: linear-gradient(135deg, rgba(98, 219, 184, 0.1) 0%, rgba(211, 54, 130, 0.1) 100%); padding: 4rem 1rem; text-align: center; }
+.page-header h1 { color: var(--primary); margin-bottom: 0.5rem; }
+.page-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+.content-section { padding: 4rem 1rem; max-width: 1000px; margin: 0 auto; }
+.content-section h2 { color: var(--primary); margin-bottom: 1.5rem; text-align: center; }
+.content-section p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.info-card { background: var(--bg-card); border-radius: 15px; padding: 1.5rem; border: 1px solid rgba(98, 219, 184, 0.2); transition: all 0.3s ease; }
+.info-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+.info-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem; }
+.info-card p { color: var(--text-muted); font-size: 0.95rem; }
+.info-card .value { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+.stats-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin: 3rem 0; }
+.stat-box { text-align: center; padding: 1.5rem; }
+.stat-box .number { font-family: 'Lustria', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary); }
+.stat-box .label { color: var(--text-muted); font-size: 0.9rem; }
+.cta-box { background: var(--bg-card); border-radius: 20px; padding: 3rem 2rem; text-align: center; margin: 3rem auto; max-width: 600px; }
+.cta-box h3 { margin-bottom: 1rem; }
+.cta-box p { color: var(--text-muted); margin-bottom: 1.5rem; }
+.btn { display: inline-flex; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; border: none; background: var(--gradient-1); color: #000; cursor: pointer; transition: all 0.3s ease; }
+.btn:hover { transform: translateY(-3px); }
+.features-list { list-style: none; padding: 0; }
+.features-list li { position: relative; padding-left: 2rem; margin-bottom: 1rem; color: var(--text-muted); }
+.features-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+.footer { background: var(--bg-card); padding: 3rem 1rem 2rem; border-top: 1px solid rgba(98, 219, 184, 0.1); text-align: center; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--primary); }
+.footer-bottom { color: var(--text-muted); font-size: 0.9rem; padding-top: 1.5rem; border-top: 1px solid rgba(98, 219, 184, 0.1); }
+@media (max-width: 768px) { .stats-row { gap: 1rem; } .stat-box .number { font-size: 2rem; } }
+
+        /* Network Explorer Section */
+        .network-explorer-section {
+            padding: 4rem 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .network-explorer-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .network-explorer-header h2 {
+            font-family: 'Lustria', serif;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        .network-explorer-header p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .network-explorer-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .ne-stat {
+            background: var(--bg-card);
+            border: 1px solid rgba(98,219,184,0.2);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 140px;
+        }
+        .ne-stat .number {
+            font-family: 'Lustria', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .ne-stat .label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+        .network-explorer-map {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(98,219,184,0.25);
+            margin-bottom: 1.5rem;
+        }
+        .network-explorer-map iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: block;
+        }
+        .network-explorer-legend {
+            background: var(--bg-card);
+            border: 1px solid rgba(98,219,184,0.2);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .network-explorer-legend h4 {
+            font-family: 'Lustria', serif;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .network-explorer-legend > p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .ne-legend-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 2rem;
+        }
+        .ne-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .ne-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .ne-dot-red { background: #ef4444; }
+        .ne-dot-blue { background: #60a5fa; }
+        .ne-dot-green { background: #4ade80; }
+        .ne-dot-black { background: #374151; }
+        .network-explorer-cta {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-ne {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: var(--gradient-1);
+            color: #000;
+            text-decoration: none;
+        }
+        .btn-ne:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(98,219,184,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .network-explorer-map iframe { height: 350px; }
+            .ne-stat { min-width: 120px; }
+        }
+
+</style>
+<script src="js/unified-header.js" defer></script>
+</head>
+<body>
+    <div class="page-header">
+        <h1>🌐 Blockchain MultiversX</h1>
+        <p>Infraestructura blockchain de alto rendimiento para la próxima generación de aplicaciones descentralizadas</p>
+    </div>
+    
+    <section class="content-section">
+        <h2>¿Qué es MultiversX?</h2>
+        <p>MultiversX (anteriormente Elrond) es una red blockchain altamente escalable, segura y descentralizada diseñada para impulsar el futuro de las finanzas digitales y las aplicaciones Web3. Utilizando Adaptive State Sharding y consenso Secure Proof of Stake (SPoS), MultiversX logra un rendimiento de transacciones sin precedentes mientras mantiene la descentralización y seguridad.</p>
+        
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="number">260,000+</div>
+                <div class="label">TPS (Transacciones Por Segundo)</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">6s</div>
+                <div class="label">Tiempo de Bloque</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">$0.001</div>
+                <div class="label">Costo Promedio de Transacción</div>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>🔐 Secure Proof of Stake</h3>
+                <p>Mecanismo de consenso revolucionario que garantiza alta seguridad manteniendo eficiencia energética y descentralización.</p>
+            </div>
+            <div class="info-card">
+                <h3>⚡ Adaptive State Sharding</h3>
+                <p>Arquitectura de sharding dinámico que escala linealmente con la demanda de la red, permitiendo transacciones casi instantáneas.</p>
+            </div>
+            <div class="info-card">
+                <h3>🌍 Carbono Negativo</h3>
+                <p>MultiversX es una de las blockchains más ecológicas, compensando más carbono del que produce.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: linear-gradient(135deg, rgba(98, 219, 184, 0.05) 0%, rgba(211, 54, 130, 0.05) 100%); border-radius: 20px; margin: 2rem auto;">
+        <h2 style="color: #d33682;">🚀 La Actualización Supernova</h2>
+        <p>La <strong>actualización Supernova</strong> es la evolución de protocolo más ambiciosa de MultiversX, trayendo capacidades de nivel empresarial e infraestructura Web3 de próxima generación. Desplegada a principios de 2026, Supernova introduce una arquitectura modular que permite a cualquier persona construir redes blockchain personalizadas mientras mantiene la compatibilidad con el ecosistema MultiversX.</p>
+        
+        <div class="info-grid" style="margin-top: 2rem;">
+            <div class="info-card">
+                <h3>🧩 xFabric — Arquitectura Modular</h3>
+                <p>Framework modular revolucionario que permite a empresas y desarrolladores crear redes blockchain personalizadas con configuraciones específicas manteniendo interoperabilidad con MultiversX.</p>
+            </div>
+            <div class="info-card">
+                <h3>⚙️ xHotware — Soporte Dual VM</h3>
+                <p>Soporte nativo para WebAssembly (WASM) y Solana Virtual Machine (SVM), permitiendo desplegar programas Solidity y Solana sin problemas en MultiversX.</p>
+            </div>
+            <div class="info-card">
+                <h3>⛓️ Staking Mejorado</h3>
+                <p>Mecanismo de staking mejorado con mejor distribución de recompensas, tiempos de unstake más rápidos y seguridad mejorada mediante requisitos actualizados de validadores.</p>
+            </div>
+            <div class="info-card">
+                <h3>🌉 xChain Bridge 2.0</h3>
+                <p>Infraestructura de bridge cross-chain significativamente mejorada con tiempos de confirmación más rápidos, menores comisiones y soporte para más redes blockchain.</p>
+            </div>
+        </div>
+        
+        <div class="stats-row" style="margin-top: 2rem;">
+            <div class="stat-box">
+                <div class="number" style="color: #d33682;">10x</div>
+                <div class="label">Más Rápido Cross-Chain</div>
+            </div>
+            <div class="stat-box">
+                <div class="number" style="color: #d33682;">$0.0001</div>
+                <div class="label">Costo de Transacción</div>
+            </div>
+            <div class="stat-box">
+                <div class="number" style="color: #d33682;">50+</div>
+                <div class="label">Socios de Bridge</div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; color: var(--text-muted);">La actualización Supernova posiciona a MultiversX como la capa de infraestructura principal para la adopción Web3 institucional.</p>
+    </section>
+    
+    <section class="content-section">
+        <h2>¿Por qué delegar eGLD?</h2>
+        <p>eGLD es la criptomoneda nativa de la red MultiversX. Al delegar tus eGLD con un validador confiable como Colombia Staking, contribuyes a la seguridad de la red mientras ganas recompensas.</p>
+        
+        <ul class="features-list">
+            <li>Gana recompensas competitivas por staking (típicamente 8-12% APR)</li>
+            <li>Apoya la descentralización y seguridad de la red</li>
+            <li>Tus tokens permanecen en tu billetera - staking sin custodia</li>
+            <li>Delegación flexible - retira cuando quieras</li>
+            <li>Compón tus recompensas para máximo crecimiento</li>
+            <li>Transacciones blockchain transparentes y seguras</li>
+        </ul>
+    </section>
+    
+    <section class="content-section">
+        <h2>Cómo Delegar con Colombia Staking</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="value">1</div>
+                <h3>Obtén Xportal Wallet</h3>
+                <p>Descarga la app Xportal o usa la extensión de navegador para almacenar tus eGLD de forma segura.</p>
+            </div>
+            <div class="info-card">
+                <div class="value">2</div>
+                <h3>Visita Nuestra dApp</h3>
+                <p>Ingresa a staking.colombia-staking.com y conecta tu billetera para acceder a nuestros servicios de delegación.</p>
+            </div>
+            <div class="info-card">
+                <div class="value">3</div>
+                <h3>Delega tus eGLD</h3>
+                <p>Elige la cantidad a delegar y confirma la transacción. ¡Empieza a ganar recompensas inmediatamente!</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="cta-box">
+        <h3>¿Listo para Empezar?</h3>
+        <p>Delega tus eGLD a Colombia Staking y comienza a ganar recompensas competitivas hoy.</p>
+        <a href="https://staking.colombia-staking.com/unlock" class="btn">🚀 Delegar Ahora</a>
+    </div>
+    
+    
+        <!-- Network Explorer Section -->
+        <section class="network-explorer-section">
+            <div class="network-explorer-header">
+                <h2>🗺️ Mapa de Red en Vivo</h2>
+                <p>Colombia Staking opera 50 nodos validadores en 4 shards con 8 endpoints de observadores en todo el mundo. El mapa de red muestra el estado en tiempo real de la blockchain MultiversX.</p>
+            </div>
+            <div class="network-explorer-stats">
+                                <div class="ne-stat">
+                    <div class="number">50</div>
+                    <div class="label">Nodos Validadores</div>
+                </div>
+                <div class="ne-stat">
+                    <div class="number">8</div>
+                    <div class="label">Endpoints de Observadores</div>
+                </div>
+                <div class="ne-stat">
+                    <div class="number">2</div>
+                    <div class="label">Centros de Datos</div>
+                </div>
+                <div class="ne-stat">
+                    <div class="number">4</div>
+                    <div class="label">Continentes</div>
+                </div>
+            </div>
+            <div class="network-explorer-map">
+                <iframe
+                    src="https://colombia-staking.co/network/"
+                    title="MultiversX Network Explorer"
+                    loading="lazy"
+                    allow="fullscreen"
+                ></iframe>
+            </div>
+            <div class="network-explorer-legend">
+                <h4>Leyenda de Tipos de Nodos</h4>
+                <p>El mapa de red muestra todos los nodos activos de MultiversX. Pasa el mouse para ver detalles.</p>
+                <div class="ne-legend-grid">
+                                        <div class="ne-legend-item"><div class="ne-legend-dot ne-dot-red"></div><span>🔴 Bordes rojos — Conexiones P2P observadas directamente</span></div>
+                    <div class="ne-legend-item"><div class="ne-legend-dot ne-dot-blue"></div><span>🔵 Bordes azules — Pares coincidentes por identidad</span></div>
+                    <div class="ne-legend-item"><div class="ne-legend-dot ne-dot-green"></div><span>🟢 Bordes verdes — Coincidencia por nombre/ubicación</span></div>
+                    <div class="ne-legend-item"><div class="ne-legend-dot ne-dot-black"></div><span>⚫ Bordes negros — Conexiones NAT/indirectas</span></div>
+                </div>
+            </div>
+            <div class="network-explorer-cta">
+                <a href="https://colombia-staking.co/network/" target="_blank" class="btn-ne">
+                    🌐 Abrir Explorador de Red Completo
+                </a>
+            </div>
+        </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html">Nosotros</a>
+            <a href="elrond.html">MultiversX</a>
+            <a href="billetera-maiar.html">Xportal</a>
+            <a href="node-status.html">Nodos</a>
+            <a href="preguntas-frecuentes.html">FAQ</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Colombia Staking. Todos los derechos reservados. | Validador MultiversX</p>
+        </div>
+    </footer>
+</body>
+</html>

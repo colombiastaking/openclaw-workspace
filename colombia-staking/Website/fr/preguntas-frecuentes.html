@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Colombia Staking</title>
+    <meta name="description" content="Questions fréquentes sur le staking d'eGLD avec Colombia Staking. Apprenez-en plus sur les récompenses, la sécurité et comment commencer.">
+    <link rel="canonical" href="https://fr.colombia-staking.com/preguntas-frecuentes.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --primary: #62dbb8; --bg-dark: #0a0a0a; --bg-card: #1a1a1a; --text-light: #ffffff; --text-muted: #a0a0a0; --gradient-1: linear-gradient(135deg, #62dbb8 0%, #4bc9a1 100%); }
+html { scroll-behavior: smooth; }
+body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; padding-top: 70px; }
+h1, h2, h3, h4 { font-family: 'Lustria', serif; font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+.page-header { background: linear-gradient(135deg, rgba(98, 219, 184, 0.1) 0%, rgba(211, 54, 130, 0.1) 100%); padding: 4rem 1rem; text-align: center; }
+.page-header h1 { color: var(--primary); margin-bottom: 0.5rem; }
+.page-header p { color: var(--text-muted); }
+.faq-container { max-width: 900px; margin: 0 auto; padding: 3rem 1rem; }
+.faq-category { margin-bottom: 2rem; }
+.faq-category h2 { color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(98, 219, 184, 0.3); }
+.faq-item { background: var(--bg-card); border-radius: 10px; margin-bottom: 1rem; overflow: hidden; border: 1px solid rgba(98, 219, 184, 0.1); }
+.faq-question { padding: 1.2rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
+.faq-question:hover { background: rgba(98, 219, 184, 0.05); }
+.faq-question h3 { font-size: 1rem; font-weight: 500; font-family: 'Poppins', sans-serif; }
+.faq-toggle { font-size: 1.5rem; color: var(--primary); transition: transform 0.3s ease; }
+.faq-item.active .faq-toggle { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-item.active .faq-answer { max-height: 500px; }
+.faq-answer-content { padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.8; }
+.faq-answer-content a { color: var(--primary); }
+.cta-box { background: var(--bg-card); border-radius: 20px; padding: 3rem 2rem; text-align: center; margin: 3rem auto; max-width: 600px; }
+.cta-box h3 { margin-bottom: 1rem; }
+.cta-box p { color: var(--text-muted); margin-bottom: 1.5rem; }
+.btn { display: inline-flex; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; border: none; background: var(--gradient-1); color: #000; cursor: pointer; }
+.footer { background: var(--bg-card); padding: 3rem 1rem 2rem; border-top: 1px solid rgba(98, 219, 184, 0.1); text-align: center; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--primary); }
+.footer-bottom { color: var(--text-muted); font-size: 0.9rem; padding-top: 1.5rem; border-top: 1px solid rgba(98, 219, 184, 0.1); }
+</style>
+<script src="js/unified-header.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+});
+</script>
+</head>
+<body>
+    <div class="page-header">
+        <h1>❓ Questions Fréquentes</h1>
+        <p>Trouvez des réponses aux questions courantes sur le staking avec Colombia Staking</p>
+    </div>
+    
+    <div class="faq-container">
+        <div class="faq-category">
+            <h2>🚀 Pour Commencer</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Qu'est-ce que le staking ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Le staking est le processus de délégation de vos jetons eGLD à un validateur pour aider à sécuriser le réseau MultiversX. En retour, vous gagnez des récompenses proportionnelles à votre mise. C'est similaire à gagner des intérêts sur vos cryptomonnaies tout en soutenant les opérations blockchain.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Comment commencer à déléguer avec Colombia Staking ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        1. Téléchargez l'app Xportal ou l'extension navigateur<br>
+                        2. Achetez des eGLD sur un exchange supporté<br>
+                        3. Visitez <a href="https://staking.colombia-staking.com" target="_blank">staking.colombia-staking.com</a><br>
+                        4. Connectez votre portefeuille et déléguez vos eGLD à Colombia Staking
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quel est le montant minimum pour déléguer ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Il n'y a pas de montant minimum pour déléguer avec Colombia Staking. Vous pouvez déléguer n'importe quelle quantité d'eGLD que vous avez dans votre portefeuille. Cependant, de très petits montants peuvent entraîner des récompenses proportionnellement faibles.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2>💰 Récompenses et Frais</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quel est l'APY actuel pour le staking ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Le rendement annuel en pourcentage (APY) pour le staking d'eGLD varie généralement entre 8% et 12%, selon les conditions du réseau et le montant total délégué. Colombia Staking offre des taux de commission compétitifs pour maximiser vos rendements.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quand reçois-je mes récompenses ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Les récompenses de staking sont calculées et distribuées à chaque epoch (environ 24 heures). Vos récompenses s'accumulent automatiquement et peuvent être réclamées à tout moment via la dApp de staking.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quels frais Colombia Staking facture-t-il ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Colombia Staking facture des frais de service compétitifs sur les récompenses gagnées. Ces frais sont automatiquement déduits de vos récompenses - votre montant principal délégué n'est jamais touché. Le taux exact est affiché de manière transparente dans notre dApp avant la délégation.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2>🔒 Sécurité</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Mes eGLD sont-ils en sécurité lors du staking ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Oui ! Lorsque vous déléguez vos eGLD, ils restent dans votre portefeuille - nous ne prenons jamais la garde de vos fonds. Vous pouvez retirer votre délégation à tout moment, et vos jetons seront retournés dans votre portefeuille. C'est ce qu'on appelle le staking non-custodial.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Que se passe-t-il si Colombia Staking se déconnecte ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Colombia Staking opère 48 nœuds validateurs avec une infrastructure redondante dans plusieurs emplacements. Même si certains nœuds rencontrent des problèmes, votre mise reste sécurisée et continue de gagner des récompenses de nos autres nœuds. Vos jetons ne sont jamais à risque.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2>⚡ Opérations</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Combien de temps faut-il pour retirer ma délégation ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Lorsque vous retirez vos eGLD, il y a une période d'attente d'environ 10 jours (10 epochs) avant que vos jetons ne soient disponibles dans votre portefeuille. C'est une fonctionnalité intégrée du protocole MultiversX, pas de Colombia Staking.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Puis-je ajouter plus d'eGLD à ma mise existante ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Oui ! Vous pouvez déléguer des eGLD supplémentaires à tout moment. Chaque délégation est séparée, donc si vous misez plus tard, cela créera une nouvelle entrée de délégation. Toutes les délégations au même validateur gagnent des récompenses indépendamment.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Puis-je déléguer depuis un portefeuille hardware ?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Oui ! Xportal et le portefeuille web MultiversX supportent les portefeuilles hardware comme Ledger. Vous pouvez déléguer vos eGLD directement depuis votre portefeuille hardware pour une sécurité maximale.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cta-box">
+        <h3>Vous avez encore des questions ?</h3>
+        <p>Rejoignez notre communauté Telegram pour du support et des mises à jour.</p>
+        <a href="https://t.me/ColombiaStaking" target="_blank" rel="noopener" class="btn">💬 Rejoindre Telegram</a>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="quienes-somos.html">À Propos</a>
+            <a href="elrond.html">MultiversX</a>
+            <a href="billetera-maiar.html">Xportal</a>
+            <a href="node-status.html">Nœuds</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Colombia Staking. Tous droits réservés. | Validateur MultiversX</p>
+        </div>
+    </footer>
+</body>
+</html>

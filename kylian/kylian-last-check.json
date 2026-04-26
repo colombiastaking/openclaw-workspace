@@ -1,0 +1,9 @@
+{
+  "lastCheck": "2026-03-27T23:00:00.000Z",
+  "status": "token_expired",
+  "note": "FRIDAY CHECK FAILED: Teams refresh token is invalid/exired. Cannot check for new plan without re-authentication. Same plan (Semana 24-27 de Marzo) from March 20 likely still current. Next Friday check may also fail unless token is refreshed manually.",
+  "checkedDrives": [],
+  "files": [],
+  "nextCheck": "2026-03-28T07:00:00.000Z",
+  "actionRequired": "Need to re-authenticate Microsoft Teams token. User interaction required for device code flow."
+}

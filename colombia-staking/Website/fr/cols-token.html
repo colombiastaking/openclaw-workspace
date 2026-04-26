@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeton COLS - Colombia Staking</title>
+    <meta name="description" content="Jeton COLS - Gagnez jusqu'à 50% de bonus APR sur votre eGLD misé. Jeton communautaire avec rachats forts des frais de Colombia Staking.">
+    <meta name="keywords" content="jeton COLS, staking eGLD, MultiversX, bonus APR, DeFi, Colombia Staking">
+    <link rel="canonical" href="https://fr.colombia-staking.com/cols-token.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/1/apple-touch-icon-01e00f.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lustria:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --primary: #62dbb8;
+            --primary-dark: #4bc9a1;
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --bg-card-hover: #252525;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-pink: #d33682;
+            --accent-purple: #9b59b6;
+            --gradient-1: linear-gradient(135deg, #62dbb8 0%, #4bc9a1 100%);
+            --gradient-2: linear-gradient(135deg, #d33682 0%, #e85a8a 100%);
+            --gradient-purple: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            --shadow-glow: 0 0 30px rgba(98, 219, 184, 0.3);
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: 70px;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 { font-family: 'Lustria', serif; font-weight: 600; line-height: 1.2; }
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+        
+        a { color: inherit; text-decoration: none; transition: all 0.3s ease; }
+        
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--gradient-purple);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(155, 89, 182, 0); }
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-purple);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+        }
+        
+        /* Token Info Section */
+        .token-info {
+            padding: 5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(98, 219, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Lustria', serif;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Tokenomics Section */
+        .tokenomics {
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(98, 219, 184, 0.1) 100%);
+        }
+        
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tokenomics-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(155, 89, 182, 0.2);
+        }
+        
+        .tokenomics-card h3 {
+            color: var(--accent-purple);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tokenomics-card ul {
+            list-style: none;
+        }
+        
+        .tokenomics-card li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .tokenomics-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .tokenomics-card li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        /* Distribution Chart */
+        .distribution {
+            padding: 5rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .distribution-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .distribution-visual {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .distribution-item {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border-left: 4px solid;
+        }
+        
+        .distribution-item.dao {
+            border-color: var(--accent-purple);
+        }
+        
+        .distribution-item.delegators {
+            border-color: var(--primary);
+        }
+        
+        .distribution-percent {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Lustria', serif;
+        }
+        
+        .distribution-item.dao .distribution-percent {
+            color: var(--accent-purple);
+        }
+        
+        .distribution-item.delegators .distribution-percent {
+            color: var(--primary);
+        }
+        
+        .distribution-title {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+        
+        .distribution-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 5rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .video-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Utilities Section */
+        .utilities {
+            padding: 5rem 1rem;
+            background: var(--bg-card);
+        }
+        
+        .utilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .utility-card {
+            background: var(--bg-dark);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .utility-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .utility-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .utility-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .utility-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 1rem;
+            text-align: center;
+            background: var(--gradient-purple);
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            background: white;
+            color: var(--accent-purple);
+            padding: 1rem 2.5rem;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--accent-purple);
+        }
+        
+        /* Links */
+        .link-highlight {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .link-highlight:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #050505;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* NFT Section */
+        .nft-section {
+            padding: 5rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-card);
+        }
+        
+        .nft-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nft-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+        }
+        
+        .nft-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .nft-card h3 {
+            text-align: center;
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .nft-description {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .nft-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .nft-benefit {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .nft-benefit strong {
+            color: #FFD700;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .nft-benefit p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .nft-example {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .nft-example h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .nft-example p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .nft-formula {
+            background: rgba(98, 219, 184, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--primary) !important;
+            font-weight: 600;
+            margin-top: 1rem !important;
+        }
+        
+        .nft-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .nft-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(98, 219, 184, 0.3);
+        }
+        
+        .nft-link:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+        
+        .nft-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-style: italic;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding-top: 1rem;
+            margin-bottom: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 60px; }
+            .hero { min-height: 60vh; }
+            .stat-card { padding: 1.5rem; }
+            .stat-value { font-size: 1.5rem; }
+            .tokenomics-card { padding: 1.5rem; }
+            .nft-card { padding: 2rem 1.5rem; }
+            .nft-badge { font-size: 0.8rem; padding: 0.4rem 1rem; }
+        }
+    </style>
+    
+    <script src="js/unified-header.js" defer></script>
+    
+    
+    <!-- Node Status Widget -->
+    <script>
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://colombia-staking.com/status.json')
+                .then(r => r.json())
+                .then(data => {
+                    const allSync = data.nodes.every(n => n.status === 'SYNC');
+                    const statusColor = allSync ? '#62dbb8' : '#f59e0b';
+                    const statusText = allSync ? 'Nœuds en Ligne' : 'Voir État';
+                    
+                    const widget = document.createElement('a');
+                    widget.href = 'node-status.html';
+                    widget.id = 'cs-node-status';
+                    widget.innerHTML = `<span style="display:inline-block;width:10px;height:10px;background:${statusColor};border-radius:50%;margin-right:8px;animation:nodePulse 2s infinite;"></span>${statusText}`;
+                    widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:500;border:1px solid #62dbb8;box-shadow:0 2px 10px rgba(0,0,0,0.3);transition:all 0.3s;';
+                    
+                    document.body.appendChild(widget);
+                    
+                    const style = document.createElement('style');
+                    style.textContent = '#cs-node-status { bottom: 80px !important; } @keyframes nodePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(98,219,184,0.4); } 50% { box-shadow: 0 0 0 8px rgba(98,219,184,0); } }';
+                    document.head.appendChild(style);
+                })
+                .catch(() => {});
+        });
+    })();
+    </script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="video/openart-video_03cf22a3_1748907875758.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🪙 Jeton COLS</div>
+            <img src="images/colombia-staking-logo.svg" alt="Jeton COLS" class="hero-logo">
+            <h1>Maximisez Vos Récompenses de Staking</h1>
+            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Gagnez jusqu'à <strong style="color: var(--accent-purple);">50% de bonus APR</strong> sur votre eGLD misé
+            </p>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+                Jeton utilitaire communautaire avec rachats soutenus par les frais de Colombia Staking
+            </p>
+            <div class="hero-buttons">
+                <a href="https://staking.colombia-staking.com/dashboard" target="_blank" rel="noopener" class="btn btn-primary">
+                    ⚡ Miser COLS Maintenant
+                </a>
+                <a href="https://explorer.multiversx.com/tokens/COLS-9d91b7" target="_blank" rel="noopener" class="btn btn-secondary">
+                    🔍 Voir sur Explorer
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Token Info Stats -->
+    <section class="token-info">
+        <div class="section-header">
+            <h2>📊 Aperçu du Jeton</h2>
+            <p>COLS est un jeton rare, piloté par la communauté, conçu pour récompenser les stakers à long terme</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🪙</div>
+                <div class="stat-value">COLS-9d91b7</div>
+                <div class="stat-label">Identifiant du Jeton</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-value">150,000 COLS</div>
+                <div class="stat-label">🚀 Approvisionnement Circulant (Déjà sur le Marché)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value">Jusqu'à 50%</div>
+                <div class="stat-label">Potentiel de Bonus APR</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">30%</div>
+                <div class="stat-label">Revenus d'Agence aux Rachats</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-value">15 Jours</div>
+                <div class="stat-label">Période de Verrouillage Min.</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tokenomics Section -->
+    <section class="tokenomics">
+        <div class="section-header">
+            <h2>💎 Tokenomics</h2>
+            <p>30% des frais d'agence de Colombia Staking sont utilisés pour racheter des jetons COLS</p>
+        </div>
+        
+        <div class="tokenomics-grid">
+            <div class="tokenomics-card">
+                <h3>🔥 Distribution des Rachats</h3>
+                <ul>
+                    <li><strong>1/3 au Pool DAO:</strong> Récompenses quotidiennes distribuées proportionnellement à tous les stakers COLS via le protocole PeerMe</li>
+                    <li><strong>2/3 aux Déléguants eGLD:</strong> Récompenses bonus quotidiennes pour les déléguants eGLD qui misent aussi des COLS</li>
+                    <li><strong>Distribution Quotidienne:</strong> Récompenses calculées et distribuées toutes les 24 heures</li>
+                </ul>
+            </div>
+            <div class="tokenomics-card">
+                <h3>🎯 Mécaniques de Récompenses</h3>
+                <ul>
+                    <li><strong>Plus de COLS = Plus de Bonus:</strong> Plus vous misez de COLS par rapport à votre eGLD, meilleur est votre APR</li>
+                    <li><strong>Staking via PeerMe:</strong> Le staking DAO utilise le protocole sécurisé PeerMe</li>
+                    <li><strong>Verrou de 15 Jours:</strong> Les COLS misés dans le DAO ont une période de verrouillage minimale de 15 jours</li>
+                    <li><strong>Direct vers Wallet:</strong> Les bonus pour déléguants eGLD sont envoyés quotidiennement à votre adresse</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Distribution Visual -->
+    <section class="distribution">
+        <div class="section-header">
+            <h2>📊 Distribution des Rachats</h2>
+        </div>
+        <div class="distribution-visual">
+            <div class="distribution-item dao">
+                <div class="distribution-percent">33%</div>
+                <h3 class="distribution-title">Pool DAO</h3>
+                <p class="distribution-desc">Distribué à tous les stakers COLS proportionnellement via la gouvernance PeerMe</p>
+            </div>
+            <div class="distribution-item delegators">
+                <div class="distribution-percent">67%</div>
+                <h3 class="distribution-title">Déléguants eGLD</h3>
+                <p class="distribution-desc">Récompenses bonus pour les déléguants eGLD qui misent des jetons COLS</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Utilities Section -->
+    <section class="utilities">
+        <div class="section-header">
+            <h2>🛠️ Utilités du Jeton</h2>
+            <p>Plusieurs façons de bénéficier de la détention et du staking de COLS</p>
+        </div>
+        
+        <div class="utilities-grid">
+            <div class="utility-card">
+                <div class="utility-icon">🏛️</div>
+                <h3>Droits de Gouvernance</h3>
+                <p>Votez et proposez au DAO Colombia Staking sur <a href="https://PeerMe.io/colombia-staking" target="_blank" rel="noopener" class="link-highlight">PeerMe</a>. Votre voix compte pour façonner l'avenir du protocole.</p>
+            </div>
+            <div class="utility-card">
+                <div class="utility-icon">📈</div>
+                <h3>Bonus APR pour Staking</h3>
+                <p>Miser des COLS dans le DAO vous donne une part des récompenses de rachat quotidiennes, augmentant directement votre rendement global.</p>
+            </div>
+            <div class="utility-card">
+                <div class="utility-icon">💎</div>
+                <h3>Boost Bonus Déléguant</h3>
+                <p>Déléguer de l'eGLD et miser des COLS pour maximiser vos récompenses. Plus votre ratio COLS/eGLD est élevé, plus votre bonus APR est important.</p>
+            </div>
+            <div class="utility-card">
+                <div class="utility-icon">🔥</div>
+                <h3>Rareté et Rachats</h3>
+                <p>Des rachats soutenus et constants par les frais d'agence créent une pression haussière sur le prix du jeton. 30% de tous les frais sont utilisés pour acheter des COLS.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section NFT Gold Member -->
+    <section class="nft-section">
+        <div class="section-header">
+            <h2>🏆 NFT Gold Member</h2>
+            <p>Avantages exclusifs pour les premiers supporters de Colombia Staking</p>
+        </div>
+        
+        <div class="nft-container">
+            <div class="nft-card">
+                <div class="nft-badge">👑 Édition Limitée</div>
+                <h3>NFT Gold Member</h3>
+                <p class="nft-description">
+                    Les 50 premiers déléguants de Colombia Staking ont reçu un NFT Gold Member, accordant des avantages exclusifs à vie.
+                </p>
+                
+                <div class="nft-benefits">
+                    <div class="nft-benefit">
+                        <span class="benefit-icon">💰</span>
+                        <div>
+                            <strong>0% Frais de Service</strong>
+                            <p>Aucun frais de service sur votre eGLD délégué (jusqu'à 500 eGLD par NFT)</p>
+                        </div>
+                    </div>
+                    <div class="nft-benefit">
+                        <span class="benefit-icon">📊</span>
+                        <div>
+                            <strong>Redistribution des Frais</strong>
+                            <p>Toutes les 2 semaines, les frais de l'agence sont redistribués aux détenteurs de NFT selon leur proportion de mise</p>
+                        </div>
+                    </div>
+                    <div class="nft-benefit">
+                        <span class="benefit-icon">💬</span>
+                        <div>
+                            <strong>Canal Exclusif</strong>
+                            <p>Accès au canal Telegram privé pour les mises à jour APR, récompenses et informations exclusives</p>
+                        </div>
+                    </div>
+                    <div class="nft-benefit">
+                        <span class="benefit-icon">🔄</span>
+                        <div>
+                            <strong>Transférable</strong>
+                            <p>Le NFT peut être vendu ou transféré—les avantages passent au nouveau propriétaire</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nft-example">
+                    <h4>📖 Exemple de Calcul</h4>
+                    <p>Si vous possédez un NFT Gold Member et avez délégué <strong>50 eGLD</strong> chez Colombia Staking, et que l'agence a collecté <strong>5 eGLD</strong> de frais pendant la semaine avec un pool total de <strong>5,000 eGLD</strong>:</p>
+                    <p class="nft-formula">Votre retour hebdomadaire = (50 ÷ 5,000) × 5 = <strong>0.05 eGLD</strong></p>
+                </div>
+                
+                <div class="nft-links">
+                    <a href="https://explorer.multiversx.com/collections/COL-70965c" target="_blank" rel="noopener" class="nft-link">
+                        🔗 Voir Collection NFT: COL-70965c
+                    </a>
+                    <a href="https://t.me/Colombia_Staking_Gold_Member" target="_blank" rel="noopener" class="nft-link">
+                        💬 Telegram Gold Members
+                    </a>
+                </div>
+                
+                <p class="nft-note">*Maximum 500 eGLD délégués par NFT éligible pour l'avantage de 0% frais de service.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>🚀 Commencez à Gagner Aujourd'hui</h2>
+        <p>Misez des COLS pour maximiser vos récompenses de staking MultiversX avec Colombia Staking</p>
+        <div class="cta-buttons">
+            <a href="https://staking.colombia-staking.com/dashboard" target="_blank" rel="noopener" class="btn btn-cta">
+                💰 Miser COLS
+            </a>
+            <a href="https://staking.colombia-staking.com/cols-info.html" target="_blank" rel="noopener" class="btn btn-outline">
+                📊 Voir Stats en Direct
+            </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>🇨🇴 Colombia Staking — <a href="https://explorer.multiversx.com/tokens/COLS-9d91b7" target="_blank" rel="noopener" class="link-highlight">COLS-9d91b7</a> sur MultiversX</p>
+    </footer>
+    <!-- Social Media Widget - Inline to bypass CDN cache -->
+    <script>
+    (function() {
+        'use strict';
+        function detectLanguage() {
+            const host = window.location.hostname;
+            if (host.includes('esp.')) return 'es';
+            if (host.includes('fr.')) return 'fr';
+            return 'en';
+        }
+        const lang = detectLanguage();
+        const config = {
+            en: { channels: [{ name: '📢 Announcements', url: 'https://t.me/ColombiaStakingAnn', desc: 'Official updates & news' }, { name: '💬 English Chat', url: 'https://t.me/ColombiaStakingChat', desc: 'Community discussions' }, { name: '🇪🇸 Spanish Chat', url: 'https://t.me/colombiastakingesp', desc: 'Comunidad en español' }, { name: '🇫🇷 French Chat', url: 'https://t.me/colmbiastakingfr', desc: 'Communauté française' }], buttonText: 'Telegram' },
+            es: { channels: [{ name: '📢 Anuncios', url: 'https://t.me/ColombiaStakingAnn', desc: 'Noticias y actualizaciones' }, { name: '💬 Chat Inglés', url: 'https://t.me/ColombiaStakingChat', desc: 'English community' }, { name: '🇪🇸 Chat Español', url: 'https://t.me/colombiastakingesp', desc: 'Comunidad en español' }, { name: '🇫🇷 Chat Francés', url: 'https://t.me/colmbiastakingfr', desc: 'Communauté française' }], buttonText: 'Telegram' },
+            fr: { channels: [{ name: '📢 Annonces', url: 'https://t.me/ColombiaStakingAnn', desc: 'Nouvelles et mises à jour' }, { name: '💬 Chat Anglais', url: 'https://t.me/ColombiaStakingChat', desc: 'English community' }, { name: '🇪🇸 Chat Espagnol', url: 'https://t.me/colombiastakingesp', desc: 'Comunidad en español' }, { name: '🇫🇷 Chat Français', url: 'https://t.me/colmbiastakingfr', desc: 'Communauté française' }], buttonText: 'Telegram' }
+        };
+        const c = config[lang];
+        const styles = `<style id="cs-telegram-styles">.cs-social-widget{position:fixed;bottom:20px;right:20px;z-index:999990;font-family:'Poppins',sans-serif;display:flex;flex-direction:column;align-items:flex-end;gap:10px}.cs-social-buttons{display:flex;gap:10px}.cs-x-btn{display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:#000;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:all 0.3s ease;text-decoration:none}.cs-x-btn:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(0,0,0,0.5)}.cs-telegram-btn{display:flex;align-items:center;gap:10px;padding:14px 20px;background:linear-gradient(135deg,#0088cc 0%,#00a8e8 100%);border:none;border-radius:50px;cursor:pointer;box-shadow:0 4px 15px rgba(0,136,204,0.4);transition:all 0.3s ease}.cs-telegram-btn:hover{transform:scale(1.05);box-shadow:0 6px 25px rgba(0,136,204,0.6)}.cs-telegram-btn img{width:24px;height:24px}.cs-telegram-btn span{color:white;font-weight:600;font-size:14px;white-space:nowrap}.cs-telegram-popup{position:absolute;bottom:70px;right:0;background:#1a1a1a;border-radius:16px;padding:20px;min-width:280px;box-shadow:0 10px 40px rgba(0,0,0,0.5);border:1px solid rgba(0,136,204,0.3);opacity:0;visibility:hidden;transform:translateY(10px);transition:all 0.3s ease}.cs-telegram-popup.active{opacity:1;visibility:visible;transform:translateY(0)}.cs-telegram-popup h4{margin:0 0 15px 0;color:#62dbb8;font-size:16px;font-weight:600;padding-bottom:10px;border-bottom:1px solid rgba(98,219,184,0.2)}.cs-telegram-channel{display:block;padding:12px 15px;background:#252525;border-radius:10px;margin-bottom:8px;color:white;text-decoration:none;transition:all 0.2s ease;border:1px solid transparent}.cs-telegram-channel:last-child{margin-bottom:0}.cs-telegram-channel:hover{background:#333;border-color:#0088cc;transform:translateX(-5px)}.cs-telegram-channel-name{display:block;font-weight:600;margin-bottom:2px;font-size:14px}.cs-telegram-channel-desc{font-size:12px;color:#888}@media(max-width:768px){.cs-telegram-btn span{display:none}.cs-telegram-btn{padding:14px;border-radius:50%}.cs-telegram-popup{right:-10px;min-width:250px}}</style>`;
+        function buildPopup() {
+            const channels = c.channels.map(ch => `<a href="${ch.url}" target="_blank" rel="noopener" class="cs-telegram-channel"><span class="cs-telegram-channel-name">${ch.name}</span><span class="cs-telegram-channel-desc">${ch.desc}</span></a>`).join('');
+            return `<div class="cs-social-widget" id="csSocialWidget"><div class="cs-telegram-popup" id="csTelegramPopup"><h4>📱 Join us on Telegram</h4>${channels}</div><div class="cs-social-buttons"><a href="https://x.com/ColombiaStaking" target="_blank" rel="noopener" class="cs-x-btn" title="X (Twitter)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><button class="cs-telegram-btn" id="csTelegramBtn" aria-label="Telegram"><img src="images/v/telegram-logo-120.png" alt="Telegram"><span>${c.buttonText}</span></button></div></div>`;
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const existingStyles = document.getElementById('cs-telegram-styles');
+            if (existingStyles) existingStyles.remove();
+            document.head.insertAdjacentHTML('beforeend', styles);
+            document.body.insertAdjacentHTML('beforeend', buildPopup());
+            const btn = document.getElementById('csTelegramBtn');
+            const popup = document.getElementById('csTelegramPopup');
+            if (btn && popup) {
+                btn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); popup.classList.toggle('active'); });
+                document.addEventListener('click', function(e) { if (!document.getElementById('csSocialWidget').contains(e.target)) { popup.classList.remove('active'); } });
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
