@@ -23,10 +23,10 @@ PASS = "sMGi6hW3vikr"
 
 # Site configs: (local_path, remote_path)
 SITES = {
-    "en": ("/home/raspberry/.openclaw/workspace/Website/eng", "/public_html"),
-    "es": ("/home/raspberry/.openclaw/workspace/Website/esp", "/esp.colombia-staking.com"),
-    "fr": ("/home/raspberry/.openclaw/workspace/Website/fr", "/fr.colombia-staking.com"),
-    "dapp": ("/home/raspberry/.openclaw/workspace/DAPP-V3/build", "/staking.colombia-staking.com"),
+    "en": ("/home/raspberry/.openclaw/workspace/colombia-staking/Website/eng", "/public_html"),
+    "es": ("/home/raspberry/.openclaw/workspace/colombia-staking/Website/esp", "/esp.colombia-staking.com"),
+    "fr": ("/home/raspberry/.openclaw/workspace/colombia-staking/Website/fr", "/fr.colombia-staking.com"),
+    "dapp": ("/home/raspberry/.openclaw/workspace/colombia-staking/DAPP-V3/build-fresh", "/staking.colombia-staking.com"),
 }
 
 

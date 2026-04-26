@@ -1782,7 +1782,7 @@ def run_analysis():
     is_intra_cycle_rally = False
     rally_reason = ""
     ma_discount_pct = ((market_data['current_price'] / market_data['ma_50_week'] - 1) * 100) if market_data['ma_50_week'] > 0 else 0
-    if 600 <= days <= 750:
+    if 600 <= market_data['blocks_since_halving'] <= 750:
         # Only true rally if RSI recovered (>50) OR price near MA (> -15% discount)
         if market_data['rsi'] > 50 or ma_discount_pct > -15:
             is_intra_cycle_rally = True
@@ -1861,13 +1861,44 @@ def save_alert(alert, filepath="/tmp/btc_decision_alert.json"):
     except Exception as e:
         print(f"Error saving alert: {e}")
 
+def save_report(alert, filepath="/tmp/btc_general_report.json"):
+    """Save full report JSON for DApp /btc-report/summary endpoint"""
+    try:
+        report = {
+            "generated": datetime.now().isoformat(),
+            "timestamp": datetime.now().isoformat(),
+            "score": alert.get("score", 0),
+            "recommendation": alert.get("recommendation", ""),
+            "action": alert.get("action", ""),
+            "price": alert.get("price", 0),
+            "summary": {
+                "score": alert.get("score", 0),
+                "recommendation": alert.get("recommendation", ""),
+                "price": alert.get("price", 0),
+                "dca_amount_weekly": round(alert.get("price", 77840) * 0.00353, 2) if alert.get("price") else 275,
+                "dca_amount_monthly": round(alert.get("price", 77840) * 0.01412, 2) if alert.get("price") else 1100,
+                "strategy": alert.get("strategy", ""),
+                "mvrv": alert.get("indicators", {}).get("mvrv", 0),
+                "rsi": alert.get("indicators", {}).get("rsi", 0),
+                "fear_greed": alert.get("indicators", {}).get("fear_greed", 0),
+                "cycle_phase": alert.get("cycle_phase", ""),
+            }
+        }
+        with open(filepath, 'w') as f:
+            json.dump(report, f, indent=2)
+        print(f"💾 Report saved to {filepath}")
+    except Exception as e:
+        print(f"Error saving report: {e}")
+
 if __name__ == "__main__":
     # Run analysis
     alert = run_analysis()
     
     if alert:
         save_alert(alert)
+        save_report(alert)
         
         print("\n" + "=" * 70)
         print("💾 Alert saved to /tmp/btc_decision_alert.json")
+        print("💾 Report saved to /tmp/btc_general_report.json")
         print("=" * 70)
