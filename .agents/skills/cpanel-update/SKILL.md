@@ -12,127 +12,108 @@ When rebuilding and redeploying the DApp:
 1. **Upload index.html** AND **all new JS/CSS files** from `build/assets/`
 2. New builds create new hash filenames (e.g., `index-6ea07f4a.js` vs old `index-cd871205.js`)
 3. If you only upload index.html without the new JS files → "text/html is not valid JavaScript" error
-4. Always upload the complete `build/` folder contents:
+4. Always upload the complete `build/` folder contents
+
+## Deploy Script
+
+**Use the Python lftp deploy script** — it handles TLS properly and uploads only changed files:
 
 ```bash
-# Upload index.html + all assets
-curl -s -k --ftp-ssl -u "AliceDapp@..." -T build/index.html "ftp://.../index.html"
-for f in build/assets/*; do
-  curl -s -k --ftp-ssl -u "AliceDapp@..." -T "$f" "ftp://.../$f"
-done
+python3 ~/.openclaw/workspace/scripts/deploy-website.py [en|es|fr|dapp|all]
 ```
 
-## ⚠️ ES/FR FTP Accounts
+| Flag | Deploys |
+|------|---------|
+| `en` | EN website → `colombia-staking.com/` |
+| `es` | ES website → `esp.colombia-staking.com/` |
+| `fr` | FR website → `fr.colombia-staking.com/` |
+| `dapp` | DApp → `staking.colombia-staking.com/` |
+| `all` | All 4 sites |
 
-ES and FR FTP users exist but have **no home directory** configured on the server (421 error).
+**Only deploy what changed** — don't run `all` unless everything changed.
 
-To fix: cPanel → FTP Accounts → Edit AliceEsp/AliceFr → set home directory:
-- AliceEsp: `/home/colombia6/esp.colombia-staking.com`
-- AliceFr: `/home/colombia6/fr.colombia-staking.com`
+## Server Directory Structure
 
-**Not blocking HTTP** — EN/ES/FR sites work fine via HTTP. FTP is just for maintenance.
-
-**The server has SSL issues with lftp (timeout problems). Use curl instead.**
-
-## ⚠️ CRITICAL: .htaccess Corruption Fix
-
-If DApp routes return 404, the .htaccess may be corrupted. **Re-upload a clean .htaccess**:
-
-```bash
-# Create clean .htaccess
-cat > /tmp/clean_htaccess.htaccess << 'HTACCESS'
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.html$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
-HTACCESS
-
-# Upload with AliceDapp credentials
-curl -s -k --ftp-ssl \
-  -u "AliceDapp@staking.colombia-staking.com:vXQln+-JsMLNz)0V" \
-  -T /tmp/clean_htaccess.htaccess \
-  "ftp://staking.colombia-staking.com/.htaccess"
 ```
-
-Always use **new credentials** (not old colombia6/sMGi6hW3vikr) to avoid corruption.
+/home/colombia6/
+├── public_html/                       ← EN site (index.html at root)
+├── esp.colombia-staking.com/          ← ES site (index.html at root)
+├── fr.colombia-staking.com/           ← FR site (index.html at root)
+└── staking.colombia-staking.com/      ← DApp (index.html at root)
+    index.html, manifest.json, node_status.json, etc.
+    assets/, build/, leagues/, public/
+```
 
 ## FTP Configuration
 
-Credentials stored at: `~/.openclaw/secrets/.ftp_credentials`
+**Single account for all sites** (works with TLS):
 
-### Individual Site Credentials (updated 2026-04-18)
-
-**DApp (staking.colombia-staking.com):**
-```
-DAPP_HOST="staking.colombia-staking.com"
-DAPP_USER="AliceDapp@staking.colombia-staking.com"
-DAPP_PASS="vXQln+-JsMLNz)0V"
-```
-
-**EN Website (colombia-staking.com):**
-```
-ENG_HOST="colombia-staking.com"
-ENG_USER="AliceEng@colombia-staking.com"
-ENG_PASS="0w3ikUp^?k,1s@ET"
-```
-
-**ES Website (esp.colombia-staking.com):**
-```
-ESP_HOST="esp.colombia-staking.com"
-ESP_USER="AliceEsp@esp.colombia-staking.com"
-ESP_PASS="?jTL&[YOwIoo#Pmh"
-```
-
-**FR Website (fr.colombia-staking.com):**
-```
-FR_HOST="fr.colombia-staking.com"
-FR_USER="AliceFr@fr.colombia-staking.com"
-FR_PASS="qy+EN{rqa.u;9.%-"
-```
-
-**ES/FR FTP users** — Home directory not yet configured on server. cPanel → FTP Accounts to fix.
-
-### Legacy (for backwards compatibility):
 ```
 HOST="colombia-staking.com"
 USER="colombia6"
 PASS="sMGi6hW3vikr"
 ```
 
-## Server Directory Structure
+Credentials stored at: `~/.openclaw/secrets/.ftp_credentials`
 
-```
-/home/colombia6/
-├── public_html/                    ← EN site (index.html at root)
-├── esp.colombia-staking.com/       ← ES site (index.html at root)
-├── fr.colombia-staking.com/        ← FR site (index.html at root)
-└── staking.colombia-staking.com/   ← DApp (index.html at root)
-    index.html, manifest.json, node_status.json, etc.
-    assets/, build/, leagues/, public/
-```
+## DApp Paths (on Pi)
 
-## DApp Upload Process
+| Item | Local Path |
+|------|-----------|
+| DApp source | `/home/raspberry/.openclaw/workspace/colombia-staking/DAPP-V3/` |
+| DApp build | `/home/raspberry/.openclaw/workspace/colombia-staking/DAPP-V3/build/` |
+| DApp GitHub | `https://github.com/colombiastaking/DAPP-V3.git` |
+
+## Website Paths (on Pi)
+
+| Item | Local Path |
+|------|-----------|
+| Website source | `/home/raspberry/.openclaw/workspace/colombia-staking/Website/` |
+| EN | `Website/eng/` → `/public_html/` |
+| ES | `Website/esp/` → `/esp.colombia-staking.com/` |
+| FR | `Website/fr/` → `/fr.colombia-staking.com/` |
+| Website GitHub | `https://github.com/colombiastaking/Website.git` |
+
+## Rebuilding and Deploying DApp
 
 ```bash
-# 1. Build the DApp
-cd ~/.openclaw/workspace/DAPP-V3 && npm run build
+# 1. Rebuild DApp
+cd ~/.openclaw/workspace/colombia-staking/DAPP-V3 && npm run build
 
-# 2. Upload with new credentials
-curl -s -k --ftp-ssl \
-  -u "AliceDapp@staking.colombia-staking.com:vXQln+-JsMLNz)0V" \
-  -T build/index.html \
-  "ftp://staking.colombia-staking.com/index.html"
+# 2. Deploy to cPanel (only DApp changed)
+python3 ~/.openclaw/workspace/scripts/deploy-website.py dapp
 
-# 3. Re-upload .htaccess AFTER any file upload (LiteSpeed cache issue)
-curl -s -k --ftp-ssl \
-  -u "AliceDapp@staking.colombia-staking.com:vXQln+-JsMLNz)0V" \
-  -T /tmp/clean_htaccess.htaccess \
-  "ftp://staking.colombia-staking.com/.htaccess"
+# 3. Commit to GitHub
+cd ~/.openclaw/workspace/colombia-staking/DAPP-V3
+git add src/helpers/FallbackProxyNetworkProvider.ts  # or whatever changed
+git commit -m "describe change"
+git push origin main
 ```
 
-⚠️ **After uploading ANY file to DApp, always re-upload .htaccess** — LiteSpeed caches files aggressively and only clears on .htaccess re-upload.
+## Rebuilding and Deploying Websites
+
+```bash
+# 1. Commit changes to GitHub
+cd ~/.openclaw/workspace/colombia-staking/Website
+git add .
+git commit -m "describe change"
+git push origin main
+
+# 2. Deploy to cPanel
+python3 ~/.openclaw/workspace/scripts/deploy-website.py en  # or es fr or all
+```
+
+## Manual FTP (curl fallback)
+
+If lftp fails, use curl with explicit FTP:
+
+```bash
+# Upload single file
+curl -k --ftp-ssl \
+  -u "colombia6:sMGi6hW3vikr" \
+  -T local-file.txt \
+  "ftp://colombia-staking.com/remote-file.txt"
+```
 
 ## DApp Endpoints
 
@@ -141,12 +122,16 @@ curl -s -k --ftp-ssl \
 | BTC Strategy | `/tools` | `https://colombia-staking.co/btc-report/summary` |
 | Tax Report | `/tools` (sub-page) | `https://colombia-staking.co/tax-query?address=...` |
 
-Both endpoints route through kepler-proxy on port 3000 → cloudflared tunnel → Pi.
+Both route through kepler-proxy on port 3000 → cloudflared tunnel → Pi.
 
-## FTP Helper Script
+## Troubleshooting
 
-```bash
-~/.openclaw/workspace/.agents/skills/cpanel-update/scripts/ftp-helper.sh <action>
+### LiteSpeed serving stale content
+After uploading, LiteSpeed may cache old HTML. Purge via:
+cPanel → LiteSpeed Cache → Purge All
+
+### FTP TLS certificate errors
+The `colombia6` account handles TLS fine. If cert errors appear, add to lftp script:
 ```
-
-Actions: `test`, `list-dapp`, `list-eng`, `list-esp`, `list-fr`, `upload-dapp <f> <r>`, etc.
+set ssl:verify-certificate no
+```
