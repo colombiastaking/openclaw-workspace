@@ -1,13 +1,13 @@
 /**
  * COLS Distribution Scripts - FIXED VERSION with On-Chain Verification
- * 
+ *
  * FIXES over original:
  * 1. Verifies txHash is valid before marking success
  * 2. Awaits transaction confirmation (not just broadcast)
  * 3. Verifies each transaction on-chain before counting as success
  * 4. Handles failures properly with retry logic
  * 5. Batches transactions and verifies in groups to avoid rate limits
- * 
+ *
  * TWO POOLS:
  * 1. DAO POOL (1/3 of buyback): ONE transaction to PeerMe contract
  * 2. BONUS POOL (2/3 of buyback): Individual ESDT transfers
@@ -89,15 +89,15 @@ async function signTransaction(tx, secretKey, provider) {
   const serializedTx = transactionComputer.computeBytesForSigning(tx);
   const signature = secretKey.sign(serializedTx);
   tx.signature = signature;
-  
+
   // Send and get hash
   const txHash = await provider.sendTransaction(tx);
-  
+
   // BUG FIX #1: Verify txHash is valid
   if (!txHash || txHash === 'undefined' || txHash === 'null') {
     throw new Error(`Invalid txHash returned: ${txHash}`);
   }
-  
+
   return txHash.toString();
 }
 
@@ -106,25 +106,25 @@ async function signTransaction(tx, secretKey, provider) {
  */
 async function waitForConfirmation(provider, txHash, timeoutMs = VERIFICATION_TIMEOUT_MS) {
   const startTime = Date.now();
-  
+
   while (Date.now() - startTime < timeoutMs) {
     try {
       const txStatus = await provider.getTransaction(txHash);
-      
+
       if (txStatus.status.isExecuted()) {
         return { confirmed: true, status: 'executed' };
       }
-      
+
       if (txStatus.status.isFailed()) {
         return { confirmed: false, status: 'failed' };
       }
-      
+
       if (txStatus.status.isPending()) {
         // Still pending, wait a bit more
         await new Promise(r => setTimeout(r, 2000));
         continue;
       }
-      
+
     } catch (e) {
       // Transaction not found yet, wait and retry
       if (e.message.includes('transaction not found') || e.message.includes('404')) {
@@ -135,7 +135,7 @@ async function waitForConfirmation(provider, txHash, timeoutMs = VERIFICATION_TI
       throw e;
     }
   }
-  
+
   // Timeout reached
   return { confirmed: false, status: 'timeout' };
 }
@@ -145,20 +145,20 @@ async function waitForConfirmation(provider, txHash, timeoutMs = VERIFICATION_TI
  */
 async function sendAndVerify(provider, tx, secretKey, recipientInfo, maxRetries = MAX_RETRIES, timeoutMs = CONFIRMATION_WAIT_MS) {
   let lastError = null;
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       // Sign and send
       const txHash = await signTransaction(tx, secretKey, provider);
       console.log(`     📤 Hash: ${txHash.slice(0, 12)}... (attempt ${attempt})`);
-      
+
       // Wait for confirmation
       const result = await waitForConfirmation(provider, txHash, timeoutMs);
-      
+
       if (result.confirmed) {
         return { success: true, txHash, confirmed: true };
       }
-      
+
       // Transaction not confirmed
       if (result.status === 'timeout') {
         console.log(`     ⏳ Timeout waiting for confirmation`);
@@ -167,7 +167,7 @@ async function sendAndVerify(provider, tx, secretKey, recipientInfo, maxRetries 
         console.log(`     ❌ Transaction failed on-chain`);
         lastError = new Error('Transaction failed on-chain');
       }
-      
+
       // If timeout, do a final on-chain check before giving up
       if (result.status === 'timeout') {
         try {
@@ -178,27 +178,27 @@ async function sendAndVerify(provider, tx, secretKey, recipientInfo, maxRetries 
           }
         } catch (e) {}
       }
-      
+
       // If failed, don't retry - it won't help
       break;
-      
+
     } catch (e) {
       lastError = e;
       console.log(`     ❌ Error: ${e.message}`);
-      
+
       // If it's a nonce error, don't retry - the nonce is likely stale
       if (e.message.includes('nonce') || e.message.includes('Guardian')) {
         break;
       }
     }
-    
+
     // Wait before retry
     if (attempt < maxRetries) {
       console.log(`     🔄 Retrying in 3s...`);
       await new Promise(r => setTimeout(r, 3000));
     }
   }
-  
+
   return { success: false, error: lastError?.message || 'Unknown error', confirmed: false };
 }
 
@@ -208,25 +208,25 @@ async function main() {
   const doBonus = args.includes('--bonus') || args.includes('--all');
   const doGold = args.includes('--gold') || args.includes('--all-gold');
   const force = args.includes('--force');
-  
+
   const state = loadState();
   const today = new Date().toISOString().slice(0, 10);
-  
+
   if (!force && state.lastDistributionDate === today) {
     console.log(`⚠️  Distribution already executed today: ${today}`);
     console.log(`   Use --force to re-run`);
     process.exit(0);
   }
-  
+
   console.log("═".repeat(70));
   console.log("🚀 COLS DISTRIBUTION - FIXED VERSION WITH VERIFICATION");
   console.log("═".repeat(70));
   console.log(`Time: ${new Date().toISOString()}`);
   console.log(`Verification: Waiting ${CONFIRMATION_WAIT_MS/1000}s for on-chain confirmation`);
   console.log("");
-  
+
   // Setup
-  const provider = new ProxyNetworkProvider(NETWORK_PROVIDER, { 
+  const provider = new ProxyNetworkProvider(NETWORK_PROVIDER, {
     timeout: 30000,
     clientName: "cols-distribution-fixed"
   });
@@ -234,26 +234,31 @@ async function main() {
   const senderPublicKey = secretKey.generatePublicKey();
   const senderAddress = new Address(senderPublicKey.valueOf());
   const senderAddressForProvider = senderPublicKey.toAddress();
-  
+
   console.log(`Wallet: ${senderAddress.toBech32()}`);
-  
+
   // Get fresh nonce
   const account = await provider.getAccount(senderAddressForProvider);
   console.log(`Current Nonce: ${account.nonce}`);
   console.log(`Balance: ${Number(account.balance) / 1e18} EGLD`);
   console.log("");
-  
+
   // Load distribution
   const dist = loadDistribution();
   const bonusRecipients = dist.bonus.recipients;
   const totalBonus = dist.bonus.totalBonus;
   const totalBuyback = totalBonus / 0.667;
   const daoAmount = totalBuyback * 0.333;
-  
+
   console.log("📊 Distribution Summary:");
   console.log(`   DAO Pool: ${daoAmount.toFixed(6)} COLS → PeerMe contract`);
   console.log(`   BONUS Pool: ${totalBonus.toFixed(6)} COLS → ${bonusRecipients.length} addresses`);
   console.log("");
+
+  // Initialize results early (used in deduplication below, defined properly later)
+  const resultsFile = `/tmp/cols_distribution/results_${today}.json`;
+  const existing = (force && fs.existsSync(resultsFile)) ? JSON.parse(fs.readFileSync(resultsFile, 'utf-8')) : null;
+  const results = { dao: null, bonus: existing?.bonus || [], gold: existing?.gold || [] };
 
   // ─── DEDUPLICATION: Check who already received COLS today ───
   const alreadyPaid = new Set(results.bonus.map(r => r.address.toLowerCase()));
@@ -268,8 +273,22 @@ async function main() {
       try {
         const todayStr = new Date().toISOString().split('T')[0];
         const apiUrl = `https://api.multiversx.com/accounts/${recipient.address}/transfers?token=${COLS_TOKEN_ID}&sender=erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy&size=50`;
-        const resp = await fetch(apiUrl);
-        if (resp.ok) {
+        // Retry logic for API calls (handle 429 rate limits)
+        const MAX_RETRIES = 5;
+        let resp = null;
+        for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+          resp = await fetch(apiUrl);
+          if (resp.ok) break;
+          if (resp.status === 429 && attempt < MAX_RETRIES - 1) {
+            const waitMs = Math.min(2000 * Math.pow(2, attempt), 10000);
+            console.warn(`   ⏳ Rate limited, retrying in ${waitMs}ms... (attempt ${attempt + 1}/${MAX_RETRIES})`);
+            await new Promise(r => setTimeout(r, waitMs));
+            continue;
+          }
+          break;
+        }
+        
+        if (resp && resp.ok) {
           const data = await resp.json();
           const receivedToday = (Array.isArray(data) ? data : (data.data || [])).some(t => {
             const ts = t.timestamp || t.date || '';
@@ -280,15 +299,15 @@ async function main() {
             toSkip.add(recipient.address);
           }
         } else if (!resp.ok) {
-          // API returned non-OK — be conservative, skip to avoid double-pay
+          // API returned non-OK - be conservative, skip to avoid double-pay
           toSkip.add(recipient.address);
-          console.warn(`   ⚠ API error for ${recipient.address.slice(0,12)}... (${resp.status}) — SKIPPING`);
+          console.warn(`   ⚠ API error for ${recipient.address.slice(0,12)}... (${resp.status}) - SKIPPING`);
         }
-        // On-chain check — be conservative: if check fails, skip to avoid double-pay
+        // On-chain check - be conservative: if check fails, skip to avoid double-pay
       } catch (e) {
-        // Could not verify — SKIP to avoid double-sending
+        // Could not verify - SKIP to avoid double-sending
         toSkip.add(recipient.address);
-        console.warn(`   ⚠ Check failed for ${recipient.address.slice(0,12)}... — SKIPPING (cannot verify)`);
+        console.warn(`   ⚠ Check failed for ${recipient.address.slice(0,12)}... - SKIPPING (cannot verify)`);
       }
     }
     console.log(`   On-chain duplicates found: ${toSkip.size}`);
@@ -298,12 +317,8 @@ async function main() {
   const recipientsToPay = bonusRecipients.filter(r => !alreadyPaid.has(r.address.toLowerCase()) && !toSkip.has(r.address));
   console.log(`   Recipients to pay: ${recipientsToPay.length} (skipping ${alreadyPaid.size + toSkip.size} already paid)`);
   console.log("");
-  
+
   let nonce = Number(account.nonce);
-  const resultsFile = `/tmp/cols_distribution/results_${today}.json`;
-  // Preserve existing bonus/gold results if only re-running DAO
-  const existing = (force && fs.existsSync(resultsFile)) ? JSON.parse(fs.readFileSync(resultsFile, 'utf-8')) : null;
-  const results = { dao: null, bonus: existing?.bonus || [], gold: existing?.gold || [] };
   
   // =============================================
   // DAO DISTRIBUTION
@@ -312,14 +327,14 @@ async function main() {
     console.log("═".repeat(70));
     console.log("🔴 DAO POOL");
     console.log("═".repeat(70));
-    
+
     // Re-fetch nonce AFTER BONUS+GOLD completed (they use sequential nonces starting from account.nonce)
     nonce = Number((await provider.getAccount(senderAddressForProvider)).nonce);
     console.log(`DAO using fresh nonce: ${nonce}`);
     const functionHex = stringToHex("distribute");
     const entityHex = new Address(COLOMBIA_ENTITY).getPublicKey().toString('hex');
     const data = `ESDTTransfer@${stringToHex(COLS_TOKEN_ID)}@${colsToHex(daoAmount)}@${functionHex}@${entityHex}`;
-    
+
     const daoTx = new Transaction({
       sender: senderAddress,
       receiver: new Address(PEERME_CLAIM_CONTRACT),
@@ -329,16 +344,16 @@ async function main() {
       nonce: BigInt(nonce),
       data: Buffer.from(data)
     });
-    
+
     console.log(`Sending DAO transaction (nonce ${nonce})...`);
-    
+
     // For retries with fresh nonce, create a helper function
     async function sendDaoWithRetry(provider, secretKey, daoAmount, maxRetries, timeoutMs) {
       for (let attempt = 1; attempt <= maxRetries; attempt++) {
         // Get fresh nonce for each attempt (critical for retries!)
         const currentNonce = Number((await provider.getAccount(senderAddressForProvider)).nonce);
         console.log(`   DAO attempt ${attempt}: nonce ${currentNonce}`);
-        
+
         const data = `ESDTTransfer@${stringToHex(COLS_TOKEN_ID)}@${colsToHex(daoAmount)}@${functionHex}@${entityHex}`;
         const daoTx = new Transaction({
           sender: senderAddress,
@@ -349,19 +364,19 @@ async function main() {
           nonce: BigInt(currentNonce),
           data: Buffer.from(data)
         });
-        
+
         const result = await sendAndVerify(provider, daoTx, secretKey, { address: PEERME_CLAIM_CONTRACT, amount: daoAmount }, 1, timeoutMs); // 1 retry per attempt (nonce refresh handles actual retries)
-        
+
         if (result.success) return result;
-        
+
         console.log(`   ⏳ Timeout, retrying with fresh nonce...`);
         await new Promise(r => setTimeout(r, 5000)); // Wait 5s before retry
       }
       return { success: false, error: 'DAO failed after all retries' };
     }
-    
+
     const result = await sendDaoWithRetry(provider, secretKey, daoAmount, DAO_MAX_RETRIES, DAO_CONFIRMATION_WAIT_MS);
-    
+
     if (result.success) {
       console.log(`✅ DAO Transaction CONFIRMED: ${result.txHash}`);
       results.dao = { hash: result.txHash, amount: daoAmount };
@@ -370,10 +385,10 @@ async function main() {
       console.error(`❌ DAO Transaction FAILED: ${result.error}`);
       throw new Error(`DAO distribution failed: ${result.error}`);
     }
-    
+
     await new Promise(r => setTimeout(r, 2000));
   }
-  
+
   // =============================================
   // BONUS DISTRIBUTION WITH BATCH VERIFICATION
   // =============================================
@@ -386,14 +401,14 @@ async function main() {
     console.log(`Batch size: ${BATCH_SIZE}`);
     console.log(`Confirmation wait: ${CONFIRMATION_WAIT_MS/1000}s per batch`);
     console.log("");
-    
+
     let successCount = 0;
     let failCount = 0;
     let pendingBatch = [];
-    
+
     for (let i = 0; i < recipientsToPay.length; i++) {
       const recipient = recipientsToPay[i];
-      
+
       const data = `ESDTTransfer@${stringToHex(COLS_TOKEN_ID)}@${colsToHex(recipient.amount)}`;
       const tx = new Transaction({
         sender: senderAddress,
@@ -404,14 +419,14 @@ async function main() {
         nonce: BigInt(nonce),
         data: Buffer.from(data)
       });
-      
+
       pendingBatch.push({ tx, recipient, nonce });
       nonce++;
-      
+
       // When batch is full or we're at the end, verify all
       if (pendingBatch.length >= BATCH_SIZE || i === recipientsToPay.length - 1) {
         console.log(`\n📦 Verifying batch of ${pendingBatch.length} transactions...`);
-        
+
         // Send all in batch first
         const sent = [];
         for (const item of pendingBatch) {
@@ -424,18 +439,18 @@ async function main() {
             failCount++;
           }
         }
-        
+
         // Wait for confirmations
         if (sent.length > 0) {
           console.log(`  ⏳ Waiting ${CONFIRMATION_WAIT_MS/1000}s for first confirmation...`);
           await new Promise(r => setTimeout(r, CONFIRMATION_WAIT_MS));
-          
+
           // Verify each - collect failed/pending ones
           const needsRetry = [];
           for (const item of sent) {
             try {
               const txStatus = await provider.getTransaction(item.txHash);
-              
+
               if (txStatus.status.isExecuted()) {
                 results.bonus.push({ hash: item.txHash, address: item.recipient.address, amount: item.recipient.amount });
                 successCount++;
@@ -453,17 +468,17 @@ async function main() {
               console.error(`  ❌ ${item.txHash.slice(0,8)}... → VERIFICATION ERROR: ${e.message}`);
             }
           }
-          
+
           // Retry pending TXs with fresh nonces (ON-CHAIN VERIFICATION BEFORE RETRY)
           if (needsRetry.length > 0) {
             console.log(`\n  🔄 Retrying ${needsRetry.length} pending transactions...`);
             const retryResults = [];
-            
+
             for (const item of needsRetry) {
               try {
                 // Get fresh nonce from blockchain
                 const freshNonce = Number((await provider.getAccount(senderAddressForProvider)).nonce);
-                
+
                 // Create new TX with fresh nonce
                 const retryData = `ESDTTransfer@${stringToHex(COLS_TOKEN_ID)}@${colsToHex(item.recipient.amount)}`;
                 const retryTx = new Transaction({
@@ -475,7 +490,7 @@ async function main() {
                   nonce: BigInt(freshNonce),
                   data: Buffer.from(retryData)
                 });
-                
+
                 const retryTxHash = await signTransaction(retryTx, secretKey, provider);
                 console.log(`  📤 RETRY ${item.recipient.address.slice(0,12)}... → ${retryTxHash.slice(0,8)}... (nonce ${freshNonce})`);
                 retryResults.push({ ...item, retryTxHash, freshNonce, freshNonce });
@@ -484,17 +499,17 @@ async function main() {
                 console.error(`  ❌ RETRY FAILED: ${e.message}`);
               }
             }
-            
+
             // Wait for retry confirmations
             if (retryResults.length > 0) {
               console.log(`  ⏳ Waiting ${CONFIRMATION_WAIT_MS/1000}s for retry confirmations...`);
               await new Promise(r => setTimeout(r, CONFIRMATION_WAIT_MS));
-              
+
               // Verify each retry on-chain
               for (const item of retryResults) {
                 try {
                   const txStatus = await provider.getTransaction(item.retryTxHash);
-                  
+
                   if (txStatus.status.isExecuted()) {
                     results.bonus.push({ hash: item.retryTxHash, address: item.recipient.address, amount: item.recipient.amount, originalHash: item.txHash });
                     successCount++;
@@ -515,24 +530,24 @@ async function main() {
             }
           }
         }
-        
+
         // Clear batch
         pendingBatch = [];
-        
+
         // Progress update
         console.log(`  📊 Progress: ${successCount} confirmed, ${failCount} failed (${i + 1}/${recipientsToPay.length})`);
-        
+
         // Small delay between batches
         if (i < recipientsToPay.length - 1) {
           await new Promise(r => setTimeout(r, 1000));
         }
       }
     }
-    
+
     console.log("");
     console.log(`BONUS Complete: ${successCount} confirmed, ${failCount} failed`);
   }
-  
+
   // =============================================
   // GOLD DISTRIBUTION (similar verification)
   // =============================================
@@ -541,9 +556,9 @@ async function main() {
     console.log("═".repeat(70));
     console.log("🟡 GOLD POOL");
     console.log("═".repeat(70));
-    
+
     const goldFile = `/tmp/cols_distribution/gold_distribution_latest.json`;
-    
+
     if (!fs.existsSync(goldFile)) {
       console.log("⚠️ No GOLD distribution file found. Run calculate_gold_distribution.mjs first.");
     } else {
@@ -560,8 +575,20 @@ async function main() {
           try {
             const todayStr = new Date().toISOString().split('T')[0];
             const apiUrl = `https://api.multiversx.com/accounts/${recipient.address}/transfers?token=${COLS_TOKEN_ID}&sender=erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy&size=50`;
-            const resp = await fetch(apiUrl);
-            if (resp.ok) {
+            const GOLD_MAX_RETRIES = 5;
+            let resp = null;
+            for (let attempt = 0; attempt < GOLD_MAX_RETRIES; attempt++) {
+              resp = await fetch(apiUrl);
+              if (resp.ok) break;
+              if (resp.status === 429 && attempt < GOLD_MAX_RETRIES - 1) {
+                const waitMs = Math.min(2000 * Math.pow(2, attempt), 10000);
+                console.warn(`   ⏳ GOLD Rate limited, retrying in ${waitMs}ms... (${attempt+1}/${GOLD_MAX_RETRIES})`);
+                await new Promise(r => setTimeout(r, waitMs));
+                continue;
+              }
+              break;
+            }
+            if (resp && resp.ok) {
               const data = await resp.json();
               const receivedToday = (Array.isArray(data) ? data : (data.data || [])).some(t => {
                 const ts = t.timestamp || t.date || '';
@@ -570,14 +597,14 @@ async function main() {
               });
               if (receivedToday) goldToSkip.add(recipient.address);
             } else if (!resp.ok) {
-              // API returned non-OK — be conservative, skip to avoid double-pay
+              // API returned non-OK - be conservative, skip to avoid double-pay
               goldToSkip.add(recipient.address);
-              console.warn(`   ⚠ GOLD API error for ${recipient.address.slice(0,12)}... (${resp.status}) — SKIPPING`);
+              console.warn(`   ⚠ GOLD API error for ${recipient.address.slice(0,12)}... (${resp.status}) - SKIPPING`);
             }
           } catch (e) {
-            // Could not verify — SKIP to avoid double-sending
+            // Could not verify - SKIP to avoid double-sending
             goldToSkip.add(recipient.address);
-            console.warn(`   ⚠ GOLD check failed for ${recipient.address.slice(0,12)}... — SKIPPING`);
+            console.warn(`   ⚠ GOLD check failed for ${recipient.address.slice(0,12)}... - SKIPPING`);
           }
         }
       }
@@ -585,9 +612,9 @@ async function main() {
       console.log(`   GOLD: ${goldRecipients.length} to pay (skipping ${alreadyPaidGold.size + goldToSkip.size} already paid)`);
       console.log(`Recipients: ${goldRecipients.length}`);
       console.log(`Batch size: ${BATCH_SIZE}`);
-      
+
       let successCount = 0, failCount = 0, pendingBatch = [];
-      
+
       for (let i = 0; i < goldRecipients.length; i++) {
         const recipient = goldRecipients[i];
         const data = `ESDTTransfer@${stringToHex(COLS_TOKEN_ID)}@${colsToHex(recipient.amount)}`;
@@ -600,14 +627,14 @@ async function main() {
           nonce: BigInt(nonce),
           data: Buffer.from(data)
         });
-        
+
         pendingBatch.push({ tx, recipient, nonce });
         nonce++;
-        
+
         // When batch is full or we're at the end, verify all
         if (pendingBatch.length >= BATCH_SIZE || i === goldRecipients.length - 1) {
           console.log(`\n📦 Verifying GOLD batch of ${pendingBatch.length} transactions...`);
-          
+
           // Send all in batch first
           const sent = [];
           for (const item of pendingBatch) {
@@ -620,18 +647,18 @@ async function main() {
               failCount++;
             }
           }
-          
+
           // Wait for confirmations
           if (sent.length > 0) {
             console.log(`  ⏳ Waiting ${CONFIRMATION_WAIT_MS/1000}s for first confirmation...`);
             await new Promise(r => setTimeout(r, CONFIRMATION_WAIT_MS));
-            
+
             // Verify each - collect pending ones for retry
             const needsRetry = [];
             for (const item of sent) {
               try {
                 const txStatus = await provider.getTransaction(item.txHash);
-                
+
                 if (txStatus.status.isExecuted()) {
                   results.gold.push({ hash: item.txHash, address: item.recipient.address, amount: item.recipient.amount });
                   successCount++;
@@ -648,15 +675,15 @@ async function main() {
                 console.error(`  ❌ ${item.txHash.slice(0,8)}... → VERIFICATION ERROR: ${e.message}`);
               }
             }
-            
+
             // Retry pending TXs with fresh nonces (ON-CHAIN VERIFICATION BEFORE RETRY)
             if (needsRetry.length > 0) {
               console.log(`\n  🔄 Retrying ${needsRetry.length} pending GOLD transactions...`);
-              
+
               for (const item of needsRetry) {
                 try {
                   const freshNonce = Number((await provider.getAccount(senderAddressForProvider)).nonce);
-                  
+
                   const retryData = `ESDTTransfer@${stringToHex(COLS_TOKEN_ID)}@${colsToHex(item.recipient.amount)}`;
                   const retryTx = new Transaction({
                     sender: senderAddress,
@@ -667,13 +694,13 @@ async function main() {
                     nonce: BigInt(freshNonce),
                     data: Buffer.from(retryData)
                   });
-                  
+
                   const retryTxHash = await signTransaction(retryTx, secretKey, provider);
                   console.log(`  📤 RETRY ${item.recipient.address.slice(0,12)}... → ${retryTxHash.slice(0,8)}... (nonce ${freshNonce})`);
-                  
+
                   // Wait for retry confirmation
                   await new Promise(r => setTimeout(r, CONFIRMATION_WAIT_MS));
-                  
+
                   const txStatus = await provider.getTransaction(retryTxHash);
                   if (txStatus.status.isExecuted()) {
                     results.gold.push({ hash: retryTxHash, address: item.recipient.address, amount: item.recipient.amount, originalHash: item.txHash });
@@ -693,20 +720,20 @@ async function main() {
               }
             }
           }
-          
+
           pendingBatch = [];
           console.log(`  📊 GOLD Progress: ${successCount} confirmed, ${failCount} failed (${i + 1}/${goldRecipients.length})`);
-          
+
           if (i < goldRecipients.length - 1) {
             await new Promise(r => setTimeout(r, 1000));
           }
         }
       }
-      
+
       console.log(`GOLD Complete: ${successCount} confirmed, ${failCount} failed`);
     }
   }
-  
+
   // =============================================
   // FINAL SUMMARY
   // =============================================
@@ -714,40 +741,40 @@ async function main() {
   console.log("═".repeat(70));
   console.log("🎉 DISTRIBUTION COMPLETE - VERIFIED");
   console.log("═".repeat(70));
-  
+
   if (results.dao) {
     console.log(`DAO: ${results.dao.amount.toFixed(6)} COLS → PeerMe`);
     console.log(`   https://explorer.multiversx.com/transactions/${results.dao.hash}`);
   }
-  
+
   if (results.bonus.length > 0) {
     const totalSent = results.bonus.reduce((s, r) => s + r.amount, 0);
     console.log(`BONUS: ${totalSent.toFixed(6)} COLS → ${results.bonus.length} addresses`);
   }
-  
+
   if (results.gold?.length > 0) {
     const totalGold = results.gold.reduce((s, r) => s + r.amount, 0);
     console.log(`GOLD: ${totalGold.toFixed(6)} COLS → ${results.gold.length} addresses`);
   }
-  
+
   // Calculate totals
-  const totalDistributed = (results.dao?.amount || 0) + 
-                          results.bonus.reduce((s, r) => s + r.amount, 0) + 
+  const totalDistributed = (results.dao?.amount || 0) +
+                          results.bonus.reduce((s, r) => s + r.amount, 0) +
                           (results.gold?.reduce((s, r) => s + r.amount, 0) || 0);
-  
+
   const expectedTotal = (results.dao?.amount || 0) + totalBonus + (doGold ? dist.gold?.total || 0 : 0);
   const matchPercent = expectedTotal > 0 ? ((totalDistributed / expectedTotal) * 100).toFixed(1) : 0;
-  
+
   console.log("");
   console.log(`💰 Total Distributed: ${totalDistributed.toFixed(6)} COLS`);
   console.log(`📊 Verification: ${matchPercent}% of expected amount confirmed on-chain`);
-  
+
   if (Number(matchPercent) < 99) {
     console.log("");
     console.log("⚠️  WARNING: Some transactions were NOT confirmed on-chain!");
     console.log("   Check the failed recipients and re-send if needed.");
   }
-  
+
   // Save state
   const finalState = {
     lastDistributionDate: today,
@@ -756,18 +783,18 @@ async function main() {
     lastNonce: nonce,
     lastDistribution: {
       dao: results.dao ? { amount: results.dao.amount.toString(), tx: results.dao.hash } : null,
-      bonus: results.bonus.length > 0 ? { 
-        count: results.bonus.length, 
-        total: results.bonus.reduce((s, r) => s + r.amount, 0).toString() 
+      bonus: results.bonus.length > 0 ? {
+        count: results.bonus.length,
+        total: results.bonus.reduce((s, r) => s + r.amount, 0).toString()
       } : null,
-      gold: results.gold?.length > 0 ? { 
-        count: results.gold.length, 
-        total: results.gold.reduce((s, r) => s + r.amount, 0).toString() 
+      gold: results.gold?.length > 0 ? {
+        count: results.gold.length,
+        total: results.gold.reduce((s, r) => s + r.amount, 0).toString()
       } : null
     }
   };
   saveState(finalState);
-  
+
   // Save full results
   // Merge with existing results if only re-running DAO
   const saved = (force && fs.existsSync(resultsFile)) ? JSON.parse(fs.readFileSync(resultsFile, 'utf-8')) : {};
@@ -782,9 +809,9 @@ async function main() {
     totalColsDistributed: totalDistributed || saved.totalColsDistributed || 0
   };
   fs.writeFileSync(resultsFile, JSON.stringify(mergedResults, null, 2));
-  
+
   console.log(`\nResults saved: ${resultsFile}`);
-  
+
   // Exit with error if DAO failed (critical pool must not fail silently)
   if (!results.dao) {
     console.error(`\n❌ DAO distribution FAILED - process exiting with error`);

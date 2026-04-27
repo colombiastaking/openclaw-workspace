@@ -29,9 +29,16 @@ export class FallbackProxyNetworkProvider {
     // Try primary unless it's known to be down
     if (!this.failedEndpoints.has(PRIMARY)) {
       try {
-        return await fn(this.primary);
-      } catch (err) {
-        console.warn('[FallbackProvider] Primary gateway failed, trying secondary:', err);
+        const result = await fn(this.primary);
+        // ProxyNetworkProvider doesn't throw on HTTP errors — check response for API errors
+        if (this.isErrorResponse(result)) {
+          console.warn('[FallbackProvider] Primary returned error response, trying secondary');
+          this.failedEndpoints.add(PRIMARY);
+        } else {
+          return result;
+        }
+      } catch (err: any) {
+        console.warn('[FallbackProvider] Primary threw, trying secondary:', err?.message);
         this.failedEndpoints.add(PRIMARY);
       }
     }
@@ -40,8 +47,8 @@ export class FallbackProxyNetworkProvider {
     if (!this.failedEndpoints.has(SECONDARY)) {
       try {
         return await fn(this.secondary);
-      } catch (err) {
-        console.error('[FallbackProvider] Both gateways failed:', err);
+      } catch (err: any) {
+        console.error('[FallbackProvider] Both gateways failed:', err?.message);
         this.failedEndpoints.add(SECONDARY);
         throw err;
       }
@@ -53,6 +60,21 @@ export class FallbackProxyNetworkProvider {
     } catch (err) {
       throw err;
     }
+  }
+
+  /** Check if a ProxyNetworkProvider result contains an error (503, credit auth, etc.) */
+  private isErrorResponse(result: any): boolean {
+    if (!result) return true;
+    // Typical error shape: { error: string, message: string }
+    if (result.error || result.isSoftError || result?.ReturnCode === 'error') return true;
+    // SDK queryContract returns QueryResponseBundle — check for error in return data
+    if (result.returnData && Array.isArray(result.returnData)) {
+      // Empty or "aaaa" encoded error
+      if (result.returnData.length === 0) return true;
+      const first = Buffer.from(result.returnData[0] || '', 'base64').toString();
+      if (first === 'aaaa' || first.startsWith('@')) return false; // valid
+    }
+    return false;
   }
 
   async queryContract(query: IContractQuery) {

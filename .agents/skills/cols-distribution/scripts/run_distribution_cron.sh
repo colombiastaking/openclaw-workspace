@@ -6,7 +6,7 @@
 
 set -e
 
-SCRIPTS_DIR="/home/raspberry/.openclaw/workspace/DAPP-V3/scripts"
+SCRIPTS_DIR="/home/raspberry/.openclaw/workspace/colombia-staking/DAPP-V3/scripts"
 OUTPUT_DIR="/tmp/cols_distribution"
 LOG_FILE="/tmp/cols_distribution_cron.log"
 
