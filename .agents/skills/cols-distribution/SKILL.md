@@ -25,11 +25,14 @@ The distribution runs **every day at 1:10 PM Colombia time** via OpenClaw cron. 
 
 ## Cron Job
 
-| Job | Schedule | Purpose |
-|-----|----------|---------|
-| `cols-distribution` | 1:10 PM daily | Preview only — reports calculations, no TXs sent |
+| Job ID | Schedule | Purpose |
+|--------|----------|---------|
+| `76f919d1-306a-4f32-ba29-1e44c737cb67` | 1:10 PM daily | Runs `run_distribution_cron.sh` → `execute_distribution_fixed.cjs` |
+| `807e54ab-c369-428a-8415-bc7c8dae2c16` | 1:15 PM daily | Posts summary to Telegram group |
 
-**⚠️ Important:** Cron runs preview (`bash run_distribution.sh calc`), announces to Sebas's DM, and waits for approval before any real TXs.
+**Current flow:** Cron automatically executes distribution (not preview-only). Uses `agentTurn` trigger for reliability. State files prevent double-execution.
+
+**⚠️ Warning:** Previously used `systemEvent` payload which was unreliable — always use `agentTurn` for distribution cron.
 
 ## Distribution Flow
 
@@ -46,14 +49,12 @@ If approved:
 
 ## Key Files
 
-### Scripts (from commit abd9e3ea)
+### Scripts
 | Script | Purpose |
 |--------|---------|
 | `run_distribution.sh` | Bash orchestrator: `calc`, `execute`, `gold` commands |
-| `execute_bonus_distribution_v3.cjs` | BONUS pool — SDK with on-chain TX verification |
-| `execute_gold_distribution.cjs` | GOLD pool — SDK with state tracking |
-| `execute_distribution.cjs` | DAO pool (PeerMe) + BONUS combined |
-| `daily_distribution.mjs` | Calculate BONUS pool per staker |
+| `run_distribution_cron.sh` | OpenClaw cron entry point (runs `calc` then `execute` if approved) |
+| `execute_distribution_fixed.cjs` | **Main distribution script** — DAO + BONUS + GOLD combined with on-chain verification |
 | `calculate_gold_distribution.mjs` | Calculate GOLD pool per NFT holder |
 
 ### Output Files (in `/tmp/cols_distribution/`)
@@ -126,6 +127,25 @@ Daily_bonus = (APR_bonus / 100) × EGLD_stake × EGLD_price / 365 / COLS_price
 | COLS Token | `COLS-9d91b7` |
 | Distribution Wallet | `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` |
 
+## ⚠️ CRITICAL: Wallet Private Key
+
+**The distribution wallet key is NOT the same as the MCP server key.**
+
+| Wallet | Key | Address |
+|--------|-----|---------|
+| **Distribution** (COLS sends) | `bf17d85f639d87399dcc63acbc8b430209f36ff217759f38474e800f01d646f4` | `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` |
+| **MCP server** (alice-mcp-multiversx) | `2dbcd2ecf8878cf4cda470fe857d93936627755b6a712875de54d641cecf9800` | `erd1j8dn54q9wmzdydr5llmsst2wgll42aj9psrpz2h0n8ud6ak3xkusxewvne` |
+
+**Private key file location:** `/home/raspberry/.openclaw/wallet/.private_key` (raw 64-char hex)
+
+**Key restoration history (2026-04-26):**
+- Original PEM was lost after a gateway crash
+- Key `bf17d85f...` was recovered from `secrets.enc` (WALLET_PRIVATE_KEY field)
+- Previous attempts used the wrong conversion from PEM → hex
+- Always use the raw hex from `secrets.enc` as source of truth
+
+**⚠️ Never overwrite the private key without verifying the address it generates.**
+
 ## Troubleshooting
 
 ### Distribution didn't run today
@@ -136,6 +156,8 @@ Daily_bonus = (APR_bonus / 100) × EGLD_stake × EGLD_price / 365 / COLS_price
 ### Some recipients didn't get tokens
 1. Check results file: `cat /tmp/cols_distribution/results_YYYY-MM-DD.json | jq '.failed'`
 2. Re-run with state cleared: `rm /tmp/cols_distribution/gold_state.json`
+3. **Rate limit issue (2026-04-26):** MultiversX API returns 429 after ~73 calls. The dedup check has retry logic with exponential backoff (5 attempts). If still hitting 429, recipients are skipped to avoid double-pay — they miss the distribution.
+4. To re-run skipped recipients: `node execute_distribution_fixed.cjs --bonus --force`
 
 ### Transaction failures
 1. Check log for errors: `grep -i error /tmp/cols_distribution_cron.log`
@@ -151,7 +173,13 @@ cat /tmp/cols_distribution/gold_state.json
 # Reset to allow re-run
 rm /tmp/cols_distribution/state.json
 rm /tmp/cols_distribution/gold_state.json
+rm /tmp/cols_distribution/results_YYYY-MM-DD.json
 ```
+
+### Key mismatch (wrong address derived)
+1. Verify key: `cd /home/raspberry/.openclaw/workspace/alice-mcp-multiversx && node -e "const {UserSecretKey}=require('@multiversx/sdk-core'); const sk=UserSecretKey.fromString(require('fs').readFileSync('/home/raspberry/.openclaw/wallet/.private_key','utf8').trim()); console.log(sk.generatePublicKey().toAddress().toBech32());"`
+2. Should return: `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy`
+3. If wrong: restore from `secrets.enc` or `alice-backup/wallet_raw.enc`
 
 ## Distribution Summary Format
 
