@@ -1,0 +1,1109 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-26T23:29:35.622Z",
+  "entries": {
+    "memory:memory/2026-02-16.md:21:57": {
+      "key": "memory:memory/2026-02-16.md:21:57",
+      "path": "memory/2026-02-16.md",
+      "startLine": 21,
+      "endLine": 57,
+      "source": "memory",
+      "snippet": "- Built with **Sitely.app** - generates complex inline CSS/JS - ~85KB HTML files per language - Animations: fadeIn, tada, zoomIn, dropdown menus (200ms transitions) - Primary color: `#62dbb8` (teal/mint green) - Dark theme with `#1d1f23` background - Fonts: Lustria, Playfair Display, Lato - jQuery/jQuery UI for interactions ### Website Pages by Language | English (eng/) | Spanish (esp/) | French (fr/) | |----------------|----------------|--------------| | index.html | index.html | index.html | | quienes-somos.html | quienes-somos.html | quienes-somos.html | | multiversx.html | elrond.html | elrond.html | | xportal.html | billetera-maiar.html | billetera-maiar.html | | membership.html | afil",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8272124321597951,
+      "maxScore": 0.8272124321597951,
+      "firstRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "queryHashes": [
+        "fb25eceb5c78"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "sitely.app",
+        "css/js",
+        "teal/mint",
+        "jquery/jquery",
+        "index.html",
+        "quienes-somos.html",
+        "multiversx.html",
+        "elrond.html"
+      ]
+    },
+    "memory:memory/2026-03-27.md:123:149": {
+      "key": "memory:memory/2026-03-27.md:123:149",
+      "path": "memory/2026-03-27.md",
+      "startLine": 123,
+      "endLine": 149,
+      "source": "memory",
+      "snippet": "12. microsoft-teams-token-refresh - DISABLED (token has no refresh_token, only id_token) ### Distribution Script Bug - UNRESOLVED **CRITICAL:** March 27 daily distribution (18:10 UTC) falsely reported \"102 success, 0 failed\" - Sebas (erd1kr7m0ge40v6zj6yr8e2eupkeudfsnv827e7ta6w550e9rnhmdv6sfr8qdm) did NOT receive his March 27 bonus - Blockchain shows March 26 transaction but NOT March 27 - Script showed success but blockchain says false - multiversx_sdk error: \"AttributeError: 'str' object has no attribute 'to_bech32'\" - Root cause: script marked transactions success before broadcast - **PENDING:** Full 102-recipient audit against blockchain ### Kylian Teams Access **Current State:** - Sh",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7874794681969108,
+      "maxScore": 0.7874794681969108,
+      "firstRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "queryHashes": [
+        "fb25eceb5c78"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "microsoft-teams-token-refresh",
+        "refresh-token",
+        "id-token",
+        "multiversx-sdk",
+        "to-bech32",
+        "102-recipient",
+        "microsoft",
+        "teams"
+      ]
+    },
+    "memory:memory/2026-02-13.md:100:140": {
+      "key": "memory:memory/2026-02-13.md:100:140",
+      "path": "memory/2026-02-13.md",
+      "startLine": 100,
+      "endLine": 140,
+      "source": "memory",
+      "snippet": "- Client ID: `495724051011-3l4qn60jg22fl181o1e8dpjibm1j3n62.apps.googleusercontent.com` - Client Secret: `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` - **Tokens saved to:** `/home/raspberry/.openclaw/workspace/google-tokens.json` - **Access:** Full read/write to Google Calendar API ### Calendars Connected 1. **Familia** (Family calendar) - ID: `5039a61867c5d3d735ff81f91523004e48651cf6b94fd8afc54117da62f2023b@group.calendar.google.com` - Full read/write access via OAuth2 - Timezone: America/Bogota 2. **colombiastaking@gmail.com** (Primary) 3. **Holidays in Colombia** ### Daily Reminders Created (5 events, recurring weekly) | Day | Time | Event | |-----|------|-------| | Sunday | 7:00",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.774123280897128,
+      "maxScore": 0.774123280897128,
+      "firstRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "queryHashes": [
+        "fb25eceb5c78"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "home/raspberry",
+        "read/write",
+        "group.calendar.google.com",
+        "america/bogota",
+        "gmail.com",
+        "client",
+        "3l4qn60jg22fl181o1e8dpjibm1j3n62",
+        "apps.googleusercontent.com"
+      ]
+    },
+    "memory:memory/2026-03-27.md:29:70": {
+      "key": "memory:memory/2026-03-27.md:29:70",
+      "path": "memory/2026-03-27.md",
+      "startLine": 29,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "### Current BTC Status (from last run ~04:00 UTC) - Score: 19.2/100 (Deep Bear / Strong Buy) - Regime: INTRA-CYCLE RALLY (0.75x DCA multiplier) - VIX: 28.3 (High Crisis) → Geopolitical Score: 20/5 - MVRV: 0.69 → Score: 5/25 (EXTREME DISCOUNT) - DCA: 0.75x (€187/week instead of €250 due to intra-cycle rally detection) - HF: ~1.78, LTV: ~43% ### Files Modified - /home/raspberry/.openclaw/workspace/btc-monitor/btc_decision_engine.py (v6.0) - /home/raspberry/.openclaw/workspace/.agents/skills/btc-strategy/SKILL.md (v6.0) ### Pending Tasks - [ ] Implement Support/Resistance levels (pending Sebas approval) - [ ] Possible follow-up on S/R implementation ## Cron Jobs Status All running normally o",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7695879601533061,
+      "maxScore": 0.7695879601533061,
+      "firstRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "queryHashes": [
+        "fb25eceb5c78"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "19.2/100",
+        "intra-cycle",
+        "0.75x",
+        "28.3",
+        "20/5",
+        "0.69",
+        "5/25",
+        "187/week"
+      ]
+    },
+    "memory:memory/2026-02-24.md:32:58": {
+      "key": "memory:memory/2026-02-24.md:32:58",
+      "path": "memory/2026-02-24.md",
+      "startLine": 32,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- Added to MEMORY.md as standard method - Total: 130 stakers, 106,889.96 COLS staked - Address erd1eqwpvgc6hz7he8qdh4ja8nnm3azwd3ymstr05rjhpvx3dsz8tpkshxv4z0: 2,023.67 COLS (rank #8), not Gold Member ### Daily Distribution - DAO: 13.51 COLS - BONUS: 27.06 COLS (107 recipients) - GOLD: 4.89 COLS (21 recipients) - Total: 45.46 COLS ### GitHub Commit - Committed: \"feat: Revamp leaderboard with big animal cards and glassmorphism\" ### Additional Styling Work - Stake page: Modern compact design with strength pills, quick stats, wallet card - ClaimColsButton fix: Added back to Stake page (was missing in Stake.tsx) - XPortal Hub compatibility issue: Any CSS changes >~4KB cause white screen on XPo",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.766231583979075,
+      "maxScore": 0.766231583979075,
+      "firstRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "queryHashes": [
+        "fb25eceb5c78"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "memory.md",
+        "889.96",
+        "023.67",
+        "13.51",
+        "27.06",
+        "4.89",
+        "45.46",
+        "stake.tsx"
+      ]
+    },
+    "memory:memory/2026-02-16.md:117:155": {
+      "key": "memory:memory/2026-02-16.md:117:155",
+      "path": "memory/2026-02-16.md",
+      "startLine": 117,
+      "endLine": 155,
+      "source": "memory",
+      "snippet": "- Added `js/status-widget.js` to all pages - Injects floating \"Node Status\" button on bottom-right - Auto-detects language for localized label - Fetches `status.json` to update indicator color - Excluded from node-status.html page ### Dapp Info Page Update ✅ - Added Node Status section to Info.tsx - Fetches live data from `colombia-staking.com/status.json` - Shows CPU, Memory, Peers, TX Pool with progress bars - Status badges: SYNC ✓, SLOW ⚠, LAG 🔄, DESYNC ✗, ERROR 💀 - Auto-refreshes every 2 minutes - Responsive design for mobile ### Cron Jobs Updated ✅ - `/home/raspberry/update_node_status.sh` - Runs every 5 min - Uploads status.json to all 3 website domains via FTP - `/home/raspberry/n",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7637786887533679,
+      "maxScore": 0.7637786887533679,
+      "firstRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "queryHashes": [
+        "fb25eceb5c78"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "js/status-widget.js",
+        "bottom-right",
+        "auto-detects",
+        "status.json",
+        "node-status.html",
+        "info.tsx",
+        "colombia-staking.com/status.json",
+        "auto-refreshes"
+      ]
+    },
+    "memory:memory/2026-03-27.md:95:128": {
+      "key": "memory:memory/2026-03-27.md:95:128",
+      "path": "memory/2026-03-27.md",
+      "startLine": 95,
+      "endLine": 128,
+      "source": "memory",
+      "snippet": "- Removed \"node-daily-report\" (duplicate of \"node-alert-check\") **Sebas Requested Restoration:** - \"BTC AI Daily Strategy\" restored (disabled) - different output format - \"node-daily-report\" restored (disabled) - different output format **Comparison of Two 8AM BTC Strategy Crons:** | Feature | Daily Strategy Report | BTC AI Daily Strategy | |---------|----------------------|----------------------| | Status | ENABLED | DISABLED | | Session | Isolated | Main session | | Take Profit | Not explicit | Yes ($80K+, $100K+ triggers) | | Watch Levels | No | Yes | | Aave Script | btc_monitor.py | monitor.py + btc_monitor.py | **Current Active Crons (12 total):** 1. btc-price-alert - Every hour (BT",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.8327100156842282,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-12T18:39:50.485Z",
+      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "queryHashes": [
+        "7f273cb50c59",
+        "6e2dd6abbc38"
+      ],
+      "recallDays": [
+        "2026-04-12",
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "node-daily-report",
+        "node-alert-check",
+        "btc-monitor.py",
+        "monitor.py",
+        "btc-price-alert",
+        "removed",
+        "node",
+        "report"
+      ]
+    },
+    "memory:memory/2026-03-30.md:1:40": {
+      "key": "memory:memory/2026-03-30.md:1:40",
+      "path": "memory/2026-03-30.md",
+      "startLine": 1,
+      "endLine": 40,
+      "source": "memory",
+      "snippet": "# Daily Notes — 2026-03-30 ## Session Start (00:23 UTC / 19:23 Bogota) - New session started. Ran startup sequence. - BTC score was ~32 — DCA at 100% = €200/wk ## Node Monitor Cron (node-alert-check) — March 29 → 30 All ran successfully every hour (11am through 3am Bogota time): - Every run returned 🟡 HOLD - Market price steady at 3709.17 EGLD - One run at 01:02 UTC couldn't fetch data but still returned HOLD - Cron job ID: `c9d8a6bb-e081-411e-96b7-923dce8cd751` ## Alice Backup Cron — March 29 18:00 UTC - Ran successfully. Pushed 43 files to GitHub `colombiastaking/alice-backup` - Delivery mode = \"none\" (silent backup, no notification) ## Daily Strategy Report Cron — March 29 14:04 U",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.7847931911737414,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-12T18:39:50.485Z",
+      "lastRecalledAt": "2026-04-15T02:03:44.018Z",
+      "queryHashes": [
+        "7f273cb50c59",
+        "26a7539b9b40"
+      ],
+      "recallDays": [
+        "2026-04-12",
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "backup",
+        "200/wk",
+        "node-alert-check",
+        "3709.17",
+        "colombiastaking/alice-backup",
+        "start",
+        "utc",
+        "bogota"
+      ]
+    },
+    "memory:memory/2026-04-09.md:167:180": {
+      "key": "memory:memory/2026-04-09.md:167:180",
+      "path": "memory/2026-04-09.md",
+      "startLine": 167,
+      "endLine": 180,
+      "source": "memory",
+      "snippet": "- `data/network-explorer.db` and `data/network-explorer.db-shm` added to `.gitignore` - DB was 115 MB — too large for GitHub, and already persists independently on the Pi **Results after collector re-run:** - 1,369 nodes total (up from 1,339 — 30 new nodes found in DB) - 1,301 nodes with IP data (95% coverage) - 687 unique IPs tracked - 7,518 edges - DB: 182K observations over 176 runs **Live:** `https://colombia-staking.co/network/` (hard refresh Ctrl+Shift+R) **Commits pushed:** `network-explorer` repo (collector.js + app.js + .gitignore)",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.6718085861079586,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-12T18:39:50.485Z",
+      "lastRecalledAt": "2026-04-14T18:02:06.478Z",
+      "queryHashes": [
+        "7f273cb50c59",
+        "9b07edfcc624",
+        "ad224cf13757"
+      ],
+      "recallDays": [
+        "2026-04-12",
+        "2026-04-13",
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "network",
+        "data/network-explorer.db",
+        "data/network-explorer.db-shm",
+        "re-run",
+        "colombia-staking.co/network",
+        "network-explorer",
+        "collector.js",
+        "app.js"
+      ]
+    },
+    "memory:memory/2026-04-09.md:29:63": {
+      "key": "memory:memory/2026-04-09.md:29:63",
+      "path": "memory/2026-04-09.md",
+      "startLine": 29,
+      "endLine": 63,
+      "source": "memory",
+      "snippet": "- Network Explorer interactive bubble map HTML (was being built when compaction hit) - Full D3.js bubble map with force simulation - Filters: shard, region, provider, node type, online status - Colombia section with peer IDs and regional distribution - Public API: https://api.multiversx.com/nodes (no auth) - To test: `cd network-explorer && node server/collector.js` ## Notes - Colombia Staking has 4 local validator nodes (192.168.0.120-122, 192.168.0.124) + 2 VPS - Public API gives ~3200 nodes total - `/node/heartbeatstatus` gives peer PIDs and computed shard, but IPs are only visible to direct peers ## Session 2 (Morning continued - ~9:34-9:52) ### Network Explorer v2 - HTML B",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.8896181637259888,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-13T11:02:05.676Z",
+      "lastRecalledAt": "2026-04-14T18:02:06.478Z",
+      "queryHashes": [
+        "9b07edfcc624",
+        "ad224cf13757"
+      ],
+      "recallDays": [
+        "2026-04-13",
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "network",
+        "d3.js",
+        "api.multiversx.com/nodes",
+        "network-explorer",
+        "server/collector.js",
+        "192.168.0.120-122",
+        "192.168.0.124",
+        "node/heartbeatstatus"
+      ]
+    },
+    "memory:memory/2026-04-09.md:80:110": {
+      "key": "memory:memory/2026-04-09.md:80:110",
+      "path": "memory/2026-04-09.md",
+      "startLine": 80,
+      "endLine": 110,
+      "source": "memory",
+      "snippet": "- Fix: changed to `inp.addEventListener('input', async e => {` - Committed: `006600c976a64549522888398b8436cf038a7c7b` **Still outstanding (14:55):** - Sigma graph NOT rendering on first page load (blank canvas) - After clicking \"Shard 0\" filter then back to \"All\" → nodes appear ✅ - Debug commit pushed to investigate `networkData` loading timing - Added `console.log` debug lines to track init flow - Live at: `https://colombia-staking.co/network/` **Root cause suspected:** `networkData` fetches from server but the `render()` call that initializes sigma fires before the async fetch completes, or the data is empty on first render. Need to wait for `networkData` to be fully loaded before calli",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.882335100984173,
+      "maxScore": 0.882335100984173,
+      "firstRecalledAt": "2026-04-13T11:02:05.676Z",
+      "lastRecalledAt": "2026-04-13T11:02:05.676Z",
+      "queryHashes": [
+        "9b07edfcc624"
+      ],
+      "recallDays": [
+        "2026-04-13"
+      ],
+      "conceptTags": [
+        "network",
+        "inp.addeventlistener",
+        "console.log",
+        "colombia-staking.co/network",
+        "fix",
+        "changed",
+        "input",
+        "async"
+      ]
+    },
+    "memory:memory/2026-04-09.md:1:35": {
+      "key": "memory:memory/2026-04-09.md:1:35",
+      "path": "memory/2026-04-09.md",
+      "startLine": 1,
+      "endLine": 35,
+      "source": "memory",
+      "snippet": "# 2026-04-09 Daily Memory ## Session 1 (Morning) ### Colombia Staking VPS Nodes - Public IPs Sebas asked to get public IPs for the external nodes. From the exec output: - **ChagnaieBlanc**: `82.66.243.38` - **ExternalJuju**: `176.160.237.59` Note: These are already documented in MEMORY.md node monitoring section. Confirmed they're still active (pingable). ### Network Explorer v2 Work Sebas wants to build a better network explorer. Key findings: - Local observer nodes use **port 80** (not 8008) for `/node/status` - `/node/heartbeatstatus` returns peer IDs but NOT their IPs - The `peerType` field in status response has wrong values for Shard0 (shows \"metachain\" but it's actually Shard0) -",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8792735053374205,
+      "maxScore": 0.8792735053374205,
+      "firstRecalledAt": "2026-04-13T11:02:05.676Z",
+      "lastRecalledAt": "2026-04-13T11:02:05.676Z",
+      "queryHashes": [
+        "9b07edfcc624"
+      ],
+      "recallDays": [
+        "2026-04-13"
+      ],
+      "conceptTags": [
+        "network",
+        "82.66.243.38",
+        "176.160.237.59",
+        "memory.md",
+        "node/status",
+        "node/heartbeatstatus",
+        "morning",
+        "colombia"
+      ]
+    },
+    "memory:memory/2026-04-09.md:55:86": {
+      "key": "memory:memory/2026-04-09.md:55:86",
+      "path": "memory/2026-04-09.md",
+      "startLine": 55,
+      "endLine": 86,
+      "source": "memory",
+      "snippet": "Pending: `app.js` (D3 simulation), `style.css` (styling), `server/collector.js` (needs full data collection), and running the collector to generate `data/network-data.json`. ## Session 3 (Afternoon - ~14:30-15:11) ### Sigma.js v3 WebGL Upgrade (Network Explorer v3) Building new network explorer using sigma.js v3 + graphology + ForceAtlas2 (replaced D3.js bubble map). **Key files:** - `public/app.js` — NetworkExplorer class (ESM, dynamic imports) - `public/index.html` — HTML shell - `server/collector.js` — data collection from public API + local nodes - `data/network-data.json` — cached data (generated hourly) **Sigma.js v3 migration:** - Uses `sigma-core` + `sigma-react` from esm.sh CDN",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8784722993488069,
+      "maxScore": 0.8784722993488069,
+      "firstRecalledAt": "2026-04-13T11:02:05.676Z",
+      "lastRecalledAt": "2026-04-13T11:02:05.676Z",
+      "queryHashes": [
+        "9b07edfcc624"
+      ],
+      "recallDays": [
+        "2026-04-13"
+      ],
+      "conceptTags": [
+        "network",
+        "app.js",
+        "style.css",
+        "server/collector.js",
+        "data/network-data.json",
+        "30-15",
+        "sigma.js",
+        "d3.js"
+      ]
+    },
+    "memory:memory/2026-04-11.md:1:37": {
+      "key": "memory:memory/2026-04-11.md:1:37",
+      "path": "memory/2026-04-11.md",
+      "startLine": 1,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "# 2026-04-11 — Daily Memory ## Network Explorer Landing Page — Complete Rebuild **What:** Full redesign of the Network Explorer section at colombia-staking.co/network/ **What changed:** 1. **New landing page** (`network-explorer/public/index.html`) - Full branded landing page (~44KB, single-file) - Animated hero: shard pills, live stats, CTAs - Sections: Features, How It Works, Live Preview, Tech Stack, CTA - Ambient orb animations + CSS-only rotating node preview - Mobile hamburger menu - Links: \"Explore the Network\" → `/network/network.html` - Back to Colombia Staking links 2. **Sigma.js explorer fully themed** (`network-explorer/public/network.html`) - Landing",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-14T18:02:06.478Z",
+      "lastRecalledAt": "2026-04-14T18:02:06.478Z",
+      "queryHashes": [
+        "ad224cf13757"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "network",
+        "colombia-staking.co/network",
+        "single-file",
+        "css-only",
+        "network/network.html",
+        "sigma.js",
+        "explorer",
+        "landing"
+      ]
+    },
+    "memory:memory/2026-04-11.md:30:71": {
+      "key": "memory:memory/2026-04-11.md:30:71",
+      "path": "memory/2026-04-11.md",
+      "startLine": 30,
+      "endLine": 71,
+      "source": "memory",
+      "snippet": "4. **Cloudflare Tunnel routing** — already routes `/network/*` to port 3000 → `kepler-proxy.js` → Pi serves static files **URLs:** - Landing: `https://colombia-staking.co/network/` - Full explorer: `https://colombia-staking.co/network/network.html` **GitHub:** Committed `9fe5086` to `colombiastaking/network-explorer` **Status:** Live, no further action needed. The `.com` landing links from the main Colombia Staking site still need to be wired up (not done yet — pending if Sebas wants to publish). --- ## Also Done Today - BTC strategy report ran normally (HEARTBEAT context: normal Saturday morning) --- ## End of session # 2026-04-11 — Daily Memory ## Network Explorer Landing Page — C",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-14T18:02:06.478Z",
+      "lastRecalledAt": "2026-04-14T18:02:06.478Z",
+      "queryHashes": [
+        "ad224cf13757"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "network",
+        "kepler-proxy.js",
+        "colombia-staking.co/network",
+        "colombiastaking/network-explorer",
+        "cloudflare",
+        "tunnel",
+        "routing",
+        "already"
+      ]
+    },
+    "memory:memory/2026-04-11.md:64:103": {
+      "key": "memory:memory/2026-04-11.md:64:103",
+      "path": "memory/2026-04-11.md",
+      "startLine": 64,
+      "endLine": 103,
+      "source": "memory",
+      "snippet": "- Back to Colombia Staking links 2. **Sigma.js explorer fully themed** (`network-explorer/public/network.html`) - Landing hero overlay with live stats (updates via `network-ready` event) - Canvas fills full screen - \"Explore the Network\" button removes overlay, reveals sidebar + filters - Mobile-optimized 3. **Style.css migrated** — all tokens updated to match Colombia Staking theme: - `--primary: #62dbb8` (teal) - `--bg-dark: #0a0a0a` - `--bg-card: #1a1a1a` - Shard colors, Colombia orange, multikey blue edges preserved 4. **Cloudflare Tunnel routing** — already routes `/network/*` to port 3000 → `kepler-proxy.js` → Pi serves static files **URLs:** - Landing: `",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-14T18:02:06.478Z",
+      "lastRecalledAt": "2026-04-14T18:02:06.478Z",
+      "queryHashes": [
+        "ad224cf13757"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "network",
+        "sigma.js",
+        "network-ready",
+        "mobile-optimized",
+        "style.css",
+        "bg-dark",
+        "bg-card",
+        "kepler-proxy.js"
+      ]
+    },
+    "memory:memory/2026-03-28.md:39:62": {
+      "key": "memory:memory/2026-03-28.md:39:62",
+      "path": "memory/2026-03-28.md",
+      "startLine": 39,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "### MSAL OAuth2 Setup (APPROVED - NOT YET IMPLEMENTED) - Need to install MSAL Python library - Do one proper OAuth2 auth flow to get refresh_token - Enables automatic token refresh for Teams - Current token expires ~89 min, device code flow doesn't give refresh_token ### Distribution Script Bug (March 27) - March 27 bonus didn't process correctly - Script: DAPP-V3/scripts/execute_bonus_distribution_v3.cjs - Needs investigation ### Kylian Plan - Current plan: \"Semana 24-27 de Marzo\" from March 20 - Token expired Friday, couldn't verify new plan - System is automated - Friday 19:30 sends weekly plan ## Files Created/Modified Today - `/home/raspberry/.openclaw/alice-backup/backup.sh` (rewrit",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T01:34:59.584Z",
+      "lastRecalledAt": "2026-04-15T01:34:59.584Z",
+      "queryHashes": [
+        "a8e1f7c140fb"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "backup",
+        "refresh-token",
+        "24-27",
+        "created/modified",
+        "home/raspberry",
+        "openclaw/alice-backup/backup.sh",
+        "msal",
+        "oauth2"
+      ]
+    },
+    "memory:memory/2026-03-08.md:1:33": {
+      "key": "memory:memory/2026-03-08.md:1:33",
+      "path": "memory/2026-03-08.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# March 8, 2026 ## Aave Monitor Setup - Created Aave V3 position monitor for Sebas's WBTC/USDC loan - Wallet: 0xb88da656FEe3CA19A70993684aDF1A7409ac37E6 - Position: 0.0692 WBTC collateral, $1,720 USDC borrowed - Health factor: ~2.10, Liquidation price: ~$31,887 - Using 78% liquidation threshold (Sebas requested) - Daily reports at 9AM, alerts every 6 hours ## Twitter/X Attempts - Tried to set up Twitter API posting - Free tier no longer allows posting tweets - Managed to read tweets via Nitter RSS (19 tweets analyzed) - Saved style guide to tweets/style-guide.md - Twitter credentials secured (removed from workspace) ## Agent-Browser (Vercel) - Installed agent-browser CLI on Pi (npm instal",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T01:34:59.584Z",
+      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "queryHashes": [
+        "a8e1f7c140fb",
+        "26a7539b9b40",
+        "6e2dd6abbc38"
+      ],
+      "recallDays": [
+        "2026-04-14",
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "wbtc/usdc",
+        "0.0692",
+        "2.10",
+        "twitter/x",
+        "tweets/style-guide.md",
+        "agent-browser",
+        "march",
+        "aave"
+      ]
+    },
+    "memory:memory/2026-02-13.md:72:106": {
+      "key": "memory:memory/2026-02-13.md:72:106",
+      "path": "memory/2026-02-13.md",
+      "startLine": 72,
+      "endLine": 106,
+      "source": "memory",
+      "snippet": "**Replaced Migration tab with Info tab:** - Removed Migration page entirely - Created new Info page (`src/pages/Info/`) with: - 48 active nodes counter - Total eGLD staked (with USD equivalent) - Delegators count - Base APR - COLS and eGLD prices (live) - Top 10 COLS stakers with APR & league badges - Links to website, Telegram, X, GitHub - Updated `src/routes.ts` and `src/components/BottomNav/BottomNav.tsx` - Commit: `b1717ff Replace Migration tab with Info tab` - Build successful, zip sent to Sebas ## Telegram Announcement Workflow (established 2026-02-13) When Sebas asks me to post an announcement: 1. Post **original English text** to ColombiaStakingChat (-1001567513982) 2.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T01:34:59.584Z",
+      "lastRecalledAt": "2026-04-15T01:34:59.584Z",
+      "queryHashes": [
+        "a8e1f7c140fb"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "src/pages/info",
+        "src/routes.ts",
+        "replaced",
+        "migration",
+        "tab",
+        "info",
+        "removed",
+        "page"
+      ]
+    },
+    "memory:memory/2026-02-28.md:1:39": {
+      "key": "memory:memory/2026-02-28.md:1:39",
+      "path": "memory/2026-02-28.md",
+      "startLine": 1,
+      "endLine": 39,
+      "source": "memory",
+      "snippet": "# 2026-02-28 ## Alicia Improvements ### Web Search - Working via system curl (Node.js HTTP doesn't work on Pi) - Uses Bing News RSS ### COLS Stakers Fix - Shows all 128 (not limited to 20) - Added \"all\", \"every\", \"complete\" keywords ### Bulk Delegators - Fetch all delegators for ANY provider - Provider name lookup: Colombia Staking, Figment, Binance, etc. - Fixed field name: `stake` not `userActiveStake` ### New Queries Added - Gas/transaction fees - Minimum/maximum stake - Unstake period (10 days) - Token supply (circulating) - Token metadata - Provider comparison ### GitHub - Push working as SebastienLombard ### Alicia is NOT an OpenClaw sub-agent - Standalone Node.js script - Uses",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T01:36:16.227Z",
+      "lastRecalledAt": "2026-04-15T01:36:16.227Z",
+      "queryHashes": [
+        "f6bae5966fe8"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "node.js",
+        "gas/transaction",
+        "minimum/maximum",
+        "sub-agent",
+        "alicia",
+        "improvements",
+        "web",
+        "working"
+      ]
+    },
+    "memory:memory/2026-02-16.md:477:515": {
+      "key": "memory:memory/2026-02-16.md:477:515",
+      "path": "memory/2026-02-16.md",
+      "startLine": 477,
+      "endLine": 515,
+      "source": "memory",
+      "snippet": "- All recipients now received correct amounts ### TWO DAILY DISTRIBUTIONS AT 13:00 BOGOTA **1. DAO Pool (33.3% of buyback)** - Single transaction to PeerMe smart contract - Contract: `erd1qqq...tsv6a9k0` - Calls `distribute()` function with entity argument - Distributed proportionally to ALL COLS stakers via PeerMe **2. BONUS Pool (66.7% of buyback)** - Individual ESDT transfers to each eligible address - Eligibility: Must have BOTH EGLD delegated AND COLS staked - Calculation: Based on normalized ratio formula **Scripts:** - `/home/raspberry/.openclaw/workspace/colombia-staking-dapp/scripts/execute_distribution.mjs` - Main executor - `/home/raspberry/.openclaw/workspace/colombia-staking",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T01:36:16.227Z",
+      "lastRecalledAt": "2026-04-15T01:36:16.227Z",
+      "queryHashes": [
+        "f6bae5966fe8"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "33.3",
+        "66.7",
+        "home/raspberry",
+        "all",
+        "recipients",
+        "now",
+        "received",
+        "correct"
+      ]
+    },
+    "memory:memory/2026-02-16.md:444:486": {
+      "key": "memory:memory/2026-02-16.md:444:486",
+      "path": "memory/2026-02-16.md",
+      "startLine": 444,
+      "endLine": 486,
+      "source": "memory",
+      "snippet": "- Issue: First attempts failed with \"sending value to non payable contract\" - Root Cause 1: Gas limit too low (600K instead of 10M) - Root Cause 2: Function name not hex-encoded (`distribute` vs `64697374726962757465`) - Root Cause 3: Entity address needed 32-byte hex, not string hex - Solution: Correct transaction format with proper hex encoding **Working DAO Transaction Format:** ``` ESDTTransfer@434f4c532d396439316237@<AMOUNT_HEX>@64697374726962757465@<ENTITY_32BYTE_HEX> ``` - Token hex: `434f4c532d396439316237` (COLS-9d91b7) - Function hex: `64697374726962757465` (distribute) - Entity hex: `00000000000000000500f5ae3a400dae272bd254689fd5a44f88e3f2949e5787` - GasLimit: 10,000,000 **BONUS",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T01:36:16.227Z",
+      "lastRecalledAt": "2026-04-15T01:36:16.227Z",
+      "queryHashes": [
+        "f6bae5966fe8"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "hex-encoded",
+        "32-byte",
+        "amount-hex",
+        "entity-32byte-hex",
+        "cols-9d91b7",
+        "issue",
+        "first",
+        "attempts"
+      ]
+    },
+    "memory:memory/2026-02-22.md:1:6": {
+      "key": "memory:memory/2026-02-22.md:1:6",
+      "path": "memory/2026-02-22.md",
+      "startLine": 1,
+      "endLine": 6,
+      "source": "memory",
+      "snippet": "# 2026-02-22 - Domingo ## 7:00 - Recordatorio school Kylian (FAILED) - Cron job tried to send WhatsApp message but failed: \"gateway closed (1008): pairing required\" - Need to restart WhatsApp gateway or fix pairing",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T02:03:44.018Z",
+      "lastRecalledAt": "2026-04-15T02:03:44.018Z",
+      "queryHashes": [
+        "26a7539b9b40"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "gateway",
+        "domingo",
+        "recordatorio",
+        "school",
+        "kylian",
+        "failed",
+        "cron",
+        "job"
+      ]
+    },
+    "memory:memory/2026-03-20.md:1:14": {
+      "key": "memory:memory/2026-03-20.md:1:14",
+      "path": "memory/2026-03-20.md",
+      "startLine": 1,
+      "endLine": 14,
+      "source": "memory",
+      "snippet": "# Memory - March 20, 2026 ## Session with Sebas ### Distribution Notification Time Changed - User requested change from 2:00 PM to 1:15 PM Colombia time - Updated cron job `daily-distribution-summary` (ID: f42aeade-00bb-48d6-bad7-d6f3e3a67a29) - New schedule: `15 13 * * *` (1:15 PM Colombia time, America/Bogota) - Target channel: -1001567513982 (ColombiaStakingChat English group) ### Arbitrage Research Dropped - User asked to forget about MultiversX arbitrage research - Will revisit later if requested",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T02:03:44.018Z",
+      "lastRecalledAt": "2026-04-15T02:03:44.018Z",
+      "queryHashes": [
+        "26a7539b9b40"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "daily-distribution-summary",
+        "america/bogota",
+        "march",
+        "sebas",
+        "distribution",
+        "notification",
+        "time",
+        "changed"
+      ]
+    },
+    "memory:memory/2026-03-26.md:29:71": {
+      "key": "memory:memory/2026-03-26.md:29:71",
+      "path": "memory/2026-03-26.md",
+      "startLine": 29,
+      "endLine": 71,
+      "source": "memory",
+      "snippet": "- ETF Score: 45 (Neutral) - Mixed flows ### Version History - v5.6: Fix bear market overrides + ETF trend tracking - v5.7: Real ETF flow data from btcetfdata.com ### GitHub - Pushed to: https://github.com/colombiastaking/btc-strategy - Commits: 9087597 (v5.6), d901b1e (v5.7) --- ## Alice Backup Session (Earlier Today) ### Repository Separation - `btc-strategy` repo → BTC strategy scripts (workspace pushes here) - `alice-backup` repo → Full Alice backup (backup.sh runs from here) ### Backup Coverage (Complete) - Alice core: AGENTS.md, SOUL.md, USER.md, MEMORY.md, IDENTITY.md, HEARTBEAT.md, TOOLS.md - Custom skills: `.agents/skills/` (BTC strategy, MultiversX, Warps, etc.) - Built-in ski",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T02:03:44.018Z",
+      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "queryHashes": [
+        "26a7539b9b40",
+        "6e2dd6abbc38"
+      ],
+      "recallDays": [
+        "2026-04-14",
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "backup",
+        "v5.6",
+        "v5.7",
+        "btcetfdata.com",
+        "btc-strategy",
+        "alice-backup",
+        "backup.sh",
+        "agents.md"
+      ]
+    },
+    "memory:memory/2026-02-16.md:51:87": {
+      "key": "memory:memory/2026-02-16.md:51:87",
+      "path": "memory/2026-02-16.md",
+      "startLine": 51,
+      "endLine": 87,
+      "source": "memory",
+      "snippet": "| `Website/esp/node-status.html` | Real-time node monitoring (Spanish) | | `Website/fr/node-status.html` | Real-time node monitoring (French) | | `Website/*/status.json` | Node status data (auto-generated) | | `/home/raspberry/node_monitor.sh` | Updated with JSON output | | `/home/raspberry/update_node_status.sh` | Uploads status.json to FTP | ### Node Monitoring Features - **4 Nodes Monitored**: Shard0, Shard1, Shard2, Metachain - **Hardware Specs Displayed**: - Shard0: Intel i5-10400, 6 Cores, 2.9GHz, 16GB RAM - Shard1: Intel i7-10700, 8 Cores, 2.9GHz, 16GB RAM - Shard2: Intel i5-10400, 6 Cores, 2.9GHz, 16GB RAM - Metachain: Intel i5-12600H, 12 Cores, 4.5GHz, 24GB RAM - **Real-tim",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-15T02:03:44.018Z",
+      "lastRecalledAt": "2026-04-15T02:03:44.018Z",
+      "queryHashes": [
+        "26a7539b9b40"
+      ],
+      "recallDays": [
+        "2026-04-14"
+      ],
+      "conceptTags": [
+        "website/esp/node-status.html",
+        "real-time",
+        "website/fr/node-status.html",
+        "status.json",
+        "auto-generated",
+        "home/raspberry/node-monitor.sh",
+        "i5-10400",
+        "2.9ghz"
+      ]
+    },
+    "memory:memory/2026-04-18.md:49:76": {
+      "key": "memory:memory/2026-04-18.md:49:76",
+      "path": "memory/2026-04-18.md",
+      "startLine": 49,
+      "endLine": 76,
+      "source": "memory",
+      "snippet": "1. Remove `function fetchAndStoreGeo(...)` and `function sleep(...)` bodies from inside `buildOutput` (they start with 8-space indent) 2. Insert dedented copies before `buildOutput` (at 0-space indent) 3. Step 6 in `main()` will then be able to call `fetchAndStoreGeo` ### Collector Run Log (Shows the Bug) ``` 🌍 Step 6: 1 IPs in network-data.json need geo lookup Fetching geo for: 88.99.253.20 ReferenceError: fetchAndStoreGeo is not defined ``` ### Root Cause `fetchAndStoreGeo` and `sleep` were placed inside `buildOutput` as inner functions, not at module level. `main()` → Step 6 is OUTSIDE `buildOutput`'s scope. ### File: `/home/raspberry/.openclaw/workspace/network-explorer/server/collec",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T12:20:25.365Z",
+      "lastRecalledAt": "2026-04-26T23:29:35.622Z",
+      "queryHashes": [
+        "4ca711cfd532",
+        "ab05b3113ee8"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "network",
+        "8-space",
+        "0-space",
+        "network-data.json",
+        "88.99.253.20",
+        "home/raspberry",
+        "remove",
+        "function"
+      ]
+    },
+    "memory:memory/2026-04-18.md:72:101": {
+      "key": "memory:memory/2026-04-18.md:72:101",
+      "path": "memory/2026-04-18.md",
+      "startLine": 72,
+      "endLine": 101,
+      "source": "memory",
+      "snippet": "4. **Distribution wallet has 0 EGLD** — alice wallet `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` has EGLD (0.54) and COLS (764) ### Fixes Applied 1. **Found real Alice key** in `~/.openclaw/alice-backup/wallet-backup/secrets.enc` (decrypted to text, contains WALLET_PRIVATE_KEY=[KEY REDACTED]) 2. **Converted PEM to raw hex**: `python3 -c \"import base64,struct; ...\"` to extract scalar 3. **Updated `.private_key`** with raw hex: `[KEY REDACTED]` 4. **Fixed MCP server**: `cd alice-mcp-multiversx && npm install @modelcontextprotocol/sdk` 5. **Fixed DAO nonce race**: Added re-f",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T12:20:25.365Z",
+      "lastRecalledAt": "2026-04-26T12:20:25.365Z",
+      "queryHashes": [
+        "4ca711cfd532"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "backup",
+        "0.54",
+        "wallet-private-key",
+        "private-key",
+        "alice-mcp-multiversx",
+        "modelcontextprotocol/sdk",
+        "re-f",
+        "distribution"
+      ]
+    },
+    "memory:memory/2026-04-18.md:166:191": {
+      "key": "memory:memory/2026-04-18.md:166:191",
+      "path": "memory/2026-04-18.md",
+      "startLine": 166,
+      "endLine": 191,
+      "source": "memory",
+      "snippet": "2. **Wrong key was stored** — `.private_key` had a device auth key, not Alice's wallet key 3. **MCP server broken** — missing `@modelcontextprotocol/sdk` package 4. **Distribution wallet has 0 EGLD** — alice wallet `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` has EGLD (0.54) and COLS (764) ### Fixes Applied 1. **Found real Alice key** in `~/.openclaw/alice-backup/wallet-backup/secrets.enc` (decrypted to text, contains WALLET_PRIVATE_KEY=[KEY REDACTED]) 2. **Converted PEM to raw hex**: `python3 -c \"import base64,struct; ...\"` to extract scalar 3. **Updated `.private_key`** with raw hex: `2dbcd2ecf8878cf4cda470fe857d9393662",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T12:20:25.365Z",
+      "lastRecalledAt": "2026-04-26T12:20:25.365Z",
+      "queryHashes": [
+        "4ca711cfd532"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "backup",
+        "private-key",
+        "modelcontextprotocol/sdk",
+        "0.54",
+        "wallet-private-key",
+        "wrong",
+        "key",
+        "was"
+      ]
+    },
+    "memory:memory/2026-04-18.md:141:170": {
+      "key": "memory:memory/2026-04-18.md:141:170",
+      "path": "memory/2026-04-18.md",
+      "startLine": 141,
+      "endLine": 170,
+      "source": "memory",
+      "snippet": "The memory note claiming it was \"extracted to module level\" was incorrect — line 926 is part of `LOCATION_TO_COUNTRIES`, not a function. ### Fix (Pending — Will Apply After Flush) Move both functions to module level, just before `buildOutput`. Steps: 1. Remove `function fetchAndStoreGeo(...)` and `function sleep(...)` bodies from inside `buildOutput` (they start with 8-space indent) 2. Insert dedented copies before `buildOutput` (at 0-space indent) 3. Step 6 in `main()` will then be able to call `fetchAndStoreGeo` ### Collector Run Log (Shows the Bug) ``` 🌍 Step 6: 1 IPs in network-data.json need geo lookup Fetching geo for: 88.99.253.20 ReferenceError: fetchAndStoreGeo is not defined ```",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T12:20:25.365Z",
+      "lastRecalledAt": "2026-04-26T23:29:35.622Z",
+      "queryHashes": [
+        "4ca711cfd532",
+        "ab05b3113ee8"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "network",
+        "location-to-countries",
+        "8-space",
+        "0-space",
+        "network-data.json",
+        "88.99.253.20",
+        "claiming",
+        "was"
+      ]
+    },
+    "memory:memory/2026-04-18.md:184:220": {
+      "key": "memory:memory/2026-04-18.md:184:220",
+      "path": "memory/2026-04-18.md",
+      "startLine": 184,
+      "endLine": 220,
+      "source": "memory",
+      "snippet": "- Key: `[KEY REDACTED]` (raw 64-char hex) - Address: `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` - EGLD balance: ~0.54 - COLS balance: ~764 - File: `/home/raspberry/.openclaw/wallet/.private_key` ### To-Do - [ ] Investigate DAO distribution failure (PeerMe contract `distribute` function rejecting) - [ ] Create startup decryption service OR leave wallet decrypted (Simpler: leave decrypted) ## Post-Flush Updates (14:00-17:00) ### DAO Distribution — On-Chain Failure DAO failed with \"all gas used\" on the PeerMe smart contract. The `distribute` function call format may be wrong. **Status:** BONUS and GOLD fully confirmed on",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T12:20:25.365Z",
+      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "queryHashes": [
+        "4ca711cfd532",
+        "6e2dd6abbc38"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "64-char",
+        "0.54",
+        "home/raspberry",
+        "openclaw/wallet",
+        "private-key",
+        "to-do",
+        "post-flush",
+        "00-17"
+      ]
+    },
+    "memory:memory/2026-03-26.md:63:88": {
+      "key": "memory:memory/2026-03-26.md:63:88",
+      "path": "memory/2026-03-26.md",
+      "startLine": 63,
+      "endLine": 88,
+      "source": "memory",
+      "snippet": "- wallet-backup/ now un-ignored and tracked ### Issues Fixed - wallet-backup was gitignored (fixed) - Large files (lcm.db 123MB, extensions 593MB) exceed GitHub 100MB limit - removed from tracking - backup.sh had UTF-8 corruption after git reset - repaired ### Cron Jobs - alice-daily-backup: 18:00 America/Bogota daily - Status: OK, last run ~88 seconds --- ## Distribution Summary (Today) - DAO: 12.148592 COLS → PeerMe contract - BONUS: 24.333667 COLS → 102 addresses - GOLD: 4.4040 COLS → 21 addresses - Total: ~40.89 COLS distributed --- ## Node Status - 48 nodes running - EGLD: $3.87-$3.92 - All HOLD verdicts today",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T12:20:25.365Z",
+      "lastRecalledAt": "2026-04-26T12:20:25.365Z",
+      "queryHashes": [
+        "4ca711cfd532"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "backup",
+        "wallet-backup",
+        "un-ignored",
+        "lcm.db",
+        "backup.sh",
+        "utf-8",
+        "alice-daily-backup",
+        "america/bogota"
+      ]
+    },
+    "memory:memory/2026-04-18.md:210:247": {
+      "key": "memory:memory/2026-04-18.md:210:247",
+      "path": "memory/2026-04-18.md",
+      "startLine": 210,
+      "endLine": 247,
+      "source": "memory",
+      "snippet": "- Format: raw 64-char hex - After reboot: will need to re-decrypt if encrypted again. Decision: keep decrypted. ### BTC Strategy Update (2026-04-18) - Score: 65/100 (Accumulation) - BTC price: $107,700 (approximate) - Weekly DCA: $250 - BTC/HF moving up, cycle indicators improving - Aave: No borrowing needed - Weekly report sent to Telegram ### Network Explorer — 08:45 AM Collector Run Moonlorian IP `88.99.253.20` successfully geolocated (Falkenstein, Germany / 50.4777, 12.3649 / Hetzner). 22/30 moonlorian nodes now with geo. Remaining 8 have empty `ips[]` — genuinely invisible to observers. 4525 nodes with geo in `network-data.json`. ## Pending Issues (Updated 2026-04-18 17:00) ### Open",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T13:03:11.274Z",
+      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "queryHashes": [
+        "6e2dd6abbc38"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "network",
+        "64-char",
+        "re-decrypt",
+        "65/100",
+        "btc/hf",
+        "88.99.253.20",
+        "50.4777",
+        "12.3649"
+      ]
+    },
+    "memory:memory/2026-03-27.md:63:103": {
+      "key": "memory:memory/2026-03-27.md:63:103",
+      "path": "memory/2026-03-27.md",
+      "startLine": 63,
+      "endLine": 103,
+      "source": "memory",
+      "snippet": "**v7.3 Profit-Taking Framework:** - Tier 1: BTC $80K+ (score ~55+) → Sell 5% - Tier 2: BTC $100K+ (score ~65+) → Sell 10% more - Tier 3: BTC $120K+ (score ~75+) → Sell 10% more - Tier 4: BTC $150K+ (score ~85+) → STOP, max 25% reached - Clear debt + build stablecoin reserves at each tier **Key Bugs Fixed During Implementation:** 1. Rally detection bug: `(price/ma - 1) > -15` was comparing decimal to percentage - Fixed: `((price / ma) - 1) * 100 > -15` 2. Regime description hardcoded to \"INTRA-CYCLE RALLY\" regardless of actual state - Fixed with text replacement based on `is_intra_cycle_rally` boolean **Current Market State (March 27 evening):** - Score: ~10/100 (Deep Bear / EXTREME B",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T13:03:11.274Z",
+      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "queryHashes": [
+        "6e2dd6abbc38"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "v7.3",
+        "profit-taking",
+        "price/ma",
+        "intra-cycle",
+        "is-intra-cycle-rally",
+        "10/100",
+        "profit",
+        "taking"
+      ]
+    },
+    "memory:memory/2026-04-26.md:1:38": {
+      "key": "memory:memory/2026-04-26.md:1:38",
+      "path": "memory/2026-04-26.md",
+      "startLine": 1,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "# 2026-04-26 — Session Notes ## Wallet PEM Restored (CRITICAL FIX) **Problem:** `.private_key` file was missing — encrypted blob after reboot or password change. **Recovery:** Used raw hex key from memory (stored 2026-04-18). Key was in `secrets.enc` decrypted content: ``` [KEY REDACTED] ``` Raw hex (for .private_key file): ``` [KEY REDACTED] ``` Wallet address: `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` **Restored to:** `/home/raspberry/.openclaw/wallet/.private_key` (raw 64-char hex format) **Current balance:** 390.7 COLS + 0.365 EGLD **Distribution now works.** B",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-04-26T23:29:35.622Z",
+      "lastRecalledAt": "2026-04-26T23:29:35.622Z",
+      "queryHashes": [
+        "ab05b3113ee8"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "private-key",
+        "secrets.enc",
+        "home/raspberry",
+        "openclaw/wallet",
+        "64-char",
+        "390.7",
+        "0.365",
+        "wallet"
+      ]
+    }
+  }
+}
