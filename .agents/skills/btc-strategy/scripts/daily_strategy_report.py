@@ -128,6 +128,19 @@ def get_aave_position():
     ltv = (debt_usd / collateral_usd * 100) if collateral_usd > 0 else 0
     max_borrow_at_50 = (collateral_usd * 0.5) - debt_usd
     
+    # --- Ledger position (cold storage accumulation) ---
+    ledger_btc = 0
+    ledger_updated = ""
+    position_file = "/home/raspberry/.openclaw/workspace/btc-position.json"
+    try:
+        import json
+        with open(position_file, 'r') as f:
+            pos = json.load(f)
+            ledger_btc = pos.get("btc_holding", 0)
+            ledger_updated = pos.get("last_updated", "")
+    except:
+        pass
+    
     return {
         'health_factor': hf,
         'collateral_btc': collateral_btc,
@@ -137,7 +150,11 @@ def get_aave_position():
         'buffer_pct': buffer_pct,
         'ltv': ltv,
         'btc_price': btc_price,
-        'max_borrow_at_50': max_borrow_at_50 if max_borrow_at_50 > 0 else 0
+        'max_borrow_at_50': max_borrow_at_50 if max_borrow_at_50 > 0 else 0,
+        'ledger_btc': ledger_btc,
+        'ledger_updated': ledger_updated,
+        'total_btc': collateral_btc + ledger_btc,
+        'total_usd': collateral_usd + (ledger_btc * btc_price)
     }
 
 def generate_deep_reflection(btc, aave, strategy):
@@ -193,13 +210,28 @@ def generate_deep_reflection(btc, aave, strategy):
     elif cycle_days < 180:
         reflection.append("⏰ **CYCLE TIMING**: Early cycle - typically not the best time for heavy accumulation as you're paying a premium.")
     
-    # 5. Aave Position Strategy
-    if hf >= 1.8 and ltv < 60:
-        reflection.append("💰 **YOUR POSITION**: HF {:.2f} and LTV {:.1f}% - strong health. You have optionality: either maintain for long-term or strategically leverage during this accumulation zone.".format(hf, ltv))
-    elif hf < 1.3:
-        reflection.append("💰 **YOUR POSITION**: HF {:.2f} is concerning. Priority this week is debt reduction, not DCA. Your buffer is too thin for this cycle.".format(hf))
+    # 5. Position Strategy (Aave + Ledger)
+    ledger_btc = aave.get('ledger_btc', 0)
+    total_btc = aave.get('total_btc', 0)
+    total_usd = aave.get('total_usd', 0)
+    aave_active = aave.get('aave_active', False)
+    
+    if aave_active and hf >= 1.8 and ltv < 60:
+        reflection.append("💰 **AAVE POSITION**: HF {:.2f} and LTV {:.1f}% — strong health. You have optionality: either maintain for long-term or strategically leverage during this accumulation zone.".format(hf, ltv))
+    elif aave_active and hf < 1.3:
+        reflection.append("💰 **AAVE POSITION**: HF {:.2f} is concerning. Priority this week is debt reduction, not DCA. Your buffer is too thin for this cycle.".format(hf))
+    elif aave_active:
+        reflection.append("💰 **AAVE POSITION**: HF {:.2f} is healthy but monitor closely. You're positioned well for this market phase.".format(hf))
     else:
-        reflection.append("💰 **YOUR POSITION**: HF {:.2f} is healthy but monitor closely. You're positioned well for this market phase.".format(hf))
+        reflection.append("💰 **AAVE POSITION**: Closed — no active Aave position. All accumulation via Ledger cold storage.")
+    
+    # Ledger holdings
+    if ledger_btc > 0:
+        reflection.append("📀 **LEDGER HOLDINGS**: {:.4f} BTC (${:,.0f}) — cold storage accumulation.".format(ledger_btc, ledger_btc * btc_price))
+    
+    # Total position
+    if total_btc > 0:
+        reflection.append("📊 **TOTAL POSITION**: {:.4f} BTC (${:,.0f})".format(total_btc, total_usd))
     
     # 6. Risk Assessment
     if buffer > 30:
@@ -225,15 +257,18 @@ def generate_deep_reflection(btc, aave, strategy):
     else:
         reflection.append("🐂 **BULL MARKET**: All clear - Continue accumulation strategy. No profit-taking signals active.")
     
-    # 9. Position Progress Tracking
-    btc_holdings = collateral / btc_price if btc_price > 0 else 0
+    # 9. Position Progress Tracking (Total: Aave + Ledger)
+    btc_holdings = total_btc if total_btc > 0 else (collateral / btc_price if btc_price > 0 else 0)
     dca_eur = strategy.get('dca_amount_eur', 0)
     # Goal: Car ~0.35-0.5 BTC, Projects ~0.7-1 BTC, Real Estate ~1-2 BTC
     car_target = 0.4  # BTC
     projects_target = 0.85  # BTC
     real_estate_target = 1.5  # BTC
     
-    reflection.append("📊 **PROGRESS**: You hold {:.4f} BTC (${:,.0f})".format(btc_holdings, collateral))
+    if ledger_btc > 0:
+        reflection.append("📊 **PROGRESS** (Aave + Ledger): {:.4f} BTC total (${:,.0f})".format(btc_holdings, total_usd))
+    else:
+        reflection.append("📊 **PROGRESS**: {:.4f} BTC (${:,.0f})".format(btc_holdings, collateral))
     if dca_eur > 0:
         weekly_sats = (dca_eur / btc_price * 100000000) if btc_price > 0 else 0
         if btc_holdings < car_target:
@@ -638,7 +673,7 @@ def send_telegram(message):
 
 def main():
     # Fetch data
-    run_command("cd /home/raspberry/.openclaw/workspace/btc-monitor && python3 btc_decision_engine.py > /dev/null 2>&1")
+    run_command("cd /home/raspberry/.openclaw/workspace/.agents/skills/btc-strategy/scripts && python3 btc_decision_engine.py > /dev/null 2>&1")
     btc = get_btc_signal()
     aave = get_aave_position()
     strategy = calculate_professional_strategy(btc, aave)
@@ -681,10 +716,14 @@ def main():
    RSI: {rsi} | 50W MA: -{ma_disc}%
    Cycle: Day {cycle} | Fear&Greed: {btc.get('fear_greed', 50)}
 
-💰 *YOUR POSITION*
-   Collateral: ${collat:,.0f} | Debt: ${debt:,.0f}
+💰 *YOUR POSITIONS*
+   Aave Collateral: ${collat:,.0f} | Debt: ${debt:,.0f}
    HF: {hf} | LTV: {ltv:.1f}% | Buffer: {buffer:.1f}%
-   Total Aave: ${strategy['total_position']:,.0f}
+   
+📀 *LEDGER HOLDINGS*
+   BTC: {aave.get('ledger_btc', 0):.4f} | USD: ${aave.get('ledger_btc', 0) * btc.get('price', 0):,.0f}
+   
+📊 *TOTAL POSITION*: {aave.get('total_btc', 0):.4f} BTC (${aave.get('total_usd', 0):,.0f})
 
 🐂 *BULL MARKET SIGNALS*
    Stage: {bull_stage}/4
