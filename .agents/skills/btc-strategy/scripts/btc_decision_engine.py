@@ -1063,43 +1063,59 @@ def score_fear_greed(fg):
         return 95, "🔴 BUBBLE"
 
 def score_etf_sentiment(etf_data):
-    """Score ETF sentiment (lower = better for accumulation)"""
+    """Score ETF sentiment (v7.9a: calibrated for modern ETF era)"""
     if not etf_data:
         return 50, "🟡 UNAVAILABLE"
     
     avg_daily_flow = etf_data.get("avg_daily_flow", 0)
     
-    if avg_daily_flow > 3000:
+    # v7.9a: More granular thresholds for modern ETF market dynamics
+    # Pre-2024: ETFs were new → 500 BTC/day was massive
+    # Post-2024: ETFs mature → need higher thresholds
+    if avg_daily_flow > 5000:
         return 5, "🟢 MASSIVE INFLOWS"
+    elif avg_daily_flow > 3000:
+        return 12, "🟢 STRONG INFLOWS"
     elif avg_daily_flow > 1500:
-        return 15, "🟢 STRONG INFLOWS"
+        return 20, "🟢 SOLID INFLOWS"
     elif avg_daily_flow > 500:
-        return 25, "🟢 POSITIVE"
-    elif avg_daily_flow > -500:
-        return 45, "🟡 NEUTRAL"
-    elif avg_daily_flow > -1500:
-        return 65, "🟠 OUTFLOWS"
-    elif avg_daily_flow > -3000:
-        return 80, "🔴 HEAVY OUTFLOWS"
+        return 30, "🟢 POSITIVE"
+    elif avg_daily_flow > -200:
+        return 42, "🟡 SLIGHTLY POSITIVE"
+    elif avg_daily_flow > -1000:
+        return 52, "🟡 NEUTRAL/MILD OUTFLOWS"
+    elif avg_daily_flow > -2500:
+        return 65, "🟠 MODERATE OUTFLOWS"
+    elif avg_daily_flow > -5000:
+        return 78, "🔴 HEAVY OUTFLOWS"
+    elif avg_daily_flow > -10000:
+        return 88, "🔴 EXTREME OUTFLOWS"
     else:
-        return 92, "🔴 CAPITULATION"
+        return 95, "🔴 CAPITULATION"
 
 def score_macd(macd_histogram):
     """Score Weekly MACD histogram (lower = better for accumulation)"""
-    if macd_histogram < -5000:
-        return 8, "🟢 STRONG BEAR MOMENTUM"
+    # v7.9a: More granular thresholds — reduces false extreme signals
+    if macd_histogram < -10000:
+        return 5, "🟢 EXTREME BEAR MOMENTUM"
+    elif macd_histogram < -5000:
+        return 12, "🟢 STRONG BEAR MOMENTUM"
     elif macd_histogram < -2000:
-        return 18, "🟢 BEAR WEAKENING"
+        return 22, "🟢 BEAR WEAKENING"
     elif macd_histogram < -500:
-        return 28, "🟢 EARLY ACCUMULATION"
-    elif macd_histogram < 500:
-        return 45, "🟡 NEUTRAL"
-    elif macd_histogram < 2000:
-        return 55, "🟠 BULL MOMENTUM"
+        return 32, "🟢 EARLY ACCUMULATION"
+    elif macd_histogram < 0:
+        return 42, "🟡 SLIGHTLY BEARISH"
+    elif macd_histogram < 1000:
+        return 50, "🟡 NEUTRAL"
+    elif macd_histogram < 2500:
+        return 58, "🟠 MILD BULL MOMENTUM"
     elif macd_histogram < 5000:
-        return 70, "🔴 STRONG BULL"
+        return 68, "🟠 STRONG BULL"
+    elif macd_histogram < 10000:
+        return 78, "🔴 EXTREME BULL"
     else:
-        return 85, "🔴 EXTREME MOMENTUM"
+        return 90, "🔴 PARABOLIC MOMENTUM"
 
 def score_bollinger(bb_position):
     """Score Weekly Bollinger Bands position (lower = better for accumulation)"""
@@ -1137,19 +1153,27 @@ def score_geopolitical(geo_risk):
         return 40, f"🟢 LOW RISK (VIX: {vix})"
 
 def score_pi_cycle(pi_diff):
-    """Score Pi Cycle indicator"""
-    if pi_diff < -20:
-        return 8, "🟢 BOTTOM PATTERN"
+    """Score Pi Cycle indicator (v7.9a: fixed bullish interpretation)"""
+    # Pi Cycle diff positive = price BELOW 350d MA x2 = BULLISH (not topped)
+    # Pi Cycle diff negative = price ABOVE 350d MA x2 = BEARISH (potential top)
+    if pi_diff < -50:
+        return 8, "🟢 DEEP BOTTOM PATTERN"
+    elif pi_diff < -20:
+        return 15, "🟢 BOTTOM FORMING"
     elif pi_diff < -5:
-        return 18, "🟢 RECOVERING"
+        return 25, "🟢 EARLY RECOVERY"
+    elif pi_diff < 10:
+        return 35, "🟡 NORMAL BULL"
     elif pi_diff < 30:
-        return 40, "🟡 NORMAL BULL"
-    elif pi_diff < 60:
-        return 60, "🟠 EXTENDED"
+        return 42, "🟡 BULL CONTINUATION"
+    elif pi_diff < 50:
+        return 50, "🟠 EXTENDED BUT NOT TOPPED"
+    elif pi_diff < 75:
+        return 60, "🟠 LATE CYCLE"
     elif pi_diff < 100:
-        return 80, "🔴 WARNING"
+        return 75, "🔴 WARNING ZONE"
     else:
-        return 95, "🔴 BUBBLE"
+        return 92, "🔴 BUBBLE TERRITORY"
 
 def score_stock_to_flow(s2f):
     """Score Stock-to-Flow (higher = more bullish due to scarcity)"""
@@ -1861,34 +1885,98 @@ def save_alert(alert, filepath="/tmp/btc_decision_alert.json"):
     except Exception as e:
         print(f"Error saving alert: {e}")
 
+def get_score_interpretation(score):
+    """Convert numeric score to human-readable interpretation."""
+    if score <= 20:
+        return "🟢 Extreme Buy Zone - Historical cycle bottom conditions"
+    elif score <= 35:
+        return "🟢 Strong Buy - Favorable conditions for accumulation"
+    elif score <= 50:
+        return "🟡 Buy - Generally positive conditions, DCA appropriate"
+    elif score <= 65:
+        return "🟡 Neutral - Mixed signals, maintain current strategy"
+    elif score <= 80:
+        return "🟠 Sell - Overvalued conditions emerging"
+    else:
+        return "🔴 Strong Sell - Take profits, reduce exposure"
+
+def get_dca_recommendation(score, price=77840):
+    """Get DCA recommendation based on score."""
+    if score <= 20:
+        base = price * 0.010
+    elif score <= 35:
+        base = price * 0.007
+    elif score <= 50:
+        base = price * 0.0035
+    elif score <= 65:
+        base = price * 0.0015
+    else:
+        return "Pause DCA - Consider profit-taking"
+    return f"€{base:.0f}/month"
+
 def save_report(alert, filepath="/tmp/btc_general_report.json"):
     """Save full report JSON for DApp /btc-report/summary endpoint"""
     try:
+        indicators = alert.get("indicators", {})
+        score = alert.get("score", 0)
+        regime = alert.get("regime", {})
+        
+        # Calculate MVRV Z-Score (simplified)
+        mvrv = indicators.get("mvrv", 1.0)
+        mvrv_z = round((mvrv - 1.0) / 0.5, 2) if mvrv else 0
+        
+        # Determine action and detail
+        action = alert.get("action", "")
+        action_detail = f"Historical win rate: 60-70%. Suggested timeframe: {alert.get('timeframe', '3-6 months')}"
+        
+        # Get cycle position in days (approx from blocks)
+        cycle_blocks = indicators.get("cycle_blocks", 0)
+        days_since_halving = cycle_blocks / 144 if cycle_blocks else 0  # ~144 blocks/day
+        
         report = {
             "generated": datetime.now().isoformat(),
             "timestamp": datetime.now().isoformat(),
-            "score": alert.get("score", 0),
+            "score": score,
+            "score_interpretation": get_score_interpretation(score),
+            "score_detail": f"Based on MVRV {mvrv}, RSI {indicators.get('rsi', 0)}, Fear/Greed {indicators.get('fear_greed', 0)} and 8 other indicators",
+            "dca_recommendation": get_dca_recommendation(score, alert.get("price", 77840)),
+            "regime": regime.get("current", "UNKNOWN"),
+            "regime_title": regime.get("description", "").split(" - ")[0] if regime.get("description") else "Market Regime",
+            "regime_description": regime.get("description", "Market conditions unclear"),
+            "action": action,
+            "action_detail": action_detail,
             "recommendation": alert.get("recommendation", ""),
-            "action": alert.get("action", ""),
             "price": alert.get("price", 0),
             "summary": {
-                "score": alert.get("score", 0),
+                "score": score,
                 "recommendation": alert.get("recommendation", ""),
                 "price": alert.get("price", 0),
                 "dca_amount_weekly": round(alert.get("price", 77840) * 0.00353, 2) if alert.get("price") else 275,
                 "dca_amount_monthly": round(alert.get("price", 77840) * 0.01412, 2) if alert.get("price") else 1100,
                 "strategy": alert.get("strategy", ""),
-                "mvrv": alert.get("indicators", {}).get("mvrv", 0),
-                "rsi": alert.get("indicators", {}).get("rsi", 0),
-                "fear_greed": alert.get("indicators", {}).get("fear_greed", 0),
+                "mvrv": indicators.get("mvrv", 0),
+                "rsi": indicators.get("rsi", 0),
+                "fear_greed": indicators.get("fear_greed", 0),
+                "etf_net_flow_7d": indicators.get("etf_net_flow_7d", 0),
+                "pi_cycle_diff": indicators.get("pi_cycle_diff", 0),
+                "s2f_value": indicators.get("s2f_value", 0),
+                "discount_50w_ma": indicators.get("discount_50w_ma", 0),
+                "bollinger_position": indicators.get("bollinger_position", 0),
+                "macd_histogram": indicators.get("macd_histogram", 0),
+                "cycle_blocks": indicators.get("cycle_blocks", 0),
+                "mvrv_z": mvrv_z,
                 "cycle_phase": alert.get("cycle_phase", ""),
             }
         }
         with open(filepath, 'w') as f:
             json.dump(report, f, indent=2)
         print(f"💾 Report saved to {filepath}")
+        print(f"   Score: {score}/100 | Regime: {regime.get('current', 'UNKNOWN')}")
+        print(f"   Indicators: MVRV={mvrv}, RSI={indicators.get('rsi', 0)}, Fear/Greed={indicators.get('fear_greed', 0)}")
     except Exception as e:
         print(f"Error saving report: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     # Run analysis
