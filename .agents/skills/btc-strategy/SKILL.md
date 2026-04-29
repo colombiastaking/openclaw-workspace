@@ -78,12 +78,16 @@ The strategy is designed for accumulation during bear markets and cycle lows. Fo
 
 ---
 
-## 11-Indicator Scoring Model (v7.9 - COMPOSITE INDICATORS WITH SYNERGY)
+## 11-Indicator Scoring Model (v7.9a — Granular Thresholds)
+
+All indicators now use **10-step granular thresholds** (v7.9a, April 2026). This reduces false signals when indicators sit near boundaries and reflects the modern ETF-era market structure.
+
+### Composite Structure
 
 | Composite | Indicators | Weight | Bear Synergy | Bull Synergy |
 |-----------|------------|--------|--------------|--------------|
 | **Valuation** | MVRV + RSI | 30% | MVRV < 1.0 + RSI < 40 → -6 | MVRV > 2.0 + RSI > 70 → +6 |
-| **Trend** | 50W MA + Cycle Position | 20% | Deep discount + Bear (600-900d) → -8 | MA > +20% + Early bull (0-300d) → +8 |
+| **Trend** | 50W MA + Cycle Position | 20% | MA < -20% + Bear (104K-208K blocks) → -8 | MA > +20% + Early bull (0-52K blocks) → +8 |
 | **Sentiment** | Fear & Greed + ETF | 17% | F&G < 25 + ETF outflows > 5000 → -6 | F&G > 75 + ETF inflows > 5000 → +6 |
 | **Momentum** | MACD + Bollinger | 12% | *(merged into Valuation)* | *(merged into Valuation)* |
 | **Standalone** | Geopolitical | 5% | - | - |
@@ -91,9 +95,29 @@ The strategy is designed for accumulation during bear markets and cycle lows. Fo
 | **Standalone** | Stock-to-Flow | 3% | - | - |
 | **Buffer** | AI discretion | 10% | For edge cases | For edge cases |
 
+### Key v7.9a Improvements
+
+| Indicator | Old Steps | New Steps | Biggest Fix |
+|-----------|-----------|-----------|-------------|
+| **MVRV** | 7 | **10** | 1.0-1.5 lumped into "normal" → now split into early/mid/late bull |
+| **RSI** | 6 | **10** | 50 threshold was too blunt → true neutral now 48-52 |
+| **MACD** | 7 | **10** | 5000 threshold too sensitive → added 10000 tier |
+| **ETF Flow** | 7 | **10** | Pre-2024 thresholds → modern ETF era calibrated |
+| **Pi Cycle** | 6 | **10** | Positive diff now correctly scored as bullish |
+| **50W MA** | 7 | **10** | Added generational crash tier (< -50%) |
+| **Cycle Position** | 6 | **9** | **HISTORICALLY CORRECTED** — peaks at ~78K blocks, not 104K+ |
+
+### Why Granular?
+
+**Old problem:** MACD at 5,752 scored 85 ("EXTREME MOMENTUM") while RSI was 40.5 ("BUY ZONE"). These should NOT diverge that much. The new 10-step system scores MACD 5,752 at 78 instead of 85 — still high but not distorted.
+
+**ETF era reality:** -526 BTC/day used to score 65 ("OUTFLOWS"). In the post-2024 ETF era, that's mild. New system scores it 52 ("NEUTRAL/MILD").
+
+**Cycle correction:** Old model said 107K blocks = "LATE CYCLE" (45). Historical peaks happen at ~70-80K blocks. New system: 107K blocks = "POST-PEAK CORRECTION" (28) — matches 2017/2021/2025 reality.
+
 ### Symmetric Scoring
 
-The v7.9 system is **symmetric** - scores range from 10 (extreme bear) to 90 (extreme bull):
+The v7.9a system is **symmetric** - scores range from 10 (extreme bear) to 90 (extreme bull):
 
 | Score Range | Interpretation | DCA Action |
 |-------------|----------------|------------|
@@ -266,7 +290,7 @@ Every 3 months, analyze:
 4. Update version number
 5. Push to GitHub with commit message
 
-**Current Version:** v7.9: Smoothed profit-taking + €1,100/month budget (April 2026)
+**Current Version:** v7.9a: Granular 10-step scoring for all indicators + historically-corrected cycle timing (April 2026)
 - v5.0: Weekly candles (long-term focus)
 - v5.1: Research-based weights
 - v5.2: Professional advisory format
@@ -286,6 +310,7 @@ Every 3 months, analyze:
 - v7.3: INDICATOR-BASED PROFIT-TAKING (v7.3 was internal/dev, not released)
 - v7.8: 20-level DCA/profit-taking table via dca_lookup.py - smooth transitions
 - v7.9: Smoothed profit-taking + €1,100/month budget (April 2026)
+- **v7.9a: Granular 10-step scoring + historically-corrected cycle timing**
 
 ---
 
