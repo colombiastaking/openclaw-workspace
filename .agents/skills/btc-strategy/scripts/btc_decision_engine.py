@@ -1033,50 +1033,75 @@ def score_rsi(rsi):
         return 90, "🔴 PARABOLIC / UNSUSTAINABLE"
 
 def score_50w_ma_discount(discount):
-    """Score 50 Week MA discount (lower = better)"""
-    if discount < -40:
-        return 8, "🟢 MASSIVE DISCOUNT"
+    """Score 50 Week MA discount (v7.9a: 10 steps with crash tier)"""
+    # Historical context:
+    #   < -50% = generational crashes (Mar 2020, Dec 2018, 2014)
+    #   -35% to -50% = severe corrections (rare, strong accumulation)
+    #   -25% to -35% = deep bear (2022 bottom, 2015)
+    #   -18% to -25% = significant correction (current -21% falls here)
+    #   -10% to -18% = moderate dip (normal pullbacks)
+    #   -5% to -10% = slight dip (healthy consolidation)
+    #   0% to -5% = near MA (trend continuation)
+    #   0% to +10% = above MA but not extreme
+    #   +10% to +25% = extended rally
+    #   >+25% = parabolic / unsustainable
+    if discount < -50:
+        return 5, "🟢 GENERATIONAL CRASH"
+    elif discount < -35:
+        return 12, "🟢 SEVERE CORRECTION"
     elif discount < -25:
-        return 18, "🟢 DEEP DISCOUNT"
-    elif discount < -15:
-        return 28, "🟢 DISCOUNT"
+        return 20, "🟢 DEEP BEAR DISCOUNT"
+    elif discount < -18:
+        return 28, "🟢 SIGNIFICANT DISCOUNT"  # Current -21.3% lands here
+    elif discount < -10:
+        return 35, "🟢 MODERATE DISCOUNT"
+    elif discount < -5:
+        return 42, "🟢 SLIGHT DISCOUNT"
     elif discount < 0:
-        return 38, "🟢 BELOW MA"
-    elif discount < 15:
-        return 50, "🟡 NEAR MA"
-    elif discount < 30:
-        return 65, "🟠 PREMIUM"
+        return 48, "🟡 JUST BELOW MA"
+    elif discount < 10:
+        return 55, "🟡 NEAR MA"
+    elif discount < 25:
+        return 68, "🟠 PREMIUM"
     else:
         return 85, "🔴 EXTREME PREMIUM"
 
 def score_cycle_position(blocks):
     """
-    Score cycle position using BLOCK HEIGHT (more accurate than calendar days).
+    Score cycle position using BLOCK HEIGHT (v7.9a: historically corrected).
     
-    Halving #4: block 840,000 (April 19, 2024)
-    Each halving cycle = 210,000 blocks (~4 years)
+    KEY INSIGHT: Historical peaks happen at ~70-80K blocks (~1.3-1.5 years),
+    NOT at 104K+. The old model misaligned peaks by ~6 months.
     
-    Bear accumulation zones (best for DCA):
-    - 156,000-208,000 blocks (~1.5-2 years post-halving): Bear accumulation
-    - 208,000-260,000 blocks (~2-2.5 years): Deep bear (maximum accumulation)
+    Historical cycle data:
+    - 2016 halving → Peak Dec 2017 (~78K blocks post-halving)
+    - 2020 halving → Peak Nov 2021 (~78K blocks post-halving)
+    - 2024 halving → Peak Mar 2025 (~70K blocks post-halving)
     
-    Bull distribution zones (not ideal for new positions):
-    - 0-52,000 blocks (~0-6 months): Early bull (post-halving hype)
-    - 52,000-104,000 blocks (~6-12 months): Mid cycle bull
-    - 104,000-156,000 blocks (~1-1.5 years): Late cycle bull
+    Therefore:
+    - 0-52K: Post-halving hype (elevated risk)
+    - 52K-78K: Early pump (peak building)
+    - 78K-104K: HISTORICAL PEAK ZONE (most dangerous for new buys)
+    - 104K+: Post-peak → BEAR ACCUMULATION (best for DCA)
     """
-    if blocks < 52000:  # ~0-6 months
-        return 50, "🟡 EARLY BULL"
-    elif blocks < 104000:  # ~6-12 months
-        return 40, "🟡 MID CYCLE"
-    elif blocks < 156000:  # ~12-18 months
-        return 45, "🟠 LATE CYCLE"
-    elif blocks < 208000:  # ~18-24 months
-        return 15, "🟢 BEAR ACCUMULATION"
-    elif blocks < 260000:  # ~24-30 months
-        return 8, "🟢 DEEP BEAR"
-    else:  # ~30+ months
-        return 12, "🟢 LATE BEAR"
+    if blocks < 26000:  # ~0-6 months
+        return 55, "🔴 POST-HALVING HYPE"
+    elif blocks < 52000:  # ~6-12 months
+        return 62, "🔴 EARLY PUMP"
+    elif blocks < 78000:  # ~12-18 months (HISTORICAL PEAK ZONE)
+        return 72, "🔴 PEAK ZONE"
+    elif blocks < 104000:  # ~18-24 months (POST-PEAK CORRECTION)
+        return 42, "🟡 POST-PEAK"
+    elif blocks < 130000:  # ~24-30 months
+        return 28, "🟢 EARLY BEAR ACCUMULATION"
+    elif blocks < 156000:  # ~30-36 months
+        return 18, "🟢 MID BEAR"
+    elif blocks < 208000:  # ~36-48 months
+        return 10, "🟢 MAXIMUM ACCUMULATION"
+    elif blocks < 234000:  # ~48-54 months
+        return 20, "🟢 PRE-HALVING RECOVERY"
+    else:  # ~54+ months (approaching next halving)
+        return 35, "🟡 APPROACHING HALVING"
 
 def score_fear_greed(fg):
     """Score Fear & Greed Index (lower = better for accumulation)"""
@@ -1292,9 +1317,10 @@ def calculate_v7_score(market_data, fear_greed_data, geo_risk):
     details["ma_discount"] = {"value": ma_discount, "score": ma_score, "signal": ma_signal, "weight": 10}  # 50% of 20%
     details["cycle"] = {"blocks": blocks_since, "score": cycle_score, "signal": cycle_signal, "weight": 10}  # 50% of 20%
     
-    # TREND SYNERGY: 50W MA < -20% AND Cycle in bear phase (156K-260K blocks) → -8 bonus
+    # TREND SYNERGY: 50W MA < -20% AND we're in BEAR ACCUMULATION phase (>104K blocks, <208K) → -8 bonus
+    # v7.9a: Updated to match corrected peak timing (peaks at ~78K, bear starts ~104K)
     trend_synergy = 0
-    if ma_discount < -20 and 156000 <= blocks_since <= 260000:
+    if ma_discount < -20 and 104000 <= blocks_since <= 208000:
         trend_synergy = -8
         synergy_bonuses["trend"] = -8
         total_synergy += 8
