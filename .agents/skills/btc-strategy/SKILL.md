@@ -200,40 +200,65 @@ The v7.9a system is **symmetric** - scores range from 10 (extreme bear) to 90 (e
 - Session: Telegram direct (delivers to Sebas)
 - Process: Run scripts → AI analyzes → Strategy delivered
 
-### Daily Report Format
+### Ledger Holdings Tracking (xpub Scan)
+
+**Wallet:** Ledger Nano S/X via BIP84 xpub  
+**Xpub:** `xpub6CjqJTKYKEYHJxJWePZ44hAM5EDrJ58sJLDWgNGcbRd2VKmHo8UPRJQbtBeaMZpA1BpByPXdge5wxcVtbJMKAnEhNtGWcC584EJc8Ba7gWS`
+
+**How it works:**
+- Ledger auto-generates new receiving addresses for each transaction (privacy)
+- Balance is spread across multiple addresses, not just one
+- Single-address checks show **0 BTC** even when funds exist at other indices
+
+**Solution:** `/home/raspberry/.openclaw/workspace/scripts/scan_xpub.py`
+- Scans BIP84 receiving chain (`m/84'/0'/0'/0/i`) + change chain (`m/84'/0'/0'/1/i`)
+- Gap limit 20, max index 200
+- Auto-updates `btc-position.json`
+
+**Current holdings (Apr 29, 2026):**
+- Receiving indices 27-31: 0.09154928 BTC
+- Change index 19: 0.05247096 BTC
+- **Total: 0.14402024 BTC**
+
+**Integration:** Daily report runs xpub scan before reading balance.
+
+---
+
+### Daily Report Format (v8.0 — Simplified)
 
 ```
-🟢 BTC DAILY STRATEGY (AI-Powered)
+📊 BTC Daily — April 29, 2026
 
-📊 MARKET ANALYSIS
-- Score: XX/100 with interpretation
-- Key indicators: MVRV, RSI, MA discount
-- BTC price and regime
+🎯 Score: 31.4/100 — 🟢 BUY
 
-💰 AAVAVE POSITION
-- Health Factor, LTV, buffer status
-- Whether position is healthy
+📈 Market
+• BTC: $75,916 | MVRV: 1.29
+• RSI: 40.6 | 50W MA: -21.2%
+• Fear & Greed: 50
 
-🎯 THIS WEEK'S STRATEGY
-- DCA Amount: €XXX with rationale
-- Borrow: YES/NO with amount and reason
-- Repay: YES/NO with reason
-- Take Profit: triggers when score > 55 and bull synergies active (MVRV > 1.5, RSI > 60, F&G > 70)
+💰 Position
+• Ledger: 0.1440 BTC ($10,935)
+• Aave: $0 collateral | $0 debt
+• Total: 0.1440 BTC ($10,935)
 
-⚠️ WATCH LEVELS
-- Key price levels to monitor
-- Any urgent concerns
+📋 Strategy
+• DCA: €385/week — Deep value zone
+• Borrow: No — Deep value zone
+• Repay: No — Deep value zone
+
+⚠️ Watch: Deep value zone
 ```
 
-### Goals Display Rule
+**What was removed (v7.x → v8.0):**
+- Deep reflection section
+- Market regime breakdown
+- Bull market signals
+- Risk check section
+- Model confidence section
 
-**IMPORTANT:** Only mention financial goals when there is a SPECIFIC OCCASION or OPPORTUNITY:
-- Milestone reached (e.g., "Car goal 50% complete!")
-- Profit-taking opportunity aligned with goal
-- Major market shift affecting goal timeline
-- Request from Sebas to see progress
-
-Otherwise, keep goals out of daily reports.
+**What was added:**
+- Auto xpub scan for Ledger balance accuracy
+- Concise bullet-point format
 
 ---
 
@@ -290,7 +315,7 @@ Every 3 months, analyze:
 4. Update version number
 5. Push to GitHub with commit message
 
-**Current Version:** v7.9a: Granular 10-step scoring for all indicators + historically-corrected cycle timing (April 2026)
+**Current Version:** v8.0: Simplified daily report format + auto xpub scanning for Ledger balance accuracy (April 2026)
 - v5.0: Weekly candles (long-term focus)
 - v5.1: Research-based weights
 - v5.2: Professional advisory format
@@ -310,7 +335,8 @@ Every 3 months, analyze:
 - v7.3: INDICATOR-BASED PROFIT-TAKING (v7.3 was internal/dev, not released)
 - v7.8: 20-level DCA/profit-taking table via dca_lookup.py - smooth transitions
 - v7.9: Smoothed profit-taking + €1,100/month budget (April 2026)
-- **v7.9a: Granular 10-step scoring + historically-corrected cycle timing**
+- v7.9a: Granular 10-step scoring + historically-corrected cycle timing
+- **v8.0: Simplified daily report + auto xpub Ledger scanning**
 
 ---
 
