@@ -968,36 +968,69 @@ def get_geopolitical_interpretation(overall_risk, war_risk):
 # ======================
 
 def score_mvrv(mvrv):
-    """Score MVRV indicator (lower = better for accumulation)"""
-    if mvrv < 0.7:
-        return 5, "🟢 EXTREME DISCOUNT"
-    elif mvrv < 0.9:
-        return 15, "🟢 DEEP VALUE"
-    elif mvrv < 1.0:
-        return 22, "🟢 GOOD VALUE"
-    elif mvrv < 1.1:
-        return 22, "🟡 FAIR VALUE"
-    elif mvrv < 1.5:
-        return 35, "🟡 NORMAL"
-    elif mvrv < 2.0:
-        return 55, "🟠 EXPENSIVE"
+    """Score MVRV indicator (v7.9a: 10 steps reflecting historical cycle patterns)"""
+    # Historical context:
+    #   <0.75 = generational bottoms (2015, 2018, 2022 capitulation)
+    #   0.75-0.90 = deep bear accumulation
+    #   0.90-1.00 = fair value / neutral accumulation
+    #   1.00-1.30 = post-halving bull early phase
+    #   1.30-1.60 = mid-bull, getting warm
+    #   1.60-2.50 = late bull / euphoria building
+    #   >2.50 = historical bubble territory (2017, 2021 tops)
+    if mvrv < 0.75:
+        return 5, "🟢 GENERATIONAL BOTTOM"
+    elif mvrv < 0.85:
+        return 12, "🟢 DEEP BEAR ACCUMULATION"
+    elif mvrv < 0.95:
+        return 20, "🟢 ACCUMULATION ZONE"
+    elif mvrv < 1.00:
+        return 28, "🟢 SLIGHTLY BELOW FAIR"
+    elif mvrv < 1.10:
+        return 35, "🟡 FAIR VALUE"
+    elif mvrv < 1.30:
+        return 42, "🟡 ELEVATED / EARLY BULL"
+    elif mvrv < 1.60:
+        return 52, "🟠 MID-BULL WARMING"
+    elif mvrv < 2.00:
+        return 62, "🟠 LATE BULL"
+    elif mvrv < 2.50:
+        return 75, "🔴 VERY EXPENSIVE"
     else:
-        return 75, "🔴 BUBBLE"
+        return 90, "🔴 HISTORICAL BUBBLE"
 
 def score_rsi(rsi):
-    """Score Weekly RSI indicator (lower = better for accumulation)"""
-    if rsi < 30:
-        return 5, "🟢 OVERSOLD"
-    elif rsi < 40:
-        return 15, "🟢 ACCUMULATE"
-    elif rsi < 50:
-        return 25, "🟢 BUY ZONE"
-    elif rsi < 60:
+    """Score Weekly RSI (v7.9a: 10 steps, smoothed transitions)"""
+    # RSI behavior on weekly timeframe:
+    #   <25 = rare capitulation (generational buys)
+    #   25-35 = oversold accumulation
+    #   35-42 = early buy zone
+    #   42-48 = neutral-bullish transition
+    #   48-52 = true neutral (50 = no momentum bias)
+    #   52-58 = mild bullish momentum
+    #   58-65 = overbought warning
+    #   65-72 = strongly overbought
+    #   72-80 = extreme (distribution zone)
+    #   >80 = parabolic / unsustainable
+    if rsi < 25:
+        return 5, "🟢 EXTREME OVERSOLD"
+    elif rsi < 35:
+        return 15, "🟢 OVERSOLD"
+    elif rsi < 42:
+        return 22, "🟢 ACCUMULATE"
+    elif rsi < 48:
+        return 28, "🟢 BUY ZONE — EARLY"
+    elif rsi < 52:
+        return 35, "🟡 NEUTRAL-BULLISH"
+    elif rsi < 58:
         return 45, "🟡 NEUTRAL"
-    elif rsi < 70:
-        return 65, "🟠 OVERBOUGHT"
+    elif rsi < 65:
+        return 55, "🟠 SLIGHTLY OVERBOUGHT"
+    elif rsi < 72:
+        return 68, "🟠 OVERBOUGHT"
+    elif rsi < 80:
+        return 78, "🔴 STRONGLY OVERBOUGHT"
     else:
-        return 85, "🔴 EXTREME OVERBOUGHT"
+        return 90, "🔴 PARABOLIC / UNSUSTAINABLE"
 
 def score_50w_ma_discount(discount):
     """Score 50 Week MA discount (lower = better)"""
