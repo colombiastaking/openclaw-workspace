@@ -40,6 +40,9 @@ def get_btc_signal():
         }
 
 def get_aave_position():
+    # Always refresh xpub scan first
+    run_command("python3 /home/raspberry/.openclaw/workspace/scripts/scan_xpub.py > /dev/null 2>&1")
+    
     output = run_command("cd /home/raspberry/.openclaw/workspace/aave-monitor && python3 btc_monitor.py")
     hf = 1.5; collateral_btc = 0; collateral_usd = 0; debt_usd = 0
     liq_price = 0; buffer_pct = 0; btc_price = 75000
