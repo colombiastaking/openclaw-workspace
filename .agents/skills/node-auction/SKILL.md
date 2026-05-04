@@ -18,15 +18,17 @@ Economic monitoring for Colombia Staking validator node decisions.
 EGLD_per_node = Total_Staked / Num_Nodes
 ```
 
-**Decision Rules:**
-- If `EGLD_per_node < Market_Threshold` → **REMOVE node** (unprofitable)
-- If `EGLD/(nodes+1) > Market_Threshold` → **ADD node** (economically viable)
-- Otherwise → **HOLD**
+**Notification Rules (20 EGLD Margin):**
 
-**User Threshold:** If margin > 20 EGLD, consider ADD action
+| Condition | Calculation | Action |
+|-----------|-----------|--------|
+| ADD alert | `EGLD/(nodes+1) > market + 20` | 🟢 Notify |
+| REMOVE alert | `EGLD/nodes < market` | 🔴 Notify |
+| HOLD | Neither above | 🟡 No notification |
 
-**Market Threshold** = The `qualifiedStake` of the lowest qualified auction node.
-This is what you need to stake to secure a validator slot.
+**Notification Threshold = market_price + 20 EGLD**
+
+This ensures you only get ADD alerts when you have a solid 20 EGLD margin above market price.
 
 ## Colombia Staking Config
 
@@ -58,46 +60,9 @@ This will:
 2. Fetch total staked amount from provider
 3. Fetch market threshold (lowest qualified node's qualifiedStake)
 4. Calculate EGLD per node
-5. Determine ADD/REMOVE/HOLD
-6. Print full report
-
-## Decision Thresholds
-
-| Condition | Action | Alert |
-|-----------|--------|-------|
-| `EGLD/nodes < market_threshold` | REMOVE | 🔴 Telegram alert |
-| `EGLD/(nodes+1) > market_threshold + 20 EGLD margin` | ADD | 🟢 Telegram alert |
-| `EGLD/(nodes+1) > market_threshold` but < 20 EGLD margin | HOLD (weak signal) | 🟡 No alert |
-| Both false | HOLD | No alert |
-
-## Cron Job
-
-**Job:** `node-alert-check` (OpenClaw cron)
-**Schedule:** Every hour at :00
-**Behavior:**
-- Runs `node_monitor.py`
-- If output says "HOLD" → sends nothing
-- If output says ADD with margin > 20 EGLD → sends Telegram alert to Sebas
-- If output says REMOVE → sends Telegram alert to Sebas
-
-## State File
-
-Check `/tmp/node_monitor_state.json` for last run data:
-
-```json
-{
-  "timestamp": "2026-05-04T13:12:00",
-  "total_staked": 182394.74,
-  "nodes": 48,
-  "egld_per_node": 3799.89,
-  "market_price": 3717.70,
-  "margin": 82.19,
-  "user_threshold": 20.0,
-  "can_add": true,
-  "need_remove": false,
-  "egld_price": 4.11
-}
-```
+5. Apply 20 EGLD margin rule
+6. Determine ADD/REMOVE/HOLD
+7. Print full report
 
 ## Example Output
 
@@ -106,7 +71,7 @@ Check `/tmp/node_monitor_state.json` for last run data:
 🔷 **COLOMBIA STAKING NODE MONITOR**
 🕐 2026-05-04 13:12 UTC
 
-💰 EGLD: $4.11 | BTC: $80,380
+💰 EGLD: $4.11
 
 📊 **STAKE:**
    Total: 182,394.74 EGLD
@@ -115,49 +80,51 @@ Check `/tmp/node_monitor_state.json` for last run data:
    Per node: 3,799.89 EGLD
 
 ⚡ **MARKET PRICE:** 3,717.70 EGLD
-   → Add if EGLD/(nodes+1) > 3,717.70 + 20 EGLD margin
-   → Remove if EGLD/nodes < 3,717.70
+   → Notify ADD if EGLD/(nodes+1) > 3,737.70 (market + 20 EGLD)
+   → Notify REMOVE if EGLD/nodes < 3,717.70
 
 💎 **CALCULATION:**
    182,394.74 / 48 = 3,799.89 EGLD/node
    182,394.74 / 49 = 3,722.34 EGLD/node
    Market price: 3,717.70 EGLD
+   Notification threshold: 3,737.70 EGLD (market + 20)
 
 🎯 **VERDICT:**
-   🟢 ADD: Can add 1 node (margin = 82.19 EGLD > 20 EGLD threshold)
+   🟡 HOLD: per_node_if_add (3,722.34) ≤ threshold (3,737.70)
+   Gap: 15.36 EGLD below 20 EGLD margin
 ━━━━━━━━━━━━━━━━━━━━
 ```
 
-## Margin Calculation
+## Decision Thresholds
 
 ```python
-margin = egld_per_node - market_price
-if margin > user_threshold:
-    alert = "🟢 ADD"
-elif margin < -user_threshold:
-    alert = "🔴 REMOVE"  
-else:
-    alert = "🟡 HOLD"
-```
+# 20 EGLD margin on top of market price
+NOTIFICATION_THRESHOLD = market_price + 20.0
 
-Default `user_threshold` = 20.0 EGLD
+if egld_if_add > NOTIFICATION_THRESHOLD:
+    action = "🟢 ADD ALERT"
+elif egld_per_node < market_price:
+    action = "🔴 REMOVE ALERT"
+else:
+    action = "🟡 HOLD (no alert)"
+```
 
 ## Important Notes
 
-1. **qualifiedStake vs stake:** The market threshold uses `qualifiedStake` field, NOT `stake + topUp`. These can differ significantly due to auction dynamics.
+1. **20 EGLD Buffer:** The notification only fires when the per-node value AFTER adding exceeds market price by at least 20 EGLD. This filters out minor fluctuations.
 
-2. **Queue Position:** Being in the auction list doesn't guarantee a slot. You need `qualifiedStake` >= the lowest qualified node.
+2. **qualifiedStake vs stake:** The market threshold uses `qualifiedStake` field, NOT `stake + topUp`. These can differ significantly due to auction dynamics.
 
-3. **48 Nodes Fixed:** For now, Colombia Staking operates exactly 48 nodes. The ADD calculation assumes adding one more (49).
+3. **Queue Position:** Being in the auction list doesn't guarantee a slot. You need `qualifiedStake` >= the lowest qualified node.
 
-4. **20 EGLD Threshold:** The notification only fires if margin > 20 EGLD. This prevents noise from minor fluctuations.
+4. **48 Nodes Fixed:** For now, Colombia Staking operates exactly 48 nodes. The ADD calculation assumes adding one more (49).
 
 ## API Sources
 
 - Identity: `https://api.multiversx.com/identities/colombiastaking`
 - Provider: `https://api.multiversx.com/providers/erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf`
 - Nodes: `https://api.multiversx.com/nodes?size=2000`
-- Prices: CoinGecko API
+- Prices: `https://api.coingecko.com/api/v3/simple/price?ids=elrond-erd-2&vs_currencies=usd`
 
 ## Troubleshooting
 
