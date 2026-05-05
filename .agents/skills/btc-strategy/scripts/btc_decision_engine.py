@@ -85,14 +85,17 @@ def get_dune_realized_price():
             
             if rows:
                 latest = rows[0]
-                realized_price = latest.get("REALIZED_PRICE", latest.get("realized_price", latest.get("price", None)))
-                timestamp = latest.get("time", latest.get("date", None))
-                
-                return {
-                    "realized_price": realized_price,
-                    "timestamp": timestamp,
-                    "source": "dune_onchain"
-                }, "success"
+                if isinstance(latest, dict):
+                    realized_price = latest.get("REALIZED_PRICE", latest.get("realized_price", latest.get("price", None)))
+                    if realized_price:
+                        timestamp = latest.get("time", latest.get("date", None))
+                        return {
+                            "realized_price": float(realized_price),
+                            "timestamp": timestamp,
+                            "source": "dune_onchain"
+                        }, "success"
+            
+            return None, "no_data"
         elif response.status_code == 401 or response.status_code == 403:
             return None, "auth_error"
         else:
