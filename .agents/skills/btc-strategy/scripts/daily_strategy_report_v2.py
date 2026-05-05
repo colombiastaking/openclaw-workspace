@@ -22,22 +22,50 @@ def get_btc_signal():
     try:
         with open('/tmp/btc_general_report.json', 'r') as f:
             data = json.load(f)
-            return data
-    except:
+            # Flatten summary into top level for compatibility
+            summary = data.get('summary', {})
+            result = {
+                'score': data.get('score', 50),
+                'recommendation': data.get('recommendation', 'NEUTRAL'),
+                'price': data.get('price', 75000),
+                'mvrv': summary.get('mvrv', 1.0),
+                'rsi': summary.get('rsi', 50),
+                'ma_discount': summary.get('discount_50w_ma', 0),
+                'fear_greed': summary.get('fear_greed', 50),
+                'cycle_days': summary.get('cycle_blocks', 0),
+                'etf_net_flow_7d': summary.get('etf_net_flow_7d', 0),
+                'macd_histogram': summary.get('macd_histogram', 0),
+                'bollinger_position': summary.get('bollinger_position', 0.5),
+                'pi_cycle_diff': summary.get('pi_cycle_diff', 0),
+                's2f_value': summary.get('s2f_value', 50),
+                'cycle_phase': summary.get('cycle_phase', 'UNKNOWN'),
+                'dca_amount_weekly': summary.get('dca_amount_weekly', 275),
+            }
+            return result
+    except Exception as e:
+        print(f"Error reading btc_general_report.json: {e}")
         return {
             'score': 50, 'recommendation': 'NEUTRAL', 'price': 75000,
             'mvrv': 1.0, 'rsi': 50, 'ma_discount': 0,
             'fear_greed': 50, 'cycle_days': 0,
-            'realized_price': 70000, 'realized_price_source': 'estimated',
-            'regime_current': 'UNKNOWN', 'regime_description': '',
-            'dca_multiplier': 1.0, 'borrow_allowed': True,
-            'repay_urgency': 'low', 'profit_taking': 'none',
-            'bull_signals': 0, 'bear_signals': 0,
-            'win_rate': '60-70%', 'timeframe': '6-18 months',
-            'bull_stage': 0, 'bull_action': 'ACCUMULATION ZONE',
-            'bull_description': 'All clear',
-            'bull_btc_sell_pct': 0, 'bull_debt_pay_pct': 0
+            'etf_net_flow_7d': 0, 'macd_histogram': 0,
+            'bollinger_position': 0.5, 'pi_cycle_diff': 0,
+            's2f_value': 50, 'cycle_phase': 'UNKNOWN',
+            'dca_amount_weekly': 275,
         }
+
+def get_ledger_btc():
+    """Get Ledger BTC from xpub scan."""
+    # Run xpub scan first
+    run_command("/usr/bin/python3 /home/raspberry/.openclaw/workspace/scripts/scan_xpub.py")
+    
+    # Read from btc-position.json
+    try:
+        with open('/home/raspberry/.openclaw/workspace/btc-position.json', 'r') as f:
+            pos = json.load(f)
+            return pos.get("btc_holding", 0)
+    except:
+        return 0
 
 def get_aave_position():
     output = run_command("cd /home/raspberry/.openclaw/workspace/aave-monitor && python3 btc_monitor.py")
@@ -65,12 +93,7 @@ def get_aave_position():
     if btc_price > 0 and liq_price > 0: buffer_pct = ((btc_price - liq_price) / btc_price) * 100
     ltv = (debt_usd / collateral_usd * 100) if collateral_usd > 0 else 0
     
-    ledger_btc = 0
-    try:
-        with open('/home/raspberry/.openclaw/workspace/btc-position.json', 'r') as f:
-            pos = json.load(f)
-            ledger_btc = pos.get("btc_holding", 0)
-    except: pass
+    ledger_btc = get_ledger_btc()
     
     return {
         'health_factor': hf, 'collateral_btc': collateral_btc,
@@ -126,9 +149,9 @@ def main():
 🎯 Score: {score}/100 — {rec}
 
 📈 Market
-• BTC: ${btc.get('price', 0):,.0f} | MVRV: {btc.get('mvrv', 0)}
-• RSI: {btc.get('rsi', 0)} | 50W MA: {btc.get('ma_discount', 0):+.1f}%
-• Fear & Greed: {btc.get('fear_greed', 50)}
+• BTC: ${btc.get('price', 0):,.0f} | MVRV: {btc.get('mvrv', 0):.2f}
+• RSI: {btc.get('rsi', 0):.1f} | 50W MA: {btc.get('ma_discount', 0):+.1f}%
+• Fear & Greed: {btc.get('fear_greed', 50)} | ETF 7d: {btc.get('etf_net_flow_7d', 0):+,.0f} BTC
 
 💰 Position
 • Ledger: {aave.get('ledger_btc', 0):.4f} BTC (${aave.get('ledger_btc', 0) * btc.get('price', 0):,.0f})

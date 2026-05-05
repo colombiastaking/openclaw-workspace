@@ -2,6 +2,24 @@
 
 ## ⚠️ CRITICAL: Keep this file ≤12,000 chars
 
+## Active Mission: Lagos Harbor Survey (2026-05)
+
+**Mission:** Snake Island Port Pre-Dredging Survey  
+**Vessel:** BITAM  
+**Client:** DEME / ITB Nigeria  
+**IHO Order:** Order 1a  
+**Hydrographer:** Sébastien (Cat A, 15 years)  
+**Assistant:** Alice (Mission Recorder)  
+**Status:** PRE-DEPLOYMENT
+
+**Project path:** `~/.openclaw/workspace/missions/2026-05-LAGOS-HARBOR-GABON/`  
+**Mission diary:** `MISSION-DIARY.md` (master log, auto-updated)  
+**Daily notes:** `daily-notes/YYYY-MM-DD/`
+
+**Alice's role:** Full-time mission assistant. Register all field data (photos, calibrations, sketches, benchmarks, systems), compile reports, maintain diary, flag missing info. Autonomous updates — Sebas feeds data, Alice organizes. Sebas is Cat A hydrographer — Alice follows technical decisions, asks only when genuinely unclear.
+
+---
+
 ## Kepler Proxy (Tax Tool)
 
 **Location:** `/home/raspberry/.openclaw/kepler/kepler-proxy.js`
@@ -19,16 +37,16 @@ Routes: `/api`, `/gateway`, `/es`, `/tax-query`, `/delegation`, `/images` → po
 
 ---
 
-## OpenClaw Agents (3-agent setup)
+## OpenClaw Agent Setup
 
-| Agent | Model | Role |
-|-------|-------|------|
-| **main** | minimax-m2.7:cloud | Wallet, chain, decisions |
-| **researcher** | kimi-k2.5:cloud | Data, reports, monitoring |
-| **coder** | glm-5.1:cloud | Debugging, heavy builds |
+**Single model:** `ollama/kimi-k2.6:cloud` — all tasks, no agent splitting.
 
-**Delegated to researcher:** BTC strategy (8 AM), COLS summary (1:15 PM), Network Explorer collector (hourly)
-**Delegated to coder:** Smart contracts, dApp frontend, complex debugging
+**Web search:** `ollama` (via `http://127.0.0.1:11434/api/experimental/web_search`) — default provider, enabled for all research queries.
+
+**Cron jobs run as subagents** (same model, isolated context):
+- BTC strategy (11 AM daily)
+- COLS distribution summary (~1:15 PM daily)
+- Network Explorer collector (hourly)
 
 ---
 

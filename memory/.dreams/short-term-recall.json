@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-26T23:29:35.622Z",
+  "updatedAt": "2026-05-04T18:30:03.916Z",
   "entries": {
     "memory:memory/2026-02-16.md:21:57": {
       "key": "memory:memory/2026-02-16.md:21:57",
@@ -133,18 +133,20 @@
       "endLine": 58,
       "source": "memory",
       "snippet": "- Added to MEMORY.md as standard method - Total: 130 stakers, 106,889.96 COLS staked - Address erd1eqwpvgc6hz7he8qdh4ja8nnm3azwd3ymstr05rjhpvx3dsz8tpkshxv4z0: 2,023.67 COLS (rank #8), not Gold Member ### Daily Distribution - DAO: 13.51 COLS - BONUS: 27.06 COLS (107 recipients) - GOLD: 4.89 COLS (21 recipients) - Total: 45.46 COLS ### GitHub Commit - Committed: \"feat: Revamp leaderboard with big animal cards and glassmorphism\" ### Additional Styling Work - Stake page: Modern compact design with strength pills, quick stats, wallet card - ClaimColsButton fix: Added back to Stake page (was missing in Stake.tsx) - XPortal Hub compatibility issue: Any CSS changes >~4KB cause white screen on XPo",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.766231583979075,
-      "maxScore": 0.766231583979075,
+      "totalScore": 1.766231583979075,
+      "maxScore": 1,
       "firstRecalledAt": "2026-04-11T23:10:06.784Z",
-      "lastRecalledAt": "2026-04-11T23:10:06.784Z",
+      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
       "queryHashes": [
-        "fb25eceb5c78"
+        "fb25eceb5c78",
+        "3ec5d092945c"
       ],
       "recallDays": [
-        "2026-04-11"
+        "2026-04-11",
+        "2026-05-04"
       ],
       "conceptTags": [
         "memory.md",
@@ -515,18 +517,20 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "### MSAL OAuth2 Setup (APPROVED - NOT YET IMPLEMENTED) - Need to install MSAL Python library - Do one proper OAuth2 auth flow to get refresh_token - Enables automatic token refresh for Teams - Current token expires ~89 min, device code flow doesn't give refresh_token ### Distribution Script Bug (March 27) - March 27 bonus didn't process correctly - Script: DAPP-V3/scripts/execute_bonus_distribution_v3.cjs - Needs investigation ### Kylian Plan - Current plan: \"Semana 24-27 de Marzo\" from March 20 - Token expired Friday, couldn't verify new plan - System is automated - Friday 19:30 sends weekly plan ## Files Created/Modified Today - `/home/raspberry/.openclaw/alice-backup/backup.sh` (rewrit",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1,
+      "totalScore": 2,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:34:59.584Z",
-      "lastRecalledAt": "2026-04-15T01:34:59.584Z",
+      "lastRecalledAt": "2026-05-04T14:05:42.042Z",
       "queryHashes": [
-        "a8e1f7c140fb"
+        "a8e1f7c140fb",
+        "42a3a2cd93f8"
       ],
       "recallDays": [
-        "2026-04-14"
+        "2026-04-14",
+        "2026-05-04"
       ],
       "conceptTags": [
         "backup",
@@ -546,21 +550,24 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "# March 8, 2026 ## Aave Monitor Setup - Created Aave V3 position monitor for Sebas's WBTC/USDC loan - Wallet: 0xb88da656FEe3CA19A70993684aDF1A7409ac37E6 - Position: 0.0692 WBTC collateral, $1,720 USDC borrowed - Health factor: ~2.10, Liquidation price: ~$31,887 - Using 78% liquidation threshold (Sebas requested) - Daily reports at 9AM, alerts every 6 hours ## Twitter/X Attempts - Tried to set up Twitter API posting - Free tier no longer allows posting tweets - Managed to read tweets via Nitter RSS (19 tweets analyzed) - Saved style guide to tweets/style-guide.md - Twitter credentials secured (removed from workspace) ## Agent-Browser (Vercel) - Installed agent-browser CLI on Pi (npm instal",
-      "recallCount": 3,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3,
+      "totalScore": 5,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:34:59.584Z",
-      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "lastRecalledAt": "2026-05-04T15:00:17.774Z",
       "queryHashes": [
         "a8e1f7c140fb",
         "26a7539b9b40",
-        "6e2dd6abbc38"
+        "6e2dd6abbc38",
+        "fd89f5bf0cbb",
+        "75fe1dce638c"
       ],
       "recallDays": [
         "2026-04-14",
-        "2026-04-26"
+        "2026-04-26",
+        "2026-05-04"
       ],
       "conceptTags": [
         "wbtc/usdc",
@@ -611,18 +618,20 @@
       "endLine": 39,
       "source": "memory",
       "snippet": "# 2026-02-28 ## Alicia Improvements ### Web Search - Working via system curl (Node.js HTTP doesn't work on Pi) - Uses Bing News RSS ### COLS Stakers Fix - Shows all 128 (not limited to 20) - Added \"all\", \"every\", \"complete\" keywords ### Bulk Delegators - Fetch all delegators for ANY provider - Provider name lookup: Colombia Staking, Figment, Binance, etc. - Fixed field name: `stake` not `userActiveStake` ### New Queries Added - Gas/transaction fees - Minimum/maximum stake - Unstake period (10 days) - Token supply (circulating) - Token metadata - Provider comparison ### GitHub - Push working as SebastienLombard ### Alicia is NOT an OpenClaw sub-agent - Standalone Node.js script - Uses",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1,
+      "totalScore": 2,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:36:16.227Z",
-      "lastRecalledAt": "2026-04-15T01:36:16.227Z",
+      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
       "queryHashes": [
-        "f6bae5966fe8"
+        "f6bae5966fe8",
+        "1d1ff610f015"
       ],
       "recallDays": [
-        "2026-04-14"
+        "2026-04-14",
+        "2026-05-04"
       ],
       "conceptTags": [
         "node.js",
@@ -642,18 +651,20 @@
       "endLine": 515,
       "source": "memory",
       "snippet": "- All recipients now received correct amounts ### TWO DAILY DISTRIBUTIONS AT 13:00 BOGOTA **1. DAO Pool (33.3% of buyback)** - Single transaction to PeerMe smart contract - Contract: `erd1qqq...tsv6a9k0` - Calls `distribute()` function with entity argument - Distributed proportionally to ALL COLS stakers via PeerMe **2. BONUS Pool (66.7% of buyback)** - Individual ESDT transfers to each eligible address - Eligibility: Must have BOTH EGLD delegated AND COLS staked - Calculation: Based on normalized ratio formula **Scripts:** - `/home/raspberry/.openclaw/workspace/colombia-staking-dapp/scripts/execute_distribution.mjs` - Main executor - `/home/raspberry/.openclaw/workspace/colombia-staking",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1,
+      "totalScore": 2,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:36:16.227Z",
-      "lastRecalledAt": "2026-04-15T01:36:16.227Z",
+      "lastRecalledAt": "2026-05-04T14:05:42.042Z",
       "queryHashes": [
-        "f6bae5966fe8"
+        "f6bae5966fe8",
+        "42a3a2cd93f8"
       ],
       "recallDays": [
-        "2026-04-14"
+        "2026-04-14",
+        "2026-05-04"
       ],
       "conceptTags": [
         "33.3",
@@ -799,18 +810,20 @@
       "endLine": 87,
       "source": "memory",
       "snippet": "| `Website/esp/node-status.html` | Real-time node monitoring (Spanish) | | `Website/fr/node-status.html` | Real-time node monitoring (French) | | `Website/*/status.json` | Node status data (auto-generated) | | `/home/raspberry/node_monitor.sh` | Updated with JSON output | | `/home/raspberry/update_node_status.sh` | Uploads status.json to FTP | ### Node Monitoring Features - **4 Nodes Monitored**: Shard0, Shard1, Shard2, Metachain - **Hardware Specs Displayed**: - Shard0: Intel i5-10400, 6 Cores, 2.9GHz, 16GB RAM - Shard1: Intel i7-10700, 8 Cores, 2.9GHz, 16GB RAM - Shard2: Intel i5-10400, 6 Cores, 2.9GHz, 16GB RAM - Metachain: Intel i5-12600H, 12 Cores, 4.5GHz, 24GB RAM - **Real-tim",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1,
+      "totalScore": 2,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T02:03:44.018Z",
-      "lastRecalledAt": "2026-04-15T02:03:44.018Z",
+      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
       "queryHashes": [
-        "26a7539b9b40"
+        "26a7539b9b40",
+        "1d1ff610f015"
       ],
       "recallDays": [
-        "2026-04-14"
+        "2026-04-14",
+        "2026-05-04"
       ],
       "conceptTags": [
         "website/esp/node-status.html",
@@ -1103,6 +1116,484 @@
         "390.7",
         "0.365",
         "wallet"
+      ]
+    },
+    "memory:memory/2026-04-14.md:243:268": {
+      "key": "memory:memory/2026-04-14.md:243:268",
+      "path": "memory/2026-04-14.md",
+      "startLine": 243,
+      "endLine": 268,
+      "source": "memory",
+      "snippet": "- Sigma v2 has internal normalization that breaks pixel-perfect positioning - Canvas 2D approach: latLngToContainerPoint() → pixel coords → ctx.arc() - 4,096 nodes geolocated via ip-api.com (2257 IP + 938 region-fallback) - 1,200 nodes still without coords (Unknown region, no public IP) - Landing page restored from b2ad148 (Colombia Staking branded) - Fix committed: c960b19 (landing page restore), pushed to master - Pi needs `git pull` to deploy c960b19 — couldn't SSH (Pi not reachable from this network) **BTC Strategy:** - Fixed stale cache bug: cron was running BEFORE Dune ETF data publishes (8 AM vs 10 AM) - Rescheduled daily-btc-strategy cron from 8 AM → 11 AM - ETF cache had duplicate",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T13:58:54.326Z",
+      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
+      "queryHashes": [
+        "a36323ed85c2",
+        "fd89f5bf0cbb",
+        "1d1ff610f015"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "network",
+        "pixel-perfect",
+        "ctx.arc",
+        "ip-api.com",
+        "region-fallback",
+        "daily-btc-strategy",
+        "sigma",
+        "has"
+      ]
+    },
+    "memory:memory/2026-04-18.md:219:251": {
+      "key": "memory:memory/2026-04-18.md:219:251",
+      "path": "memory/2026-04-18.md",
+      "startLine": 219,
+      "endLine": 251,
+      "source": "memory",
+      "snippet": "- Weekly report sent to Telegram ### Network Explorer — 08:45 AM Collector Run Moonlorian IP `88.99.253.20` successfully geolocated (Falkenstein, Germany / 50.4777, 12.3649 / Hetzner). 22/30 moonlorian nodes now with geo. Remaining 8 have empty `ips[]` — genuinely invisible to observers. 4525 nodes with geo in `network-data.json`. ## Pending Issues (Updated 2026-04-18 17:00) ### Open - DAO distribution contract failure — PeerMe contract `distribute` call format issue - Network Explorer: collector scope bug not yet confirmed fixed (functions may still be inside buildOutput — fix was attempted but unclear if successful) ### Resolved Today - ✅ Wallet key format (PEM → raw hex) - ✅ Wrong wal",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T13:58:54.326Z",
+      "lastRecalledAt": "2026-05-04T13:58:54.326Z",
+      "queryHashes": [
+        "a36323ed85c2"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "network",
+        "88.99.253.20",
+        "50.4777",
+        "12.3649",
+        "22/30",
+        "network-data.json",
+        "weekly",
+        "report"
+      ]
+    },
+    "memory:memory/2026-02-17.md:31:80": {
+      "key": "memory:memory/2026-02-17.md:31:80",
+      "path": "memory/2026-02-17.md",
+      "startLine": 31,
+      "endLine": 80,
+      "source": "memory",
+      "snippet": "1. ColombiaStakingAnn (-1001656543676) - English 2. colombiastakingesp (-1003060491428) - Spanish 3. colmbiastakingfr (-1002660077574) - French 4. Skip ColombiaStakingChat - they get from announcement channel ## Cron Jobs Updated ### COLS Daily Distribution - Schedule: 13:00 daily (America/Bogota) - Updated to use `run_distribution.sh` wrapper - Added 600s timeout - Delivery: Telegram → Sebas (1144365829) - Previous run: failed (timeout) - now fixed ## Telegram Config Updated Added ColombiaStakingAnn channel to allowlist: - ID: -1001656543676 - Now can post to all 4 Colombia Staking groups ## Announcements Posted SDK5 upgrade announcement posted to: - ColombiaStakingAnn (EN) -",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T13:58:54.326Z",
+      "lastRecalledAt": "2026-05-04T15:00:17.774Z",
+      "queryHashes": [
+        "a36323ed85c2",
+        "fd89f5bf0cbb",
+        "75fe1dce638c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "america/bogota",
+        "run-distribution.sh",
+        "colombiastakingann",
+        "english",
+        "colombiastakingesp",
+        "spanish",
+        "colmbiastakingfr",
+        "french"
+      ]
+    },
+    "memory:memory/2026-03-30.md:36:58": {
+      "key": "memory:memory/2026-03-30.md:36:58",
+      "path": "memory/2026-03-30.md",
+      "startLine": 36,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "| x402 | HTTP-native payments (402 Payment Required) | Coinbase, adapted for MVX | | UCP | Universal Commerce Protocol | Google | | ACP | Agent Commerce Protocol — programmatic checkout | MultiversX | | AP2 | Agent Payments Protocol — delegated authority mandates | Google | | MCP | Model Context Protocol — AI→blockchain connectivity | Linux Foundation | | MX-8004 | Agent identity standard — Dynamic NFTs + trust + x402 payment rails | MultiversX (inspired by ERC-8004) | **What Colombia Staking could use (prioritized):** 1. **MCP Server** — Connect Alice to MultiversX chain data via typed MCP functions 2. **x402 for DApp API** — Monetize API calls: external agents pay MicroEGLD per request 3.",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T13:58:54.326Z",
+      "lastRecalledAt": "2026-05-04T15:00:17.774Z",
+      "queryHashes": [
+        "a36323ed85c2",
+        "fd89f5bf0cbb",
+        "75fe1dce638c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "http-native",
+        "mx-8004",
+        "erc-8004",
+        "x402",
+        "http",
+        "native",
+        "payments",
+        "payment"
+      ]
+    },
+    "memory:memory/2026-02-17.md:71:129": {
+      "key": "memory:memory/2026-02-17.md:71:129",
+      "path": "memory/2026-02-17.md",
+      "startLine": 71,
+      "endLine": 129,
+      "source": "memory",
+      "snippet": "- `multiversx/mx-agent-standard` - Agent standards (ACP specs) - `multiversx/mx-a2a-x402` - A2A + x402 integration ### My Recommendations for Colombia Staking **Short-term (Quick Wins):** 1. **MCP** - Connect DApp to AI tools, enable agents to query staking data 2. **x402** - Add \"instant stake\" micropayments **Medium-term:** 1. Agent marketplace with AP2 payments 2. Premium AI features (advisor, notifications, analytics) **Long-term:** - Agent Identity (MX-8004) for verified node operators - Host MCP servers for staking data - Build agent services --- ## Wallet State After Distribution - Alice COLS: 154.82 (was 169.83) - Alice EGLD: 0.3876 - Nonce: 846 ## Last Distribution - Date: 20",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:05:42.023Z",
+      "lastRecalledAt": "2026-05-04T15:00:17.774Z",
+      "queryHashes": [
+        "fd89f5bf0cbb",
+        "75fe1dce638c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "multiversx/mx-agent-standard",
+        "multiversx/mx-a2a-x402",
+        "short-term",
+        "medium-term",
+        "long-term",
+        "mx-8004",
+        "154.82",
+        "169.83"
+      ]
+    },
+    "memory:memory/2026-04-26.md:57:90": {
+      "key": "memory:memory/2026-04-26.md:57:90",
+      "path": "memory/2026-04-26.md",
+      "startLine": 57,
+      "endLine": 90,
+      "source": "memory",
+      "snippet": "**Tax Report** (`/tax-query`) working correctly — returns empty for Alice's address because she has no delegation history (expected behavior). **Bug also fixed:** `NameError: name 'days' is not defined` in `btc_decision_engine.py` — variable `days` was used but undefined (should reference `market_data['blocks_since_halving']`). ## Backup Upgrade Plan (Today) User lost gateway yesterday and had to rebuild everything manually. Wants a **comprehensive self-contained GitHub backup** so a fresh OpenClaw install recovers in minutes without manual reconfiguration. **Gaps identified in current backup:** - `.env` (all secrets: FTP, cPanel, Pushover, Kepler API key) - Wallet PEM (`.private_key`) -",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:05:42.042Z",
+      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
+      "queryHashes": [
+        "42a3a2cd93f8",
+        "1d1ff610f015"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "backup",
+        "gateway",
+        "tax-query",
+        "btc-decision-engine.py",
+        "market-data",
+        "blocks-since-halving",
+        "self-contained",
+        "private-key"
+      ]
+    },
+    "memory:memory/2026-03-07.md:1:41": {
+      "key": "memory:memory/2026-03-07.md:1:41",
+      "path": "memory/2026-03-07.md",
+      "startLine": 1,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "# March 7, 2026 - Memory Log ## Key Events ### Gmail Tokens Fixed - Found missing `sebas-gmail-tokens.json` in `/home/raspberry/.openclaw/alice-backup/tokens/` - Copied to workspace: `/home/raspberry/.openclaw/workspace/sebas-gmail-tokens.json` - Tested Gmail API successfully - now can monitor school emails ### COLS Distribution - Sebas sent 200 COLS extra (total: 336.23 → after distribution: ~294 COLS remaining) - Distribution ran successfully: - DAO: 12.42 COLS - BONUS: 24.88 COLS (104 recipients) - GOLD: 4.45 COLS (21 recipients) ### Node Monitoring Fixed - Discovered observer REST API still working on ports 8008 (except Shard0) - Fixed `marc-health.sh` to fetch real CPU/RAM fro",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:05:42.042Z",
+      "lastRecalledAt": "2026-05-04T14:05:42.042Z",
+      "queryHashes": [
+        "42a3a2cd93f8"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "backup",
+        "sebas-gmail-tokens.json",
+        "home/raspberry",
+        "openclaw/alice-backup/tokens",
+        "336.23",
+        "12.42",
+        "24.88",
+        "4.45"
+      ]
+    },
+    "memory:memory/2026-03-06.md:37:55": {
+      "key": "memory:memory/2026-03-06.md:37:55",
+      "path": "memory/2026-03-06.md",
+      "startLine": 37,
+      "endLine": 55,
+      "source": "memory",
+      "snippet": "- Website https://colombia-staking.com/node-status.html showed old data (epoch 2038) - Fixed by adding automatic upload of status.json to health check script - Upload to both: colombia-staking.com and staking.colombia-staking.com - Fixed timestamp format: JavaScript expects milliseconds, so multiplied by 1000 ### Key Files Modified - `/home/raspberry/.openclaw/workspace/marc/marc-health.sh` - `/home/raspberry/.openclaw/workspace/alice-backup/marc/marc-health.sh` - All distribution scripts in `colombia-staking-dapp/scripts/` - Monitoring scripts ## Kylian - Materiales San Patricio (17 marzo) De parte de Sebas: - Impresión cartulina café clara (Google Drive) - Tijeras punta Roma - Lana café",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:05:42.042Z",
+      "lastRecalledAt": "2026-05-04T14:05:42.042Z",
+      "queryHashes": [
+        "42a3a2cd93f8"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "backup",
+        "status.json",
+        "colombia-staking.com",
+        "staking.colombia-staking.com",
+        "home/raspberry",
+        "colombia-staking-dapp/scripts",
+        "website",
+        "https"
+      ]
+    },
+    "memory:memory/2026-04-18.md:328:359": {
+      "key": "memory:memory/2026-04-18.md:328:359",
+      "path": "memory/2026-04-18.md",
+      "startLine": 328,
+      "endLine": 359,
+      "source": "memory",
+      "snippet": "User abandoned the node-dashboard project at 18:29. All traces removed: - Service stopped: `sudo systemctl stop node-dashboard` - Service disabled: `sudo systemctl disable node-dashboard` - Service file removed: `/etc/systemd/system/node-dashboard.service` - Files left in workspace (`/home/raspberry/.openclaw/workspace/node-dashboard/`) for potential future use cloudflared config was NOT modified — `nodes.colombia-staking.co → localhost:3001` route was already removed during earlier cleanup. ## Daily Summary (2026-04-18) ### Resolved - ✅ COLS distribution wallet key (PEM → raw hex, correct key found) - ✅ MCP server SDK re-installed - ✅ BONUS/GOLD distributions confirmed on-chain (104 + 21",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:11:08.440Z",
+      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "queryHashes": [
+        "4dd5cb4a0c02",
+        "5146f12c8337",
+        "3ec5d092945c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "node-dashboard",
+        "home/raspberry",
+        "nodes.colombia-staking.co",
+        "re-installed",
+        "bonus/gold",
+        "on-chain",
+        "abandoned",
+        "node"
+      ]
+    },
+    "memory:memory/2026-04-18.md:294:333": {
+      "key": "memory:memory/2026-04-18.md:294:333",
+      "path": "memory/2026-04-18.md",
+      "startLine": 294,
+      "endLine": 333,
+      "source": "memory",
+      "snippet": "- A record → original CDN IP `172.67.133.69` → Error 1000 (same) ### Root Cause The tunnel's DNS is managed automatically by Cloudflare when you add a route via **Networks → Tunnels → Public Hostname** in the dashboard. Manual A records conflict with this. ### Solution 1. Deleted all manual A records from Cloudflare DNS 2. Removed tunnel route from dashboard 3. Re-added tunnel route: `colombia-staking.co` → `http://localhost:3000` 4. Cloudflare automatically recreated the proper CNAME/record ### Pi DNS Fix (Parallel Issue) systemd-resolved was routing DNS through router `192.168.0.1`, which wasn't forwarding queries for `colombia-staking.co` correctly. Changed `/etc/systemd/resolved.conf`",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:11:08.440Z",
+      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "queryHashes": [
+        "4dd5cb4a0c02",
+        "5146f12c8337",
+        "3ec5d092945c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "network",
+        "router",
+        "172.67.133.69",
+        "re-added",
+        "colombia-staking.co",
+        "cname/record",
+        "systemd-resolved",
+        "192.168.0.1"
+      ]
+    },
+    "memory:memory/2026-03-06.md:1:42": {
+      "key": "memory:memory/2026-03-06.md:1:42",
+      "path": "memory/2026-03-06.md",
+      "startLine": 1,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "# March 6, 2026 ## API/Indexer Cleanup Day ### Bathymetry CSV Conversion - Sebas sent 3 images of bathymetry survey tables (bus schedules format) - Extracted to CSV files (survey_table_1.csv, survey_table_2.csv, survey_table_3.csv) ### API Server Issues & Full Cleanup - API on 192.168.0.120 was down (500 error) - Disk was 100% full - found 814GB in PM2 logs (`~/.pm2/logs/mx-api-out.log`) - Freed 814GB by deleting PM2 logs - Nodes were syncing, so API couldn't start **Decision:** Completely uninstall API, ElasticSearch, Indexer, Gateway ### Uninstall Actions 1. ✅ Freed disk space (814GB PM2 logs) 2. ✅ Removed directories: mx-api-service, mx-chain-es-indexer-go, mx-chain-proxy-go 3. ✅ Sto",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:13:37.013Z",
+      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "queryHashes": [
+        "5146f12c8337",
+        "3ec5d092945c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "gateway",
+        "api/indexer",
+        "survey-table-1.csv",
+        "survey-table-2.csv",
+        "survey-table-3.csv",
+        "192.168.0.120",
+        "pm2/logs/mx-api-out.log",
+        "mx-api-service"
+      ]
+    },
+    "memory:memory/2026-02-23.md:1:46": {
+      "key": "memory:memory/2026-02-23.md:1:46",
+      "path": "memory/2026-02-23.md",
+      "startLine": 1,
+      "endLine": 46,
+      "source": "memory",
+      "snippet": "# Session: 2026-02-23 17:45 UTC ## Work Done Today ### MultiversX Local Gateway (Proxy) Setup Successfully installed and configured mx-chain-proxy-go on 192.168.0.120: 1. **Installed Proxy** on port 8079 2. **Key insight**: Each observer is on separate machine - must connect via nginx (port 8008), not directly to observer (8080) 3. **Final working config**: Proxy → nginx (8008) → observer nodes (shards 0,1,2,meta) 4. **Elasticsearch**: Configured external.toml to connect to 192.168.0.120:9200 ### Distribution Scripts - Local First Updated scripts to prioritize local infrastructure: 1. **calculate_distribution_v4.mjs**: Changed PRIMARY_GATEWAY from `http://192.168.0.120/gateway` to `ht",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T14:14:13.016Z",
+      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "queryHashes": [
+        "3ec5d092945c"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "gateway",
+        "mx-chain-proxy-go",
+        "192.168.0.120",
+        "external.toml",
+        "calculate-distribution-v4.mjs",
+        "primary-gateway",
+        "192.168.0.120/gateway",
+        "utc"
+      ]
+    },
+    "memory:memory/2026-02-26.md:1:43": {
+      "key": "memory:memory/2026-02-26.md:1:43",
+      "path": "memory/2026-02-26.md",
+      "startLine": 1,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "# February 26, 2026 ## Colombia Staking DApp Chat with AI ### Alice Bot Upgraded to AI - Connected DApp chat widget to Ollama AI (minimax-m2.5:cloud) - Full AI-powered conversations now possible - Security: Restricted system prompt - cannot execute commands - Access: 200+ COLS staked required - Uses cached stakers from distribution scripts ### Files - API: `~/.openclaw/workspace/colombia-staking-dapp/scripts/dapp-chat-api.mjs` - DApp Widget: `src/components/ChatWidget.tsx` ### Deployment - DApp: https://staking.colombia-staking.com - Bot API: https://colombia-staking.co (via Cloudflare tunnel) - Systemd: colombia-chat-api.service ### Mobile Chat Widget - Fixed position: top-right below",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T15:11:12.321Z",
+      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
+      "queryHashes": [
+        "1d1ff610f015"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "minimax-m2.5",
+        "ai-powered",
+        "src/components/chatwidget.tsx",
+        "staking.colombia-staking.com",
+        "colombia-staking.co",
+        "colombia-chat-api.service",
+        "top-right",
+        "february"
+      ]
+    },
+    "memory:memory/2026-04-26.md:33:60": {
+      "key": "memory:memory/2026-04-26.md:33:60",
+      "path": "memory/2026-04-26.md",
+      "startLine": 33,
+      "endLine": 60,
+      "source": "memory",
+      "snippet": "**Key insight:** The raw hex key was preserved in memory because it was extracted from `secrets.enc` on 2026-04-18. The wallet file got re-encrypted later but the hex was already saved. ## alice-backup Repo Password Puzzle - `.backup_password` = `iVP6!fphj@` — local-only (never committed to git) - `alice_config.enc` + `google-tokens.enc` decrypt with this password - `wallet.tar.enc` + `wallet-backup/.private_key.enc` do NOT decrypt (created before password was set/changed) - `.private_key.enc` is only 144 bytes — not a real private key, probably encrypted metadata **Conclusion:** Wallet backup from April 24 uses a different password. The raw hex key in memory is the source of truth. ## W",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T15:11:12.321Z",
+      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
+      "queryHashes": [
+        "1d1ff610f015"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "backup",
+        "secrets.enc",
+        "re-encrypted",
+        "alice-backup",
+        "backup-password",
+        "local-only",
+        "alice-config.enc",
+        "google-tokens.enc"
+      ]
+    },
+    "memory:memory/2026-02-16.md:405:451": {
+      "key": "memory:memory/2026-02-16.md:405:451",
+      "path": "memory/2026-02-16.md",
+      "startLine": 405,
+      "endLine": 451,
+      "source": "memory",
+      "snippet": "| EN | ES | FR | |----|----|----| | Home | Inicio | Accueil | | COLS Token | Token COLS | Jeton COLS | | MultiversX | MultiversX | MultiversX | | Xportal | Xportal | Xportal | | Nodes | Nodos | Nœuds | | About | Nosotros | À Propos | | FAQ | FAQ | FAQ | **File:** `Website/*/js/unified-header.js` ### Footer Telegram Button Removed ✅ Removed Telegram bubble from footer on all landing pages (EN, ES, FR). - File: `Website/*/js/telegram-widget.js` - empty placeholder ### CRON Jobs Updated ✅ **COLS Daily Distribution Job:** - Job ID: `a6989f80-838f-4944-87b9-23879b0e857e` - Schedule: Daily at 1:00 PM Bogota time - Delivery: WhatsApp to `120363424223798013@g.us` - Script: `colombia-staking-dapp",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-04T18:30:03.916Z",
+      "lastRecalledAt": "2026-05-04T18:30:03.916Z",
+      "queryHashes": [
+        "6c73f906903a"
+      ],
+      "recallDays": [
+        "2026-05-04"
+      ],
+      "conceptTags": [
+        "js/unified-header.js",
+        "js/telegram-widget.js",
+        "g.us",
+        "colombia-staking-dapp",
+        "home",
+        "inicio",
+        "accueil",
+        "cols"
       ]
     }
   }
