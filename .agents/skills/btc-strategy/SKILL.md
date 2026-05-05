@@ -315,7 +315,7 @@ Every 3 months, analyze:
 4. Update version number
 5. Push to GitHub with commit message
 
-**Current Version:** v8.0: Simplified daily report format + auto xpub scanning for Ledger balance accuracy (April 2026)
+**Current Version:** v8.1: Dune realized price fix + ETF cache restoration + data parsing fix (May 2026)
 - v5.0: Weekly candles (long-term focus)
 - v5.1: Research-based weights
 - v5.2: Professional advisory format
@@ -336,7 +336,8 @@ Every 3 months, analyze:
 - v7.8: 20-level DCA/profit-taking table via dca_lookup.py - smooth transitions
 - v7.9: Smoothed profit-taking + €1,100/month budget (April 2026)
 - v7.9a: Granular 10-step scoring + historically-corrected cycle timing
-- **v8.0: Simplified daily report + auto xpub Ledger scanning**
+- v8.0: Simplified daily report + auto xpub Ledger scanning
+- **v8.1: Fixed Dune realized price parsing + restored ETF cache + corrected v2 script data access**
 
 ---
 
