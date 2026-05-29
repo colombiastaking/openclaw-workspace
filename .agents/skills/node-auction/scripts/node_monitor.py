@@ -49,11 +49,14 @@ def get_market_threshold():
     """Get lowest qualified stake from auction list."""
     try:
         r = requests.get(f"{API_BASE}/nodes?from=0&size=2000&auctionList=true", timeout=30)
-        data = r.json()
-        nodes = data.get('nodes', [])
+        nodes = r.json()
+        
+        # API returns list directly, not dict with 'nodes' key
+        if isinstance(nodes, dict):
+            nodes = nodes.get('nodes', [])
         
         # Filter qualified nodes in auction
-        qualified = [n for n in nodes if n.get('auctionQualified', False)]
+        qualified = [n for n in nodes if isinstance(n, dict) and n.get('auctionQualified', False)]
         if not qualified:
             return None
         

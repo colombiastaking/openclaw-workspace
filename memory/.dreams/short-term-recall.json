@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-04T18:30:03.916Z",
+  "updatedAt": "2026-05-27T12:37:53.943Z",
   "entries": {
     "memory:memory/2026-02-16.md:21:57": {
       "key": "memory:memory/2026-02-16.md:21:57",
@@ -133,20 +133,22 @@
       "endLine": 58,
       "source": "memory",
       "snippet": "- Added to MEMORY.md as standard method - Total: 130 stakers, 106,889.96 COLS staked - Address erd1eqwpvgc6hz7he8qdh4ja8nnm3azwd3ymstr05rjhpvx3dsz8tpkshxv4z0: 2,023.67 COLS (rank #8), not Gold Member ### Daily Distribution - DAO: 13.51 COLS - BONUS: 27.06 COLS (107 recipients) - GOLD: 4.89 COLS (21 recipients) - Total: 45.46 COLS ### GitHub Commit - Committed: \"feat: Revamp leaderboard with big animal cards and glassmorphism\" ### Additional Styling Work - Stake page: Modern compact design with strength pills, quick stats, wallet card - ClaimColsButton fix: Added back to Stake page (was missing in Stake.tsx) - XPortal Hub compatibility issue: Any CSS changes >~4KB cause white screen on XPo",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.766231583979075,
+      "totalScore": 2.766231583979075,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-11T23:10:06.784Z",
-      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
       "queryHashes": [
         "fb25eceb5c78",
-        "3ec5d092945c"
+        "3ec5d092945c",
+        "1374ecccd6a9"
       ],
       "recallDays": [
         "2026-04-11",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-27"
       ],
       "conceptTags": [
         "memory.md",
@@ -197,20 +199,22 @@
       "endLine": 128,
       "source": "memory",
       "snippet": "- Removed \"node-daily-report\" (duplicate of \"node-alert-check\") **Sebas Requested Restoration:** - \"BTC AI Daily Strategy\" restored (disabled) - different output format - \"node-daily-report\" restored (disabled) - different output format **Comparison of Two 8AM BTC Strategy Crons:** | Feature | Daily Strategy Report | BTC AI Daily Strategy | |---------|----------------------|----------------------| | Status | ENABLED | DISABLED | | Session | Isolated | Main session | | Take Profit | Not explicit | Yes ($80K+, $100K+ triggers) | | Watch Levels | No | Yes | | Aave Script | btc_monitor.py | monitor.py + btc_monitor.py | **Current Active Crons (12 total):** 1. btc-price-alert - Every hour (BT",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.8327100156842282,
+      "totalScore": 2.832710015684228,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-12T18:39:50.485Z",
-      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "lastRecalledAt": "2026-05-06T22:43:25.519Z",
       "queryHashes": [
         "7f273cb50c59",
-        "6e2dd6abbc38"
+        "6e2dd6abbc38",
+        "a64170aa27cc"
       ],
       "recallDays": [
         "2026-04-12",
-        "2026-04-26"
+        "2026-04-26",
+        "2026-05-06"
       ],
       "conceptTags": [
         "node-daily-report",
@@ -393,18 +397,20 @@
       "endLine": 86,
       "source": "memory",
       "snippet": "Pending: `app.js` (D3 simulation), `style.css` (styling), `server/collector.js` (needs full data collection), and running the collector to generate `data/network-data.json`. ## Session 3 (Afternoon - ~14:30-15:11) ### Sigma.js v3 WebGL Upgrade (Network Explorer v3) Building new network explorer using sigma.js v3 + graphology + ForceAtlas2 (replaced D3.js bubble map). **Key files:** - `public/app.js` — NetworkExplorer class (ESM, dynamic imports) - `public/index.html` — HTML shell - `server/collector.js` — data collection from public API + local nodes - `data/network-data.json` — cached data (generated hourly) **Sigma.js v3 migration:** - Uses `sigma-core` + `sigma-react` from esm.sh CDN",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.8784722993488069,
-      "maxScore": 0.8784722993488069,
+      "totalScore": 1.878472299348807,
+      "maxScore": 1,
       "firstRecalledAt": "2026-04-13T11:02:05.676Z",
-      "lastRecalledAt": "2026-04-13T11:02:05.676Z",
+      "lastRecalledAt": "2026-05-17T19:03:42.213Z",
       "queryHashes": [
-        "9b07edfcc624"
+        "9b07edfcc624",
+        "1fe69f6f546f"
       ],
       "recallDays": [
-        "2026-04-13"
+        "2026-04-13",
+        "2026-05-17"
       ],
       "conceptTags": [
         "network",
@@ -517,20 +523,22 @@
       "endLine": 62,
       "source": "memory",
       "snippet": "### MSAL OAuth2 Setup (APPROVED - NOT YET IMPLEMENTED) - Need to install MSAL Python library - Do one proper OAuth2 auth flow to get refresh_token - Enables automatic token refresh for Teams - Current token expires ~89 min, device code flow doesn't give refresh_token ### Distribution Script Bug (March 27) - March 27 bonus didn't process correctly - Script: DAPP-V3/scripts/execute_bonus_distribution_v3.cjs - Needs investigation ### Kylian Plan - Current plan: \"Semana 24-27 de Marzo\" from March 20 - Token expired Friday, couldn't verify new plan - System is automated - Friday 19:30 sends weekly plan ## Files Created/Modified Today - `/home/raspberry/.openclaw/alice-backup/backup.sh` (rewrit",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2,
+      "totalScore": 3,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:34:59.584Z",
-      "lastRecalledAt": "2026-05-04T14:05:42.042Z",
+      "lastRecalledAt": "2026-05-10T16:23:53.663Z",
       "queryHashes": [
         "a8e1f7c140fb",
-        "42a3a2cd93f8"
+        "42a3a2cd93f8",
+        "23a2137a3b33"
       ],
       "recallDays": [
         "2026-04-14",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-10"
       ],
       "conceptTags": [
         "backup",
@@ -550,24 +558,26 @@
       "endLine": 33,
       "source": "memory",
       "snippet": "# March 8, 2026 ## Aave Monitor Setup - Created Aave V3 position monitor for Sebas's WBTC/USDC loan - Wallet: 0xb88da656FEe3CA19A70993684aDF1A7409ac37E6 - Position: 0.0692 WBTC collateral, $1,720 USDC borrowed - Health factor: ~2.10, Liquidation price: ~$31,887 - Using 78% liquidation threshold (Sebas requested) - Daily reports at 9AM, alerts every 6 hours ## Twitter/X Attempts - Tried to set up Twitter API posting - Free tier no longer allows posting tweets - Managed to read tweets via Nitter RSS (19 tweets analyzed) - Saved style guide to tweets/style-guide.md - Twitter credentials secured (removed from workspace) ## Agent-Browser (Vercel) - Installed agent-browser CLI on Pi (npm instal",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5,
+      "totalScore": 6,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:34:59.584Z",
-      "lastRecalledAt": "2026-05-04T15:00:17.774Z",
+      "lastRecalledAt": "2026-05-10T16:23:53.663Z",
       "queryHashes": [
         "a8e1f7c140fb",
         "26a7539b9b40",
         "6e2dd6abbc38",
         "fd89f5bf0cbb",
-        "75fe1dce638c"
+        "75fe1dce638c",
+        "23a2137a3b33"
       ],
       "recallDays": [
         "2026-04-14",
         "2026-04-26",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-10"
       ],
       "conceptTags": [
         "wbtc/usdc",
@@ -618,20 +628,22 @@
       "endLine": 39,
       "source": "memory",
       "snippet": "# 2026-02-28 ## Alicia Improvements ### Web Search - Working via system curl (Node.js HTTP doesn't work on Pi) - Uses Bing News RSS ### COLS Stakers Fix - Shows all 128 (not limited to 20) - Added \"all\", \"every\", \"complete\" keywords ### Bulk Delegators - Fetch all delegators for ANY provider - Provider name lookup: Colombia Staking, Figment, Binance, etc. - Fixed field name: `stake` not `userActiveStake` ### New Queries Added - Gas/transaction fees - Minimum/maximum stake - Unstake period (10 days) - Token supply (circulating) - Token metadata - Provider comparison ### GitHub - Push working as SebastienLombard ### Alicia is NOT an OpenClaw sub-agent - Standalone Node.js script - Uses",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2,
+      "totalScore": 3,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T01:36:16.227Z",
-      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
       "queryHashes": [
         "f6bae5966fe8",
-        "1d1ff610f015"
+        "1d1ff610f015",
+        "1374ecccd6a9"
       ],
       "recallDays": [
         "2026-04-14",
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-27"
       ],
       "conceptTags": [
         "node.js",
@@ -777,20 +789,22 @@
       "endLine": 71,
       "source": "memory",
       "snippet": "- ETF Score: 45 (Neutral) - Mixed flows ### Version History - v5.6: Fix bear market overrides + ETF trend tracking - v5.7: Real ETF flow data from btcetfdata.com ### GitHub - Pushed to: https://github.com/colombiastaking/btc-strategy - Commits: 9087597 (v5.6), d901b1e (v5.7) --- ## Alice Backup Session (Earlier Today) ### Repository Separation - `btc-strategy` repo → BTC strategy scripts (workspace pushes here) - `alice-backup` repo → Full Alice backup (backup.sh runs from here) ### Backup Coverage (Complete) - Alice core: AGENTS.md, SOUL.md, USER.md, MEMORY.md, IDENTITY.md, HEARTBEAT.md, TOOLS.md - Custom skills: `.agents/skills/` (BTC strategy, MultiversX, Warps, etc.) - Built-in ski",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2,
+      "totalScore": 3,
       "maxScore": 1,
       "firstRecalledAt": "2026-04-15T02:03:44.018Z",
-      "lastRecalledAt": "2026-04-26T13:03:11.274Z",
+      "lastRecalledAt": "2026-05-18T18:18:46.854Z",
       "queryHashes": [
         "26a7539b9b40",
-        "6e2dd6abbc38"
+        "6e2dd6abbc38",
+        "cdbfa7b766ec"
       ],
       "recallDays": [
         "2026-04-14",
-        "2026-04-26"
+        "2026-04-26",
+        "2026-05-18"
       ],
       "conceptTags": [
         "backup",
@@ -1222,20 +1236,22 @@
       "endLine": 58,
       "source": "memory",
       "snippet": "| x402 | HTTP-native payments (402 Payment Required) | Coinbase, adapted for MVX | | UCP | Universal Commerce Protocol | Google | | ACP | Agent Commerce Protocol — programmatic checkout | MultiversX | | AP2 | Agent Payments Protocol — delegated authority mandates | Google | | MCP | Model Context Protocol — AI→blockchain connectivity | Linux Foundation | | MX-8004 | Agent identity standard — Dynamic NFTs + trust + x402 payment rails | MultiversX (inspired by ERC-8004) | **What Colombia Staking could use (prioritized):** 1. **MCP Server** — Connect Alice to MultiversX chain data via typed MCP functions 2. **x402 for DApp API** — Monetize API calls: external agents pay MicroEGLD per request 3.",
-      "recallCount": 3,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3,
+      "totalScore": 4,
       "maxScore": 1,
       "firstRecalledAt": "2026-05-04T13:58:54.326Z",
-      "lastRecalledAt": "2026-05-04T15:00:17.774Z",
+      "lastRecalledAt": "2026-05-18T18:18:46.854Z",
       "queryHashes": [
         "a36323ed85c2",
         "fd89f5bf0cbb",
-        "75fe1dce638c"
+        "75fe1dce638c",
+        "cdbfa7b766ec"
       ],
       "recallDays": [
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-18"
       ],
       "conceptTags": [
         "http-native",
@@ -1447,19 +1463,25 @@
       "endLine": 42,
       "source": "memory",
       "snippet": "# March 6, 2026 ## API/Indexer Cleanup Day ### Bathymetry CSV Conversion - Sebas sent 3 images of bathymetry survey tables (bus schedules format) - Extracted to CSV files (survey_table_1.csv, survey_table_2.csv, survey_table_3.csv) ### API Server Issues & Full Cleanup - API on 192.168.0.120 was down (500 error) - Disk was 100% full - found 814GB in PM2 logs (`~/.pm2/logs/mx-api-out.log`) - Freed 814GB by deleting PM2 logs - Nodes were syncing, so API couldn't start **Decision:** Completely uninstall API, ElasticSearch, Indexer, Gateway ### Uninstall Actions 1. ✅ Freed disk space (814GB PM2 logs) 2. ✅ Removed directories: mx-api-service, mx-chain-es-indexer-go, mx-chain-proxy-go 3. ✅ Sto",
-      "recallCount": 2,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2,
+      "totalScore": 5,
       "maxScore": 1,
       "firstRecalledAt": "2026-05-04T14:13:37.013Z",
-      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
       "queryHashes": [
         "5146f12c8337",
-        "3ec5d092945c"
+        "3ec5d092945c",
+        "cc4f3efd4321",
+        "7c279f38fddd",
+        "58a3869e2a4d"
       ],
       "recallDays": [
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-07",
+        "2026-05-10",
+        "2026-05-26"
       ],
       "conceptTags": [
         "gateway",
@@ -1479,18 +1501,20 @@
       "endLine": 46,
       "source": "memory",
       "snippet": "# Session: 2026-02-23 17:45 UTC ## Work Done Today ### MultiversX Local Gateway (Proxy) Setup Successfully installed and configured mx-chain-proxy-go on 192.168.0.120: 1. **Installed Proxy** on port 8079 2. **Key insight**: Each observer is on separate machine - must connect via nginx (port 8008), not directly to observer (8080) 3. **Final working config**: Proxy → nginx (8008) → observer nodes (shards 0,1,2,meta) 4. **Elasticsearch**: Configured external.toml to connect to 192.168.0.120:9200 ### Distribution Scripts - Local First Updated scripts to prioritize local infrastructure: 1. **calculate_distribution_v4.mjs**: Changed PRIMARY_GATEWAY from `http://192.168.0.120/gateway` to `ht",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1,
+      "totalScore": 2,
       "maxScore": 1,
       "firstRecalledAt": "2026-05-04T14:14:13.016Z",
-      "lastRecalledAt": "2026-05-04T14:14:13.016Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
       "queryHashes": [
-        "3ec5d092945c"
+        "3ec5d092945c",
+        "1374ecccd6a9"
       ],
       "recallDays": [
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-27"
       ],
       "conceptTags": [
         "gateway",
@@ -1541,18 +1565,20 @@
       "endLine": 60,
       "source": "memory",
       "snippet": "**Key insight:** The raw hex key was preserved in memory because it was extracted from `secrets.enc` on 2026-04-18. The wallet file got re-encrypted later but the hex was already saved. ## alice-backup Repo Password Puzzle - `.backup_password` = `iVP6!fphj@` — local-only (never committed to git) - `alice_config.enc` + `google-tokens.enc` decrypt with this password - `wallet.tar.enc` + `wallet-backup/.private_key.enc` do NOT decrypt (created before password was set/changed) - `.private_key.enc` is only 144 bytes — not a real private key, probably encrypted metadata **Conclusion:** Wallet backup from April 24 uses a different password. The raw hex key in memory is the source of truth. ## W",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1,
+      "totalScore": 2,
       "maxScore": 1,
       "firstRecalledAt": "2026-05-04T15:11:12.321Z",
-      "lastRecalledAt": "2026-05-04T15:11:12.321Z",
+      "lastRecalledAt": "2026-05-06T22:43:25.519Z",
       "queryHashes": [
-        "1d1ff610f015"
+        "1d1ff610f015",
+        "a64170aa27cc"
       ],
       "recallDays": [
-        "2026-05-04"
+        "2026-05-04",
+        "2026-05-06"
       ],
       "conceptTags": [
         "backup",
@@ -1594,6 +1620,1314 @@
         "inicio",
         "accueil",
         "cols"
+      ]
+    },
+    "memory:memory/2026-04-19.md:1:31": {
+      "key": "memory:memory/2026-04-19.md:1:31",
+      "path": "memory/2026-04-19.md",
+      "startLine": 1,
+      "endLine": 31,
+      "source": "memory",
+      "snippet": "# Memory - 2026-04-19 ## BTC Report DApp Issues (Fixed) ### Morning: DApp /tools showing black page - Error: `TypeError: undefined is not an object (evaluating 'yl.score.toFixed')` - Root cause: API returns `{\"error\": \"Report not available yet...\"}` but BTCReportTool tried to render `report.score.toFixed(1)` - Fix: Added error check in `fetchBTCReport().then()` to handle error response - Commit: `daa31c9` - \"fix(BTCReportTool): handle API error response when report not available yet\" - Pushed to GitHub ✅ ### Morning: DApp fully broken after rebuild - Error: `'text/html' is not a valid JavaScript MIME type` - Root cause: Uploaded new index.html referencing new JS files but didn't upload th",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-06T22:43:25.519Z",
+      "lastRecalledAt": "2026-05-06T22:43:25.519Z",
+      "queryHashes": [
+        "a64170aa27cc"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "yl.score.tofixed",
+        "report.score.tofixed",
+        "text/html",
+        "index.html",
+        "btc",
+        "report",
+        "dapp",
+        "issues"
+      ]
+    },
+    "memory:memory/2026-04-19.md:26:43": {
+      "key": "memory:memory/2026-04-19.md:26:43",
+      "path": "memory/2026-04-19.md",
+      "startLine": 26,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "- Fix: Added message splitting to `send_telegram()` in `scripts/daily_strategy_report.py` (4000 char chunks) - Report sent successfully on retry ## Network STEP F Research (06:00 AM) - 1 provider researched: anon-multiversx (7 nodes on dummy IP 10.254.0.40) - Remains anonymous - no website, no social, no explorer profile - Confidence 60%, status resolved with Unknown country ## DApp Now Working - /tools page loads correctly - BTC Report shows: score 28.1, recommendation STRONG BUY, action HOLD - Report endpoint: `https://colombia-staking.co/btc-report/summary` working ## ES/FR FTP still not fixed - AliceEsp and AliceFr still have no home directory - Not blocking HTTP (both sites return 20",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-06T22:43:25.519Z",
+      "lastRecalledAt": "2026-05-06T22:43:25.519Z",
+      "queryHashes": [
+        "a64170aa27cc"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "network",
+        "send-telegram",
+        "scripts/daily-strategy-report.py",
+        "anon-multiversx",
+        "10.254.0.40",
+        "28.1",
+        "es/fr",
+        "fix"
+      ]
+    },
+    "memory:memory/2026-05-04.md:68:94": {
+      "key": "memory:memory/2026-05-04.md:68:94",
+      "path": "memory/2026-05-04.md",
+      "startLine": 68,
+      "endLine": 94,
+      "source": "memory",
+      "snippet": "- **Current numbers:** Market threshold = 3,717.70 EGLD → Notification threshold = 3,737.70 EGLD - **Status:** 🟡 HOLD (3,722.34 if add 1 node = 15.36 EGLD short of threshold) - Files updated: `node_monitor.py`, `SKILL.md` - Committed: `72f7d18` to `colombiastaking/openclaw-workspace` ### BTC Strategy Report Fix - **Problem:** Daily report still using old v7.x format with \"Deep Reflection\" essay - **Solution:** Updated system crontab to use `daily_strategy_report_v2.py` (v8.0 simplified format) - **New format:** Score, Market, Position, Strategy — ~15 lines vs ~100 lines - **Ledger integration:** Added `get_ledger_btc()` with xpub scan to v2 script - **Result:** Report now shows correct Led",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-06T22:43:25.519Z",
+      "lastRecalledAt": "2026-05-06T22:43:25.519Z",
+      "queryHashes": [
+        "a64170aa27cc"
+      ],
+      "recallDays": [
+        "2026-05-06"
+      ],
+      "conceptTags": [
+        "717.70",
+        "737.70",
+        "722.34",
+        "15.36",
+        "node-monitor.py",
+        "skill.md",
+        "v7.x",
+        "daily-strategy-report-v2.py"
+      ]
+    },
+    "memory:memory/2026-05-05.md:1:23": {
+      "key": "memory:memory/2026-05-05.md:1:23",
+      "path": "memory/2026-05-05.md",
+      "startLine": 1,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "# Memory Log — 2026-05-05 ## Lagos Harbor Survey Method Statement — COMPLETE (v21) Major work session with Sebas on the Snake Island Port Pre-Dredging Survey method statement. ### Evolution (v08 → v21) - v08: Original baseline (Special Order, had issues) - v09: Fixed IHO Order to Order 1a, removed duplicate sections - v10: Added external contractor SSS/SBP/magnetometer processing details - v11: Added dredging control systems (DTPS, Carlson excavator guidance), online QC, processing workflows - v12: Fixed broken images (corrupted rId33), added excavator GPS diagram, Snake Island map, EM2040C spec sheet - v13: Structural fixes — duplicate 8.6→8.7, renumbered 7.8.4→7.8.6, added section numbe",
+      "recallCount": 10,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 10,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T14:41:58.572Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "cc4f3efd4321",
+        "082822ccf65c",
+        "42cb5968a428",
+        "8deafbd91e5b",
+        "23a2137a3b33",
+        "7c279f38fddd",
+        "fdd89536088a",
+        "8582fa045ca9",
+        "94c25dd478ae",
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-07",
+        "2026-05-10",
+        "2026-05-17",
+        "2026-05-18",
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "pre-dredging",
+        "sss/sbp/magnetometer",
+        "8.6",
+        "8.7",
+        "7.8.4",
+        "7.8.6",
+        "log",
+        "lagos"
+      ]
+    },
+    "memory:memory/2026-05-05.md:18:53": {
+      "key": "memory:memory/2026-05-05.md:18:53",
+      "path": "memory/2026-05-05.md",
+      "startLine": 18,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- v18: Extracted official benchmark coordinates from STARFIX SOP report via OCR — 26 active + 4 removed benchmarks with Easting/Northing/Height - v19-20: (Intermediate cleanup) - v21: FINAL CLIENT-READY — all blanks filled, placeholders removed, signature table completed ### Key Technical Decisions - IHO Order: **Special Order** (confirmed for Panamax container port — vertical ±0.25m, horizontal 2m, feature detection 1m³) - Vertical datum: Mean Sea Level (MSL) — confirmed by ITB - Coordinate system: Minna UTM Zone 31N (Clarke 1880 ellipsoid) - Vessel: **Bitam** - SSS: Dual-frequency StarFish 990F XD + 425F PRO ### Survey Schedule (Confirmed) - 5 May: Bintam departs Port Harcourt - 8 May: E",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 6,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T14:41:58.572Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "cc4f3efd4321",
+        "082822ccf65c",
+        "7c279f38fddd",
+        "8582fa045ca9",
+        "94c25dd478ae",
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-07",
+        "2026-05-10",
+        "2026-05-17",
+        "2026-05-18",
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "easting/northing/height",
+        "v19-20",
+        "client-ready",
+        "0.25m",
+        "dual-frequency",
+        "v18",
+        "extracted",
+        "official"
+      ]
+    },
+    "memory:memory/2026-05-05.md:45:71": {
+      "key": "memory:memory/2026-05-05.md:45:71",
+      "path": "memory/2026-05-05.md",
+      "startLine": 45,
+      "endLine": 71,
+      "source": "memory",
+      "snippet": "- Commit: `a6df581` — \"FINAL CLIENT-READY v21\" --- ## Reference Documents Compared 1. La Rochelle HDPE Pipeline (PRO_001) — IHO S-44 Special Order 2. Ten RFQ Method Statement (PRO_002) 3. WMS Survey Burullus (WMS Survey) — dredging control systems, online QC 4. External STARFIX-GEO proposal — SSS/SBP/magnetometer specs 5. XXX Dredging Method Statement — scope context (980m quay, -15.38m MSL vs our -16.5m CD) 6. STARFIX TBM Survey Report — benchmark coordinates 7. SOP on SICT Survey 30Ha — AutoCAD layout with Nigerdock/STARFIX control points --- ## Tools Used - `python-docx` for document manipulation - `pdfplumber` + `tesseract OCR` for coordinate extraction from scanned PDFs - Git for ve",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 6,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T14:41:58.572Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "cc4f3efd4321",
+        "082822ccf65c",
+        "7c279f38fddd",
+        "8582fa045ca9",
+        "94c25dd478ae",
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-07",
+        "2026-05-10",
+        "2026-05-17",
+        "2026-05-18",
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "client-ready",
+        "pro-001",
+        "s-44",
+        "pro-002",
+        "starfix-geo",
+        "sss/sbp/magnetometer",
+        "15.38m",
+        "16.5m"
+      ]
+    },
+    "memory:memory/2026-02-16.md:547:590": {
+      "key": "memory:memory/2026-02-16.md:547:590",
+      "path": "memory/2026-02-16.md",
+      "startLine": 547,
+      "endLine": 590,
+      "source": "memory",
+      "snippet": "<script src=\"js/telegram-widget.js?v=2\" defer></script> ``` **Files Updated:** - All 6 HTML files across 3 languages - Version forces browsers to fetch new JS **Git Commits:** ``` 9fd61bd - fix: Update CSS ID from csTelegramWidget to csSocialWidget 2c1d185 - fix: Position social widget correctly and update Telegram links 3de1e58 - fix: Add cache-busting version to telegram-widget.js ``` ### Deployment Note CDN caching can delay visible changes by 5-15 minutes. Use incognito mode or `?nocache=` parameter to verify changes immediately. ## Completed Today (2026-02-16) - Session 9: CDN Cache Investigation ### LiteSpeed CDN Caching Issue Discovered ⚠️ **Problem:** - Files uploaded correctly",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T14:41:58.572Z",
+      "lastRecalledAt": "2026-05-18T17:43:33.461Z",
+      "queryHashes": [
+        "cc4f3efd4321",
+        "42cb5968a428",
+        "94c25dd478ae"
+      ],
+      "recallDays": [
+        "2026-05-07",
+        "2026-05-18"
+      ],
+      "conceptTags": [
+        "js/telegram-widget.js",
+        "cache-busting",
+        "telegram-widget.js",
+        "5-15",
+        "script",
+        "src",
+        "telegram",
+        "widget.js"
+      ]
+    },
+    "memory:memory/2026-02-16.md:508:557": {
+      "key": "memory:memory/2026-02-16.md:508:557",
+      "path": "memory/2026-02-16.md",
+      "startLine": 508,
+      "endLine": 557,
+      "source": "memory",
+      "snippet": "- X button: Black circle with white \"X\" SVG, links to `x.com/ColombiaStaking` - Telegram button: Blue gradient with popup channel selector ### Telegram Links Corrected ✅ | Channel | Old (Wrong) | New (Correct) | |---------|-------------|---------------| | Announcements | `t.me/ColombiaStakingAnnouncements` | `t.me/ColombiaStakingAnn` | | English Chat | `t.me/ColombiaStaking` | `t.me/ColombiaStakingChat` | | Spanish Chat | `t.me/ColombiaStakingES` | `t.me/colombiastakingesp` | | French Chat | `t.me/ColombiaStakingFR` | `t.me/colmbiastakingfr` | ### CSS ID Mismatch Fixed ✅ **Issue:** Widget not working - inline CSS referenced `#csTelegramWidget` but JS used `#csSocialWidget` **Fix:** Upda",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T21:39:22.438Z",
+      "lastRecalledAt": "2026-05-07T21:39:22.438Z",
+      "queryHashes": [
+        "42cb5968a428"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "x.com/colombiastaking",
+        "t.me/colombiastakingann",
+        "t.me/colombiastaking",
+        "t.me/colombiastakingchat",
+        "t.me/colombiastakinges",
+        "t.me/colombiastakingesp",
+        "t.me/colombiastakingfr",
+        "t.me/colmbiastakingfr"
+      ]
+    },
+    "memory:memory/2026-04-22.md:67:98": {
+      "key": "memory:memory/2026-04-22.md:67:98",
+      "path": "memory/2026-04-22.md",
+      "startLine": 67,
+      "endLine": 98,
+      "source": "memory",
+      "snippet": "- Added `totalStaked` from stats-api.php → now shows \"180.8K eGLD\" - API key: `https://colombia-staking.co/stats-api.php` returns `totalStaked: \"180641.09\"` - STRENGTHS array now uses dynamic `nodeCount` parameter — no more \"Top 3\" or \"$10M+\" - APY source: MultiversX provider API (`identity: colombiastaking` → `apr` field) - Nodes: from stats-api.php (49, not 50 from provider API which includes offline nodes) **Delegation page (Delegation.tsx):** - Strength cards showed hardcoded `50 Nodes` → now uses `numNodes` from context - Fixed `NUMBER_OF_NODES = 50` constant → `NUMBER_OF_NODES = numNodes || 49` **Home.tsx:** - Welcome banner showed hardcoded \"50 Nodes - Most secure agency\" - Now uses",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T21:39:22.438Z",
+      "lastRecalledAt": "2026-05-07T21:39:22.438Z",
+      "queryHashes": [
+        "42cb5968a428"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "stats-api.php",
+        "180.8k",
+        "180641.09",
+        "delegation.tsx",
+        "number-of-nodes",
+        "home.tsx",
+        "added",
+        "totalstaked"
+      ]
+    },
+    "memory:memory/2026-04-22.md:37:70": {
+      "key": "memory:memory/2026-04-22.md:37:70",
+      "path": "memory/2026-04-22.md",
+      "startLine": 37,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "- `curl https://colombia-staking.com/` returns 41446 bytes (old) vs local 41370 bytes (new with embed=1) - `last-modified: Mon, 20 Apr 2026` — hasn't updated since upload - LiteSpeed API module not installed — cannot purge via API - **Sebas needs to:** cPanel → LiteSpeed Cache → Purge All Once purged, About pages will show infrastructure cards and live node count. ## Deploy Script Status - `deploy-website.py` indentation fix committed (d685510) - FTP still times out (SIGKILL) on large sites (EN/ES/FR ~90 files each) - DApp deploys fine (~43s build) - Manual FTP single-file uploads work for cache busting ## Network Explorer - Sebas reverted to `0e92774` (force push) — no design changes sin",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T21:39:22.438Z",
+      "lastRecalledAt": "2026-05-07T21:39:22.438Z",
+      "queryHashes": [
+        "42cb5968a428"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "network",
+        "colombia-staking.com",
+        "last-modified",
+        "deploy-website.py",
+        "en/es/fr",
+        "single-file",
+        "curl",
+        "https"
+      ]
+    },
+    "memory:memory/2026-04-13.md:32:70": {
+      "key": "memory:memory/2026-04-13.md:32:70",
+      "path": "memory/2026-04-13.md",
+      "startLine": 32,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "## Kepler API Proxy Status **Kepler proxy** (port 3000, `~/.openclaw/kepler/kepler-proxy.js`) — running fine but out of credits on the backend. Tax tool may fail. **Cloudflare Tunnel**: Active, routes to port 3000. **If tax tool breaks again**: Check `systemctl --user status kepler-proxy` and verify backend credits. --- ## BTC Strategy Notes Ledger BTC tracker (`ledger_btc_tracker.py`) integrated into master script since 2026-04-08. Running normally. --- ## No Major Changes to Other Systems All other infrastructure stable. Network Explorer on track (hourly cron, ~14-20 MB DB). --- ## STEP F implemented — Observer-only IP replacement **New DB table: `observer_only_ips`** - Columns",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T21:39:25.654Z",
+      "lastRecalledAt": "2026-05-07T21:39:25.654Z",
+      "queryHashes": [
+        "8deafbd91e5b"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "network",
+        "openclaw/kepler/kepler-proxy.js",
+        "kepler-proxy",
+        "ledger-btc-tracker.py",
+        "14-20",
+        "observer-only",
+        "observer-only-ips",
+        "kepler"
+      ]
+    },
+    "memory:memory/2026-04-13.md:65:98": {
+      "key": "memory:memory/2026-04-13.md:65:98",
+      "path": "memory/2026-04-13.md",
+      "startLine": 65,
+      "endLine": 98,
+      "source": "memory",
+      "snippet": "- 405 nodes still on dummy (no matching observer-only IP in table) - 22 observer-only IPs in DB table (3 CoreBlock FR + 19 auto-detected) **Update script** (`scripts/update-observer-ips.js`): - Auto-detects observer-only IPs from peer_observations (IPs with no validator BLS) - Manual rules map observer names → provider identities (CoreBlock, Incal, Disruptive, etc.) - Run manually or from cron to keep table updated **Edge color gradient (certainty high→low):** 🔴 RED = step A (direct P2P) | 🔵 BLUE = step B (identity multikey) | 🟡 YELLOW = step C/C-alt | 🟠 ORANGE = step D | 🟢 GREEN = step E/F/colombia-nat **Still unresolved:** 405 nodes on dummy IPs, mostly \"provider=none\" or anonymous",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-07T21:39:25.654Z",
+      "lastRecalledAt": "2026-05-07T21:39:25.654Z",
+      "queryHashes": [
+        "8deafbd91e5b"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "observer-only",
+        "auto-detected",
+        "scripts/update-observer-ips.js",
+        "auto-detects",
+        "peer-observations",
+        "c/c-alt",
+        "e/f/colombia-nat",
+        "nodes"
+      ]
+    },
+    "memory:memory/2026-02-13.md:196:234": {
+      "key": "memory:memory/2026-02-13.md:196:234",
+      "path": "memory/2026-02-13.md",
+      "startLine": 196,
+      "endLine": 234,
+      "source": "memory",
+      "snippet": "## Gmail Integration - Sebas Personal Email (2026-02-13) ### OAuth2 Connected - **Account:** sebastien.hondaa@gmail.com - **Tokens:** `/home/raspberry/.openclaw/workspace/sebas-gmail-tokens.json` - **Scope:** Gmail read-only + Calendar read/write ### Email Monitoring - **Sender monitored:** *@lanuevaesperanza.edu.co (school) - **Check frequency:** 8h and 18h daily - **Actions on new email:** 1. Summarize content 2. Extract dates/events 3. Add to Familia calendar 4. Notify WhatsApp group ### Last Emails from School (17 total in 30 days) | Date | Subject | |------|---------| | 13/02 | Reunión Inicial Padres 2026 | | 13/02 | Directorio Staff y Protocolo 2026 | | 10/02 | St. Valentine",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:52.977Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "a7056ffde482",
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-17",
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "sebastien.hondaa",
+        "gmail.com",
+        "home/raspberry",
+        "read-only",
+        "read/write",
+        "lanuevaesperanza.edu.co",
+        "dates/events",
+        "13/02"
+      ]
+    },
+    "memory:memory/2026-04-18.md:73:103": {
+      "key": "memory:memory/2026-04-18.md:73:103",
+      "path": "memory/2026-04-18.md",
+      "startLine": 73,
+      "endLine": 103,
+      "source": "memory",
+      "snippet": "### Fixes Applied 1. **Found real Alice key** in `~/.openclaw/alice-backup/wallet-backup/secrets.enc` (decrypted to text, contains WALLET_PRIVATE_KEY=[KEY REDACTED]) 2. **Converted PEM to raw hex**: `python3 -c \"import base64,struct; ...\"` to extract scalar 3. **Updated `.private_key`** with raw hex: `[KEY REDACTED]` 4. **Fixed MCP server**: `cd alice-mcp-multiversx && npm install @modelcontextprotocol/sdk` 5. **Fixed DAO nonce race**: Added re-fetch of nonce before DAO in `execute_distribution_fixed.cjs` (line ~270) ### Distribution Results (2026-04-18) - BONUS: 104 recipients, all confirmed ✅ - GOLD: 21 recipients, all confirmed ✅ - DAO: Failed on-chain (smart contract error, all gas use",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:52.977Z",
+      "lastRecalledAt": "2026-05-17T09:08:54.386Z",
+      "queryHashes": [
+        "a7056ffde482",
+        "8582fa045ca9"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "backup",
+        "wallet-private-key",
+        "private-key",
+        "alice-mcp-multiversx",
+        "modelcontextprotocol/sdk",
+        "re-fetch",
+        "execute-distribution-fixed.cjs",
+        "on-chain"
+      ]
+    },
+    "memory:memory/2026-04-18.md:168:197": {
+      "key": "memory:memory/2026-04-18.md:168:197",
+      "path": "memory/2026-04-18.md",
+      "startLine": 168,
+      "endLine": 197,
+      "source": "memory",
+      "snippet": "4. **Distribution wallet has 0 EGLD** — alice wallet `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` has EGLD (0.54) and COLS (764) ### Fixes Applied 1. **Found real Alice key** in `~/.openclaw/alice-backup/wallet-backup/secrets.enc` (decrypted to text, contains WALLET_PRIVATE_KEY=[KEY REDACTED]) 2. **Converted PEM to raw hex**: `python3 -c \"import base64,struct; ...\"` to extract scalar 3. **Updated `.private_key`** with raw hex: `[KEY REDACTED]` 4. **Fixed MCP server**: `cd alice-mcp-multiversx && npm install @modelcontextprotocol/sdk` 5. **Fixed DAO nonce race**: Added re-fetch of nonce before DAO in `execute_distribution_fixed.cjs` (line ~270) ### Distribution Results (",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:52.977Z",
+      "lastRecalledAt": "2026-05-17T09:08:52.977Z",
+      "queryHashes": [
+        "a7056ffde482"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "backup",
+        "0.54",
+        "wallet-private-key",
+        "private-key",
+        "alice-mcp-multiversx",
+        "modelcontextprotocol/sdk",
+        "re-fetch",
+        "execute-distribution-fixed.cjs"
+      ]
+    },
+    "memory:memory/2026-04-18.md:49:77": {
+      "key": "memory:memory/2026-04-18.md:49:77",
+      "path": "memory/2026-04-18.md",
+      "startLine": 49,
+      "endLine": 77,
+      "source": "memory",
+      "snippet": "1. Remove `function fetchAndStoreGeo(...)` and `function sleep(...)` bodies from inside `buildOutput` (they start with 8-space indent) 2. Insert dedented copies before `buildOutput` (at 0-space indent) 3. Step 6 in `main()` will then be able to call `fetchAndStoreGeo` ### Collector Run Log (Shows the Bug) ``` 🌍 Step 6: 1 IPs in network-data.json need geo lookup Fetching geo for: 88.99.253.20 ReferenceError: fetchAndStoreGeo is not defined ``` ### Root Cause `fetchAndStoreGeo` and `sleep` were placed inside `buildOutput` as inner functions, not at module level. `main()` → Step 6 is OUTSIDE `buildOutput`'s scope. ### File: `/home/raspberry/.openclaw/workspace/network-explorer/server/collec",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:52.977Z",
+      "lastRecalledAt": "2026-05-17T09:08:52.977Z",
+      "queryHashes": [
+        "a7056ffde482"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "network",
+        "8-space",
+        "0-space",
+        "network-data.json",
+        "88.99.253.20",
+        "home/raspberry",
+        "remove",
+        "function"
+      ]
+    },
+    "memory:memory/2026-04-18.md:144:172": {
+      "key": "memory:memory/2026-04-18.md:144:172",
+      "path": "memory/2026-04-18.md",
+      "startLine": 144,
+      "endLine": 172,
+      "source": "memory",
+      "snippet": "Move both functions to module level, just before `buildOutput`. Steps: 1. Remove `function fetchAndStoreGeo(...)` and `function sleep(...)` bodies from inside `buildOutput` (they start with 8-space indent) 2. Insert dedented copies before `buildOutput` (at 0-space indent) 3. Step 6 in `main()` will then be able to call `fetchAndStoreGeo` ### Collector Run Log (Shows the Bug) ``` 🌍 Step 6: 1 IPs in network-data.json need geo lookup Fetching geo for: 88.99.253.20 ReferenceError: fetchAndStoreGeo is not defined ``` ### Root Cause `fetchAndStoreGeo` and `sleep` were placed inside `buildOutput` as inner functions, not at module level. `main()` → Step 6 is OUTSIDE `buildOutput`'s scope. ### Fi",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:52.977Z",
+      "lastRecalledAt": "2026-05-17T09:08:52.977Z",
+      "queryHashes": [
+        "a7056ffde482"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "network",
+        "8-space",
+        "0-space",
+        "network-data.json",
+        "88.99.253.20",
+        "both",
+        "functions",
+        "module"
+      ]
+    },
+    "memory:memory/2026-04-13.md:140:167": {
+      "key": "memory:memory/2026-04-13.md:140:167",
+      "path": "memory/2026-04-13.md",
+      "startLine": 140,
+      "endLine": 167,
+      "source": "memory",
+      "snippet": "| `f2871f2` | Fix /api/geo route order, better-sqlite3 path, cached hoisting | --- ## No Other Changes Tonight All other systems stable. BTC strategy running normally. Colombia Staking infrastructure normal. ## Network Explorer - Sigma Visibility Fix (8:25 PM session) **Problem:** Graph showed loading spinner but never transitioned to visible nodes. **Root cause — two bugs from later commits:** 1. **`autoRescale: false`** — Added in commit `9cb54cf` after the last working version `167ac1a`. sigma v2 defaults to `autoRescale: true` (computes bounding box from node positions for rendering). Setting it to `false` broke sigma's internal size calculations → all nodes invisible. 2. **Wron",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:54.386Z",
+      "lastRecalledAt": "2026-05-17T09:08:54.386Z",
+      "queryHashes": [
+        "8582fa045ca9"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "network",
+        "api/geo",
+        "better-sqlite3",
+        "f2871f2",
+        "fix",
+        "api",
+        "geo",
+        "route"
+      ]
+    },
+    "memory:memory/2026-04-18.md:96:128": {
+      "key": "memory:memory/2026-04-18.md:96:128",
+      "path": "memory/2026-04-18.md",
+      "startLine": 96,
+      "endLine": 128,
+      "source": "memory",
+      "snippet": "- [ ] Create startup decryption service OR leave wallet decrypted (Simpler: leave decrypted) # Memory — 2026-04-18 ## Network Explorer — Moonlorian Geo Fix (STEP 6) ### Problem Moonlorian nodes (14 nodes, IP `88.99.253.20`) were in `network-data.json` but had no geo coordinates. Root cause: `getUncachedPublicIPs()` only queries `peer_observations` table (IPs seen by your 7 observers via P2P). Since moonlorian's IP never appeared in any observer's peer list, it was never queued for geo lookup. ### Fix Applied Added **STEP 6** to `server/collector.js` — after `buildOutput` writes `network-data.json`, do a second geo pass: - Scan ALL unique public IPs from `network-data.json` (not just `peer",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T09:08:54.386Z",
+      "lastRecalledAt": "2026-05-17T09:08:54.386Z",
+      "queryHashes": [
+        "8582fa045ca9"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "network",
+        "88.99.253.20",
+        "network-data.json",
+        "peer-observations",
+        "server/collector.js",
+        "create",
+        "startup",
+        "decryption"
+      ]
+    },
+    "memory:memory/2026-04-17.md:158:195": {
+      "key": "memory:memory/2026-04-17.md:158:195",
+      "path": "memory/2026-04-17.md",
+      "startLine": 158,
+      "endLine": 195,
+      "source": "memory",
+      "snippet": "- Sebas noted score of 35.0 appeared frozen for 2 days — suspected bug - Root cause: First automated cron run was only on **2026-04-17 08:00** (cron re-created after Pi crash on April 16) - No automated reports on April 15-16 (cron didn't exist) - Fresh manual run showed 28.1 — market data shifts during the day change the score - **35.0 is legitimate** — not a bug, just how the market was at 08:00 this morning - All indicators working, decision engine functioning correctly ## Network Explorer Stats (16:39) | Metric | Value | |--------|-------| | Total nodes | 5,278 | | Public IP | 4,543 | | LAN/private | 667 | | Dummy IP (anon) | 34 | | Unique public IPs | 527 | | Coverage | 99.4% | - `ano",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T19:03:42.213Z",
+      "lastRecalledAt": "2026-05-17T19:03:42.213Z",
+      "queryHashes": [
+        "1fe69f6f546f"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "network",
+        "35.0",
+        "re-created",
+        "15-16",
+        "28.1",
+        "lan/private",
+        "99.4",
+        "sebas"
+      ]
+    },
+    "memory:memory/2026-04-17.md:76:112": {
+      "key": "memory:memory/2026-04-17.md:76:112",
+      "path": "memory/2026-04-17.md",
+      "startLine": 76,
+      "endLine": 112,
+      "source": "memory",
+      "snippet": "| Metric | Value | |--------|-------| | Total nodes | 5,278 | | Public IP | 4,543 | | LAN/private | 667 | | Dummy IP (anon) | 34 | | Unique public IPs | 527 | | Coverage | 99.4% | - `anon-multiversx` (7 nodes) are unresolvable without Google — research cron would target them - API node list cache: 1.2h old (max 24h) — working properly - Churn handled automatically — departed nodes drop off next run ## Skill Updated - `multiversx-network-map/SKILL.md`: cron schedule (hourly → every 2h), Known Issues #4 (SIGKILL storm), stable commits table updated # 2026-04-17 — Network Explorer STEP F Bug ## Problem STEP F not assigning real IPs to procryptostaking and other research-db providers. Despite",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-17T19:03:42.213Z",
+      "lastRecalledAt": "2026-05-17T19:03:42.213Z",
+      "queryHashes": [
+        "1fe69f6f546f"
+      ],
+      "recallDays": [
+        "2026-05-17"
+      ],
+      "conceptTags": [
+        "network",
+        "lan/private",
+        "99.4",
+        "anon-multiversx",
+        "1.2h",
+        "multiversx-network-map/skill.md",
+        "research-db",
+        "metric"
+      ]
+    },
+    "memory:memory/2026-04-25.md:1:9": {
+      "key": "memory:memory/2026-04-25.md:1:9",
+      "path": "memory/2026-04-25.md",
+      "startLine": 1,
+      "endLine": 9,
+      "source": "memory",
+      "snippet": "# 2026-04-25 ## Bootstrap restore - Restored workspace from https://github.com/colombiastaking/openclaw-workspace - Backup was from 2026-04-16 — 9 days of gap - Confirmed identity: Claw 🐱, running on Raspberry Pi - Confirmed user: Sebastien Lombard, GMT-5, Colombia Staking - BOOTSTRAP.md workflow complete — deleting it now - Created memory/ directory and MEMORY.md",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-18T18:18:46.854Z",
+      "lastRecalledAt": "2026-05-18T18:18:46.854Z",
+      "queryHashes": [
+        "cdbfa7b766ec"
+      ],
+      "recallDays": [
+        "2026-05-18"
+      ],
+      "conceptTags": [
+        "backup",
+        "gmt-5",
+        "bootstrap.md",
+        "memory.md",
+        "bootstrap",
+        "restore",
+        "restored",
+        "https"
+      ]
+    },
+    "memory:memory/2026-04-06.md:33:46": {
+      "key": "memory:memory/2026-04-06.md:33:46",
+      "path": "memory/2026-04-06.md",
+      "startLine": 33,
+      "endLine": 46,
+      "source": "memory",
+      "snippet": "- GitHub at `b59383e` (in sync with local) ### Files Changed - `src/config.ts` — removed trailing slash - `src/helpers/FallbackProxyNetworkProvider.ts` — NEW - `src/hooks/useGlobalData.ts` — uses FallbackProvider - `src/hooks/usePreloadData.ts` — uses FallbackProvider - `src/hooks/useColsApr.ts` — uses FallbackProvider ### Verified Working - Both `https://colombia-staking.co/gateway/network/config` ✅ - `https://gateway.multiversx.com/network/config` ✅ - DApp SC queries resolving correctly ✅",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-18T18:18:46.854Z",
+      "lastRecalledAt": "2026-05-18T18:18:46.854Z",
+      "queryHashes": [
+        "cdbfa7b766ec"
+      ],
+      "recallDays": [
+        "2026-05-18"
+      ],
+      "conceptTags": [
+        "gateway",
+        "network",
+        "src/config.ts",
+        "src/hooks/useglobaldata.ts",
+        "src/hooks/usepreloaddata.ts",
+        "src/hooks/usecolsapr.ts",
+        "github",
+        "b59383e"
+      ]
+    },
+    "memory:memory/2026-05-04.md:1:51": {
+      "key": "memory:memory/2026-05-04.md:1:51",
+      "path": "memory/2026-05-04.md",
+      "startLine": 1,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "# COLS Daily Distribution — May 4, 2026 ## Distribution Run (1:10 PM cron) - **BONUS Pool**: 102 stakers → 26.326 COLS distributed - All 102 TXs confirmed on-chain (100% verification) - Top: erd1teku... (3.382 COLS), erd1qskt... (2.929 COLS) - Script exit code 1 (post-verification issue, but on-chain success confirmed) - **GOLD Pool**: 20 members → 4.369 COLS distributed - All TXs succeeded, nonce advanced to 10669 - **DAO Pool**: 13.143 COLS to PeerMe contract - Hash: `e5c7271d39c0a58eead7c8fe26dc8fe75526bb64dca03622cf0e9bd7d6cb8a19` - Status: success ✅ ## Market Conditions - EGLD: $4.11 - COLS: $0.1416 - APR: 8.32% ## Actions - ✅ Notified ColombiaStakingChat group - ⚠️ Inv",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-19T19:10:21.555Z",
+      "lastRecalledAt": "2026-05-19T19:10:21.555Z",
+      "queryHashes": [
+        "2e82d7f7ad67"
+      ],
+      "recallDays": [
+        "2026-05-19"
+      ],
+      "conceptTags": [
+        "26.326",
+        "on-chain",
+        "3.382",
+        "2.929",
+        "post-verification",
+        "4.369",
+        "13.143",
+        "4.11"
+      ]
+    },
+    "memory:memory/2026-02-16.md:348:382": {
+      "key": "memory:memory/2026-02-16.md:348:382",
+      "path": "memory/2026-02-16.md",
+      "startLine": 348,
+      "endLine": 382,
+      "source": "memory",
+      "snippet": "- Hamburger menu with full-screen overlay - All 7 nav items visible - Touch-friendly button sizes (44px+ tap targets) - Responsive image sizing - No horizontal scroll ## All Website Tasks Completed ✅ - [x] Landing page reorganization - DONE (complete rebuild) - [x] Mobile responsiveness - DONE (hamburger menu fixed) - [x] Professional UI/UX - DONE (clean modern design) - [x] All 3 languages - DONE (EN, ES, FR complete) - [x] All core pages - DONE (Home, About, MultiversX, Xportal, FAQ, Node Status) ## Completed Today (2026-02-16) - Session 6: COLS Token Pages ### COLS Token Page Created ✅ New professional COLS token page for all 3 languages: | Language | URL | File | |----------|-----|-",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-19T19:10:21.555Z",
+      "lastRecalledAt": "2026-05-19T19:10:21.555Z",
+      "queryHashes": [
+        "2e82d7f7ad67"
+      ],
+      "recallDays": [
+        "2026-05-19"
+      ],
+      "conceptTags": [
+        "full-screen",
+        "touch-friendly",
+        "ui/ux",
+        "hamburger",
+        "menu",
+        "full",
+        "screen",
+        "overlay"
+      ]
+    },
+    "memory:memory/2026-05-18.md:1:30": {
+      "key": "memory:memory/2026-05-18.md:1:30",
+      "path": "memory/2026-05-18.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# May 18, 2026 ## COLS Distribution - May 18, 2026 ### BONUS Pool - Planned: 101 recipients, 26.36 COLS - Successful: 81 recipients sent - Failed: 20 recipients (insufficient EGLD gas) - To retry: 0.09 COLS ### GOLD Pool - Calculated: 21 recipients, 4.74 COLS - Status: NOT SENT (awaiting gas) ### DAO Pool - Calculated: ~12 COLS to PeerMe - Status: NOT SENT (awaiting gas) ### Issue - Distribution wallet: erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy - EGLD balance: 0.000011 EGLD - Need: ~0.065 EGLD for gas - COLS balance: 889.73 COLS (sufficient) ### Action Required Sebas needs to send ~0.1 EGLD to the distribution wallet, then retry: 1. 20 failed BONUS recipients 2. GO",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-19T19:10:21.555Z",
+      "lastRecalledAt": "2026-05-19T19:10:21.555Z",
+      "queryHashes": [
+        "2e82d7f7ad67"
+      ],
+      "recallDays": [
+        "2026-05-19"
+      ],
+      "conceptTags": [
+        "26.36",
+        "0.09",
+        "4.74",
+        "0.000011",
+        "0.065",
+        "889.73",
+        "0.1",
+        "may"
+      ]
+    },
+    "memory:memory/2026-02-16.md:264:319": {
+      "key": "memory:memory/2026-02-16.md:264:319",
+      "path": "memory/2026-02-16.md",
+      "startLine": 264,
+      "endLine": 319,
+      "source": "memory",
+      "snippet": "- Video section: Presentation video (`video/colombia-20staking-2025-low.mp4`) - Xportal promo section with download button - Footer with navigation links **MultiversX Page:** - Hero with gradient background - Stats: 260,000+ TPS, 6s Block Time, $0.001 Transaction Cost - Features: Secure PoS, Adaptive Sharding, Carbon Negative - Benefits list for staking eGLD - 3-step \"How to Stake\" guide - CTA: \"Stake Now\" button **Xportal Page:** - Hero with app screenshot - 6 feature cards: Secure Storage, Fast Transactions, Web3 Access, Built-in Staking, NFT Support, Hardware Wallet - 4-step \"How to Get Started\" guide - Download buttons: Xportal.com + Stake Now **FAQ Page:** - Accordion-style expandabl",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:30:18.395Z",
+      "lastRecalledAt": "2026-05-26T20:30:18.395Z",
+      "queryHashes": [
+        "93cfa44819ff"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "0.001",
+        "3-step",
+        "built-in",
+        "4-step",
+        "xportal.com",
+        "accordion-style",
+        "video",
+        "section"
+      ]
+    },
+    "memory:memory/2026-04-12-step-d-geo.md:1:27": {
+      "key": "memory:memory/2026-04-12-step-d-geo.md:1:27",
+      "path": "memory/2026-04-12-step-d-geo.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# Session: 2026-04-12 17:43:18 UTC - **Session Key**: agent:main:telegram:direct:1144365829 - **Session ID**: 31aed914-cbc2-423c-94b4-d8f3d2739d87 - **Source**: telegram ## Conversation Summary assistant: Good questions! Let me verify STEP D is wired correctly in the current code. assistant: STEP D is inside `buildOutput()` (line 810-1031). Let me verify `getGeo` is accessible there: assistant: Good questions! Let me check a few things: assistant: ✅ **STEP D is working and compatible.** Here's the status: 1. **STEP D was added in commit `2134449`** by you — it's in the `step-c-clean` branch. The geo enrichment was added on top in `f958b21` and `9d707b4`. All in the same branch. 2. **STE",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:30:18.395Z",
+      "lastRecalledAt": "2026-05-26T20:30:18.395Z",
+      "queryHashes": [
+        "93cfa44819ff"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "2026-04-12-step-d-geo.md",
+        "810-1031",
+        "step-c-clean",
+        "step",
+        "geo.md",
+        "utc",
+        "key",
+        "agent:main:telegram:direct"
+      ]
+    },
+    "memory:memory/2026-02-16.md:687:739": {
+      "key": "memory:memory/2026-02-16.md:687:739",
+      "path": "memory/2026-02-16.md",
+      "startLine": 687,
+      "endLine": 739,
+      "source": "memory",
+      "snippet": "|---------|---------| | Have | tener | | Read | leer | | Write | escribir | | Use | usar | **Teacher:** Miss Dani ### Kylian's Lengua Castellana (Spanish) Quiz Topics **From: Miss Leo (Spanish/Language teacher)** **Class:** 1° A **Period:** I Period Quiz **Topics to Study:** **1. Consonants Usage:** - m, p, s, l, t, n, r, g, f, b, c **2. Reading:** - Read short texts using the studied consonants - Practice with consonant combinations **3. Reading Comprehension:** - Answer questions about the texts - Text comprehension exercises **4. Study Materials:** - Review notebook (cuaderno) **Teacher:** Miss Leo 💙💚 ### Kylian's Matemáticas (Math) Quiz Topics **From: Miss Rocio Doria (Math",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:30:18.395Z",
+      "lastRecalledAt": "2026-05-26T20:30:18.395Z",
+      "queryHashes": [
+        "93cfa44819ff"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "spanish/language",
+        "tener",
+        "read",
+        "leer",
+        "write",
+        "escribir",
+        "use",
+        "usar"
+      ]
+    },
+    "memory:memory/2026-03-01-alicia-connection.md:39:74": {
+      "key": "memory:memory/2026-03-01-alicia-connection.md:39:74",
+      "path": "memory/2026-03-01-alicia-connection.md",
+      "startLine": 39,
+      "endLine": 74,
+      "source": "memory",
+      "snippet": "Let me set this up properly. First, let me check what tools Alicia would need: assistant: Quick question: What specific changes should Alicia be able to make on the website? Options: 1. **Just answer questions** (current) - blockchain data, staking info 2. **Deploy DApp updates** - git pull, build, FTP upload 3. **Manage services** - restart services, check logs 4. **All of the above** What's your vision? 🎀 user: Conversation info (untrusted metadata): ```json { \"timestamp\": \"Sat 2026-02-28 19:29 GMT-5\" } ``` She cannot do any change : please use the existing Alicia subagent we already setup everything yesterday so why so I am chocked that this subagent is not connected to anything a",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:30:18.395Z",
+      "lastRecalledAt": "2026-05-26T20:30:18.395Z",
+      "queryHashes": [
+        "93cfa44819ff"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "2026-03-01-alicia-connection.md",
+        "gmt-5",
+        "alicia",
+        "connection.md",
+        "let",
+        "set",
+        "properly",
+        "first"
+      ]
+    },
+    "memory:memory/2026-03-01-alicia-connection.md:1:46": {
+      "key": "memory:memory/2026-03-01-alicia-connection.md:1:46",
+      "path": "memory/2026-03-01-alicia-connection.md",
+      "startLine": 1,
+      "endLine": 46,
+      "source": "memory",
+      "snippet": "# Session: 2026-03-01 00:37:07 UTC - **Session Key**: agent:main:main - **Session ID**: bb04ed7b-b434-4c63-875c-c7e3182c8a3e - **Source**: telegram ## Conversation Summary user: Conversation info (untrusted metadata): ```json { \"timestamp\": \"Sat 2026-02-28 19:26 GMT-5\" } ``` Alicia must be a subagent I see now she can also make some changes on Colombia staking website ? assistant: You're right! Currently Alicia is just a gateway that creates isolated sessions per request. She should be a proper persistent sub-agent. Let me check how to set this up: assistant: There's already an `alicia` agent! Let me check its bindings: assistant: The `alicia` agent exists but isn't connected to any",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:30:18.395Z",
+      "lastRecalledAt": "2026-05-26T20:30:18.395Z",
+      "queryHashes": [
+        "93cfa44819ff"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "gateway",
+        "2026-03-01-alicia-connection.md",
+        "gmt-5",
+        "sub-agent",
+        "alicia",
+        "connection.md",
+        "utc",
+        "key"
+      ]
+    },
+    "memory:memory/2026-02-25-request-timed-out-before-a-res.md:104:139": {
+      "key": "memory:memory/2026-02-25-request-timed-out-before-a-res.md:104:139",
+      "path": "memory/2026-02-25-request-timed-out-before-a-res.md",
+      "startLine": 104,
+      "endLine": 139,
+      "source": "memory",
+      "snippet": "| **API as a Service** | Offer our local API to others for a fee | None — we monetize existing infrastructure | | **Analytics dashboard** | Build public dashboard with on-chain data, monetize via ads/ subscriptions | Low | | **Monitoring alerts** | Sell whale/activity alerts to projects | Low | | **Staking consulting** | Help others optimize delegation | None — service-based | | **Data exports** | Custom queries for researchers/projects | Low | **Our edge:** - We have real-time on-chain data (indexer) - Fast local API - Already running 24/7 **Quickest win:** Offer API access to other projects/individuals who need MultiversX data but don't want to run their own nodes. We could charge a sub",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:31:01.314Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "on-chain",
+        "whale/activity",
+        "service-based",
+        "researchers/projects",
+        "real-time",
+        "24/7",
+        "projects/individuals",
+        "request"
+      ]
+    },
+    "memory:memory/2026-02-25-request-timed-out-before-a-res.md:66:107": {
+      "key": "memory:memory/2026-02-25-request-timed-out-before-a-res.md:66:107",
+      "path": "memory/2026-02-25-request-timed-out-before-a-res.md",
+      "startLine": 66,
+      "endLine": 107,
+      "source": "memory",
+      "snippet": "1. **\"First Buyer\" Bot** - Detect new token listing → be among first buyers - Sell after initial pump 2. **Whale Copy Trade** - Follow large holders' movements - If whale buys →跟着 buy (smaller) 3. **Gas Timing** - Monitor network gas prices - Execute big swaps when gas is low 4. **Staking Yield Arbitrage** - Compare staking APR vs lending yields - Move between staking/lending 5. **Correlation Trading** - EGLD moves with BTC/ETH - Trade on divergences --- **What's realistic for us to start:** 1. **Whale transfer alerts** — We have the indexer, easy to implement 2. **New token/volume alerts** — We can detect new ESDT tokens 3. **Price delta alerts** — When",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:31:01.314Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "network",
+        "staking/lending",
+        "btc/eth",
+        "token/volume",
+        "request",
+        "timed",
+        "out",
+        "res.md"
+      ]
+    },
+    "memory:memory/2026-04-23.md:40:64": {
+      "key": "memory:memory/2026-04-23.md:40:64",
+      "path": "memory/2026-04-23.md",
+      "startLine": 40,
+      "endLine": 64,
+      "source": "memory",
+      "snippet": "- `DAPP-V3/scripts/verify-distributions.cjs` — verification script --- ## BTC Strategy Cron — Locked to Personal DM - Cron `880a7df2-9f51-44d5-a854-d57dbabf66e0` now set with `\"bestEffort\": false` + explicit `\"to\": \"1144365829\"` - Report will ONLY go to Sebas personal DM, never to ColombiaStakingChat group - Commit `88e3eae` pushed --- ## COLS Distribution — Key Metrics (Today) | Pool | Recipients | Overpaid | Missing | Status | |------|-----------|---------|---------|--------| | BONUS | 104 | 24 | 29 | Broken (fix deployed) | | GOLD | 21 | 0 | 0 | ✅ Clean | | DAO | 0 | 0 | all | ❌ Failed | | **Total** | **116** | **24** | **29** | Fix works tomorrow | --- ## Pending - Sebas needs to",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T20:31:01.314Z",
+      "lastRecalledAt": "2026-05-26T20:31:01.314Z",
+      "queryHashes": [
+        "58a3869e2a4d"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "dapp",
+        "scripts",
+        "verify",
+        "distributions.cjs",
+        "verification",
+        "script",
+        "btc",
+        "strategy"
+      ]
+    },
+    "memory:memory/2026-04-14-sigma-capture-zoom-fix.md:37:83": {
+      "key": "memory:memory/2026-04-14-sigma-capture-zoom-fix.md:37:83",
+      "path": "memory/2026-04-14-sigma-capture-zoom-fix.md",
+      "startLine": 37,
+      "endLine": 83,
+      "source": "memory",
+      "snippet": "assistant: Only the `_log` helper remains. Let me also check for any remaining `// debug` comments and clean up that unused method: assistant: Good - the `// debug removed` comments are harmless (just empty comments). Let me also check the `_log` method and remove it since it's unused: assistant: Those `_log` calls are useful operational messages. Let me just clean up the empty `// debug removed` comment lines: assistant: Done. All debug console logs removed — only useful `_log` messages remain (`🚀 initializing`, `✅ Ready`, `📡 fetching`, `❌ fetch failed`, etc.). Refresh and test. user: Conversation info (untrusted metadata): ```json { \"message_id\": \"20165\", \"sender_id\": \"1144365829",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "message-id",
+        "sender-id",
+        "sigma",
+        "capture",
+        "zoom",
+        "fix.md",
+        "only",
+        "log"
+      ]
+    },
+    "memory:memory/2026-04-14-sigma-capture-zoom-fix.md:68:95": {
+      "key": "memory:memory/2026-04-14-sigma-capture-zoom-fix.md:68:95",
+      "path": "memory/2026-04-14-sigma-capture-zoom-fix.md",
+      "startLine": 68,
+      "endLine": 95,
+      "source": "memory",
+      "snippet": "assistant: There's broken code - empty `if (canvas)` block. Let me fix it: assistant: Refresh. Mouse wheel to zoom, drag to pan should work now. user: Conversation info (untrusted metadata): ```json { \"message_id\": \"20169\", \"sender_id\": \"1144365829\", \"sender\": \"Sébastien Colombia Staking\", \"timestamp\": \"Tue 2026-04-14 12:47 GMT-5\" } ``` Sender (untrusted metadata): ```json { \"label\": \"Sébastien Colombia Staking (1144365829)\", \"id\": \"1144365829\", \"name\": \"Sébastien Colombia Staking\", \"username\": \"ColombiaStaking\" } ``` still cannot zoom assistant: Refresh. Mouse wheel should zoom, drag should pan.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "message-id",
+        "sender-id",
+        "gmt-5",
+        "sigma",
+        "capture",
+        "zoom",
+        "fix.md",
+        "there's"
+      ]
+    },
+    "memory:memory/2026-02-25-request-timed-out-before-a-res.md:128:180": {
+      "key": "memory:memory/2026-02-25-request-timed-out-before-a-res.md:128:180",
+      "path": "memory/2026-02-25-request-timed-out-before-a-res.md",
+      "startLine": 128,
+      "endLine": 180,
+      "source": "memory",
+      "snippet": "**What market making can do for COLS:** | Benefit | How | |---------|-----| | **Liquidity** | Traders can always buy/sell | | **Price stability** | Reduces wild swings | | **Volume** | Looks healthy to new buyers | | **Incentives** | Earn fees from trades | **Options on MultiversX:** 1. **Passive Liquidity Pool** (easiest) - Add COLS/EGLD to xExchange or xoxno - Earn swap fees automatically 2. **Active Market Making** - Run a bot that places limit orders - Buy when price drops, sell when it rises - More work but better returns 3. **xoxno Aggregator** - They're an aggregator — could potentially integrate - Would give COLS more visibility --- **For your setup:** - Y",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "buy/sell",
+        "cols/egld",
+        "request",
+        "timed",
+        "out",
+        "res.md",
+        "what",
+        "market"
+      ]
+    },
+    "memory:memory/2026-02-26-live-api-fix.md:69:100": {
+      "key": "memory:memory/2026-02-26-live-api-fix.md:69:100",
+      "path": "memory/2026-02-26-live-api-fix.md",
+      "startLine": 69,
+      "endLine": 100,
+      "source": "memory",
+      "snippet": "| **COLS Holders** | ✅ Live from MultiversX API (200 holders) | | **Access Check** | ✅ Live query | | **User COLS Staked** | ✅ Live from API | | **Delegation/EGLD** | ✅ Live from Colombia Staking API | | **Transactions** | ✅ Live from API | **Nothing is cached anymore!** All queries go directly to the blockchain APIs. user: [Queued messages while agent was busy] --- Queued #1 We need to work on the chat bot of the Dapp : the chat bot should be able to make queries directly no cached data, also it must work in sync with the Dapp full calculations and queries , so when a user login and start to use the chat bot the data of the ranking, distribution, cols stakers list is already available and",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "2026-02-26-live-api-fix.md",
+        "delegation/egld",
+        "live",
+        "api",
+        "fix.md",
+        "cols",
+        "holders",
+        "multiversx"
+      ]
+    },
+    "memory:memory/2026-04-09-cache-fix.md:173:189": {
+      "key": "memory:memory/2026-04-09-cache-fix.md:173:189",
+      "path": "memory/2026-04-09-cache-fix.md",
+      "startLine": 173,
+      "endLine": 189,
+      "source": "memory",
+      "snippet": "please create a new sill for you : multiversX network map . assistant: Already done! Just created and packaged it right now. 🎀 **`multiversx-network-map.skill`** is at `~/.openclaw/workspace/multiversx-network-map.skill` It covers: - Live explorer URL and architecture overview - How to run/start the server and collector - Bubble sizing formula (stakes are already in EGLD) - Colombia node identification - Website integration via kepler-proxy - Git repo link Just say \"multiversX network map\" anytime you want me to work on it — I'll load the skill automatically. 🗺️",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "network",
+        "2026-04-09-cache-fix.md",
+        "multiversx-network-map.skill",
+        "run/start",
+        "kepler-proxy",
+        "cache",
+        "fix.md",
+        "please"
+      ]
+    },
+    "memory:memory/2026-04-12-step-d-geo.md:100:148": {
+      "key": "memory:memory/2026-04-12-step-d-geo.md:100:148",
+      "path": "memory/2026-04-12-step-d-geo.md",
+      "startLine": 100,
+      "endLine": 148,
+      "source": "memory",
+      "snippet": "9d707b4 2026-04-12 11:21 Add geo_cache table + ip-api.com geo enrichment (STEP D ready) f958b21 2026-04-12 10:45 Add geo_cache table + geo enrichment to output JSON 2134449 2026-04-12 09:40 STEP D: Location-matched assignment for multikey validators ``` They're all on **`step-c-clean`** branch which is pushed and up to date. The `master` branch is `[origin/master: ahead 5, behind 64]` — it hasn't been updated in a while. All today's work (STEP C keywords fix, geo enrichment with ip-api.com, STEP D) went into `step-c-clean` which is the active development branch. `master` would need a merge or fast-forward when you're ready to stabilize. user: Conversation info (untrusted metadata): `",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "2026-04-12-step-d-geo.md",
+        "geo-cache",
+        "ip-api.com",
+        "location-matched",
+        "step-c-clean",
+        "origin/master",
+        "fast-forward",
+        "step"
+      ]
+    },
+    "memory:memory/2026-04-06-dapp-path-fix.md:90:123": {
+      "key": "memory:memory/2026-04-06-dapp-path-fix.md:90:123",
+      "path": "memory/2026-04-06-dapp-path-fix.md",
+      "startLine": 90,
+      "endLine": 123,
+      "source": "memory",
+      "snippet": "You're right! The MAIN domain (`colombia-staking.com`) works fine - I tested `https://colombia-staking.com/dapp.html` earlier and it returned proper HTML. The issue is the **subdomain** (`staking.colombia-staking.com`) has the broken LiteSpeed `/lock` rewrite. **Solution:** Since the zip download link is working now, just download it and unpack on your hosting: **Download:** 👉 `https://colombia-staking.co/colombia-staking/colombia-staking-dapp-v5.zip` Then via cPanel File Manager or FTP, upload the contents to `public_html/` on the main domain. The DApp will work at `https://colombia-staking.com/` Want me to commit the changes to GitHub first, then rebuild with a fresh zip? assistant:",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:37:53.943Z",
+      "lastRecalledAt": "2026-05-27T12:37:53.943Z",
+      "queryHashes": [
+        "1374ecccd6a9"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "2026-04-06-dapp-path-fix.md",
+        "colombia-staking.com",
+        "colombia-staking.com/dapp.html",
+        "staking.colombia-staking.com",
+        "public-html",
+        "dapp",
+        "path",
+        "fix.md"
       ]
     }
   }

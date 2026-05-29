@@ -2,9 +2,19 @@
 
 const http = require('http');
 const https = require('https');
-const express = require('express');
 const path = require('path');
 const fs = require('fs');
+
+// tiny static-file server + minimal routing (no express dependency)
+function sendFile(res, filePath, type) {
+  try { res.writeHead(200, { 'Content-Type': type }); res.end(fs.readFileSync(filePath)); }
+  catch (e) { res.writeHead(404); res.end('Not found'); }
+}
+function route(req, res, routes) {
+  const url = req.url.split('?')[0];
+  for (const [prefix, handler] of routes) { if (url === prefix || url.startsWith(prefix + '/')) return handler(req, res); }
+  res.writeHead(404); res.end('Not found');
+}
 
 const NODES = [
   { name: 'Shard 0', ip: '192.168.0.120', shard: 0, color: '#58a6ff' },
@@ -16,8 +26,6 @@ const NODES = [
 const HISTORY_SIZE = 120;
 const POLL_INTERVAL = 3000;
 const REFERENCE_CACHE_TTL = 60000;
-
-const app = express();
 
 // ── State ─────────────────────────────────────────────────────────────────
 let nodesState = NODES.map(n => ({
@@ -127,31 +135,35 @@ async function pollNodes() {
   broadcast(getPayload());
 }
 
-// ── Routes (EXPLICIT BEFORE static) ────────────────────────────────────────
+// ── Routes ────────────────────────────────────────────────────────────────
 const INDEX_HTML = path.join(__dirname, 'public', 'index.html');
 
-app.get('/api/events', (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.flushHeaders();
+function handleEvents(req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*' });
   res.write(`data: ${JSON.stringify(getPayload())}\n\n`);
   clients.add(res);
   req.on('close', () => clients.delete(res));
-});
-
-app.get('/api/nodes', (req, res) => res.json(getPayload()));
-
-// Explicit routes served BEFORE static (express matches in order)
-app.get('/nodes', (req, res) => res.type('html').end(fs.readFileSync(INDEX_HTML)));
-app.get('/', (req, res) => res.type('html').end(fs.readFileSync(INDEX_HTML)));
-
-// Static AFTER explicit routes (serves assets, network/, etc.)
-app.use(express.static(__dirname + '/public'));
+}
+function handleNodes(req, res) { res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }); res.end(JSON.stringify(getPayload())); }
+function handleStatic(req, res) {
+  const url = req.url.split('?')[0];
+  let filePath = path.join(__dirname, 'public', url === '/' ? 'index.html' : url);
+  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) filePath = INDEX_HTML;
+  const ext = path.extname(filePath).toLowerCase();
+  const types = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
+  sendFile(res, filePath, types[ext] || 'application/octet-stream');
+}
 
 // ── Start ─────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Node dashboard listening on ${PORT}`));
+const server = http.createServer((req, res) => {
+  const url = req.url.split('?')[0];
+  if (url === '/api/events') return handleEvents(req, res);
+  if (url === '/api/nodes') return handleNodes(req, res);
+  if (url === '/nodes') return sendFile(res, INDEX_HTML, 'text/html');
+  if (url === '/') return sendFile(res, INDEX_HTML, 'text/html');
+  return handleStatic(req, res);
+});
+server.listen(PORT, () => console.log(`Node dashboard listening on ${PORT}`));
 setInterval(pollNodes, POLL_INTERVAL);
 pollNodes();

@@ -5,9 +5,9 @@
 ## Active Mission: Lagos Harbor Survey (2026-05)
 
 **Mission:** Snake Island Port Pre-Dredging Survey  
-**Vessel:** BITAM  
+**Vessel:** Bitam  
 **Client:** DEME / ITB Nigeria  
-**IHO Order:** Order 1a  
+**IHO Order:** Special Order  
 **Hydrographer:** Sébastien (Cat A, 15 years)  
 **Assistant:** Alice (Mission Recorder)  
 **Status:** PRE-DEPLOYMENT

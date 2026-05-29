@@ -130,9 +130,17 @@ def calculate_strategy(score, aave):
     }
 
 def send_telegram(message):
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    data = {'chat_id': TELEGRAM_CHAT_ID, 'text': message, 'parse_mode': 'Markdown'}
-    requests.post(url, data=data, timeout=10)
+    try:
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        data = {'chat_id': TELEGRAM_CHAT_ID, 'text': message, 'parse_mode': 'Markdown'}
+        resp = requests.post(url, data=data, timeout=10)
+        if resp.status_code != 200:
+            print(f"⚠️ Telegram error: {resp.status_code} - {resp.text[:200]}")
+            return False
+        return True
+    except Exception as e:
+        print(f"⚠️ Telegram send failed: {e}")
+        return False
 
 def main():
     run_command("cd /home/raspberry/.openclaw/workspace/.agents/skills/btc-strategy/scripts && python3 btc_decision_engine.py > /dev/null 2>&1")

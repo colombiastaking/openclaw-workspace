@@ -812,9 +812,17 @@ async function main() {
 
   console.log(`\nResults saved: ${resultsFile}`);
 
-  // Exit with error if DAO failed (critical pool must not fail silently)
-  if (!results.dao) {
+  // Exit with error if a requested pool failed (must not fail silently)
+  if (doDao && !results.dao) {
     console.error(`\n❌ DAO distribution FAILED - process exiting with error`);
+    process.exit(1);
+  }
+  if (doBonus && results.bonus.length === 0) {
+    console.error(`\n❌ BONUS distribution FAILED - process exiting with error`);
+    process.exit(1);
+  }
+  if (doGold && (!results.gold || results.gold.length === 0)) {
+    console.error(`\n❌ GOLD distribution FAILED - process exiting with error`);
     process.exit(1);
   }
 }
