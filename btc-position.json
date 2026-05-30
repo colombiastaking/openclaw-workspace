@@ -4,7 +4,7 @@
   "btc_address": "bc1qcuws6fs6tdx4m398wf57hpe3slfa4trrwgpeyt",
   "xpub": "xpub6CjqJTKYKEYHJxJWePZ44hAM5EDrJ58sJLDWgNGcbRd2VKmHo8UPRJQbtBeaMZpA1BpByPXdge5wxcVtbJMKAnEhNtGWcC584EJc8Ba7gWS",
   "derivation": "BIP84 Native SegWit \u2014 m/84'/0'/0'/0/i",
-  "last_updated": "2026-05-29",
+  "last_updated": "2026-05-30",
   "last_scan": {
     "receiving_addresses": [
       {
@@ -46,8 +46,8 @@
       }
     ],
     "total_balance": 0.19589173,
-    "btc_price_usd": 73190,
-    "total_usd": 14337.0
+    "btc_price_usd": 73602,
+    "total_usd": 14418.0
   },
   "notes": "Ledger cold storage. Funds spread across multiple receiving and change addresses. Auto-scanned via xpub."
 }

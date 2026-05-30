@@ -115,32 +115,34 @@ def get_aave_position():
     }
 
 def get_ledger_btc():
-    """Fetch Ledger BTC balance from the tracker script."""
-    result = run_command("/usr/bin/python3 /home/raspberry/.openclaw/workspace/btc-monitor/ledger_btc_tracker.py")
+    """Fetch Ledger BTC balance from btc-position.json (updated by scan_xpub.py)."""
     ledger_btc = 0
     ledger_sats = 0
     ledger_addr_count = 0
     
-    # Parse output
-    for line in result.split('\n'):
-        if 'TOTAL LEDGER BTC:' in line:
-            try:
-                parts = line.split('BTC')
-                if len(parts) > 0:
-                    btc_str = parts[0].split(':')[-1].strip()
-                    ledger_btc = float(btc_str)
-            except:
-                pass
-    
-    # Try reading from state file
+    # Primary: read from the main btc-position.json
     try:
-        with open('/tmp/ledger_btc_state.json', 'r') as f:
+        with open('/home/raspberry/.openclaw/workspace/btc-position.json', 'r') as f:
             state = json.load(f)
-            ledger_btc = state.get('total_btc', 0)
-            ledger_sats = state.get('total_sats', 0)
-            ledger_addr_count = len(state.get('external', {}).get('found', [])) + len(state.get('internal', {}).get('found', []))
-    except:
+            ledger_btc = state.get('btc_holding', 0)
+            # Count receiving + change addresses
+            recv = state.get('last_scan', {}).get('receiving_addresses', [])
+            change = state.get('last_scan', {}).get('change_addresses', [])
+            ledger_addr_count = len(recv) + len(change)
+            ledger_sats = int(ledger_btc * 100000000)
+    except Exception:
         pass
+    
+    # Fallback: try the legacy state file
+    if ledger_btc == 0:
+        try:
+            with open('/tmp/ledger_btc_state.json', 'r') as f:
+                state = json.load(f)
+                ledger_btc = state.get('total_btc', 0)
+                ledger_sats = state.get('total_sats', 0)
+                ledger_addr_count = len(state.get('external', {}).get('found', [])) + len(state.get('internal', {}).get('found', []))
+        except:
+            pass
     
     return {
         'btc': ledger_btc,
