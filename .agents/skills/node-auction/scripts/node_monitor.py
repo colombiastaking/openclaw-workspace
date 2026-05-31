@@ -14,7 +14,7 @@ This ensures a 20 EGLD safety margin above market price before notifying ADD.
 import requests
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 PROVIDER = "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf"
 IDENTITY = "colombiastaking"
@@ -92,7 +92,7 @@ def main():
     print()
     print("━━━━━━━━━━━━━━━━━━━━")
     print("🔷 **COLOMBIA STAKING NODE MONITOR**")
-    print(f"🕐 {datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC")
+    print(f"🕐 {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M')} UTC")
     print()
     print(f"💰 EGLD: ${price:,.2f}")
     print()
@@ -130,7 +130,7 @@ def main():
     
     # Save state
     state = {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "total_staked": total_staked,
         "nodes": nodes,
         "egld_per_node": egld_per_node,

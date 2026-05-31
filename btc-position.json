@@ -1,53 +1,38 @@
 {
   "source": "ledger",
-  "btc_holding": 0.19589173,
-  "btc_address": "bc1qcuws6fs6tdx4m398wf57hpe3slfa4trrwgpeyt",
+  "btc_holding": 0.12920715,
+  "btc_address": "bc1qgy7vg8jjsa6gvfx8x5lh3j7p8z589n2r296l3c",
   "xpub": "xpub6CjqJTKYKEYHJxJWePZ44hAM5EDrJ58sJLDWgNGcbRd2VKmHo8UPRJQbtBeaMZpA1BpByPXdge5wxcVtbJMKAnEhNtGWcC584EJc8Ba7gWS",
   "derivation": "BIP84 Native SegWit \u2014 m/84'/0'/0'/0/i",
-  "last_updated": "2026-05-30",
+  "last_updated": "2026-05-31",
   "last_scan": {
     "receiving_addresses": [
-      {
-        "index": 27,
-        "address": "bc1qcuws6fs6tdx4m398wf57hpe3slfa4trrwgpeyt",
-        "balance": 0.0102292
-      },
-      {
-        "index": 28,
-        "address": "bc1qek67g34flgmffykd794wcqrsd3294qd42dlnvl",
-        "balance": 0.01597794
-      },
-      {
-        "index": 29,
-        "address": "bc1q5asam7zggy6wykr4m3vf49ehxzar8tuzrkq6uh",
-        "balance": 0.01433122
-      },
-      {
-        "index": 30,
-        "address": "bc1q0r0x44mvftnepjpz0xea6lxmz694pf6p64zwku",
-        "balance": 0.01382056
-      },
-      {
-        "index": 31,
-        "address": "bc1qpktvmwa2njuh97m90qfpylzfvfw0as70x7rrup",
-        "balance": 0.03719036
-      },
       {
         "index": 32,
         "address": "bc1qgy7vg8jjsa6gvfx8x5lh3j7p8z589n2r296l3c",
         "balance": 0.05187149
+      },
+      {
+        "index": 33,
+        "address": "bc1q3ef65gcql4eg0dmkd3tdaxmdyjs2qrw689cqpr",
+        "balance": 0.02339097
       }
     ],
     "change_addresses": [
       {
-        "index": 19,
-        "address": "bc1qsz6g4mttvl0nd6236pw60vjd37375gprt2pw6f",
-        "balance": 0.05247096
+        "index": 20,
+        "address": "bc1q0sdpmvj42y2r99eun5hsp4meytwtvev7d0x2ur",
+        "balance": 0.0025058
+      },
+      {
+        "index": 21,
+        "address": "bc1qq62fjnsfaytncn4v7q0krg6fx8p442uhh4n2r4",
+        "balance": 0.05143889
       }
     ],
-    "total_balance": 0.19589173,
-    "btc_price_usd": 73602,
-    "total_usd": 14418.0
+    "total_balance": 0.12920715,
+    "btc_price_usd": 73794,
+    "total_usd": 9535.0
   },
   "notes": "Ledger cold storage. Funds spread across multiple receiving and change addresses. Auto-scanned via xpub."
 }
