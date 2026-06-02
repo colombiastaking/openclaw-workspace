@@ -78,6 +78,11 @@ def main():
         sys.exit(1)
     
     total_staked = float(provider.get('locked', 0)) / 10**18
+    
+    if nodes <= 0:
+        print("❌ No active nodes found for identity")
+        sys.exit(1)
+    
     egld_per_node = total_staked / nodes
     egld_if_add = total_staked / (nodes + 1)
     

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cartelera - La Represa Hidroeléctrica</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Comic Neue', cursive, sans-serif;
+  }
+  .poster {
+    width: 148mm;
+    height: 210mm;
+    background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 50%, #81d4fa 100%);
+    border: 8px solid #0277bd;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 32px;
+    color: #01579b;
+    text-align: center;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 0px #fff;
+  }
+  h2 {
+    font-size: 20px;
+    color: #0288d1;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .dam-illustration {
+    width: 100%;
+    height: 100px;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  .dam-wall {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 80px;
+    background: #78909c;
+    border-radius: 5px 5px 0 0;
+    border: 3px solid #546e7a;
+  }
+  .water-top {
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+    right: 50%;
+    height: 25px;
+    background: #4fc3f7;
+    border-radius: 0 0 10px 0;
+    border: 2px solid #039be5;
+  }
+  .water-fall {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 50px;
+    background: repeating-linear-gradient(
+      0deg,
+      #4fc3f7 0px,
+      #81d4fa 5px,
+      #4fc3f7 10px
+    );
+    border-radius: 0 0 5px 5px;
+  }
+  .water-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: 10px;
+    height: 20px;
+    background: #4fc3f7;
+    border-radius: 10px 0 0 0;
+    border: 2px solid #039be5;
+  }
+  .turbine {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #ff6f00;
+    border-radius: 50%;
+    border: 2px solid #e65100;
+    animation: spin 2s linear infinite;
+  }
+  .turbine::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 16px;
+    background: #fff;
+    border-radius: 2px;
+  }
+  .turbine::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 4px;
+    height: 16px;
+    background: #fff;
+    border-radius: 2px;
+  }
+  @keyframes spin {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
+  }
+  .lightning {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 24px;
+    animation: flash 1s ease-in-out infinite alternate;
+  }
+  @keyframes flash {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+  }
+  .info-box {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 3px solid #4fc3f7;
+  }
+  .info-box h3 {
+    color: #01579b;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .info-box ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .info-box li {
+    font-size: 14px;
+    color: #37474f;
+    margin-bottom: 6px;
+    padding-left: 25px;
+    position: relative;
+    line-height: 1.3;
+  }
+  .info-box li::before {
+    content: "💧";
+    position: absolute;
+    left: 0;
+  }
+  .steps {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .step {
+    flex: 1;
+    background: #c8e6c9;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid #4caf50;
+  }
+  .step .emoji {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .step .text {
+    font-size: 12px;
+    color: #1b5e20;
+    line-height: 1.2;
+  }
+  .fun-fact {
+    width: 100%;
+    background: #fff3e0;
+    border: 3px solid #ff9800;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .fun-fact h3 {
+    color: #e65100;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .fun-fact p {
+    font-size: 14px;
+    color: #5d4037;
+    line-height: 1.4;
+  }
+  .footer {
+    margin-top: auto;
+    text-align: center;
+  }
+  .footer .name {
+    font-size: 22px;
+    color: #01579b;
+    font-weight: bold;
+  }
+  .footer .grade {
+    font-size: 14px;
+    color: #0288d1;
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <h1>💧 THE DAM</h1>
+  <h2>Water Makes Electricity!</h2>
+
+  <div class="dam-illustration">
+    <div class="water-top"></div>
+    <div class="dam-wall"></div>
+    <div class="water-fall"></div>
+    <div class="turbine"></div>
+    <div class="water-bottom"></div>
+    <div class="lightning">⚡</div>
+  </div>
+
+  <div class="info-box">
+    <h3>📖 What is it?</h3>
+    <ul>
+      <li>A dam is a big wall built across a river.</li>
+      <li>It stops water and makes a lake behind it.</li>
+      <li>Water flows through the dam and spins wheels.</li>
+      <li>The spinning wheels make electricity for our homes!</li>
+    </ul>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <span class="emoji">🌧️</span>
+      <span class="text">Rain fills the lake</span>
+    </div>
+    <div class="step">
+      <span class="emoji">🌊</span>
+      <span class="text">Water flows down</span>
+    </div>
+    <div class="step">
+      <span class="emoji">⚙️</span>
+      <span class="text">Wheels spin fast</span>
+    </div>
+    <div class="step">
+      <span class="emoji">💡</span>
+      <span class="text">We get light!</span>
+    </div>
+  </div>
+
+  <div class="fun-fact">
+    <h3>💡 Did You Know?</h3>
+    <p>The biggest dam in the world is in China — it's called the Three Gorges Dam. It's as long as 500 soccer fields! The water can fill 4,000 swimming pools every second!</p>
+  </div>
+
+  <div class="footer">
+    <div class="name">Kylian</div>
+    <div class="grade">1st Grade — 6 years old</div>
+  </div>
+</div>
+
+</body>
+</html>

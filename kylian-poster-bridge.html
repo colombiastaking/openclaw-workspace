@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cartelera - El Puente</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Comic Neue', cursive, sans-serif;
+  }
+  .poster {
+    width: 280mm;   /* octavo de cartulina ≈ ancho A4 / 2 */
+    height: 420mm;  /* altura A4 */
+    background: linear-gradient(135deg, #fff9c4 0%, #ffecb3 100%);
+    border: 8px solid #ff6f00;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .poster::before {
+    content: "";
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 150px; height: 150px;
+    background: #ffcc80;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+  .poster::after {
+    content: "";
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 100px; height: 100px;
+    background: #81d4fa;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+  h1 {
+    font-size: 42px;
+    color: #e65100;
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px #fff;
+    z-index: 1;
+  }
+  h2 {
+    font-size: 28px;
+    color: #1565c0;
+    margin-bottom: 20px;
+    z-index: 1;
+  }
+  .bridge-container {
+    width: 100%;
+    height: 160px;
+    background: #e3f2fd;
+    border-radius: 15px;
+    border: 4px dashed #1565c0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    margin-bottom: 20px;
+    z-index: 1;
+  }
+  /* Simple CSS bridge illustration */
+  .bridge {
+    position: relative;
+    width: 220px;
+    height: 100px;
+  }
+  .tower-left, .tower-right {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 90px;
+    background: #795548;
+    border-radius: 4px;
+  }
+  .tower-left { left: 20px; }
+  .tower-right { right: 20px; }
+  .deck {
+    position: absolute;
+    bottom: 70px;
+    left: 10px;
+    right: 10px;
+    height: 12px;
+    background: #5d4037;
+    border-radius: 3px;
+  }
+  .cable {
+    position: absolute;
+    bottom: 82px;
+    left: 35px;
+    width: 150px;
+    height: 40px;
+    border-top: 3px solid #ff6f00;
+    border-radius: 50% 50% 0 0;
+  }
+  .water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    background: repeating-linear-gradient(
+      90deg,
+      #4fc3f7 0px,
+      #81d4fa 15px,
+      #4fc3f7 30px
+    );
+    border-radius: 0 0 11px 11px;
+  }
+  .car {
+    position: absolute;
+    bottom: 85px;
+    left: 80px;
+    width: 30px;
+    height: 15px;
+    background: #e53935;
+    border-radius: 5px 5px 2px 2px;
+    animation: drive 3s linear infinite;
+  }
+  .car::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 4px;
+    width: 8px; height: 8px;
+    background: #333;
+    border-radius: 50%;
+    box-shadow: 14px 0 0 #333;
+  }
+  @keyframes drive {
+    0% { left: 40px; }
+    100% { left: 160px; }
+  }
+  .info-box {
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 3px solid #ffb74d;
+    z-index: 1;
+  }
+  .info-box h3 {
+    color: #e65100;
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-box ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .info-box li {
+    font-size: 18px;
+    color: #424242;
+    margin-bottom: 8px;
+    padding-left: 30px;
+    position: relative;
+  }
+  .info-box li::before {
+    content: "🌉";
+    position: absolute;
+    left: 0;
+  }
+  .facts {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+    z-index: 1;
+  }
+  .fact-card {
+    flex: 1;
+    background: #c8e6c9;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    border: 3px solid #4caf50;
+  }
+  .fact-card .emoji {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .fact-card .number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+  }
+  .fact-card .label {
+    font-size: 14px;
+    color: #1b5e20;
+  }
+  .did-you-know {
+    width: 100%;
+    background: #fff3e0;
+    border: 3px solid #ff9800;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    z-index: 1;
+  }
+  .did-you-know h3 {
+    color: #e65100;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .did-you-know p {
+    font-size: 18px;
+    color: #5d4037;
+    line-height: 1.5;
+  }
+  .footer {
+    margin-top: auto;
+    text-align: center;
+    z-index: 1;
+  }
+  .footer .name {
+    font-size: 24px;
+    color: #1565c0;
+    font-weight: bold;
+  }
+  .footer .grade {
+    font-size: 18px;
+    color: #e65100;
+  }
+  .decoration {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0.3;
+    z-index: 0;
+  }
+  .dec-1 { top: 20px; left: 20px; }
+  .dec-2 { top: 60px; right: 30px; }
+  .dec-3 { bottom: 100px; left: 30px; }
+  .dec-4 { bottom: 150px; right: 20px; }
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <!-- Decorations -->
+  <span class="decoration dec-1">⭐</span>
+  <span class="decoration dec-2">🚗</span>
+  <span class="decoration dec-3">🌊</span>
+  <span class="decoration dec-4">🏗️</span>
+
+  <h1>🌉 THE BRIDGE</h1>
+  <h2>A Man-Made Resource</h2>
+
+  <!-- Bridge Illustration -->
+  <div class="bridge-container">
+    <div class="bridge">
+      <div class="tower-left"></div>
+      <div class="tower-right"></div>
+      <div class="deck"></div>
+      <div class="cable"></div>
+      <div class="water"></div>
+      <div class="car"></div>
+    </div>
+  </div>
+
+  <!-- What is it? -->
+  <div class="info-box">
+    <h3>📖 What is it?</h3>
+    <ul>
+      <li>A bridge is a structure built by people to cross over rivers, valleys, or roads.</li>
+      <li>It connects two places so people and cars can travel safely.</li>
+      <li>Bridges are made of concrete, steel, wood, or stone.</li>
+    </ul>
+  </div>
+
+  <!-- Fun Facts -->
+  <div class="facts">
+    <div class="fact-card">
+      <span class="emoji">📏</span>
+      <span class="number">24 km</span>
+      <span class="label">Longest bridge in the world!</span>
+    </div>
+    <div class="fact-card">
+      <span class="emoji">🏛️</span>
+      <span class="number">2,000+</span>
+      <span class="label">Years old Roman bridges still stand!</span>
+    </div>
+    <div class="fact-card">
+      <span class="emoji">👷</span>
+      <span class="number">100+</span>
+      <span class="label">Workers build big bridges!</span>
+    </div>
+  </div>
+
+  <!-- Did You Know -->
+  <div class="did-you-know">
+    <h3>💡 Did You Know?</h3>
+    <p>The tallest bridge in the world is in France — it's called the Millau Viaduct! It's even taller than the Eiffel Tower! Engineers designed it so carefully that it looks like a beautiful white sail across the valley.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="name">Kylian</div>
+    <div class="grade">1st Grade — 6 years old</div>
+  </div>
+</div>
+
+</body>
+</html>

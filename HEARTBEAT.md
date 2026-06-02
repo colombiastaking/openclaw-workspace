@@ -1,24 +1,23 @@
-# HEARTBEAT.md
+# Heartbeat Checklist
 
-## Système Kylian - Tout est automatisé
+Rotate through these checks 2-4x/day:
 
-### ✅ Tâches gérées par CRON (pas d'action heartbeat)
+## Morning (8-10 AM)
+- [ ] Node status check
+- [ ] System resources (CPU/disk/memory)
+- [ ] Git status - any uncommitted changes?
 
-| Quand | Tâche | Action |
-|------|------|--------|
-| Vendredi 19:30 | Plan semaine suivante | WhatsApp automatique |
-| Dimanche-Jeudi 7h | Rappel lendemain | WhatsApp automatique |
-| Quotidien 8h, 18h | Vérification emails école | Calendrier + WhatsApp si réunion |
+## Midday (12-2 PM)
+- [ ] Memory maintenance - review recent notes
+- [ ] Project status checks
 
-## ⚠️ AUTOMATIONS DISABLED (2026-03-29)
-Teams token expired - no way to refresh. Kylian automations removed.
-School plans: Manually forwarded by Sebas.
+## Evening (6-8 PM)
+- [ ] Node monitoring summary
+- [ ] Backup verification
+- [ ] Plan tomorrow if needed
 
-### 📧 Surveillance emails école
-- Expéditeur: *@lanuevaesperanza.edu.co
-- Détecte: réunions, événements
-- Ajoute au calendrier Familia (partagé avec Diana)
-- Notifie groupe WhatsApp
-
-### Heartbeat = HEARTBEAT_OK
-Ce fichier est à jour. Si tu lis ceci, réponds HEARTBEAT_OK.
+## When to reach out:
+- Node alerts or downtime
+- Disk space > 80%
+- Unusual system behavior
+- Important calendar events in next 2h
