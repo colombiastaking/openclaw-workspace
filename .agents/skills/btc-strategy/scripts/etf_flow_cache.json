@@ -1363,10 +1363,54 @@
           "change_btc": 537.0
         }
       ]
+    },
+    {
+      "date": "2026-06-08",
+      "total_holdings_btc": 1236416.0,
+      "net_flow_24h": -3991.0,
+      "inflow_count": 1,
+      "outflow_count": 4,
+      "etfs": [
+        {
+          "ticker": "ARKB",
+          "holdings_btc": 32254.0,
+          "change_btc": -325.0
+        },
+        {
+          "ticker": "BITB",
+          "holdings_btc": 36690.0,
+          "change_btc": 0.0
+        },
+        {
+          "ticker": "BTC",
+          "holdings_btc": 52857.0,
+          "change_btc": 0.0
+        },
+        {
+          "ticker": "BTCC",
+          "holdings_btc": 18744.0,
+          "change_btc": 6.0
+        },
+        {
+          "ticker": "FBTC",
+          "holdings_btc": 179996.0,
+          "change_btc": -87.0
+        },
+        {
+          "ticker": "GBTC",
+          "holdings_btc": 145022.0,
+          "change_btc": -5.0
+        },
+        {
+          "ticker": "IBIT",
+          "holdings_btc": 770853.0,
+          "change_btc": -3580.0
+        }
+      ]
     }
   ],
   "holdings": {
-    "total_holdings_btc": 1239997.0,
-    "date": "2026-06-07"
+    "total_holdings_btc": 1236416.0,
+    "date": "2026-06-08"
   }
 }
