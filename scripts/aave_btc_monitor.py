@@ -180,29 +180,35 @@ def main():
     
     if collateral_btc is None or debt_usd is None:
         print("❌ Could not fetch position data")
+        # Save empty state so downstream scripts know there's no position
+        save_state(btc_price or 0, 0, 0, {}, [])
         return
     
     print(f"   BTC Price: ${btc_price:,.2f}")
     print(f"   Collateral: {collateral_btc:.6f} BTC")
     print(f"   Debt: ${debt_usd:,.2f}")
     
-    # Calculate thresholds
+    # Calculate thresholds (returns None if no position)
     thresholds = calculate_btc_thresholds(collateral_btc, debt_usd)
     
-    print(f"\n📊 Threshold BTC prices:")
-    print(f"   HF 1.5 (CAUTION): ${thresholds['caution']['btc_price']:,.2f}")
-    print(f"   HF 1.2 (WARNING): ${thresholds['warning']['btc_price']:,.2f}")
-    print(f"   HF 1.0 (DANGER): ${thresholds['danger']['btc_price']:,.2f}")
+    if thresholds:
+        print(f"\n📊 Threshold BTC prices:")
+        print(f"   HF 1.5 (CAUTION): ${thresholds['caution']['btc_price']:,.2f}")
+        print(f"   HF 1.2 (WARNING): ${thresholds['warning']['btc_price']:,.2f}")
+        print(f"   HF 1.0 (DANGER): ${thresholds['danger']['btc_price']:,.2f}")
+        
+        # Check alerts
+        alerts = check_alerts(btc_price, thresholds)
+        
+        # Format and print report
+        report = format_report(btc_price, collateral_btc, debt_usd, thresholds, alerts)
+        print("\n" + report)
+    else:
+        alerts = []
+        print("\n📊 No active position — no thresholds to calculate")
     
-    # Check alerts
-    alerts = check_alerts(btc_price, thresholds)
-    
-    # Format and print report
-    report = format_report(btc_price, collateral_btc, debt_usd, thresholds, alerts)
-    print("\n" + report)
-    
-    # Save state
-    save_state(btc_price, collateral_btc, debt_usd, thresholds, alerts)
+    # Save state (always, even with no position)
+    save_state(btc_price, collateral_btc, debt_usd, thresholds or {}, alerts)
     
     if alerts:
         print("\n🚨 ALERTS TRIGGERED:")

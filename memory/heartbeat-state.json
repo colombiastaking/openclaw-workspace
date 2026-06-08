@@ -1,7 +1,10 @@
 {
   "lastChecks": {
-    "node": 1780601096,
-    "system_resources": 1780601096,
-    "git_status": 1780601096
-  }
+    "node": 1753250400,
+    "system_resources": 1753250400,
+    "websites": 1753250400,
+    "memory": 1753250400,
+    "btc_report": 1753247999
+  },
+  "summary": "BTC daily report sent (Score 27/100, $62,389, MVRV 1.06). System healthy: 17% disk, 6.3GB free RAM, kepler-proxy active. Node API shows 0 count (likely API lag, 120K EGLD staked confirmed)."
 }

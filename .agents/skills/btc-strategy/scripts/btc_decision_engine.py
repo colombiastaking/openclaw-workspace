@@ -1962,19 +1962,43 @@ def get_score_interpretation(score):
     else:
         return "🔴 Strong Sell - Take profits, reduce exposure"
 
+# DCA table aligned with strategy skill v8 (20-level, €1,100/month base budget)
+DCA_TABLE = [
+    (0, 5, 2.00, 550),    # €1,100/month
+    (6, 10, 1.85, 509),
+    (11, 15, 1.70, 468),
+    (16, 20, 1.55, 426),
+    (21, 25, 1.40, 385),
+    (26, 30, 1.25, 344),
+    (31, 35, 1.10, 303),
+    (36, 40, 0.95, 261),
+    (41, 45, 0.80, 220),
+    (46, 50, 0.70, 193),
+    (51, 55, 0.50, 138),
+    (56, 60, 0.25, 69),
+    (61, 65, 0.50, 138),
+    (66, 70, 0.25, 69),
+    (71, 100, 0.00, 0),
+]
+
+def get_dca_amounts(score):
+    """Get DCA weekly/monthly amounts based on score using the 20-level strategy table.
+    Returns: (weekly_eur, monthly_eur, multiplier, status)
+    """
+    for lo, hi, mult, weekly in DCA_TABLE:
+        if lo <= score <= hi:
+            monthly = round(weekly * 4.33)
+            status = "STOP" if mult == 0 else "DCA"
+            return weekly, monthly, mult, status
+    # Default fallback
+    return 138, 597, 0.50, "DCA"
+
 def get_dca_recommendation(score, price=77840):
-    """Get DCA recommendation based on score."""
-    if score <= 20:
-        base = price * 0.010
-    elif score <= 35:
-        base = price * 0.007
-    elif score <= 50:
-        base = price * 0.0035
-    elif score <= 65:
-        base = price * 0.0015
-    else:
+    """Legacy: Get DCA recommendation string based on score."""
+    weekly, monthly, mult, status = get_dca_amounts(score)
+    if status == "STOP":
         return "Pause DCA - Consider profit-taking"
-    return f"€{base:.0f}/month"
+    return f"€{monthly:,}/month (€{weekly:,}/week @ {int(mult*100)}% intensity)"
 
 def save_report(alert, filepath="/tmp/btc_general_report.json"):
     """Save full report JSON for DApp /btc-report/summary endpoint"""
@@ -1995,11 +2019,17 @@ def save_report(alert, filepath="/tmp/btc_general_report.json"):
         cycle_blocks = indicators.get("cycle_blocks", 0)
         days_since_halving = cycle_blocks / 144 if cycle_blocks else 0  # ~144 blocks/day
         
+        # Use aligned DCA amounts from strategy table
+        weekly_dca, monthly_dca, dca_mult, dca_status = get_dca_amounts(score)
+        
+        # Use recommendation for score_interpretation to ensure consistency
+        score_interp = alert.get("recommendation", get_score_interpretation(score))
+        
         report = {
             "generated": datetime.now().isoformat(),
             "timestamp": datetime.now().isoformat(),
             "score": score,
-            "score_interpretation": get_score_interpretation(score),
+            "score_interpretation": score_interp,
             "score_detail": f"Based on MVRV {mvrv}, RSI {indicators.get('rsi', 0)}, Fear/Greed {indicators.get('fear_greed', 0)} and 8 other indicators",
             "dca_recommendation": get_dca_recommendation(score, alert.get("price", 77840)),
             "regime": regime.get("current", "UNKNOWN"),
@@ -2013,8 +2043,10 @@ def save_report(alert, filepath="/tmp/btc_general_report.json"):
                 "score": score,
                 "recommendation": alert.get("recommendation", ""),
                 "price": alert.get("price", 0),
-                "dca_amount_weekly": round(alert.get("price", 77840) * 0.00353, 2) if alert.get("price") else 275,
-                "dca_amount_monthly": round(alert.get("price", 77840) * 0.01412, 2) if alert.get("price") else 1100,
+                "dca_amount_weekly": weekly_dca,
+                "dca_amount_monthly": monthly_dca,
+                "dca_multiplier": dca_mult,
+                "dca_status": dca_status,
                 "strategy": alert.get("strategy", ""),
                 "mvrv": indicators.get("mvrv", 0),
                 "rsi": indicators.get("rsi", 0),

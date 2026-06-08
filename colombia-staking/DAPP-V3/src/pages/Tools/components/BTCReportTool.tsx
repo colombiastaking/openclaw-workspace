@@ -15,6 +15,29 @@ const MIN_COLS_FOR_ACCESS = 100; // Minimum COLS staked to access the report
 const BTC_REPORT_SUMMARY_ENDPOINT = 'https://colombia-staking.co/btc-report/summary';
 
 // ========== TYPES ==========
+interface BTCReportSummary {
+  score: number;
+  recommendation: string;
+  price: number;
+  dca_amount_weekly: number;
+  dca_amount_monthly: number;
+  dca_multiplier: number;
+  dca_status: string;
+  strategy: string;
+  mvrv: number;
+  rsi: number;
+  fear_greed: number;
+  etf_net_flow_7d: number;
+  pi_cycle_diff: number;
+  s2f_value: number;
+  discount_50w_ma: number;
+  bollinger_position: number;
+  macd_histogram: number;
+  cycle_blocks: number;
+  mvrv_z: number;
+  cycle_phase: string;
+}
+
 interface BTCReport {
   score: number;
   score_interpretation: string;
@@ -26,6 +49,8 @@ interface BTCReport {
   action: string;
   action_detail: string;
   recommendation: string;
+  price: number;
+  summary: BTCReportSummary;
 }
 
 // ========== API FETCH ==========
@@ -47,31 +72,37 @@ export const BTCReportTool = ({ onBack }: Props) => {
   const [showDocs, setShowDocs] = useState(false);
   const [monthlyAmount, setMonthlyAmount] = useState<number>(800);
 
-  // ========== DCA CALCULATOR ==========
-  const getDcaMultiplier = (score: number): number => {
-    if (score <= 5) return 2.00;
-    if (score <= 10) return 1.85;
-    if (score <= 15) return 1.70;
-    if (score <= 20) return 1.55;
-    if (score <= 25) return 1.40;
-    if (score <= 30) return 1.25;
-    if (score <= 35) return 1.10;
-    if (score <= 40) return 0.95;
-    if (score <= 45) return 0.80;
-    if (score <= 50) return 0.70;
-    if (score <= 55) return 0.50;
-    if (score <= 60) return 0.25;
-    if (score <= 65) return 0.50;
-    if (score <= 70) return 0.25;
-    if (score <= 75) return 0.0;
-    return 0.0;
+  // ========== DCA CALCULATOR (aligned with engine v8.1 20-level table) ==========
+  const DCA_TABLE: Array<{ lo: number; hi: number; mult: number; weekly: number }> = [
+    { lo: 0, hi: 5, mult: 2.00, weekly: 550 },
+    { lo: 6, hi: 10, mult: 1.85, weekly: 509 },
+    { lo: 11, hi: 15, mult: 1.70, weekly: 468 },
+    { lo: 16, hi: 20, mult: 1.55, weekly: 426 },
+    { lo: 21, hi: 25, mult: 1.40, weekly: 385 },
+    { lo: 26, hi: 30, mult: 1.25, weekly: 344 },
+    { lo: 31, hi: 35, mult: 1.10, weekly: 303 },
+    { lo: 36, hi: 40, mult: 0.95, weekly: 261 },
+    { lo: 41, hi: 45, mult: 0.80, weekly: 220 },
+    { lo: 46, hi: 50, mult: 0.70, weekly: 193 },
+    { lo: 51, hi: 55, mult: 0.50, weekly: 138 },
+    { lo: 56, hi: 60, mult: 0.25, weekly: 69 },
+    { lo: 61, hi: 65, mult: 0.50, weekly: 138 },
+    { lo: 66, hi: 70, mult: 0.25, weekly: 69 },
+    { lo: 71, hi: 100, mult: 0.00, weekly: 0 },
+  ];
+
+  const getDcaRow = (score: number) => {
+    for (const row of DCA_TABLE) {
+      if (score >= row.lo && score <= row.hi) return row;
+    }
+    return { mult: 0.50, weekly: 138 };
   };
 
   const calculateWeeklyDCA = (score: number, monthlyEur: number): { weekly: number; multiplier: number; status: string } => {
     const weeklyBase = monthlyEur / 4.33;
-    const multiplier = getDcaMultiplier(score);
-    const weekly = weeklyBase * multiplier;
-    return { weekly, multiplier, status: multiplier === 0 ? 'STOP' : 'DCA' };
+    const row = getDcaRow(score);
+    const weekly = weeklyBase * row.mult;
+    return { weekly, multiplier: row.mult, status: row.mult === 0 ? 'STOP' : 'DCA' };
   };
 
   // Find user's COLS staked from the already-fetched stakers list
@@ -278,6 +309,46 @@ export const BTCReportTool = ({ onBack }: Props) => {
           </div>
         </div>
       </div>
+
+      {/* Live Indicators Row */}
+      {report.summary && (
+        <div className={styles.indicatorsRow}>
+          <div className={styles.indicatorBadge}>
+            <span className={styles.indicatorLabel}>BTC</span>
+            <span className={styles.indicatorValue}>${report.summary.price?.toLocaleString()}</span>
+          </div>
+          <div className={styles.indicatorBadge}>
+            <span className={styles.indicatorLabel}>MVRV</span>
+            <span className={styles.indicatorValue} style={{ color: (report.summary.mvrv || 0) < 1 ? '#22c55e' : (report.summary.mvrv || 0) > 2 ? '#ef4444' : '#eab308' }}>
+              {(report.summary.mvrv || 0).toFixed(2)}
+            </span>
+          </div>
+          <div className={styles.indicatorBadge}>
+            <span className={styles.indicatorLabel}>RSI</span>
+            <span className={styles.indicatorValue} style={{ color: (report.summary.rsi || 50) < 30 ? '#22c55e' : (report.summary.rsi || 50) > 70 ? '#ef4444' : '#eab308' }}>
+              {(report.summary.rsi || 0).toFixed(1)}
+            </span>
+          </div>
+          <div className={styles.indicatorBadge}>
+            <span className={styles.indicatorLabel}>F&G</span>
+            <span className={styles.indicatorValue} style={{ color: (report.summary.fear_greed || 50) < 25 ? '#22c55e' : (report.summary.fear_greed || 50) > 75 ? '#ef4444' : '#eab308' }}>
+              {report.summary.fear_greed || 0}
+            </span>
+          </div>
+          <div className={styles.indicatorBadge}>
+            <span className={styles.indicatorLabel}>50W MA</span>
+            <span className={styles.indicatorValue} style={{ color: (report.summary.discount_50w_ma || 0) < -20 ? '#22c55e' : (report.summary.discount_50w_ma || 0) > 20 ? '#ef4444' : '#eab308' }}>
+              {(report.summary.discount_50w_ma || 0).toFixed(1)}%
+            </span>
+          </div>
+          <div className={styles.indicatorBadge}>
+            <span className={styles.indicatorLabel}>ETF 7d</span>
+            <span className={styles.indicatorValue} style={{ color: (report.summary.etf_net_flow_7d || 0) > 0 ? '#22c55e' : (report.summary.etf_net_flow_7d || 0) < -1000 ? '#ef4444' : '#eab308' }}>
+              {(report.summary.etf_net_flow_7d || 0) > 0 ? '+' : ''}{Math.round(report.summary.etf_net_flow_7d || 0).toLocaleString()} BTC
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* DCA Calculator */}
       {(() => {
