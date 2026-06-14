@@ -242,6 +242,12 @@ python3 ~/.openclaw/workspace/scripts/deploy-website.py dapp # DApp only
 
 **⚠️ CRITICAL PATH FIX (2026-04-22):** EN site uploads to `/public_html/` (NOT `/colombia-staking.com/`). This was a bug causing LiteSpeed to serve stale cached content.
 
+**⚠️ Cache-busting `unified-header.js` (2026-06-14):** After any nav/header/JS change, bump the query string in all HTML files so browsers/CDN fetch the fresh JS. Otherwise the hamburger DApp tab may keep pointing to the old direct-DApp URL.
+```bash
+find /home/raspberry/.openclaw/workspace/colombia-staking/Website -name '*.html' -type f \
+  -exec sed -i 's|js/unified-header.js[^"]*|js/unified-header.js?v=NEWVERSION|g' {} +
+```
+
 **Server paths (cPanel colombia6 root):**
 | Site | Path |
 |------|------|
