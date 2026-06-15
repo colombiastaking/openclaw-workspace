@@ -492,12 +492,14 @@ def build_report(btc, aave, strategy, personal):
     pf = personal
     net_pct = pf['provider_net_apr'] * 100
     gross_pct = pf['provider_gross_apr'] * 100
-    pf_section = f"""• BTC holdings: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f} (@ €{pf['btc_price_eur']:,.0f}/BTC)
-• Colombia Staking: {pf['colombia_staking_total_egld']:,.0f} EGLD staked | Net APR {net_pct:.2f}% | Gross APR {gross_pct:.2f}%
-  → CS monthly revenue: {pf['cs_monthly_revenue_egld']:.2f} EGLD (€{pf['cs_monthly_revenue_eur']:,.0f})
-• Your delegation: {pf['personal_delegation_egld']:,.0f} EGLD (net APR {net_pct:.2f}%)
-  → Personal monthly: {pf['personal_monthly_egld']:.2f} EGLD (€{pf['personal_monthly_eur']:,.0f})
-• Total monthly EGLD revenue: €{pf['total_monthly_revenue_eur']:,.0f}"""
+    pf_section = f"""💰 Your BTC: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f}
+🏢 Colombia Staking income
+  • {pf['colombia_staking_total_egld']:,.0f} EGLD staked on-chain
+  • Provider APR: {net_pct:.2f}% net / {gross_pct:.2f}% gross
+  • Monthly revenue: {pf['cs_monthly_revenue_egld']:.2f} EGLD ≈ €{pf['cs_monthly_revenue_eur']:,.0f}
+🙋 Your 1,250 EGLD delegation
+  • Monthly reward: {pf['personal_monthly_egld']:.2f} EGLD ≈ €{pf['personal_monthly_eur']:,.0f}
+📊 Total monthly EGLD income: €{pf['total_monthly_revenue_eur']:,.0f}"""
     if pf.get('notes'):
         pf_section += "\n⚠️ " + " | ".join(pf['notes'])
     
@@ -510,7 +512,7 @@ def build_report(btc, aave, strategy, personal):
 • RSI: {btc.get('rsi', 0):.1f} | 50W MA: {btc.get('ma_discount', 0):+.1f}%
 • Fear & Greed: {btc.get('fear_greed', 50)} | ETF 7d: {btc.get('etf_net_flow_7d', 0):+,.0f} BTC
 
-💰 Position
+💼 Position
 • Ledger: {ledger_btc:.4f} BTC (${ledger_usd:,.0f})
 {aave_section}
 • Total: {total_btc:.4f} BTC (${total_usd:,.0f})
