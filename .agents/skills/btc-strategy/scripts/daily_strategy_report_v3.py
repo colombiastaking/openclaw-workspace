@@ -213,6 +213,52 @@ def get_colombia_staking_gross_apr(net_apr, service_fee):
         return net_apr / (1.0 - service_fee)
     return net_apr
 
+def get_cop_eur_rate():
+    """Fetch COP/EUR exchange rate from a reliable API."""
+    # Primary: exchangerate-api.com (free, no key needed for current rate)
+    try:
+        resp = requests.get("https://api.exchangerate-api.com/v4/latest/COP", timeout=10)
+        if resp.status_code == 200:
+            return float(resp.json().get("rates", {}).get("EUR", 0))
+    except Exception as e:
+        print(f"⚠️ Error fetching COP/EUR from exchangerate-api: {e}")
+    # Fallback: frankfurter.app (ECB rates)
+    try:
+        resp = requests.get("https://api.frankfurter.app/latest?from=COP&to=EUR", timeout=10)
+        if resp.status_code == 200:
+            return float(resp.json().get("rates", {}).get("EUR", 0))
+    except Exception as e:
+        print(f"⚠️ Error fetching COP/EUR from frankfurter: {e}")
+    # Fallback 2: Colombia central bank / indicative rate via floatrates
+    try:
+        resp = requests.get("https://www.floatrates.com/daily/cop.json", timeout=10)
+        if resp.status_code == 200:
+            for entry in resp.json():
+                if entry.get("code") == "EUR":
+                    return float(entry.get("rate", 0))
+    except Exception as e:
+        print(f"⚠️ Error fetching COP/EUR from floatrates: {e}")
+    return 0.00022
+
+# Apartment rental income configuration (monthly rents in COP)
+APARTMENT_RENTS_COP = {
+    "301": 820_000,
+    "201": 900_000,
+    "202": 820_000,
+}
+
+def get_apartment_rental_income_eur():
+    """Calculate total monthly apartment rental income in EUR."""
+    rate = get_cop_eur_rate()
+    total_cop = sum(APARTMENT_RENTS_COP.values())
+    total_eur = total_cop * rate if rate > 0 else 0
+    return {
+        "rate": rate,
+        "total_cop": total_cop,
+        "total_eur": total_eur,
+        "apartments": APARTMENT_RENTS_COP,
+    }
+
 def get_mvx_price_eur():
     """Fetch EGLD/EUR price from CoinGecko, Binance, or Coinbase."""
     # Primary: CoinGecko
@@ -271,6 +317,8 @@ def calculate_personal_finance(btc_price_usd):
         "personal_monthly_eur": 0,
         "total_monthly_revenue_eur": 0,
         "egld_price_eur": 0,
+        "apartment_rental_eur": 0,
+        "grand_total_monthly_income_eur": 0,
         "notes": []
     }
     # Ledger BTC
@@ -304,7 +352,14 @@ def calculate_personal_finance(btc_price_usd):
     else:
         result["notes"].append("Could not fetch provider APR for personal delegation")
 
+    # Apartment rental income (COP → EUR)
+    rental = get_apartment_rental_income_eur()
+    result["apartment_rental_eur"] = rental["total_eur"]
+    if rental["total_eur"] <= 0:
+        result["notes"].append("Could not fetch COP/EUR rate for apartment rental income")
+
     result["total_monthly_revenue_eur"] = result["cs_monthly_revenue_eur"] + result["personal_monthly_eur"]
+    result["grand_total_monthly_income_eur"] = result["total_monthly_revenue_eur"] + result["apartment_rental_eur"]
     return result
 
 def get_aave_position():
@@ -492,8 +547,9 @@ def build_report(btc, aave, strategy, personal):
     pf = personal
     net_pct = pf['provider_net_apr'] * 100
     pf_section = f"""💰 Your BTC: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f}
-🏢 Colombia Staking monthly income: €{pf['total_monthly_revenue_eur']:,.0f}
-  ({pf['colombia_staking_total_egld']:,.0f} EGLD staked · APR {net_pct:.2f}% · fee {pf['service_fee_pct']*100:.0f}%)"""
+🏢 Colombia Staking: €{pf['total_monthly_revenue_eur']:,.0f}/month
+🏠 Apartment rentals: €{pf['apartment_rental_eur']:,.0f}/month
+💵 Total monthly income: €{pf['grand_total_monthly_income_eur']:,.0f}/month"""
     if pf.get('notes'):
         pf_section += "\n⚠️ " + " | ".join(pf['notes'])
     
