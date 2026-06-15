@@ -491,15 +491,9 @@ def build_report(btc, aave, strategy, personal):
     # Personal finance summary
     pf = personal
     net_pct = pf['provider_net_apr'] * 100
-    gross_pct = pf['provider_gross_apr'] * 100
     pf_section = f"""💰 Your BTC: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f}
-🏢 Colombia Staking income
-  • {pf['colombia_staking_total_egld']:,.0f} EGLD staked on-chain
-  • Provider APR: {net_pct:.2f}% net / {gross_pct:.2f}% gross
-  • Monthly revenue: {pf['cs_monthly_revenue_egld']:.2f} EGLD ≈ €{pf['cs_monthly_revenue_eur']:,.0f}
-🙋 Your 1,250 EGLD delegation
-  • Monthly reward: {pf['personal_monthly_egld']:.2f} EGLD ≈ €{pf['personal_monthly_eur']:,.0f}
-📊 Total monthly EGLD income: €{pf['total_monthly_revenue_eur']:,.0f}"""
+🏢 Colombia Staking monthly income: €{pf['total_monthly_revenue_eur']:,.0f}
+  ({pf['colombia_staking_total_egld']:,.0f} EGLD staked · APR {net_pct:.2f}% · fee {pf['service_fee_pct']*100:.0f}%)"""
     if pf.get('notes'):
         pf_section += "\n⚠️ " + " | ".join(pf['notes'])
     
