@@ -197,6 +197,22 @@ def get_mvx_network_apr():
         return 0.11 / max(ratio, 0.01)
     return 0.08
 
+def get_colombia_staking_provider_apr():
+    """Get Colombia Staking net APR (after service fee) from on-chain provider data."""
+    p = get_colombia_staking_provider_info()
+    if not p:
+        return 0.0
+    apr = p.get("apr")
+    if apr is not None:
+        return float(apr) / 100.0  # API returns percentage, e.g. 8.4
+    return 0.0
+
+def get_colombia_staking_gross_apr(net_apr, service_fee):
+    """Derive gross APR before service fee."""
+    if net_apr > 0 and service_fee < 1.0:
+        return net_apr / (1.0 - service_fee)
+    return net_apr
+
 def get_mvx_price_eur():
     """Fetch EGLD/EUR price from CoinGecko, Binance, or Coinbase."""
     # Primary: CoinGecko
@@ -244,6 +260,8 @@ def calculate_personal_finance(btc_price_usd):
         "eur_usd": 0,
         "btc_value_eur": 0,
         "colombia_staking_total_egld": 0,
+        "provider_net_apr": 0,
+        "provider_gross_apr": 0,
         "network_apr": 0,
         "service_fee_pct": 0.10,
         "cs_monthly_revenue_egld": 0,
@@ -265,25 +283,26 @@ def calculate_personal_finance(btc_price_usd):
 
     # On-chain EGLD data
     result["egld_price_eur"] = get_mvx_price_eur()
-    result["network_apr"] = get_mvx_network_apr()
     result["service_fee_pct"] = get_colombia_staking_service_fee()
+    result["provider_net_apr"] = get_colombia_staking_provider_apr()
+    result["provider_gross_apr"] = get_colombia_staking_gross_apr(result["provider_net_apr"], result["service_fee_pct"])
+    result["network_apr"] = result["provider_net_apr"] if result["provider_net_apr"] else get_mvx_network_apr()
     result["colombia_staking_total_egld"] = get_colombia_staking_total_stake()
 
-    # Monthly revenue for Colombia Staking: total_stake * APR * (1 - protocol reserve?) * service_fee / 12
-    # MultiversX staking rewards already net; we apply service fee to gross rewards.
-    if result["colombia_staking_total_egld"] > 0 and result["network_apr"] > 0:
-        annual_rewards_egld = result["colombia_staking_total_egld"] * result["network_apr"]
+    # Monthly revenue for Colombia Staking: total_stake * gross_apr * service_fee / 12
+    if result["colombia_staking_total_egld"] > 0 and result["provider_gross_apr"] > 0:
+        annual_rewards_egld = result["colombia_staking_total_egld"] * result["provider_gross_apr"]
         result["cs_monthly_revenue_egld"] = annual_rewards_egld * result["service_fee_pct"] / 12.0
         result["cs_monthly_revenue_eur"] = result["cs_monthly_revenue_egld"] * result["egld_price_eur"]
     else:
         result["notes"].append("Could not fetch Colombia Staking on-chain stake/APR")
 
-    # Personal delegation earnings (1,250 EGLD at network APR, no service fee)
-    if result["network_apr"] > 0:
-        result["personal_monthly_egld"] = result["personal_delegation_egld"] * result["network_apr"] / 12.0
+    # Personal delegation earnings (1,250 EGLD at net provider APR)
+    if result["provider_net_apr"] > 0:
+        result["personal_monthly_egld"] = result["personal_delegation_egld"] * result["provider_net_apr"] / 12.0
         result["personal_monthly_eur"] = result["personal_monthly_egld"] * result["egld_price_eur"]
     else:
-        result["notes"].append("Could not fetch network APR for personal delegation")
+        result["notes"].append("Could not fetch provider APR for personal delegation")
 
     result["total_monthly_revenue_eur"] = result["cs_monthly_revenue_eur"] + result["personal_monthly_eur"]
     return result
@@ -471,10 +490,12 @@ def build_report(btc, aave, strategy, personal):
     
     # Personal finance summary
     pf = personal
+    net_pct = pf['provider_net_apr'] * 100
+    gross_pct = pf['provider_gross_apr'] * 100
     pf_section = f"""• BTC holdings: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f} (@ €{pf['btc_price_eur']:,.0f}/BTC)
-• Colombia Staking: {pf['colombia_staking_total_egld']:,.0f} EGLD staked | APR {pf['network_apr']*100:.2f}%
+• Colombia Staking: {pf['colombia_staking_total_egld']:,.0f} EGLD staked | Net APR {net_pct:.2f}% | Gross APR {gross_pct:.2f}%
   → CS monthly revenue: {pf['cs_monthly_revenue_egld']:.2f} EGLD (€{pf['cs_monthly_revenue_eur']:,.0f})
-• Your delegation: {pf['personal_delegation_egld']:,.0f} EGLD
+• Your delegation: {pf['personal_delegation_egld']:,.0f} EGLD (net APR {net_pct:.2f}%)
   → Personal monthly: {pf['personal_monthly_egld']:.2f} EGLD (€{pf['personal_monthly_eur']:,.0f})
 • Total monthly EGLD revenue: €{pf['total_monthly_revenue_eur']:,.0f}"""
     if pf.get('notes'):
