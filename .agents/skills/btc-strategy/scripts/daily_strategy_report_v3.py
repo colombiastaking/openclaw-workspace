@@ -16,6 +16,7 @@ import subprocess
 import os
 import requests
 import re
+import math
 from datetime import datetime
 
 # Try env first, fallback to hardcoded (bot token is stable)
@@ -78,6 +79,214 @@ def get_ledger_btc():
     except Exception as e:
         print(f"⚠️ Error reading btc-position.json: {e}")
         return 0
+
+def get_btc_eur_rate():
+    """Fetch BTC/EUR rate, trying CoinGecko first then Binance/Coinbase."""
+    # Primary: CoinGecko
+    try:
+        url = "https://api.coingecko.com/api/v3/simple/price"
+        params = {"ids": "bitcoin", "vs_currencies": "eur"}
+        resp = requests.get(url, params=params, timeout=10)
+        if resp.status_code == 200:
+            price = resp.json().get("bitcoin", {}).get("eur", 0)
+            if price:
+                return float(price)
+    except Exception as e:
+        print(f"⚠️ Error fetching BTC/EUR from CoinGecko: {e}")
+    # Fallback 1: Binance
+    try:
+        resp = requests.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCEUR", timeout=10)
+        if resp.status_code == 200:
+            return float(resp.json().get("price", 0))
+    except Exception as e:
+        print(f"⚠️ Error fetching BTC/EUR from Binance: {e}")
+    # Fallback 2: Coinbase
+    try:
+        resp = requests.get("https://api.coinbase.com/v2/exchange-rates?currency=BTC", timeout=10)
+        if resp.status_code == 200:
+            return float(resp.json()["data"]["rates"]["EUR"])
+    except Exception as e:
+        print(f"⚠️ Error fetching BTC/EUR from Coinbase: {e}")
+    return 0
+
+def get_eur_usd_rate():
+    """Fetch EUR/USD rate from CoinGecko or forex API."""
+    try:
+        url = "https://api.coingecko.com/api/v3/simple/price"
+        params = {"ids": "tether", "vs_currencies": "eur"}
+        resp = requests.get(url, params=params, timeout=10)
+        if resp.status_code == 200:
+            usdt_eur = resp.json().get("tether", {}).get("eur", 0)
+            if usdt_eur:
+                return 1.0 / float(usdt_eur)
+    except Exception as e:
+        print(f"⚠️ Error fetching EUR/USD from CoinGecko: {e}")
+    # Fallback: ECB reference rates (XML)
+    try:
+        resp = requests.get("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml", timeout=10)
+        if resp.status_code == 200:
+            import re
+            m = re.search(r'currency="USD"\s+rate="([0-9.]+)"', resp.text)
+            if m:
+                return float(m.group(1))
+    except Exception as e:
+        print(f"⚠️ Error fetching EUR/USD from ECB: {e}")
+    return 1.08
+
+MVX_PROVIDER_ADDRESS = "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf"
+
+def fetch_multiversx(url, params=None):
+    """Generic MultiversX API helper with retries."""
+    headers = {"accept": "application/json"}
+    for attempt in range(2):
+        try:
+            resp = requests.get(url, params=params, headers=headers, timeout=15)
+            if resp.status_code == 200:
+                return resp.json()
+            print(f"⚠️ MVX API {url} status {resp.status_code}")
+        except Exception as e:
+            print(f"⚠️ MVX API {url} error: {e}")
+    return None
+
+def get_colombia_staking_provider_info():
+    """Fetch Colombia Staking provider info from /providers."""
+    providers = fetch_multiversx("https://api.multiversx.com/providers", {"size": 200})
+    if not providers or not isinstance(providers, list):
+        return None
+    for p in providers:
+        ident = p.get("identity", "").lower()
+        prov = p.get("provider", "").lower()
+        if "colombia" in ident or prov == MVX_PROVIDER_ADDRESS.lower():
+            return p
+    return None
+
+def get_colombia_staking_total_stake():
+    """Get total active stake delegated to Colombia Staking (locked EGLD)."""
+    p = get_colombia_staking_provider_info()
+    if not p:
+        return 0.0
+    # locked = base stake + topUp = total EGLD delegated to the provider
+    locked = p.get("locked", 0) or p.get("stake", 0)
+    return float(locked) / 1e18
+
+def get_colombia_staking_service_fee():
+    """Get Colombia Staking on-chain service fee (fraction, e.g. 0.10)."""
+    p = get_colombia_staking_provider_info()
+    if not p:
+        return 0.10
+    fee = p.get("serviceFee")
+    if fee is not None:
+        return float(fee)
+    return 0.10
+
+def get_mvx_network_apr():
+    """Fetch MultiversX network staking APR from official economics endpoint."""
+    data = fetch_multiversx("https://api.multiversx.com/economics")
+    if not data:
+        return 0.0
+    # economics returns stakeSupply, totalStaked, apr
+    apr = data.get("apr") or data.get("stakingApr") or data.get("baseApr")
+    if apr is not None:
+        return float(apr)
+    # Fallback: derive from total supply + staked ratio + base rewards
+    total_staked = float(data.get("totalStaked", 0) or data.get("staked", 0) or 1)
+    total_supply = float(data.get("totalSupply", 0) or data.get("circulatingSupply", 0) or 1)
+    if total_staked > 0 and total_supply > 0:
+        ratio = total_staked / total_supply
+        # Approximate annual issuance ~11% base reward rate scaled by ratio
+        return 0.11 / max(ratio, 0.01)
+    return 0.08
+
+def get_mvx_price_eur():
+    """Fetch EGLD/EUR price from CoinGecko, Binance, or Coinbase."""
+    # Primary: CoinGecko
+    try:
+        url = "https://api.coingecko.com/api/v3/simple/price"
+        params = {"ids": "multiversx", "vs_currencies": "eur"}
+        resp = requests.get(url, params=params, timeout=10)
+        if resp.status_code == 200:
+            price = resp.json().get("multiversx", {}).get("eur", 0)
+            if price:
+                return float(price)
+    except Exception as e:
+        print(f"⚠️ Error fetching EGLD/EUR from CoinGecko: {e}")
+    # Fallback 1: Binance
+    try:
+        resp = requests.get("https://api.binance.com/api/v3/ticker/price?symbol=EGLDEUR", timeout=10)
+        if resp.status_code == 200:
+            return float(resp.json().get("price", 0))
+    except Exception as e:
+        print(f"⚠️ Error fetching EGLD/EUR from Binance: {e}")
+    # Fallback 2: Coinbase
+    try:
+        resp = requests.get("https://api.coinbase.com/v2/exchange-rates?currency=EGLD", timeout=10)
+        if resp.status_code == 200:
+            return float(resp.json()["data"]["rates"]["EUR"])
+    except Exception as e:
+        print(f"⚠️ Error fetching EGLD/EUR from Coinbase: {e}")
+    # Fallback 3: MultiversX economics USD price + EUR/USD
+    try:
+        eco = fetch_multiversx("https://api.multiversx.com/economics")
+        usd_price = float(eco.get("price", 0)) if eco else 0
+        eur_usd = get_eur_usd_rate()
+        if usd_price > 0 and eur_usd > 0:
+            return usd_price / eur_usd
+    except Exception as e:
+        print(f"⚠️ Error fetching EGLD/EUR from MultiversX economics: {e}")
+    return 0
+
+def calculate_personal_finance(btc_price_usd):
+    """Calculate personal finance summary from on-chain data."""
+    result = {
+        "ledger_btc": 0,
+        "btc_price_usd": btc_price_usd,
+        "btc_price_eur": 0,
+        "eur_usd": 0,
+        "btc_value_eur": 0,
+        "colombia_staking_total_egld": 0,
+        "network_apr": 0,
+        "service_fee_pct": 0.10,
+        "cs_monthly_revenue_egld": 0,
+        "cs_monthly_revenue_eur": 0,
+        "personal_delegation_egld": 1250,
+        "personal_monthly_egld": 0,
+        "personal_monthly_eur": 0,
+        "total_monthly_revenue_eur": 0,
+        "egld_price_eur": 0,
+        "notes": []
+    }
+    # Ledger BTC
+    result["ledger_btc"] = get_ledger_btc()
+    result["btc_price_eur"] = get_btc_eur_rate()
+    result["eur_usd"] = get_eur_usd_rate()
+    if result["btc_price_eur"] <= 0 and btc_price_usd > 0 and result["eur_usd"] > 0:
+        result["btc_price_eur"] = btc_price_usd / result["eur_usd"]
+    result["btc_value_eur"] = result["ledger_btc"] * result["btc_price_eur"]
+
+    # On-chain EGLD data
+    result["egld_price_eur"] = get_mvx_price_eur()
+    result["network_apr"] = get_mvx_network_apr()
+    result["service_fee_pct"] = get_colombia_staking_service_fee()
+    result["colombia_staking_total_egld"] = get_colombia_staking_total_stake()
+
+    # Monthly revenue for Colombia Staking: total_stake * APR * (1 - protocol reserve?) * service_fee / 12
+    # MultiversX staking rewards already net; we apply service fee to gross rewards.
+    if result["colombia_staking_total_egld"] > 0 and result["network_apr"] > 0:
+        annual_rewards_egld = result["colombia_staking_total_egld"] * result["network_apr"]
+        result["cs_monthly_revenue_egld"] = annual_rewards_egld * result["service_fee_pct"] / 12.0
+        result["cs_monthly_revenue_eur"] = result["cs_monthly_revenue_egld"] * result["egld_price_eur"]
+    else:
+        result["notes"].append("Could not fetch Colombia Staking on-chain stake/APR")
+
+    # Personal delegation earnings (1,250 EGLD at network APR, no service fee)
+    if result["network_apr"] > 0:
+        result["personal_monthly_egld"] = result["personal_delegation_egld"] * result["network_apr"] / 12.0
+        result["personal_monthly_eur"] = result["personal_monthly_egld"] * result["egld_price_eur"]
+    else:
+        result["notes"].append("Could not fetch network APR for personal delegation")
+
+    result["total_monthly_revenue_eur"] = result["cs_monthly_revenue_eur"] + result["personal_monthly_eur"]
+    return result
 
 def get_aave_position():
     """Get Aave position. Returns zeros if no position or error."""
@@ -239,7 +448,7 @@ def send_telegram(message):
         print(f"⚠️ Telegram send failed: {e}")
         return False
 
-def build_report(btc, aave, strategy):
+def build_report(btc, aave, strategy, personal):
     """Build the daily report message."""
     current_date = datetime.now().strftime("%B %d, %Y")
     score = btc.get('score', 50)
@@ -260,6 +469,17 @@ def build_report(btc, aave, strategy):
     else:
         aave_section = "• Aave: No active position"
     
+    # Personal finance summary
+    pf = personal
+    pf_section = f"""• BTC holdings: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f} (@ €{pf['btc_price_eur']:,.0f}/BTC)
+• Colombia Staking: {pf['colombia_staking_total_egld']:,.0f} EGLD staked | APR {pf['network_apr']*100:.2f}%
+  → CS monthly revenue: {pf['cs_monthly_revenue_egld']:.2f} EGLD (€{pf['cs_monthly_revenue_eur']:,.0f})
+• Your delegation: {pf['personal_delegation_egld']:,.0f} EGLD
+  → Personal monthly: {pf['personal_monthly_egld']:.2f} EGLD (€{pf['personal_monthly_eur']:,.0f})
+• Total monthly EGLD revenue: €{pf['total_monthly_revenue_eur']:,.0f}"""
+    if pf.get('notes'):
+        pf_section += "\n⚠️ " + " | ".join(pf['notes'])
+    
     message = f"""📊 BTC Daily Strategy — {current_date}
 
 🎯 Score: {score}/100 — {rec}
@@ -273,6 +493,9 @@ def build_report(btc, aave, strategy):
 • Ledger: {ledger_btc:.4f} BTC (${ledger_usd:,.0f})
 {aave_section}
 • Total: {total_btc:.4f} BTC (${total_usd:,.0f})
+
+👤 Personal Finance
+{pf_section}
 
 📋 Strategy
 • DCA: €{strategy['dca_amount_eur']:,.0f}/week — {strategy['posture_reason']}
@@ -310,13 +533,14 @@ def save_report(message):
         print(f"⚠️ GitHub backup: {e}")
 
 def main():
+    # Step 1: Run decision engine
     print("=" * 50)
     print("BTC Daily Strategy Report v3")
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 50)
     
     # Step 1: Run decision engine
-    print("\n[1/4] Running BTC decision engine...")
+    print("\n[1/5] Running BTC decision engine...")
     engine_output = run_command(
         "cd /home/raspberry/.openclaw/workspace/.agents/skills/btc-strategy/scripts && "
         "python3 btc_decision_engine.py > /dev/null 2>&1",
@@ -328,12 +552,12 @@ def main():
         print("✅ Engine complete")
     
     # Step 2: Read signal
-    print("\n[2/4] Reading BTC signal...")
+    print("\n[2/5] Reading BTC signal...")
     btc = get_btc_signal()
     print(f"   Score: {btc['score']}/100 | Price: ${btc['price']:,.0f} | MVRV: {btc['mvrv']:.2f}")
     
     # Step 3: Get positions
-    print("\n[3/4] Getting positions...")
+    print("\n[3/5] Getting positions...")
     aave = get_aave_position()
     aave['ledger_btc'] = get_ledger_btc()
     
@@ -343,10 +567,18 @@ def main():
     else:
         print("   Aave: No active position")
     
-    # Step 4: Calculate strategy and send
-    print("\n[4/4] Building and sending report...")
+    # Step 4: Personal finance
+    print("\n[4/5] Calculating personal finance...")
+    personal = calculate_personal_finance(btc.get('price', 0))
+    print(f"   BTC value: €{personal['btc_value_eur']:,.0f}")
+    print(f"   CS revenue: €{personal['cs_monthly_revenue_eur']:,.0f}/mo")
+    print(f"   Personal delegation: €{personal['personal_monthly_eur']:,.0f}/mo")
+    print(f"   Total EGLD revenue: €{personal['total_monthly_revenue_eur']:,.0f}/mo")
+
+    # Step 5: Calculate strategy and send
+    print("\n[5/5] Building and sending report...")
     strategy = calculate_strategy(btc.get('score', 50), aave)
-    message = build_report(btc, aave, strategy)
+    message = build_report(btc, aave, strategy, personal)
     
     # Send to Telegram
     telegram_ok = send_telegram(message)
