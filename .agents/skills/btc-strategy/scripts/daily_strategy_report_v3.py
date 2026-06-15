@@ -134,6 +134,25 @@ def get_eur_usd_rate():
     return 1.08
 
 MVX_PROVIDER_ADDRESS = "erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf"
+PROVIDER_CACHE_FILE = "/tmp/btc_cs_provider_cache.json"
+
+def load_provider_cache():
+    """Load last successfully fetched provider data."""
+    try:
+        if os.path.exists(PROVIDER_CACHE_FILE):
+            with open(PROVIDER_CACHE_FILE, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"⚠️ Error loading provider cache: {e}")
+    return {}
+
+def save_provider_cache(data):
+    """Save provider data to cache."""
+    try:
+        with open(PROVIDER_CACHE_FILE, 'w') as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        print(f"⚠️ Error saving provider cache: {e}")
 
 def fetch_multiversx(url, params=None):
     """Generic MultiversX API helper with retries."""
@@ -149,16 +168,20 @@ def fetch_multiversx(url, params=None):
     return None
 
 def get_colombia_staking_provider_info():
-    """Fetch Colombia Staking provider info from /providers."""
+    """Fetch Colombia Staking provider info from /providers, with cache fallback."""
+    cache = load_provider_cache()
     providers = fetch_multiversx("https://api.multiversx.com/providers", {"size": 200})
     if not providers or not isinstance(providers, list):
-        return None
+        print("⚠️ Could not fetch providers, using cached provider data")
+        return cache.get("provider")
     for p in providers:
         ident = p.get("identity", "").lower()
         prov = p.get("provider", "").lower()
         if "colombia" in ident or prov == MVX_PROVIDER_ADDRESS.lower():
+            save_provider_cache({"provider": p, "timestamp": datetime.now().isoformat()})
             return p
-    return None
+    print("⚠️ Colombia Staking provider not found in providers list, using cache")
+    return cache.get("provider")
 
 def get_colombia_staking_total_stake():
     """Get total active stake delegated to Colombia Staking (locked EGLD)."""
@@ -342,7 +365,7 @@ def calculate_personal_finance(btc_price_usd):
     result["service_fee_pct"] = get_colombia_staking_service_fee()
     result["provider_net_apr"] = get_colombia_staking_provider_apr()
     result["provider_gross_apr"] = get_colombia_staking_gross_apr(result["provider_net_apr"], result["service_fee_pct"])
-    result["network_apr"] = result["provider_net_apr"] if result["provider_net_apr"] else get_mvx_network_apr()
+    result["network_apr"] = result["provider_net_apr"] if result["provider_net_apr"] else 0.084
     result["colombia_staking_total_egld"] = get_colombia_staking_total_stake()
 
     # Monthly revenue for Colombia Staking: total_stake * gross_apr * service_fee / 12
