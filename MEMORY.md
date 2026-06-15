@@ -146,10 +146,11 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld"
 
 **8 AM Telegram report now includes personal finance (2026-06-15):**
 - BTC holdings in EUR
-- Colombia Staking monthly income from on-chain provider data
+- Colombia Staking monthly income from on-chain provider data (provider + personal 1,250 EGLD delegation)
+- Apartment rental income (3 apartments in Colombia, COP → EUR live rate)
+- Monthly spendings: €1,825
+- Freelance income gap and self-sustaining %
 - Provider: `erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf`
-- Net APR fetched live from provider; gross APR derived with on-chain service fee
-- Personal 1,250 EGLD delegation earnings included
 
 ---
 

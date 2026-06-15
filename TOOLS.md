@@ -66,9 +66,13 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
   - Total staked = `locked` EGLD from `/providers`
   - Net APR fetched live from provider `apr` field
   - Gross APR = net APR / (1 - service fee)
-  - CS monthly revenue = total_staked × gross_apr × service_fee / 12
-- Personal delegation: 1,250 EGLD × net provider APR / 12
-- Fallback price sources: CoinGecko → Binance → Coinbase → ECB/MultiversX economics
+  - CS monthly revenue (incl. personal 1,250 EGLD delegation) = total_staked × gross_apr × service_fee / 12 + 1,250 × net_apr / 12
+- Apartment rental income: 3 apartments (301, 201, 202) in COP → EUR via live exchange rate
+  - 301: 820,000 COP, 201: 900,000 COP, 202: 820,000 COP
+- Monthly spendings: €1,825 (Sebas confirmed 2026-06-15)
+- Freelance gap = spendings - passive income
+- Self-sustaining % = passive income / spendings
+- Fallback price sources: CoinGecko → Binance → Coinbase → ECB/MultiversX economics; COP/EUR via exchangerate-api → frankfurter → floatrates
 
 **20-Level DCA Table:**
 | Score | Multiplier | Weekly | Monthly | Posture |
