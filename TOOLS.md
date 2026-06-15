@@ -58,6 +58,18 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 - `score_interpretation` = `recommendation` (consistent messaging)
 - DCA amounts: €1,100/month base × multiplier (score-dependent)
 
+**Personal Finance Section (added 2026-06-15):**
+- Telegram-only report now includes a personal finance summary
+- BTC holdings in EUR from Ledger xpub scan
+- Colombia Staking monthly revenue from on-chain provider data:
+  - Provider: `erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf`
+  - Total staked = `locked` EGLD from `/providers`
+  - Net APR fetched live from provider `apr` field
+  - Gross APR = net APR / (1 - service fee)
+  - CS monthly revenue = total_staked × gross_apr × service_fee / 12
+- Personal delegation: 1,250 EGLD × net provider APR / 12
+- Fallback price sources: CoinGecko → Binance → Coinbase → ECB/MultiversX economics
+
 **20-Level DCA Table:**
 | Score | Multiplier | Weekly | Monthly | Posture |
 |-------|-----------|--------|---------|---------|

@@ -144,10 +144,26 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld"
 **Derivation:** BIP84 Native SegWit — m/84'/0'/0'/0/i
 **Known funded:** `bc1qa90vtxkj0umyfzs5m2cr3n4c8f5pxnenfah4e0` (index 26)
 
+**8 AM Telegram report now includes personal finance (2026-06-15):**
+- BTC holdings in EUR
+- Colombia Staking monthly income from on-chain provider data
+- Provider: `erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqallllls5rqmaf`
+- Net APR fetched live from provider; gross APR derived with on-chain service fee
+- Personal 1,250 EGLD delegation earnings included
+
 ---
+
+## Deployment Rule
+
+**After EVERY website/DApp FTP deploy → immediately commit + push to GitHub.**
+Never skip this step. Repos:
+- DAPP-V3 → `colombiastaking/DAPP-V3`
+- Website → `colombiastaking/Website`
+- Network Explorer → `colombiastaking/network-explorer`
 
 ## Pending Items
 
 - BTC report cron (8 AM) — sometimes missed if gateway restarts mid-window
 - COLS distribution (1:10 PM daily) — needs wallet on main
+- Workspace git pile — many uncommitted changes (node monitor, BTC position, website/DApp updates, missions, DXF files, memory files)
 - MEMORY.md oversize — keep trimmed to ≤12k chars
