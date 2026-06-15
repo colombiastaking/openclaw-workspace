@@ -297,6 +297,11 @@ def get_mvx_price_eur():
         print(f"⚠️ Error fetching EGLD/EUR from MultiversX economics: {e}")
     return 0
 
+def get_monthly_spendings_eur():
+    """Total monthly personal spendings in EUR."""
+    # Source: Sebas confirmed 2026-06-15
+    return 1825.0
+
 def calculate_personal_finance(btc_price_usd):
     """Calculate personal finance summary from on-chain data."""
     result = {
@@ -318,6 +323,9 @@ def calculate_personal_finance(btc_price_usd):
         "total_monthly_revenue_eur": 0,
         "egld_price_eur": 0,
         "apartment_rental_eur": 0,
+        "monthly_spendings_eur": 0,
+        "freelance_gap_eur": 0,
+        "self_sustaining_pct": 0,
         "grand_total_monthly_income_eur": 0,
         "notes": []
     }
@@ -358,8 +366,13 @@ def calculate_personal_finance(btc_price_usd):
     if rental["total_eur"] <= 0:
         result["notes"].append("Could not fetch COP/EUR rate for apartment rental income")
 
-    result["total_monthly_revenue_eur"] = result["cs_monthly_revenue_eur"] + result["personal_monthly_eur"]
-    result["grand_total_monthly_income_eur"] = result["total_monthly_revenue_eur"] + result["apartment_rental_eur"]
+    # Monthly spendings and freelance gap
+    result["monthly_spendings_eur"] = get_monthly_spendings_eur()
+    result["total_monthly_revenue_eur"] = result["cs_monthly_revenue_eur"] + result["personal_monthly_eur"] + result["apartment_rental_eur"]
+    result["grand_total_monthly_income_eur"] = result["total_monthly_revenue_eur"]
+    result["freelance_gap_eur"] = max(0, result["monthly_spendings_eur"] - result["grand_total_monthly_income_eur"])
+    if result["monthly_spendings_eur"] > 0:
+        result["self_sustaining_pct"] = (result["grand_total_monthly_income_eur"] / result["monthly_spendings_eur"]) * 100
     return result
 
 def get_aave_position():
@@ -545,11 +558,15 @@ def build_report(btc, aave, strategy, personal):
     
     # Personal finance summary
     pf = personal
-    net_pct = pf['provider_net_apr'] * 100
+    gap = pf['freelance_gap_eur']
+    progress = pf['self_sustaining_pct']
     pf_section = f"""💰 Your BTC: {pf['ledger_btc']:.4f} BTC ≈ €{pf['btc_value_eur']:,.0f}
-🏢 Colombia Staking: €{pf['total_monthly_revenue_eur']:,.0f}/month
+🏢 Colombia Staking: €{pf['cs_monthly_revenue_eur'] + pf['personal_monthly_eur']:,.0f}/month
 🏠 Apartment rentals: €{pf['apartment_rental_eur']:,.0f}/month
-💵 Total monthly income: €{pf['grand_total_monthly_income_eur']:,.0f}/month"""
+💵 Total passive income: €{pf['grand_total_monthly_income_eur']:,.0f}/month
+💳 Monthly spendings: €{pf['monthly_spendings_eur']:,.0f}/month
+📉 Freelance needed: €{gap:,.0f}/month
+🎯 Self-sustaining: {progress:.1f}%"""
     if pf.get('notes'):
         pf_section += "\n⚠️ " + " | ".join(pf['notes'])
     
