@@ -24,6 +24,25 @@ from datetime import datetime
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8550327891:AAHFbqjIeIUqlZ0VrKBRtEcs7oOS7wQ2XM8")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "1144365829")
 
+# Make sure DUNE_API_KEY is available for the decision engine if not already in env.
+# The cron job sources telegram.env but variables are not exported by default.
+def _ensure_dune_api_key():
+    if os.environ.get("DUNE_API_KEY"):
+        return
+    env_file = "/home/raspberry/.openclaw/.secrets/telegram.env"
+    try:
+        with open(env_file, "r") as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("DUNE_API_KEY="):
+                    os.environ["DUNE_API_KEY"] = line.split("=", 1)[1].strip()
+                    print("✅ Loaded DUNE_API_KEY from telegram.env")
+                    return
+    except Exception as e:
+        print(f"⚠️ Could not load DUNE_API_KEY from telegram.env: {e}")
+
+_ensure_dune_api_key()
+
 def run_command(cmd, timeout=60):
     try:
         result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
