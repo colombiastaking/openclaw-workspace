@@ -123,11 +123,16 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld"
 
 ## Backup System
 
-**Location:** `~/.openclaw/alice-backup/`
-**Schedule:** Daily 6 PM (system cron `backup.sh`)
-**Password:** in `.backup_password`
+**Location:** `/home/raspberry/alice-backup/`
+**Script:** `/home/raspberry/alice-backup/backup.sh`
+**Schedule:** Daily 18:00 (system cron)
+**Log:** `/tmp/alice-backup.log`
+**Password:** in `/home/raspberry/alice-backup/.backup_password`
 **Drop secrets:** `~/.openclaw/.secrets/` (auto-included, encrypted)
+**GitHub:** `https://github.com/colombiastaking/alice-backup`
 **Restore:** See `RESTORE.md` in alice-backup repo.
+
+**Last verified backup:** 2026-06-18 08:22 — commit `59ad00b`, all critical files present.
 
 ---
 
