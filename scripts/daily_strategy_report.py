@@ -16,7 +16,18 @@ import os
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "1144365829")
 
-# Professional Advisory Parameters
+# v3 is the canonical report. Skip if v3 already sent today to avoid duplicates.
+V3_LOCK_FILE = '/tmp/btc_daily_report.lock'
+
+def _v3_already_sent_today():
+    try:
+        if os.path.exists(V3_LOCK_FILE):
+            with open(V3_LOCK_FILE, 'r') as f:
+                data = json.load(f)
+            return data.get('date') == datetime.now().strftime('%Y-%m-%d') and bool(data.get('message_id'))
+    except Exception:
+        pass
+    return False
 # Weekly DCA = 2% of Total Aave Position (Collateral + Borrowed)
 DCA_PERCENT_OF_POSITION = 0.02
 
@@ -324,6 +335,10 @@ def send_telegram(message):
             requests.post(url, data=data, timeout=10)
 
 def main():
+    if _v3_already_sent_today():
+        print("⏭️ v3 daily report already sent today. Skipping legacy script to avoid duplicate Telegram message.")
+        return
+    
     # Fetch data
     run_command("cd /home/raspberry/.openclaw/workspace/btc-monitor && python3 btc_decision_engine.py > /dev/null 2>&1")
     btc = get_btc_signal()

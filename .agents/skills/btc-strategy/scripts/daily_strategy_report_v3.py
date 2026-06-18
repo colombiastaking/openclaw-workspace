@@ -24,6 +24,32 @@ from datetime import datetime
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8550327891:AAHFbqjIeIUqlZ0VrKBRtEcs7oOS7wQ2XM8")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "1144365829")
 
+# Deduplication: one report per day (prevent duplicate cron/agent/manual runs)
+DAILY_LOCK_FILE = '/tmp/btc_daily_report.lock'
+FORCE_SEND = os.environ.get("FORCE_SEND", "0") == "1"
+
+def already_sent_today():
+    """Check if a BTC report was already sent today."""
+    today = datetime.now().strftime('%Y-%m-%d')
+    try:
+        if os.path.exists(DAILY_LOCK_FILE):
+            with open(DAILY_LOCK_FILE, 'r') as f:
+                data = json.load(f)
+            if data.get('date') == today and data.get('message_id'):
+                return True, data.get('message_id')
+    except Exception as e:
+        print(f"⚠️ Could not read daily lock file: {e}")
+    return False, None
+
+def mark_sent_today(message_id):
+    """Record that today's report was sent."""
+    today = datetime.now().strftime('%Y-%m-%d')
+    try:
+        with open(DAILY_LOCK_FILE, 'w') as f:
+            json.dump({'date': today, 'message_id': message_id, 'sent_at': datetime.now().isoformat()}, f)
+    except Exception as e:
+        print(f"⚠️ Could not write daily lock file: {e}")
+
 # Make sure DUNE_API_KEY is available for the decision engine if not already in env.
 # The cron job sources telegram.env but variables are not exported by default.
 def _ensure_dune_api_key():
@@ -553,10 +579,10 @@ def calculate_strategy(score, aave):
     }
 
 def send_telegram(message):
-    """Send message to Telegram."""
+    """Send message to Telegram; returns (ok, message_id)."""
     if not TELEGRAM_BOT_TOKEN or TELEGRAM_BOT_TOKEN == "YOUR_BOT_TOKEN":
         print("⚠️ No Telegram bot token configured")
-        return False
+        return False, None
     
     try:
         url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -568,14 +594,15 @@ def send_telegram(message):
         }
         resp = requests.post(url, data=data, timeout=15)
         if resp.status_code == 200:
-            print("✅ Telegram delivered")
-            return True
+            message_id = resp.json().get('result', {}).get('message_id')
+            print(f"✅ Telegram delivered (message_id={message_id})")
+            return True, message_id
         else:
             print(f"⚠️ Telegram error: {resp.status_code} - {resp.text[:200]}")
-            return False
+            return False, None
     except Exception as e:
         print(f"⚠️ Telegram send failed: {e}")
-        return False
+        return False, None
 
 def build_report(btc, aave, strategy, personal):
     """Build the daily report message."""
@@ -712,8 +739,20 @@ def main():
     strategy = calculate_strategy(btc.get('score', 50), aave)
     message = build_report(btc, aave, strategy, personal)
     
-    # Send to Telegram
-    telegram_ok = send_telegram(message)
+    # Deduplication guard
+    sent_today, existing_message_id = already_sent_today()
+    telegram_ok = False
+    message_id = None
+    if sent_today and not FORCE_SEND:
+        print(f"⚠️ Daily report already sent today (message_id={existing_message_id}). Skipping Telegram send.")
+        print("    Set FORCE_SEND=1 to override.")
+    else:
+        if FORCE_SEND:
+            print("🚨 FORCE_SEND=1 — sending report even if one was already sent today.")
+        # Send to Telegram
+        telegram_ok, message_id = send_telegram(message)
+        if telegram_ok and message_id:
+            mark_sent_today(message_id)
     
     # Save locally regardless of Telegram success
     save_report(message)
@@ -723,15 +762,18 @@ def main():
     with open(log_path, 'a') as f:
         f.write(f"\n{'='*40}\n")
         f.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write(f"Telegram: {'OK' if telegram_ok else 'FAILED'}\n")
+        if sent_today and not FORCE_SEND:
+            f.write(f"Telegram: SKIPPED (already sent today, message_id={existing_message_id})\n")
+        else:
+            f.write(f"Telegram: {'OK' if telegram_ok else 'FAILED'} (message_id={message_id})\n")
         f.write(message)
         f.write("\n")
     
     print(f"\n{'='*50}")
-    print(f"Report complete! Telegram: {'✅' if telegram_ok else '❌'}")
+    print(f"Report complete! Telegram: {'✅' if telegram_ok else ('⏭️ skipped' if sent_today and not FORCE_SEND else '❌')}")
     print(f"{'='*50}")
     
-    return telegram_ok
+    return telegram_ok or (sent_today and not FORCE_SEND)
 
 if __name__ == "__main__":
     success = main()

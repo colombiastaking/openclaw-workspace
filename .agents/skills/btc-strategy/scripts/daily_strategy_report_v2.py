@@ -14,6 +14,19 @@ from datetime import datetime
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "1144365829")
 
+# v3 is the canonical report. Skip if v3 already sent today to avoid duplicates.
+V3_LOCK_FILE = '/tmp/btc_daily_report.lock'
+
+def _v3_already_sent_today():
+    try:
+        if os.path.exists(V3_LOCK_FILE):
+            with open(V3_LOCK_FILE, 'r') as f:
+                data = json.load(f)
+            return data.get('date') == datetime.now().strftime('%Y-%m-%d') and bool(data.get('message_id'))
+    except Exception:
+        pass
+    return False
+
 def run_command(cmd):
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     return result.stdout + result.stderr
@@ -143,6 +156,10 @@ def send_telegram(message):
         return False
 
 def main():
+    if _v3_already_sent_today():
+        print("⏭️ v3 daily report already sent today. Skipping v2 to avoid duplicate Telegram message.")
+        return
+    
     run_command("cd /home/raspberry/.openclaw/workspace/.agents/skills/btc-strategy/scripts && python3 btc_decision_engine.py > /dev/null 2>&1")
     btc = get_btc_signal()
     aave = get_aave_position()
