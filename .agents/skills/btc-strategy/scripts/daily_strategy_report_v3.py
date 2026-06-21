@@ -253,7 +253,18 @@ def get_colombia_staking_provider_info():
     providers = fetch_multiversx("https://api.multiversx.com/providers", {"size": 200})
     if not providers or not isinstance(providers, list):
         print("⚠️ Could not fetch providers, using cached provider data")
-        return cache.get("provider")
+        cache_age_days = None
+        if cache.get("timestamp"):
+            try:
+                cache_dt = datetime.fromisoformat(cache["timestamp"])
+                cache_age_days = (datetime.now() - cache_dt).total_seconds() / 86400
+                print(f"   Cache age: {cache_age_days:.1f} days")
+            except Exception:
+                pass
+        provider = cache.get("provider")
+        if provider is not None and cache_age_days is not None and cache_age_days > 1:
+            provider["_stale_cache_warning"] = True
+        return provider
     for p in providers:
         ident = p.get("identity", "").lower()
         prov = p.get("provider", "").lower()
@@ -443,10 +454,14 @@ def calculate_personal_finance(btc_price_usd):
     # On-chain EGLD data
     result["egld_price_eur"] = get_mvx_price_eur()
     result["service_fee_pct"] = get_colombia_staking_service_fee()
+    provider_info = get_colombia_staking_provider_info()
     result["provider_net_apr"] = get_colombia_staking_provider_apr()
     result["provider_gross_apr"] = get_colombia_staking_gross_apr(result["provider_net_apr"], result["service_fee_pct"])
     result["network_apr"] = result["provider_net_apr"] if result["provider_net_apr"] else 0.084
     result["colombia_staking_total_egld"] = get_colombia_staking_total_stake()
+
+    if provider_info and provider_info.get("_stale_cache_warning"):
+        result["notes"].append("Colombia Staking provider data is from cached data >1 day old")
 
     # Monthly revenue for Colombia Staking: total_stake * gross_apr * service_fee / 12
     if result["colombia_staking_total_egld"] > 0 and result["provider_gross_apr"] > 0:
@@ -487,35 +502,48 @@ def get_aave_position():
     try:
         with open('/tmp/btc_monitor_state.json', 'r') as f:
             state = json.load(f)
-            btc_price = state.get('btc_price', 0)
-            collateral_btc = state.get('collateral_btc', 0)
-            debt_usd = state.get('debt_usd', 0)
-            
-            # Calculate HF and LTV
-            hf_current = float('inf')
-            if debt_usd > 0 and collateral_btc > 0 and btc_price > 0:
-                hf_current = (collateral_btc * btc_price * 0.78) / debt_usd
-            
-            collateral_usd = collateral_btc * btc_price
-            ltv = (debt_usd / collateral_usd * 100) if collateral_usd > 0 else 0
-            
-            # Calculate liquidation price (HF=1.0)
-            liq_price = 0
-            if collateral_btc > 0 and debt_usd > 0:
-                liq_price = (1.0 * debt_usd) / (collateral_btc * 0.78)
-            
-            buffer_pct = ((btc_price - liq_price) / btc_price * 100) if btc_price > 0 and liq_price > 0 else 0
-            
-            return {
-                'health_factor': hf_current,
-                'collateral_btc': collateral_btc,
-                'collateral_usd': collateral_usd,
-                'debt_usd': debt_usd,
-                'buffer_pct': buffer_pct,
-                'btc_price': btc_price,
-                'ltv': ltv,
-                'has_position': collateral_btc > 0 or debt_usd > 0
-            }
+
+        # Check staleness of Aave state
+        state_ts = state.get('timestamp', '')
+        if state_ts:
+            try:
+                state_dt = datetime.fromisoformat(state_ts)
+                state_age_hours = (datetime.now() - state_dt).total_seconds() / 3600
+                if state_age_hours > 24:
+                    print(f"⚠️ Aave monitor state is {state_age_hours:.1f} hours old")
+            except Exception:
+                pass
+
+        btc_price = state.get('btc_price', 0)
+        collateral_btc = state.get('collateral_btc', 0)
+        debt_usd = state.get('debt_usd', 0)
+        
+        # Calculate HF and LTV
+        hf_current = float('inf')
+        if debt_usd > 0 and collateral_btc > 0 and btc_price > 0:
+            hf_current = (collateral_btc * btc_price * 0.78) / debt_usd
+        
+        collateral_usd = collateral_btc * btc_price
+        ltv = (debt_usd / collateral_usd * 100) if collateral_usd > 0 else 0
+        
+        # Calculate liquidation price (HF=1.0)
+        liq_price = 0
+        if collateral_btc > 0 and debt_usd > 0:
+            liq_price = (1.0 * debt_usd) / (collateral_btc * 0.78)
+        
+        buffer_pct = ((btc_price - liq_price) / btc_price * 100) if btc_price > 0 and liq_price > 0 else 0
+        
+        return {
+            'health_factor': hf_current,
+            'collateral_btc': collateral_btc,
+            'collateral_usd': collateral_usd,
+            'debt_usd': debt_usd,
+            'buffer_pct': buffer_pct,
+            'btc_price': btc_price,
+            'ltv': ltv,
+            'has_position': collateral_btc > 0 or debt_usd > 0,
+            'state_timestamp': state_ts
+        }
     except Exception as e:
         print(f"⚠️ Error reading btc_monitor_state.json: {e}")
     
