@@ -29,8 +29,13 @@ DAILY_LOCK_FILE = '/tmp/btc_daily_report.lock'
 FORCE_SEND = os.environ.get("FORCE_SEND", "0") == "1"
 
 def already_sent_today():
-    """Check if a BTC report was already sent today."""
-    today = datetime.now().strftime('%Y-%m-%d')
+    """Check if a BTC report was already sent today.
+
+    Uses the current local date (Bogotá timezone) because the 8:00 AM cron
+    and the report are expected to run in the same local calendar day.
+    """
+    from datetime import timezone as dt_timezone
+    today = datetime.now(dt_timezone.utc).astimezone().strftime('%Y-%m-%d')
     try:
         if os.path.exists(DAILY_LOCK_FILE):
             with open(DAILY_LOCK_FILE, 'r') as f:
@@ -43,7 +48,8 @@ def already_sent_today():
 
 def mark_sent_today(message_id):
     """Record that today's report was sent."""
-    today = datetime.now().strftime('%Y-%m-%d')
+    from datetime import timezone as dt_timezone
+    today = datetime.now(dt_timezone.utc).astimezone().strftime('%Y-%m-%d')
     try:
         with open(DAILY_LOCK_FILE, 'w') as f:
             json.dump({'date': today, 'message_id': message_id, 'sent_at': datetime.now().isoformat()}, f)
@@ -114,13 +120,42 @@ def get_btc_signal():
         }
 
 def get_ledger_btc():
-    """Get Ledger BTC from xpub scan."""
-    run_command("/usr/bin/python3 /home/raspberry/.openclaw/workspace/scripts/scan_xpub.py", timeout=30)
-    
+    """Get Ledger BTC from xpub scan. Refreshes file and warns if stale."""
+    skip_scan = os.environ.get("SKIP_XPUB_SCAN", "0") == "1"
+
     try:
         with open('/home/raspberry/.openclaw/workspace/btc-position.json', 'r') as f:
             pos = json.load(f)
-            return pos.get("btc_holding", 0)
+        last_updated = pos.get("last_updated", "")
+    except Exception:
+        pos = {}
+        last_updated = ""
+
+    today = datetime.now().strftime('%Y-%m-%d')
+    if skip_scan:
+        print(f"   SKIP_XPUB_SCAN=1 — using cached btc-position.json (last updated {last_updated}).")
+        return pos.get("btc_holding", 0)
+
+    # If the cached file is already from today, reuse it to avoid slow rescans in the same day.
+    if last_updated == today:
+        print(f"   btc-position.json already up to date ({last_updated}), skipping xpub rescan.")
+        return pos.get("btc_holding", 0)
+
+    print("   Running xpub scan (this can take 30-90s)...")
+    scan_output = run_command("/usr/bin/python3 /home/raspberry/.openclaw/workspace/scripts/scan_xpub.py", timeout=180)
+    # Print scan output for diagnostics (it includes total balance and any errors)
+    for line in scan_output.splitlines():
+        if line.strip():
+            print(f"   {line}")
+
+    try:
+        with open('/home/raspberry/.openclaw/workspace/btc-position.json', 'r') as f:
+            pos = json.load(f)
+        holding = pos.get("btc_holding", 0)
+        new_last_updated = pos.get("last_updated", "")
+        if new_last_updated != today:
+            print(f"⚠️ btc-position.json is stale (last updated {new_last_updated}, today {today}). Using scanned value anyway.")
+        return holding
     except Exception as e:
         print(f"⚠️ Error reading btc-position.json: {e}")
         return 0
