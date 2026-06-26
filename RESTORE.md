@@ -388,8 +388,9 @@ mcporter call multiversx.query-account address:erd1rk378updsudf9vqz98hartfwrkguv
 
 ## Pushover Integration (monitoring alerts)
 
-- **Token:** `anyqi8u1ze9y7w7dxjdh59kssdemgw`
-- **User:** `c7TnDGDLohUS4JzFbxaMcqk2TXBnGs`
+- **Token:** `[REDACTED]`
+- **User:** `[REDACTED]`
+- **Location:** `~/.openclaw/.secrets/monitoring.env`
 
 ---
 

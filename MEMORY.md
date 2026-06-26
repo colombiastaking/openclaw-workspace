@@ -76,7 +76,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld"
 | Shard2 | 192.168.0.122 | 55333 |
 | Metachain | 192.168.0.124 | 55338 |
 
-**Pushover:** token=`anyqi8u1ze9y7w7dxjdh59kssdemgw` / user=`c7TnDGDLohUS4JzFbxaMcqk2TXBnGs`
+**Pushover:** token=`[REDACTED]` / user=`[REDACTED]` (see `~/.openclaw/.secrets/monitoring.env`)
 
 ---
 
@@ -95,7 +95,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld"
 ## Website / DApp Deploy
 
 **Script:** `~/.openclaw/workspace/scripts/deploy-website.py`
-**Account:** `colombia6 / sMGi6hW3vikr`
+**Account:** `[REDACTED]` (password in `~/.openclaw/.env`)
 
 | Site | Path |
 |------|------|
@@ -127,8 +127,8 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"send-egld"
 **Script:** `/home/raspberry/alice-backup/backup.sh`
 **Schedule:** Daily 18:00 (system cron)
 **Log:** `/tmp/alice-backup.log`
-**Password:** in `/home/raspberry/alice-backup/.backup_password`
-**Drop secrets:** `~/.openclaw/.secrets/` (auto-included, encrypted)
+**Password:** in `/home/raspberry/alice-backup/.backup_password` (not in git)
+**Drop secrets:** `~/.openclaw/.secrets/` (auto-included, encrypted — includes `telegram.env`, `monitoring.env`, `github_token`)
 **GitHub:** `https://github.com/colombiastaking/alice-backup`
 **Restore:** See `RESTORE.md` in alice-backup repo.
 

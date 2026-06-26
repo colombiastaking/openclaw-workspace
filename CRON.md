@@ -95,7 +95,7 @@ journalctl --user -u kepler-proxy.service -f
 
 ## Pushover Notifications
 
-Alerts sent via Pushover (token: `anyqi8u1ze9y7w7dxjdh59kssdemgw`)
+Alerts sent via Pushover (token/user in `~/.openclaw/.secrets/monitoring.env`)
 
 | Script | Trigger | Alert |
 |--------|---------|-------|

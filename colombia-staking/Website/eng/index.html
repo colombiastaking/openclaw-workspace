@@ -606,38 +606,12 @@
         .animate-delay-3 { animation-delay: 0.6s; opacity: 0; }
     </style>
 
-    <script src="js/unified-header.js" defer></script>
+    <script src="js/unified-header.js?v=2" defer></script>
 
 
-    <!-- Node Status Widget -->
+    <!-- Live Stats from MultiversX API -->
     <script>
     (function() {
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('status.json')
-                .then(r => r.json())
-                .then(data => {
-                    const allSync = data.nodes.every(n => n.status === 'SYNC');
-                    const statusColor = allSync ? '#62dbb8' : '#f59e0b';
-                    const statusText = allSync ? 'All Nodes Online' : 'Check Status';
-
-                    const widget = document.createElement('a');
-                    widget.href = 'node-status.html';
-                    widget.id = 'cs-node-status';
-                    widget.innerHTML = `<span style="display:inline-block;width:10px;height:10px;background:${statusColor};border-radius:50%;margin-right:8px;animation:nodePulse 2s infinite;"></span>${statusText}`;
-                    widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:500;border:1px solid #62dbb8;box-shadow:0 2px 10px rgba(0,0,0,0.3);transition:all 0.3s;';
-
-                    // Move telegram widget up
-                    document.body.appendChild(widget);
-
-                    // Adjust Telegram widget position
-                    const style = document.createElement('style');
-                    style.textContent = '#cs-node-status { bottom: 80px !important; } @keyframes nodePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(98,219,184,0.4); } 50% { box-shadow: 0 0 0 8px rgba(98,219,184,0); } }';
-                    document.head.appendChild(style);
-                })
-                .catch(() => {});
-        });
-
-        // Fetch live stats from MultiversX API
         async function fetchLiveStats() {
             try {
                 const res = await fetch('https://colombia-staking.co/stats-api.php');
@@ -675,7 +649,7 @@
         <div class="hero-content">
             <div class="hero-badge animate-fade-in">🚀 New Colombia Staking DApp!</div>
             <h1 class="animate-fade-in animate-delay-1">
-                <a href="https://staking.colombia-staking.com/dashboard" >
+                <a href="dapp.html" >
                     Delegate your eGLD to the decentralized staking agency
                 </a>
             </h1>
@@ -726,7 +700,7 @@
             <p>Choose your preferred way to stake and earn rewards</p>
         </div>
         <div class="cta-grid">
-            <a href="https://staking.colombia-staking.com/dashboard"  class="cta-card">
+            <a href="dapp.html"  class="cta-card">
                 <img src="images/0/stake-egld-with-colombiastaking-1010.png" alt="Stake eGLD" loading="eager">
                 <div class="cta-card-content">
                     <h3 style="color: var(--primary);">Stake eGLD</h3>
@@ -857,7 +831,7 @@
     <section class="xportal-banner" style="background: linear-gradient(135deg, rgba(98, 219, 184, 0.15) 0%, rgba(211, 54, 130, 0.1) 100%);">
         <h3>🚀 Colombia Staking DApp - All-in-One Staking Platform</h3>
         <p style="color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 1rem;">Stake eGLD, switch validators, track rewards, and access AI-powered BTC strategy - all in one place.</p>
-        <a href="https://staking.colombia-staking.com"  style="background: var(--gradient-1); color: white;">Open DApp</a>
+        <a href="dapp.html"  style="background: var(--gradient-1); color: white;">Open DApp</a>
         <div class="xportal-img">
             <img src="images/dapp-screenshot.webp" alt="Colombia Staking DApp" loading="eager" onerror="this.style.display='none'">
         </div>
@@ -875,7 +849,7 @@
                 <a href="https://colombia-staking.com/dapp.html"  class="btn btn-primary" style="background: var(--gradient-1);">
                     🧮 Try Tax Tool
                 </a>
-                <a href="https://staking.colombia-staking.com/dashboard?tool=info"  class="btn btn-secondary">
+                <a href="https://staking.colombia-staking.com?tool=info"  class="btn btn-secondary">
                     Documentation
                 </a>
             </div>
@@ -913,7 +887,7 @@
                 <a href="dapp.html">DApp</a>
                 <a href="node-status.html">Nodes</a>
                 <a href="preguntas-frecuentes.html">FAQ</a>
-                <a href="https://staking.colombia-staking.com/dashboard" >Staking dApp</a>
+                <a href="dapp.html" >Staking dApp</a>
             </div>
             <div class="footer-social">
                 <a href="https://x.com/ColombiaStaking"  title="X (Twitter)" style="background: #000;">
@@ -1010,6 +984,6 @@
     })();
     </script>
     <!-- Stats API -->
-    <script src="js/stats-updater.js"></script>
+    <!-- Live stats handled by inline script above -->
 </body>
 </html>

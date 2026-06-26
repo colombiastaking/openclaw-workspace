@@ -51,10 +51,10 @@ python3 ~/.openclaw/workspace/scripts/deploy-website.py [en|es|fr|dapp|all]
 ```
 HOST="colombia-staking.com"
 USER="colombia6"
-PASS="sMGi6hW3vikr"
+PASS="[REDACTED]"
 ```
 
-Credentials stored at: `~/.openclaw/secrets/.ftp_credentials`
+Credentials stored at: `~/.openclaw/.env` (FTP_PASS) or `~/.openclaw/secrets/.ftp_credentials`
 
 ## DApp Paths (on Pi)
 
@@ -110,7 +110,7 @@ If lftp fails, use curl with explicit FTP:
 ```bash
 # Upload single file
 curl -k --ftp-ssl \
-  -u "colombia6:sMGi6hW3vikr" \
+  -u "colombia6:[REDACTED]" \
   -T local-file.txt \
   "ftp://colombia-staking.com/remote-file.txt"
 ```

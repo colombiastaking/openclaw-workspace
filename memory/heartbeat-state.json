@@ -1,17 +1,18 @@
 {
   "lastChecks": {
-    "node": 1782209088,
-    "system_resources": 1782209088,
-    "btc_report": 1782209088,
-    "backup": 1782079500,
-    "git_status": 1782209088,
-    "network_explorer": 1782209088
+    "node": 1782411880,
+    "system_resources": 1782457493,
+    "btc_report": 1782457493,
+    "network_explorer": 1782457493,
+    "git_status": 1782457493,
+    "cloudflare_tunnel": 1782411880,
+    "kepler_proxy": 1782457493,
+    "weather": 1782389187
   },
-  "lastSeen": 1782152153,
+  "lastSeen": 1782457493,
   "notes": [
-    "2026-06-22 01:04: Heartbeat. System healthy (55d 19h51m uptime, disk 17%, RAM 20% used, load 0.00/0.06/0.07). kepler-proxy active. BTC report sent today 2026-06-21 08:26 (message_id=28612, score 25.3 🟢 DEEP BEAR, price $63,853, MVRV 1.10, DCA €138/week @ 50% intensity). /btc-report/summary HTTP 200. /network/ HTTP 200. Cloudflare tunnel running via /usr/local/bin/cloudflared (PID 2135) even though systemctl --user cloudflared shows inactive/not found — appears to be running as standalone process, not user service. Nodes 50/50 MAX, HOLD; per-node ~3,629.50 EGLD vs market ~3,618.67 EGLD; ADD blocked by max cap. Provider identity is 'colombiastaking' (not 'colombia-staking'); locked 181,475 EGLD, APR 8.42%, fee 10%, gross revenue ~35,240 EUR/month at EGLD/EUR 2.49. Git backlog 65 modified files. No alerts; no outreach at 1 AM.",
-    "2026-06-22 05:04: Heartbeat. System healthy (54d 20h51m uptime, disk 17%, RAM 20% used, load 0.02/0.07/0.08). kepler-proxy active. BTC engine score 26.6 🟢 DEEP BEAR, price $63,963, MVRV 1.10, DCA €344/week @ 125% (ACCUMULATE). BTC daily report already sent today 2026-06-21 08:26 (message_id=28612), next at 08:00. /btc-report/summary HTTP 200. /network/ HTTP 200. Cloudflare tunnel running via /usr/local/bin/cloudflared (PID 2135) standalone. Nodes 50/50 MAX, HOLD; per-node ~3,629.51 EGLD vs market ~3,619.25 EGLD; ADD blocked by max cap. Git backlog 65 modified files. No alerts; no outreach at 5 AM.",
-    "2026-06-22 13:04: Heartbeat. System healthy (55d 4h51m uptime, disk 17%, RAM 21% used, load 0.13/0.08/0.09). kepler-proxy active ✅. BTC daily report sent 08:01 today (message_id=28636, score 27.7 🟢 DEEP BEAR, price $65,028, MVRV 1.12, DCA €344/week @ 125% intensity). /btc-report/summary 200 ✅. /network/ 200 ✅. network-explorer user service reported inactive (but kepler-proxy serves /network/ path, so map endpoint works). Nodes 50/50 MAX, HOLD; per-node ~3,630.14 EGLD vs market ~3,621.29 EGLD; ADD blocked by max cap. Git workspace backlog: 66 modified files + many untracked DXF files and daily memory notes — non-urgent, awaiting Sebas review. No urgent alerts; no outreach needed at 1 PM Monday.",
-    "2026-06-22 13:15: Heartbeat. System healthy (55d 5h2m uptime, disk 17%, RAM 20% used, load 0.48/0.20/0.12). kepler-proxy active ✅. BTC daily report sent 08:01 today (message_id=28636, score 27.7 🟢 DEEP BEAR, price $65,028, MVRV 1.12, DCA €344/week @ 125% intensity). Git workspace backlog unchanged: 66 modified + untracked DXF/memory files, awaiting Sebas review. Memory maintenance done — notes current through 2026-06-22. No alerts; no outreach needed at 1:15 PM Monday."
+    "2026-06-25 08:04: Heartbeat. System healthy (load 0.42, RAM 21%, disk 17%). kepler-proxy active ✅. node-monitor user service inactive (non-critical). BTC report sent at 8 AM ✅ (score 24.8 🟢 DEEP BEAR, DCA €385/week). BTC API /btc-report/summary 200 ✅. Network Explorer /network/ 200 ✅. No alerts requiring outreach.",
+    "2026-06-25 12:04: Heartbeat. System healthy (load 0.27, RAM 22%, disk 17%). kepler-proxy active ✅. BTC report sent at 8:05 ✅ (message_id=28667, score 25.8, DCA €138/week). BTC API 200 ✅. Network Explorer 200 ✅. 🔴 NODE ALERT persists: 50/50 nodes, per-node 3,637.61 EGLD < market threshold 3,746.09 EGLD (108.48 EGLD short). Git backlog 70 files. No urgent outreach.",
+    "2026-06-26 02:04: Heartbeat (night). System healthy (load 0.54, RAM 18%, disk 17%, uptime 9h55m). kepler-proxy active ✅. BTC daily report lock from 2026-06-25 19:05 (manual send after reboot cleared /tmp). BTC API 200 ✅. Network Explorer 200 ✅. Homepage 200 ✅. COLS distribution files present for 2026-06-26 but not yet run — awaiting wallet funding. Git backlog 74 files. No urgent outreach at 2 AM."
   ]
 }

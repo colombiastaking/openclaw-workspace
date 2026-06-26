@@ -606,36 +606,12 @@
         .animate-delay-3 { animation-delay: 0.6s; opacity: 0; }
     </style>
     
-    <script src="js/unified-header.js" defer></script>
+    <script src="js/unified-header.js?v=2" defer></script>
     
     
-    <!-- Node Status Widget -->
+    <!-- Live Stats from MultiversX API -->
     <script>
     (function() {
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('status.json')
-                .then(r => r.json())
-                .then(data => {
-                    const allSync = data.nodes.every(n => n.status === 'SYNC');
-                    const statusColor = allSync ? '#62dbb8' : '#f59e0b';
-                    const statusText = allSync ? 'Nœuds en ligne' : 'Voir Statut';
-                    
-                    const widget = document.createElement('a');
-                    widget.href = 'node-status.html';
-                    widget.id = 'cs-node-status';
-                    widget.innerHTML = `<span style="display:inline-block;width:10px;height:10px;background:${statusColor};border-radius:50%;margin-right:8px;animation:nodePulse 2s infinite;"></span>${statusText}`;
-                    widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:50px;text-decoration:none;font-size:14px;font-weight:500;border:1px solid #62dbb8;box-shadow:0 2px 10px rgba(0,0,0,0.3);transition:all 0.3s;';
-                    
-                    document.body.appendChild(widget);
-                    
-                    const style = document.createElement('style');
-                    style.textContent = '#cs-node-status { bottom: 80px !important; } @keyframes nodePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(98,219,184,0.4); } 50% { box-shadow: 0 0 0 8px rgba(98,219,184,0); } }';
-                    document.head.appendChild(style);
-                })
-                .catch(() => {});
-        });
-
-        // Fetch live stats from MultiversX API
         async function fetchLiveStats() {
             try {
                 const res = await fetch('https://colombia-staking.co/stats-api.php');
@@ -673,7 +649,7 @@
         <div class="hero-content">
             <div class="hero-badge animate-fade-in">🚀 DApp disponible sur Xportal !</div>
             <h1 class="animate-fade-in animate-delay-1">
-                <a href="https://staking.colombia-staking.com/dashboard" >
+                <a href="https://staking.colombia-staking.com" >
                     Déléguez vos eGLD à l'agence de staking décentralisée
                 </a>
             </h1>
@@ -724,7 +700,7 @@
             <p>Choisissez votre méthode de staking préférée et gagnez des récompenses</p>
         </div>
         <div class="cta-grid">
-            <a href="https://staking.colombia-staking.com/dashboard"  class="cta-card">
+            <a href="https://staking.colombia-staking.com"  class="cta-card">
                 <img src="images/0/stake-egld-with-colombiastaking-1010.png" alt="Déléguer eGLD" loading="eager">
                 <div class="cta-card-content">
                     <h3 style="color: var(--primary);">Déléguer eGLD</h3>
@@ -911,7 +887,7 @@
                 <a href="billetera-maiar.html">Xportal</a>
                 <a href="node-status.html">Nœuds</a>
                 <a href="preguntas-frecuentes.html">FAQ</a>
-                <a href="https://staking.colombia-staking.com/dashboard" >DApp Staking</a>
+                <a href="https://staking.colombia-staking.com" >DApp Staking</a>
             </div>
             <div class="footer-social">
                 <a href="https://x.com/ColombiaStaking"  title="X (Twitter)" style="background: #000;">
@@ -1007,6 +983,6 @@
         });
     })();
     </script>
-    <script src="js/stats-updater.js"></script>
+    <!-- Live stats handled by inline script above -->
 </body>
 </html>

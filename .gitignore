@@ -1,13 +1,13 @@
 # Secrets and credentials — NEVER commit these
-.openclaw/.secrets/
+monitoring.env
 .secrets/
+.env
+*.enc.key
+wallet_raw*
 *.private_key
 .private_key
 wallet/
-wallet_raw*
-*.enc.key
 telegram.env
-.env
 *.env
 
 # API keys and tokens

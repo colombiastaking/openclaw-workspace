@@ -5,7 +5,18 @@
 
 ROOT_HOST="colombia-staking.com"
 ROOT_USER="colombia6"
-ROOT_PASS="sMGi6hW3vikr"
+
+# Load FTP password from environment or ~/.openclaw/.env
+if [ -z "$FTP_PASS" ]; then
+  if [ -f "$HOME/.openclaw/.env" ]; then
+    FTP_PASS=$(grep "^FTP_PASS=" "$HOME/.openclaw/.env" | cut -d'=' -f2- | tr -d '"')
+  fi
+fi
+
+if [ -z "$FTP_PASS" ]; then
+  echo "❌ FTP_PASS not set and not found in ~/.openclaw/.env"
+  exit 1
+fi
 
 SITE_DIR="$HOME/.openclaw/workspace/Website"
 
@@ -34,13 +45,13 @@ ftp_upload() {
   while [ $retry -lt $max_retries ]; do
     # Delete existing file first (helps LiteSpeed refresh)
     curl -s -k --ftp-ssl \
-      -u "$ROOT_USER:$ROOT_PASS" \
+      -u "$ROOT_USER:$FTP_PASS" \
       -Q "DELE $remote_dir/$filename" \
       "ftp://$ROOT_HOST/" > /dev/null 2>&1
 
     # Upload new file
     result=$(curl -s -k --ftp-ssl \
-      -u "$ROOT_USER:$ROOT_PASS" \
+      -u "$ROOT_USER:$FTP_PASS" \
       -T "$local_file" \
       "ftp://$ROOT_HOST$remote_dir/$filename" \
       --connect-timeout 20 -m 60 2>&1)

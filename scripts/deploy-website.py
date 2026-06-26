@@ -16,10 +16,24 @@ import socket
 import sys
 from pathlib import Path
 
-# FTP credentials
-HOST = "colombia-staking.com"
-USER = "colombia6"
-PASS = "sMGi6hW3vikr"
+# FTP credentials — read from environment, fall back to ~/.openclaw/.env
+HOST = os.environ.get("FTP_HOST", "colombia-staking.com")
+USER = os.environ.get("FTP_USER", "colombia6")
+PASS = os.environ.get("FTP_PASS")
+
+if not PASS:
+    env_file = Path.home() / ".openclaw" / ".env"
+    if env_file.exists():
+        with env_file.open() as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("FTP_PASS="):
+                    PASS = line.split("=", 1)[1].strip().strip('"').strip("'")
+                    break
+
+if not PASS:
+    print("❌ FTP_PASS not set and not found in ~/.openclaw/.env")
+    sys.exit(1)
 
 # Site configs: (local_path, remote_path)
 SITES = {

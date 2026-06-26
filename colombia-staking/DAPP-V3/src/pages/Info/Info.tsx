@@ -12,25 +12,38 @@ const CPU_CORES = 60;
 const MACHINES = 9;
 const ISP_COUNT = 4;
 
-// Node status interface
+// Node status interface (matches status.json format from node_monitor_full.sh)
 interface NodeStatus {
   name: string;
   status: string;
-  nonce: number;
-  epoch: number;
-  peers: number;
+  nonce: string;
+  epoch?: number;
+  peers: string;
   blocksBehind: number;
-  version: string;
-  cpu: { percent: number; model: string; cores: string };
-  memory: { percent: number; usedGB: number; totalGB: number; ram: string };
-  txPool: number;
+  version?: string;
+  ip?: string;
+  // Optional detailed metrics (from node-dashboard API if available)
+  cpu?: { percent: number; model: string; cores: string };
+  memory?: { percent: number; usedGB: number; totalGB: number; ram: string };
+  txPool?: number;
+}
+
+interface ValidatorStatus {
+  name: string;
+  shard: string;
+  rating: number;
+  tempRating: number;
+  leaderFailure: number;
+  leaderSuccess: number;
+  online: boolean;
 }
 
 interface StatusData {
-  timestamp: string;
-  epoch: number;
-  thresholds: { cpu: number; memory: number; peers: number; txPool: number };
-  nodes: NodeStatus[];
+  timestamp: number;
+  epoch: string;
+  eligibleCount: number;
+  observers: NodeStatus[];
+  validators: ValidatorStatus[];
 }
 
 // Animal leagues (same as RankingTable)
@@ -344,55 +357,88 @@ export const Info = () => {
               <div className={styles.loadingContainer}>
                 <AnimatedDots />
               </div>
-            ) : nodeStatus && nodeStatus.nodes ? (
+            ) : nodeStatus && nodeStatus.observers ? (
               <>
                 <div className={styles.nodeStatusGrid}>
-                  {nodeStatus.nodes.map((node) => (
-                    <div key={node.name} className={`${styles.nodeCard} ${styles[node.status.toLowerCase()]}`}>
+                  {nodeStatus.observers.map((node) => (
+                    <div key={node.name} className={`${styles.nodeCard} ${styles[node.status.toLowerCase()] || styles.unknown}`}>
                       <div className={styles.nodeHeader}>
                         <span className={styles.nodeName}>{node.name}</span>
-                        <span className={`${styles.statusBadge} ${styles[node.status.toLowerCase()]}`}>
+                        <span className={`${styles.statusBadge} ${styles[node.status.toLowerCase()] || styles.unknown}`}>
                           {node.status === 'SYNC' && '✓'}
                           {node.status === 'SLOW' && '⚠'}
                           {node.status === 'LAG' && '🔄'}
                           {node.status === 'DESYNC' && '✗'}
                           {node.status === 'ERROR' && '💀'}
+                          {node.status === 'DOWN' && '🔴'}
+                          {node.status === 'UNKNOWN' && '❓'}
                           {' '}{node.status}
                         </span>
                       </div>
                       
-                      <div className={styles.nodeMetrics}>
-                        <div className={styles.metricPair}>
-                          <span className={styles.metricLabel}>CPU</span>
-                          <div className={styles.metricBar}>
-                            <div 
-                              className={`${styles.metricFill} ${node.cpu.percent > 80 ? styles.danger : node.cpu.percent > 50 ? styles.warning : ''}`}
-                              style={{ width: `${node.cpu.percent}%` }}
-                            />
+                      {/* Show detailed metrics if available (from node-dashboard) */}
+                      {node.cpu && node.memory && (
+                        <div className={styles.nodeMetrics}>
+                          <div className={styles.metricPair}>
+                            <span className={styles.metricLabel}>CPU</span>
+                            <div className={styles.metricBar}>
+                              <div 
+                                className={`${styles.metricFill} ${node.cpu.percent > 80 ? styles.danger : node.cpu.percent > 50 ? styles.warning : ''}`}
+                                style={{ width: `${node.cpu.percent}%` }}
+                              />
+                            </div>
+                            <span className={styles.metricValue}>{node.cpu.percent}%</span>
                           </div>
-                          <span className={styles.metricValue}>{node.cpu.percent}%</span>
-                        </div>
-                        
-                        <div className={styles.metricPair}>
-                          <span className={styles.metricLabel}>RAM</span>
-                          <div className={styles.metricBar}>
-                            <div 
-                              className={`${styles.metricFill} ${node.memory.percent > 90 ? styles.danger : node.memory.percent > 70 ? styles.warning : ''}`}
-                              style={{ width: `${node.memory.percent}%` }}
-                            />
+                          
+                          <div className={styles.metricPair}>
+                            <span className={styles.metricLabel}>RAM</span>
+                            <div className={styles.metricBar}>
+                              <div 
+                                className={`${styles.metricFill} ${node.memory.percent > 90 ? styles.danger : node.memory.percent > 70 ? styles.warning : ''}`}
+                                style={{ width: `${node.memory.percent}%` }}
+                              />
+                            </div>
+                            <span className={styles.metricValue}>{node.memory.percent}%</span>
                           </div>
-                          <span className={styles.metricValue}>{node.memory.percent}%</span>
                         </div>
-                      </div>
+                      )}
                       
                       <div className={styles.nodeDetails}>
-                        <span>🌐 {node.peers} peers</span>
-                        <span>📦 {node.txPool} tx</span>
-                        {!isMobile && <span>⏱️ {node.blocksBehind} behind</span>}
+                        <span>🌐 {node.peers || '?'} peers</span>
+                        {node.txPool !== undefined && <span>📦 {node.txPool} tx</span>}
+                        {!isMobile && <span>⏱️ {node.blocksBehind !== undefined ? node.blocksBehind : '?'} behind</span>}
                       </div>
                     </div>
                   ))}
                 </div>
+                
+                {/* Validators summary */}
+                {nodeStatus.validators && nodeStatus.validators.length > 0 && (
+                  <div className={styles.validatorsSection} style={{ marginTop: '2rem' }}>
+                    <h3 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>
+                      🏆 {nodeStatus.eligibleCount} Eligible Validators
+                    </h3>
+                    <div className={styles.nodeStatusGrid}>
+                      {nodeStatus.validators.map((v) => (
+                        <div key={v.name} className={`${styles.nodeCard} ${v.online ? styles.sync : styles.error}`}>
+                          <div className={styles.nodeHeader}>
+                            <span className={styles.nodeName}>{v.name}</span>
+                            <span className={`${styles.statusBadge} ${v.online ? styles.sync : styles.error}`}>
+                              {v.online ? '✓ ONLINE' : '🔴 OFFLINE'}
+                            </span>
+                          </div>
+                          <div className={styles.nodeDetails}>
+                            <span>📍 Shard {v.shard}</span>
+                            <span>⭐ Rating: {v.rating}</span>
+                            {v.leaderFailure > 0 && (
+                              <span style={{ color: '#ff6b6b' }}>⚠️ {v.leaderFailure} failures</span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 
                 <div className={styles.statusFooter}>
                   <span>Epoch: {nodeStatus.epoch}</span>

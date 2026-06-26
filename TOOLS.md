@@ -271,7 +271,7 @@ find /home/raspberry/.openclaw/workspace/colombia-staking/Website -name '*.html'
   -exec sed -i 's|js/unified-header.js[^"]*|js/unified-header.js?v=NEWVERSION|g' {} +
 ```
 
-**Server paths (cPanel colombia6 root):**
+**Server paths (cPanel [REDACTED] root):**
 | Site | Path |
 |------|------|
 | EN (colombia-staking.com) | `/public_html/` |

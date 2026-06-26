@@ -595,7 +595,7 @@
                 // Update status bar
                 document.getElementById('epochValue').textContent = data.epoch;
                 
-                const onlineNodes = data.nodes.filter(n => n.status === 'SYNC').length;
+                const onlineNodes = data.observers ? data.observers.filter(n => n.status === 'SYNC').length : 0;
                 document.getElementById('nodesOnline').textContent = `${onlineNodes}/4`;
                 
                 const updateTime = new Date(data.timestamp * 1000).toLocaleTimeString('en-US', { timeZone: 'America/Bogota' });
@@ -622,15 +622,19 @@
         // Render nodes
         function renderNodes(data) {
             const grid = document.getElementById('nodesGrid');
+            const nodes = data.observers || data.nodes || [];
             
-            grid.innerHTML = data.nodes.map(node => {
-                const specs = NODE_SPECS[node.name];
-                const statusClass = node.status.toLowerCase();
+            grid.innerHTML = nodes.map(node => {
+                const specs = NODE_SPECS[node.name] || {
+                    cpu: 'ARM Cortex-A72', cores: '4', frequency: '1.5 GHz', ram: '8 GB', location: 'Colombia'
+                };
+                const statusClass = (node.status || 'unknown').toLowerCase();
                 const cardClass = node.status === 'SYNC' ? '' : 
                                   (node.status === 'ERROR' ? 'warning' : 'syncing');
                 
-                const cpuClass = getMetricClass(node.cpu.percent, 80, 50);
-                const memClass = getMetricClass(node.memory.percent, 90, 70);
+                const peers = node.peers || '?';
+                const blocksBehind = node.blocksBehind !== undefined ? node.blocksBehind : '?';
+                const nonce = node.nonce || '?';
                 
                 return `
                     <div class="node-card ${cardClass}">
@@ -638,7 +642,7 @@
                             <div class="node-name">${node.name}</div>
                             <div class="node-status-badge ${statusClass}">
                                 <span class="status-dot"></span>
-                                ${node.status}
+                                ${node.status || 'UNKNOWN'}
                             </div>
                         </div>
                         
@@ -651,49 +655,29 @@
                         
                         <div class="metrics-grid">
                             <div class="metric">
-                                <div class="metric-icon">🖥️</div>
-                                <div class="metric-label">CPU Load</div>
-                                <div class="metric-value ${cpuClass}">${node.cpu.percent}%</div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill ${getProgressClass(node.cpu.percent, 80, 50)}" 
-                                         style="width: ${node.cpu.percent}%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="metric">
-                                <div class="metric-icon">💾</div>
-                                <div class="metric-label">Memory</div>
-                                <div class="metric-value ${memClass}">${node.memory.percent}%</div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill ${getProgressClass(node.memory.percent, 90, 70)}" 
-                                         style="width: ${node.memory.percent}%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="metric">
                                 <div class="metric-icon">🌐</div>
                                 <div class="metric-label">Peers</div>
-                                <div class="metric-value">${node.peers}</div>
+                                <div class="metric-value">${peers}</div>
                             </div>
                             
                             <div class="metric">
                                 <div class="metric-icon">📦</div>
-                                <div class="metric-label">TX Pool</div>
-                                <div class="metric-value">${node.txPool}</div>
+                                <div class="metric-label">Nonce</div>
+                                <div class="metric-value">${nonce}</div>
                             </div>
                             
                             <div class="metric">
                                 <div class="metric-icon">⏱️</div>
                                 <div class="metric-label">Blocks Behind</div>
-                                <div class="metric-value ${node.blocksBehind > 10 ? 'warning' : 'good'}">
-                                    ${node.blocksBehind}
+                                <div class="metric-value ${blocksBehind > 10 ? 'warning' : 'good'}">
+                                    ${blocksBehind}
                                 </div>
                             </div>
                             
                             <div class="metric">
-                                <div class="metric-icon">🔄</div>
-                                <div class="metric-label">Epoch</div>
-                                <div class="metric-value">${node.epoch}</div>
+                                <div class="metric-icon">📡</div>
+                                <div class="metric-label">IP</div>
+                                <div class="metric-value">${node.ip || 'N/A'}</div>
                             </div>
                         </div>
                         
@@ -702,14 +686,53 @@
                                 <span style="color: #666; font-size: 0.75rem;">
                                     📍 ${specs.location}
                                 </span>
-                                <span style="color: #555; font-size: 0.7rem; font-family: monospace;">
-                                    v${node.version.split('-')[0].replace('v', '')}
-                                </span>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
+            
+            // Also render validators if present
+            if (data.validators && data.validators.length > 0) {
+                const validatorsHtml = data.validators.map(v => {
+                    const statusColor = v.online ? '#4caf50' : '#f44336';
+                    const statusText = v.online ? 'ONLINE' : 'OFFLINE';
+                    return `
+                        <div class="node-card">
+                            <div class="node-card-header">
+                                <div class="node-name">${v.name}</div>
+                                <div class="node-status-badge ${v.online ? 'sync' : 'error'}">
+                                    <span class="status-dot" style="background: ${statusColor}"></span>
+                                    ${statusText}
+                                </div>
+                            </div>
+                            <div class="metrics-grid">
+                                <div class="metric">
+                                    <div class="metric-icon">⭐</div>
+                                    <div class="metric-label">Rating</div>
+                                    <div class="metric-value">${v.rating || '?'}</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon">📊</div>
+                                    <div class="metric-label">Temp Rating</div>
+                                    <div class="metric-value">${v.tempRating || '?'}</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon">🎯</div>
+                                    <div class="metric-label">Leader Success</div>
+                                    <div class="metric-value">${v.leaderSuccess || '?'}</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon">❌</div>
+                                    <div class="metric-label">Leader Failure</div>
+                                    <div class="metric-value ${v.leaderFailure > 0 ? 'warning' : 'good'}">${v.leaderFailure || 0}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                grid.innerHTML += validatorsHtml;
+            }
         }
         
         function getMetricClass(value, dangerThreshold, warningThreshold) {
@@ -739,6 +762,6 @@
                 `Next refresh in ${countdown}s`;
         }, 1000);
     </script>
-<script src="js/unified-header.js"></script>
+<script src="js/unified-header.js?v=2"></script>
 </body>
 </html>

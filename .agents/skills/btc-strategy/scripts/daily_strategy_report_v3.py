@@ -21,7 +21,10 @@ from datetime import datetime
 
 # Try env first, fallback to hardcoded (bot token is stable)
 # IMPORTANT: Token must be complete - never use ellipsis/truncation
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8550327891:AAHFbqjIeIUqlZ0VrKBRtEcs7oOS7wQ2XM8")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+if not TELEGRAM_BOT_TOKEN:
+    print("⚠️ TELEGRAM_BOT_TOKEN not set")
+    TELEGRAM_BOT_TOKEN = ""
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "1144365829")
 
 # Deduplication: one report per day (prevent duplicate cron/agent/manual runs)

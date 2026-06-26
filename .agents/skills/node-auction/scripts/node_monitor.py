@@ -83,6 +83,10 @@ def main():
         print("❌ No active nodes found for identity")
         sys.exit(1)
     
+    # MAX NODES CAP: Cannot exceed 50 nodes per entity
+    MAX_NODES = 50
+    at_max_nodes = nodes >= MAX_NODES
+    
     egld_per_node = total_staked / nodes
     egld_if_add = total_staked / (nodes + 1)
     
@@ -91,7 +95,7 @@ def main():
     notification_threshold = market + margin_threshold
     
     # Decisions
-    can_add = egld_if_add > notification_threshold
+    can_add = (egld_if_add > notification_threshold) and not at_max_nodes
     need_remove = egld_per_node < market
     
     print()
@@ -105,17 +109,23 @@ def main():
     print(f"   Total: {total_staked:,.2f} EGLD")
     print(f"   Value: ${total_staked * price:,.0f}")
     print(f"   Nodes: {nodes}")
+    if at_max_nodes:
+        print(f"   ⚠️  MAX NODES: {MAX_NODES} — Cannot add more")
     print(f"   Per node: {egld_per_node:,.2f} EGLD")
     print()
     print(f"⚡ **MARKET PRICE:** {market:,.2f} EGLD")
     print(f"   → ADD if EGLD/{nodes+1} > {notification_threshold:,.2f} (market + {margin_threshold} EGLD)")
     print(f"   → REMOVE if EGLD/{nodes} < {market:,.2f}")
+    if at_max_nodes:
+        print(f"   → ADD BLOCKED: Max {MAX_NODES} nodes reached")
     print()
     print("💎 **CALCULATION:**")
     print(f"   {total_staked:,.2f} / {nodes} = {egld_per_node:,.2f} EGLD/node")
     print(f"   {total_staked:,.2f} / {nodes+1} = {egld_if_add:,.2f} EGLD/node")
     print(f"   Market price: {market:,.2f} EGLD")
     print(f"   Notification threshold: {notification_threshold:,.2f} EGLD")
+    if at_max_nodes:
+        print(f"   Status: MAX NODES ({nodes}/{MAX_NODES}) — Add disabled")
     print()
     
     if can_add:
@@ -128,6 +138,8 @@ def main():
         gap = notification_threshold - egld_if_add
         verdict = f"🟡 HOLD: per_node_if_add ({egld_if_add:,.2f}) ≤ threshold ({notification_threshold:,.2f})"
         verdict += f"\n   Gap: {gap:,.2f} EGLD below 20 EGLD margin"
+        if at_max_nodes:
+            verdict += f"\n   Also blocked: Max nodes reached ({nodes}/{MAX_NODES})"
     
     print(f"🎯 **VERDICT:**")
     print(f"   {verdict}")
@@ -138,6 +150,8 @@ def main():
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "total_staked": total_staked,
         "nodes": nodes,
+        "max_nodes": MAX_NODES,
+        "at_max_nodes": at_max_nodes,
         "egld_per_node": egld_per_node,
         "market_price": market,
         "notification_threshold": notification_threshold,
