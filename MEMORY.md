@@ -52,7 +52,7 @@ Routes: `/api`, `/gateway`, `/es`, `/tax-query`, `/delegation`, `/images` → po
 
 ## Alice MCP MultiversX
 
-**Wallet:** `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy`
+**Wallet:** `erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt`
 **Config:** `~/.mcporter/mcporter.json`
 
 **⚠️ Write TX — use Node.js directly (mcporter CLI loses precision on large integers):**

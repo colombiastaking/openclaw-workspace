@@ -264,7 +264,7 @@ npm run build
 
 # Verify
 mcporter list
-mcporter call multiversx.get-balance address:erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy
+mcporter call multiversx.get-balance address:erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt
 ```
 
 ---
@@ -320,7 +320,7 @@ npm run build
 
 # Test
 mcporter list
-mcporter call multiversx.query-account address:erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy
+mcporter call multiversx.query-account address:erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt
 ```
 
 ---
@@ -342,7 +342,7 @@ systemctl --user list-units --type=service
 /home/raspberry/external-ip-monitor.sh
 
 # Test MCP server
-mcporter call multiversx.query-account address:erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy
+mcporter call multiversx.query-account address:erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt
 ```
 
 ---

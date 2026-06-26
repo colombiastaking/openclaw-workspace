@@ -165,7 +165,7 @@ Add whatever helps you do your job. This is your cheat sheet.
 
 **Setup:**
 - Location: `/home/raspberry/.openclaw/workspace/alice-mcp-multiversx/`
-- Wallet: Alice's main wallet (`erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy`)
+- Wallet: Alice's main wallet (`erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt`)
 - Network: mainnet
 - mcporter config: `~/.mcporter/mcporter.json`
 
@@ -186,7 +186,7 @@ Add whatever helps you do your job. This is your cheat sheet.
 **Quick test:**
 ```bash
 mcporter list  # should show: multiversx (14 tools, Xs) — Listed 1 server (1 healthy)
-mcporter call multiversx.get-balance address:erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy
+mcporter call multiversx.get-balance address:erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt
 ```
 
 **Repos:**

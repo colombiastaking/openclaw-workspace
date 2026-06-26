@@ -19,7 +19,7 @@ const https = require("https");
 const OUTPUT_DIR = "/tmp/cols_distribution";
 const API_BASE = "https://api.multiversx.com";
 const COLS_TOKEN_ID = "COLS-9d91b7";
-const WALLET = "erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy";
+const WALLET = "erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt";
 
 function apiGet(path) {
   return new Promise((resolve, reject) => {

@@ -165,13 +165,13 @@ case "$1" in
     
     # Check wallet balance
     echo "Wallet balances:"
-    ALICE_COLS=$(curl -s "https://api.multiversx.com/accounts/erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy/tokens/COLS-9d91b7" 2>/dev/null | node -e "
+    ALICE_COLS=$(curl -s "https://api.multiversx.com/accounts/erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt/tokens/COLS-9d91b7" 2>/dev/null | node -e "
       try {
         const d = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
         console.log((parseFloat(d.balance) / 1e18).toFixed(2));
       } catch(e) { console.log('error'); }
     " || echo "error")
-    ALICE_EGLD=$(curl -s "https://api.multiversx.com/accounts/erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy" 2>/dev/null | node -e "
+    ALICE_EGLD=$(curl -s "https://api.multiversx.com/accounts/erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt" 2>/dev/null | node -e "
       try {
         const d = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
         console.log((parseFloat(d.balance) / 1e18).toFixed(4));

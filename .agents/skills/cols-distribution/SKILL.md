@@ -125,7 +125,7 @@ Daily_bonus = (APR_bonus / 100) × EGLD_stake × EGLD_price / 365 / COLS_price
 | PeerMe Entity | `erd1qqqqqqqqqqqqqpgq7khr5sqd4cnjh5j5dz0atfz03r3l99y727rsulfjj0` |
 | PeerMe Claim | `erd1qqqqqqqqqqqqqpgqjhn0rrta3hceyguqlmkqgklxc0eh0r5rl3tsv6a9k0` |
 | COLS Token | `COLS-9d91b7` |
-| Distribution Wallet | `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` |
+| Distribution Wallet | `erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt` |
 
 ## ⚠️ CRITICAL: Wallet Private Key
 
@@ -133,7 +133,7 @@ Daily_bonus = (APR_bonus / 100) × EGLD_stake × EGLD_price / 365 / COLS_price
 
 | Wallet | Key | Address |
 |--------|-----|---------|
-| **Distribution** (COLS sends) | `[REDACTED - see wallet_raw.enc]` | `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy` |
+| **Distribution** (COLS sends) | `[REDACTED - see wallet_raw.enc]` | `erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt` |
 | **MCP server** (alice-mcp-multiversx) | `[REDACTED - see wallet_raw.enc]` | `erd1j8dn54q9wmzdydr5llmsst2wgll42aj9psrpz2h0n8ud6ak3xkusxewvne` |
 
 **Private key file location:** `/home/raspberry/.openclaw/wallet/.private_key` (raw 64-char hex)
@@ -178,7 +178,7 @@ rm /tmp/cols_distribution/results_YYYY-MM-DD.json
 
 ### Key mismatch (wrong address derived)
 1. Verify key: `cd /home/raspberry/.openclaw/workspace/alice-mcp-multiversx && node -e "const {UserSecretKey}=require('@multiversx/sdk-core'); const sk=UserSecretKey.fromString(require('fs').readFileSync('/home/raspberry/.openclaw/wallet/.private_key','utf8').trim()); console.log(sk.generatePublicKey().toAddress().toBech32());"`
-2. Should return: `erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy`
+2. Should return: `erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt`
 3. If wrong: restore from `secrets.enc` or `alice-backup/wallet_raw.enc`
 
 ## Distribution Summary Format

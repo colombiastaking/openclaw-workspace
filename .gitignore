@@ -1,0 +1,42 @@
+# Secrets and credentials — NEVER commit these
+.openclaw/.secrets/
+.secrets/
+*.private_key
+.private_key
+wallet/
+wallet_raw*
+*.enc.key
+telegram.env
+.env
+*.env
+
+# API keys and tokens
+*.api.key
+*.token
+apikey*
+kepler*.key
+
+# Cloudflare / tunnel credentials
+cloudflared/
+tunnel*.json
+
+# Passwords and recovery
+*password*
+*recovery*
+*.bak
+.local_secrets.json
+
+# Node / Python build artifacts
+node_modules/
+dist/
+build/
+*.pyc
+__pycache__/
+
+# Memory recall indexes (can contain sensitive snippets)
+memory/.dreams/
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/

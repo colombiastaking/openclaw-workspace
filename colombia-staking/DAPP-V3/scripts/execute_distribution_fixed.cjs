@@ -272,7 +272,7 @@ async function main() {
       if (alreadyPaid.has(recipient.address.toLowerCase())) continue;
       try {
         const todayStr = new Date().toISOString().split('T')[0];
-        const apiUrl = `https://api.multiversx.com/accounts/${recipient.address}/transfers?token=${COLS_TOKEN_ID}&sender=erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy&size=50`;
+        const apiUrl = `https://api.multiversx.com/accounts/${recipient.address}/transfers?token=${COLS_TOKEN_ID}&sender=erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt&size=50`;
         // Retry logic for API calls (handle 429 rate limits)
         const MAX_RETRIES = 5;
         let resp = null;
@@ -574,7 +574,7 @@ async function main() {
           if (alreadyPaidGold.has(recipient.address.toLowerCase())) continue;
           try {
             const todayStr = new Date().toISOString().split('T')[0];
-            const apiUrl = `https://api.multiversx.com/accounts/${recipient.address}/transfers?token=${COLS_TOKEN_ID}&sender=erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy&size=50`;
+            const apiUrl = `https://api.multiversx.com/accounts/${recipient.address}/transfers?token=${COLS_TOKEN_ID}&sender=erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt&size=50`;
             const GOLD_MAX_RETRIES = 5;
             let resp = null;
             for (let attempt = 0; attempt < GOLD_MAX_RETRIES; attempt++) {

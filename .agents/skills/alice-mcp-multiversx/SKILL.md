@@ -6,7 +6,7 @@ Use the MultiversX MCP server via mcporter to interact with the MultiversX block
 
 The MCP server is already configured at:
 - Path: `/home/raspberry/.openclaw/workspace/alice-mcp-multiversx/`
-- Wallet: Alice's main wallet (`erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy`)
+- Wallet: Alice's main wallet (`erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt`)
 - mcporter config: `~/.mcporter/mcporter.json`
 
 ## Verify Server Status
@@ -47,7 +47,7 @@ Should show: `multiversx (14 tools, Xs) — Listed 1 server (1 healthy)`
 
 ### Check Alice's balance
 ```bash
-mcporter call multiversx.get-balance address:erd1a7e9dyqcffasu9d4vu45s6cuv25g6qfeqy2r7m6gqyle7vpdkgqqazpyuy
+mcporter call multiversx.get-balance address:erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt
 ```
 
 ### Check any address
