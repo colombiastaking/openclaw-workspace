@@ -54,7 +54,7 @@ USER="colombia6"
 PASS="[REDACTED]"
 ```
 
-Credentials stored at: `~/.openclaw/.env` (FTP_PASS) or `~/.openclaw/secrets/.ftp_credentials`
+Credentials stored at: `~/.openclaw/secrets/.ftp_credentials`
 
 ## DApp Paths (on Pi)
 
