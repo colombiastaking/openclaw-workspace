@@ -6,17 +6,9 @@
 ROOT_HOST="colombia-staking.com"
 ROOT_USER="colombia6"
 
-# Load FTP password from environment or ~/.openclaw/.env
-if [ -z "$FTP_PASS" ]; then
-  if [ -f "$HOME/.openclaw/.env" ]; then
-    FTP_PASS=$(grep "^FTP_PASS=" "$HOME/.openclaw/.env" | cut -d'=' -f2- | tr -d '"')
-  fi
-fi
-
-if [ -z "$FTP_PASS" ]; then
-  echo "❌ FTP_PASS not set and not found in ~/.openclaw/.env"
-  exit 1
-fi
+# Load credentials from external env file; fail if not set
+source "$HOME/.openclaw/.env"
+FTP_PASS="${FTP_PASS:?not set}"
 
 SITE_DIR="$HOME/.openclaw/workspace/Website"
 
