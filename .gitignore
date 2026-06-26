@@ -26,6 +26,9 @@ tunnel*.json
 *.bak
 .local_secrets.json
 
+# OpenClaw workspace state (may include runtime metadata)
+openclaw-workspace-state.json
+
 # Node / Python build artifacts
 node_modules/
 dist/

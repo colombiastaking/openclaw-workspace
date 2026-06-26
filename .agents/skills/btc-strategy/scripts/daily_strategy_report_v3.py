@@ -6,7 +6,7 @@ BTC Accumulation + Aave Position
 Fixes:
 - Correct Aave monitor path (scripts/aave_btc_monitor.py)
 - Handle no-Aave-position gracefully (no crash)
-- Hardcode Telegram token from env for reliability
+- Read Telegram token from environment only
 - Added JSON output from Aave monitor for robust parsing
 - Use OpenClaw native messaging if available, fallback to Telegram API
 """
@@ -19,9 +19,8 @@ import re
 import math
 from datetime import datetime
 
-# Try env first, fallback to hardcoded (bot token is stable)
-# IMPORTANT: Token must be complete - never use ellipsis/truncation
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+# Telegram token must come from environment; no hardcoded fallback allowed.
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "1144365829")
 
 # Deduplication: one report per day (prevent duplicate cron/agent/manual runs)
@@ -644,7 +643,7 @@ def calculate_strategy(score, aave):
 def send_telegram(message):
     """Send message to Telegram; returns (ok, message_id)."""
     if not TELEGRAM_BOT_TOKEN or TELEGRAM_BOT_TOKEN == "YOUR_BOT_TOKEN":
-        print("⚠️ No Telegram bot token configured")
+        print("❌ No Telegram bot token configured. Set TELEGRAM_BOT_TOKEN and rerun.")
         return False, None
     
     try:
@@ -802,6 +801,10 @@ def main():
     strategy = calculate_strategy(btc.get('score', 50), aave)
     message = build_report(btc, aave, strategy, personal)
     
+    if not TELEGRAM_BOT_TOKEN:
+        print("❌ TELEGRAM_BOT_TOKEN is not set. Aborting report send.")
+        return False
+
     # Deduplication guard
     sent_today, existing_message_id = already_sent_today()
     telegram_ok = False
