@@ -133,8 +133,8 @@ Daily_bonus = (APR_bonus / 100) × EGLD_stake × EGLD_price / 365 / COLS_price
 
 | Wallet | Key | Address |
 |--------|-----|---------|
-| **Distribution** (COLS sends) | `[REDACTED - see wallet_raw.enc]` | `erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt` |
-| **MCP server** (alice-mcp-multiversx) | `[REDACTED - see wallet_raw.enc]` | `erd1j8dn54q9wmzdydr5llmsst2wgll42aj9psrpz2h0n8ud6ak3xkusxewvne` |
+| **Distribution** (COLS sends) | `[REDACTED - local Pi only]` | `erd1rk378updsudf9vqz98hartfwrkguvpk74jzjpygztlm8nukuqmkqfjk5pt` |
+| **MCP server** (alice-mcp-multiversx) | `[REDACTED - local Pi only]` | `erd1j8dn54q9wmzdydr5llmsst2wgll42aj9psrpz2h0n8ud6ak3xkusxewvne` |
 
 **Private key file location:** `/home/raspberry/.openclaw/wallet/.private_key` (raw 64-char hex)
 
