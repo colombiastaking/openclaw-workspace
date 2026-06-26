@@ -9,7 +9,7 @@ Morning BTC report (score: 15) failed to send via Telegram with error:
 ## Root Cause
 The `daily_strategy_report_v3.py` script had a **fallback token with ellipsis** (`…`):
 ```python
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "855032…2XM8")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "[REDACTED]")
 ```
 
 When the cron job's `source` command didn't work properly, the script fell back to this invalid truncated token, causing 404 errors.
@@ -17,7 +17,7 @@ When the cron job's `source` command didn't work properly, the script fell back 
 ## Fix Applied
 1. **Updated fallback token** in script to full correct token:
    ```python
-   TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "8550327891:AAHFbqjIeIUqlZ0VrKBRtEcs7oOS7wQ2XM8")
+   TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "[REDACTED — stored in local env only]")
    ```
 
 2. **Added comment warning** never to truncate the token.
