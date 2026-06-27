@@ -13,7 +13,7 @@ Daily COLS token distribution system for Colombia Staking rewards.
 
 ## Overview
 
-The distribution runs **every day at 1:10 PM Colombia time** via OpenClaw cron. The cron does a **preview only** (`calc`) and reports to Sebas. **No transactions are sent without explicit approval.**
+The distribution runs **automatically every day at 1:10 PM Colombia time** via OpenClaw cron. All three pools are sent on-chain without manual approval. State files prevent double-execution.
 
 ### Three Pool System
 
@@ -23,14 +23,16 @@ The distribution runs **every day at 1:10 PM Colombia time** via OpenClaw cron. 
 | **GOLD** | Gold NFT holders | Daily rebate | ESDT transfers to NFT holders |
 | **DAO** | PeerMe | 1/3 of buyback | Single tx to PeerMe contract |
 
-## Cron Job
+## Cron Jobs
 
 | Job ID | Schedule | Purpose |
 |--------|----------|---------|
-| `76f919d1-306a-4f32-ba29-1e44c737cb67` | 1:10 PM daily | Runs `run_distribution_cron.sh` → `execute_distribution_fixed.cjs` |
-| `807e54ab-c369-428a-8415-bc7c8dae2c16` | 1:15 PM daily | Posts summary to Telegram group |
+| `76f919d1-306a-4f32-ba29-1e44c737cb67` | 1:10 PM daily | Main run: fetch → calculate → execute BONUS → GOLD → DAO |
+| `f570d5f5-06ec-4ca6-bc49-e8e795b0598c` | 1:15 PM daily | Backup GOLD run (skipped if already sent today) |
+| `42b38433-2599-4898-95af-81d1d8dd800a` | 1:20 PM daily | Backup DAO run (skipped if already sent today) |
+| `807e54ab-c369-428a-8415-bc7c8dae2c16` | 1:35 PM daily | Posts summary to Telegram group |
 
-**Current flow:** Cron automatically executes distribution (not preview-only). Uses `agentTurn` trigger for reliability. State files prevent double-execution.
+**Current flow:** Cron automatically executes distribution. Uses `agentTurn` trigger for reliability. State files prevent double-execution.
 
 **⚠️ Warning:** Previously used `systemEvent` payload which was unreliable — always use `agentTurn` for distribution cron.
 
@@ -38,13 +40,15 @@ The distribution runs **every day at 1:10 PM Colombia time** via OpenClaw cron. 
 
 ```
 Daily 1:10 PM (auto):
-    bash run_distribution.sh calc
-    → Announces preview to Sebas's DM
-    → Waits for "yes" approval
+    bash /home/raspberry/.openclaw/workspace/scripts/run_distribution_cron.sh
+    → Fetch COLS stakers
+    → Calculate BONUS
+    → Calculate GOLD
+    → Execute BONUS (synchronous)
+    → Execute GOLD
+    → Execute DAO
 
-If approved:
-    yes | bash run_distribution.sh execute
-    → Sends DAO + BONUS + GOLD on-chain
+Backup at 1:15 PM and 1:20 PM will only run GOLD/DAO if they were missed.
 ```
 
 ## Key Files
@@ -52,9 +56,11 @@ If approved:
 ### Scripts
 | Script | Purpose |
 |--------|---------|
-| `run_distribution.sh` | Bash orchestrator: `calc`, `execute`, `gold` commands |
-| `run_distribution_cron.sh` | OpenClaw cron entry point (runs `calc` then `execute` if approved) |
+| `/home/raspberry/.openclaw/workspace/scripts/run_distribution_cron.sh` | **Main cron entry point** — fetch, calculate, execute BONUS/GOLD/DAO |
+| `/home/raspberry/.openclaw/workspace/scripts/cols_distribution_backup.sh` | Backup wrapper for GOLD/DAO; checks state to avoid double-pay |
+| `run_distribution.sh` | Legacy bash orchestrator: `calc`, `execute`, `gold` commands |
 | `execute_distribution_fixed.cjs` | **Main distribution script** — DAO + BONUS + GOLD combined with on-chain verification |
+| `execute_gold_distribution.cjs` | GOLD pool execution |
 | `calculate_gold_distribution.mjs` | Calculate GOLD pool per NFT holder |
 
 ### Output Files (in `/tmp/cols_distribution/`)
