@@ -39,19 +39,20 @@ log "🥇 Calculating GOLD distribution..."
 node calculate_gold_distribution.mjs 2>&1 | tee -a "$LOG_FILE"
 log "✅ GOLD calculation complete"
 
-# Step 4: Execute BONUS first, wait for completion, then GOLD (SEQUENTIALLY)
-# IMPORTANT: BONUS and GOLD must NOT run in parallel — they share the same wallet nonce,
-# causing GOLD txs to fail with lowerNonceInTx if BONUS is running concurrently.
-log "🚀 Executing BONUS distribution (background)..."
-node execute_distribution_fixed.cjs --bonus --force >> "$LOG_FILE" 2>&1 &
-BONUS_PID=$!
-log "   BONUS PID: $BONUS_PID"
-
-# Wait for BONUS to finish (don't use set -e - we want to continue even if BONUS fails)
-log "⏳ Waiting for BONUS to complete..."
-wait $BONUS_PID
+# Step 4: Execute BONUS first, then GOLD, then DAO (SEQUENTIALLY)
+# IMPORTANT: All pools share the same distribution wallet. Running them in parallel
+# causes nonce collisions (lowerNonceInTx). The fixed scripts fetch fresh nonces,
+# but we still run them synchronously so the cron session does not get killed
+# before GOLD/DAO start (a background BONUS process outliving the cron shell
+# previously left GOLD/DAO unexecuted).
+log "🚀 Executing BONUS distribution..."
+node execute_distribution_fixed.cjs --bonus --force >> "$LOG_FILE" 2>&1
 BONUS_EXIT=$?
-log "   BONUS PID $BONUS_PID exited: code $BONUS_EXIT"
+if [ $BONUS_EXIT -eq 0 ]; then
+    log "   ✅ BONUS distribution succeeded"
+else
+    log "   ⚠️  BONUS exited with code $BONUS_EXIT (continuing with GOLD/DAO if possible)"
+fi
 
 # Step 5: Execute GOLD AFTER BONUS (check if distribution file exists, not if BONUS succeeded)
 if [ -f "$OUTPUT_DIR/gold_distribution_$TODAY.json" ]; then
