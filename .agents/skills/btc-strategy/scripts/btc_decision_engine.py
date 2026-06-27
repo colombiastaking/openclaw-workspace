@@ -1985,6 +1985,8 @@ def get_dca_amounts(score):
     """Get DCA weekly/monthly amounts based on score using the 20-level strategy table.
     Returns: (weekly_eur, monthly_eur, multiplier, status)
     """
+    # Float scores (e.g. 25.8) must map to integer buckets; floor before lookup
+    score = int(score)
     for lo, hi, mult, weekly in DCA_TABLE:
         if lo <= score <= hi:
             monthly = round(weekly * 4.33)

@@ -609,6 +609,8 @@ DCA_TABLE = [
 
 def get_dca_from_score(score):
     """Get DCA amount and posture from the 20-level strategy table."""
+    # Float scores (e.g. 25.8) must map to integer buckets; floor before lookup
+    score = int(score)
     for lo, hi, weekly, posture, reason in DCA_TABLE:
         if lo <= score <= hi:
             return weekly, posture, reason
